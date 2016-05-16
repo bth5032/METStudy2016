@@ -1,6 +1,10 @@
 // Usage:
 // > root -b doAll.C
 
+//
+// 2016 MET study looper. Written by Bobak Hashemi May 13 2016
+//
+
 // C++
 #include <iostream>
 #include <vector>
