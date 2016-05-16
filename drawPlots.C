@@ -30,11 +30,18 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 
     TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_name))->Clone("datahist_"+plot_name);
     TH1F* zjets = (TH1F*) ((TH1F*) f_DY->Get("DY_"+plot_name))->Clone("zjetshist_"+plot_name);
-    TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_name))->Clone("fsbkghist_"+plot_name);
-    TH1F* extra= (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("fsbkghist_"+plot_name);
-    extra->Add(((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("fsbkghist_"+plot_name));
-    extra->Add(((TH1F*) f_WZ->Get("WZ_"+plot_name))->Clone("fsbkghist_"+plot_name));
-    extra->Add(((TH1F*) f_ZZ->Get("ZZ_"+plot_name))->Clone("fsbkghist_"+plot_name));
+    TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_name))->Clone("ttbarhist_"+plot_name);
+
+    // Build Extra Plots
+    TH1F* VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
+    TH1F* WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("WWhist_"+plot_name);
+    TH1F* WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_name))->Clone("WZhist_"+plot_name);
+    TH1F* ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_name))->Clone("ZZhist_"+plot_name);
+
+    TH1F* extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("extrahist_"+plot_name);
+    extra->Add(WW);
+    extra->Add(WZ);
+    extra->Add(ZZ);
 
     TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
     mc_sum->Add(fsbkg);
