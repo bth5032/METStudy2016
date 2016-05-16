@@ -22,7 +22,6 @@
 
 // CORE
 #include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky.h"
-//#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky.h"
 
 
 using namespace std;
