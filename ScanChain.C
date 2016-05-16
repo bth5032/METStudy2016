@@ -19,7 +19,7 @@
 using namespace std;
 using namespace zmet;
 
-int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents = -1, TString savePath="/nfs-7/userdata/bobak/METStudy2016/76Histos/") {
+int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = true, int nEvents = -1, TString savePath="/nfs-7/userdata/bobak/METStudy2016/76Histos/") {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
@@ -221,8 +221,15 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
       // Analysis Code
       //=======================================
       
-      double weight = phys.evt_scale1fb() * 2.3 * phys.puWeight();
+      double weight 
 
+      if (isData){
+        weight = 1;
+      }
+      else{
+        weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
+      }
+      
       // Base Cut
       if (!(phys.dilmass() < 101 && phys.dilmass() > 81)) continue;
 
@@ -261,7 +268,7 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
         }
         if (phys.met_rawPt() > 0)
         {
-          rawmet->Fill(phys.met_rawPt(), weight);
+          rawmet_2jets->Fill(phys.met_rawPt(), weight);
           if (phys.hyp_type() == 0)
           {
             rawmet_2jets_el->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
