@@ -349,17 +349,17 @@ void drawPlots(bool pt=true, bool phi=true, bool extra=true, TString save_dir = 
   if (extra)
   {
     plot_names.push_back("rawMET");
-    plot_names.push_back("rawMET_2Jets");
+    plot_names.push_back("rawMET_2jets");
     plot_names.push_back("type1MET");
-    plot_names.push_back("type1MET_2Jets");
+    plot_names.push_back("type1MET_2jets");
     plot_names.push_back("rawMET_el");
-    plot_names.push_back("rawMET_2Jets_el");
+    plot_names.push_back("rawMET_2jets_el");
     plot_names.push_back("type1MET_el");
-    plot_names.push_back("type1MET_2Jets_e;");
+    plot_names.push_back("type1MET_2jets_el;");
     plot_names.push_back("rawMET_mu");
-    plot_names.push_back("rawMET_2Jets_mu");
+    plot_names.push_back("rawMET_2jets_mu");
     plot_names.push_back("type1MET_mu");
-    plot_names.push_back("type1MET_2Jets_mu");
+    plot_names.push_back("type1MET_2jets_mu");
     plot_names.push_back("nVert");
     plot_names.push_back("dilmass");
     plot_names.push_back("PHIinBump");
