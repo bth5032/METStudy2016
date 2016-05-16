@@ -3,5 +3,6 @@
 #submlime sftp addon-config
 sftp-config.json
 
-#plots
+#local copies of plots and histograms
 plots/
+histos/

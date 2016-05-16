@@ -23,7 +23,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   TFile* f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");
   TFile* f_data = new TFile(input_dir+"METStudy_data.root");
 
-  cout << "no seg fault 1"<<endl;
+  cout << "Found files"<<endl;
 
   while(!plot_names.empty()){
     TString plot_name = plot_names.back();
@@ -32,14 +32,26 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     cout << "Making Plots for: "<<plot_name<<endl;
     
     TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_name))->Clone("datahist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_data->GetName()<<endl;
+
     TH1F* zjets = (TH1F*) ((TH1F*) f_DY->Get("DY_"+plot_name))->Clone("zjetshist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_DY->GetName()<<endl;
+
     TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_name))->Clone("ttbarhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_TTbar->GetName()<<endl;
 
     // Build Extra Plots
     TH1F* VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
+
     TH1F* WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("WWhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
+
     TH1F* WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_name))->Clone("WZhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
+
     TH1F* ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_name))->Clone("ZZhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
 
     TH1F* extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("extrahist_"+plot_name);
     extra->Add(WW);

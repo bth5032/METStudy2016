@@ -181,8 +181,8 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
   bumpPhi->Sumw2();
 
   TH1F *dilmass = new TH1F(sampleName+"_dilmass", "Dilepton Mass for "+sampleName, 300,0,150);
-  nu_30in_pt->SetDirectory(rootdir);
-  nu_30in_pt->Sumw2();
+  dilmass->SetDirectory(rootdir);
+  dilmass->Sumw2();
 
   
   // Loop over events to Analyze
@@ -337,7 +337,7 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
         nu_2430_pt->Fill(phys.nupfcands_2430_pt(), weight);
         nu_2430_phi->Fill(phys.nupfcands_2430_phi(), weight);
       }
-      if (phys.nupfcands_2430_pt()>0){
+      if (phys.nupfcands_30in_pt()>0){
         nu_30in_pt->Fill(phys.nupfcands_30in_pt(), weight);
         nu_30in_phi->Fill(phys.nupfcands_30in_phi(), weight);
       }
