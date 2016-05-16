@@ -274,6 +274,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     delete plotpad;
     delete fullpad;
     delete c;
+
+    cout<<"next sample...\n"<<endl;
   }
 
   cout<<"Cleaning up file variables"<<endl;
