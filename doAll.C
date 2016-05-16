@@ -22,7 +22,7 @@
   ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V07-06-09/data_2015D25ns16Dec2015_mm.root");
   ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V07-06-09/data_2015D25ns16Dec2015_mm_1.root");
 
-  ScanChain(ch_data, "data", false); 
+  ScanChain(ch_data, "data", true); 
 
   //====================================
   // DYJets
