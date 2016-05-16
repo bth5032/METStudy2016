@@ -263,7 +263,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   
 }
 
-void DrawPlots(bool pt=true, bool phi=true, bool extra=true, TString save_dir = "~/public_html/ZMET2016/looper/", TString input_dir = "/nfs-7/userdata/bobak/METStudy2016/76Histos/")
+void drawPlots(bool pt=true, bool phi=true, bool extra=true, TString save_dir = "~/public_html/ZMET2016/looper/", TString input_dir = "/nfs-7/userdata/bobak/METStudy2016/76Histos/")
 {
   
 
