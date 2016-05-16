@@ -2,3 +2,6 @@
 
 #submlime sftp addon-config
 sftp-config.json
+
+#plots
+plots/
