@@ -32,12 +32,12 @@ function 76env {
 	popd
 }
 
-function makePlots{
+function makePlots {
 	git pull
 	root -l -b -q "drawPlots.C(true, true, true)"
 }
 
-function makeHistos{
+function makeHistos {
 	git pull
 	root -l -b -q doAll.C
 }
