@@ -23,11 +23,14 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   TFile* f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");
   TFile* f_data = new TFile(input_dir+"METStudy_data.root");
 
+  cout << "no seg fault 1"<<endl;
 
   while(!plot_names.empty()){
     TString plot_name = plot_names.back();
     plot_names.pop_back();
-
+    
+    cout << "Making Plots for: "<<plot_name<<endl;
+    
     TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_name))->Clone("datahist_"+plot_name);
     TH1F* zjets = (TH1F*) ((TH1F*) f_DY->Get("DY_"+plot_name))->Clone("zjetshist_"+plot_name);
     TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_name))->Clone("ttbarhist_"+plot_name);
@@ -46,6 +49,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
     mc_sum->Add(fsbkg);
     mc_sum->Add(extra);
+
+    cout << "Histograms pulled from files, adding draw options"<<endl;
 
     //============================================
     // Draw Data-MC Plots
@@ -68,6 +73,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     plotpad->cd();
     if (plot_name.Contains("_pt") || plot_name.Contains("type1") || plot_name.Contains("MET") )
     {
+        cout<<"Plot tagged for log y-axis"<<endl;
         plotpad->SetLogy();
         
 
@@ -94,6 +100,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 
 
     data->SetMarkerStyle(20);
+
+    cout<<"Building Stack"<<endl;
     
     THStack * stack = new THStack("stack_"+plot_name, data->GetTitle());
     stack->Add(fsbkg);
@@ -108,6 +116,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         ymax = 1.2*mc_sum->GetMaximum();   
     }
 
+    cout<<"Proper plot maximum set"<<endl;
+
     TH2F* h_axes = new TH2F(Form("%s_axes",plot_name.Data()),data->GetTitle(),data->GetNbinsX(),data->GetXaxis()->GetXmin(),data->GetXaxis()->GetXmax(),1000,0.001,ymax);
 
     cout<<data->GetTitle()<<endl;
@@ -121,6 +131,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     //-----------------------
     // AXES FIX
     //-----------------------
+
+    cout<<"Setting axis names"<<endl;
     if (plot_name.Contains("_pt") || plot_name.Contains("type1") || plot_name.Contains("MET"))
     {
         h_axes->GetXaxis()->SetTitle("E^{miss}_{T} (GeV)");
@@ -136,6 +148,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     //----------------------
     // ADD OVERFLOW BIN
     //----------------------
+    cout<<"Building overflow bin"<<endl;
     if (plot_name.Contains("_pt")){
         int n_bins = data->GetNbinsX();
         int overflow_data = data->GetBinContent(n_bins + 1);
@@ -163,6 +176,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     h_axes->GetYaxis()->SetTitleOffset(0.95);
     h_axes->GetYaxis()->SetTitleSize(0.05);
 
+    cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
     stack->Draw("HIST SAME");
     data->Draw("E1 SAME");
@@ -185,6 +199,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     // Fill in Residual Plot
     //--------------------------
 
+    cout<<"Getting ready for residual plots"<<endl;
     fullpad->cd();
     TPad *ratiopad = new TPad("ratiopad", "ratiopad" ,0.,0.,1,0.21);
     ratiopad->SetTopMargin(0.05);
@@ -197,11 +212,13 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     TH1F* residual = (TH1F*) data->Clone("residual");
     residual->Divide(mc_sum);
 
+    cout<<"Fixing error bars"<<endl;
     for (int count=1; count<=mc_sum->GetNbinsX(); count++){ 
       double relative_error = (mc_sum->GetBinError(count))/ (mc_sum->GetBinContent(count));
       residual->SetBinError(count, residual->GetBinContent(count)*relative_error);
     }
 
+    cout<<"Building axes"<<endl;
     TH1F* h_axis_ratio = new TH1F(Form("%s_residual_axes",plot_name.Data()),"",residual->GetNbinsX(),residual->GetXaxis()->GetXmin(),residual->GetXaxis()->GetXmax());
 
     h_axis_ratio->GetYaxis()->SetTitleOffset(0.25);
@@ -219,16 +236,20 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     line1->SetLineStyle(2);
     
 //    h_axis_ratio->GetXaxis()->SetTitle(data->GetXaxis()->GetTitle());
+    
+    cout<<"Drawing ratio plot"<<endl;
     h_axis_ratio->Draw("axis");
     line1->Draw("same");
     residual->Draw("same");
     
     c->Update();
     c->cd();
+
+    cout<<"Saving..."<<endl;
     c->SaveAs(save_dir+plot_name+TString(".pdf"));
     c->SaveAs(save_dir+plot_name+TString(".png"));
 
-
+    cout<<"Cleaning up plot variables"<<endl;
     delete l1;
     delete mc_sum;
     delete stack;
@@ -243,6 +264,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     delete c;
   }
 
+  cout<<"Cleaning up file variables"<<endl;
   f_DY->Close();
   f_ST->Close();
   f_TTbar->Close();
