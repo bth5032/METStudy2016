@@ -64,3 +64,17 @@ function pc {
 	echo root -l -b -q doAll.C
 	echo root -l -b -q "drawPlots.C(true, true, true)"
 }
+
+function moveHistos {
+	# This function helps with moving the histograms before we make new ones.
+	MET_STUDY_LASTDIR=`ls -la ${MET_STUDY_HISTO_DIR} | tr -s " " | cut -d ' ' -f 9 | grep "^\.[0-9]" | sed 's/^\.//g' | sort -n | tail -n1`
+
+	NEXTDIR=$((MET_STUDY_LASTDIR+1))
+
+	mkdir ${MET_STUDY_HISTO_DIR}$MET_STUDY_LASTDIR
+	echo -n "Enter Comment For Move: "
+	read MET_STUDY_comment
+	echo $MET_STUDY_comment ${MET_STUDY_HISTO_DIR}${MET_STUDY_LASTDIR}/README
+
+	cp ${MET_STUDY_HISTO_DIR}*.root ${MET_STUDY_HISTO_DIR}${MET_STUDY_LASTDIR}/
+}
