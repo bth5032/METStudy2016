@@ -401,6 +401,7 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
   nu_0013_phi->Write();
   nu_1624_phi->Write();
   nu_2430_phi->Write();
+  nu_30in_phi->Write();
   nVert->Write();
   bumpPhi->Write();
   dilmass->Write();
