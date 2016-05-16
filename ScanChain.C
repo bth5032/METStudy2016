@@ -21,7 +21,7 @@
 #include "ZMET2016.cc"
 
 // CORE
-#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky.h"
+#include "dorky.h"
 
 
 using namespace std;
