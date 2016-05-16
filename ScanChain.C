@@ -221,7 +221,7 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
       // Analysis Code
       //=======================================
       
-      double weight 
+      double weight; 
 
       if (isData){
         weight = 1;
@@ -229,7 +229,7 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
       else{
         weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
       }
-      
+
       // Base Cut
       if (!(phys.dilmass() < 101 && phys.dilmass() > 81)) continue;
 
