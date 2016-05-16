@@ -235,7 +235,7 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
 
       if( phys.isData() ) {
         weight = 1;
-        DorkyEventIdentifier id(phys.run(), phys.evt(), phys.lumi());
+        duplicate_removal::DorkyEventIdentifier id(phys.run(), phys.evt(), phys.lumi());
         if (is_duplicate(id) ){
           ++nDuplicates;
           continue;
