@@ -39,11 +39,13 @@ function makePlots {
 
 function makeHistos {
 	git pull
+	rm ${MET_STUDY_HISTO_DIR}MET*.root
 	root -l -b -q doAll.C
 }
 
 function makeAll {
 	git pull
+	rm ${MET_STUDY_HISTO_DIR}MET*.root
 	root -l -b -q doAll.C
 	root -l -b -q "drawPlots.C(true, true, true)"
 }
