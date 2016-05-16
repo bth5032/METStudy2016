@@ -27,6 +27,7 @@
 
 using namespace std;
 using namespace zmet;
+using namespace duplicate_removal;
 
 int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = true, int nEvents = -1, TString savePath="/nfs-7/userdata/bobak/METStudy2016/76Histos/") {
 
@@ -235,7 +236,7 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
 
       if( phys.isData() ) {
         weight = 1;
-        duplicate_removal::DorkyEventIdentifier id(phys.run(), phys.evt(), phys.lumi());
+        DorkyEventIdentifier id(phys.run(), phys.evt(), phys.lumi());
         if (is_duplicate(id) ){
           ++nDuplicates;
           continue;
