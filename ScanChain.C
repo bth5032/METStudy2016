@@ -20,6 +20,11 @@
 // ZMET2016
 #include "ZMET2016.cc"
 
+// CORE
+#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky.h"
+//#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky.h"
+
+
 using namespace std;
 using namespace zmet;
 
@@ -196,6 +201,7 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
   TObjArray *listOfFiles = chain->GetListOfFiles();
   TIter fileIter(listOfFiles);
   TFile *currentFile = 0;
+  int nDuplicates = 0;
 
   // File Loop
   while ( (currentFile = (TFile*)fileIter.Next()) ) {
@@ -227,9 +233,15 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
       
       double weight; 
 
-      if (isData){
+      if( zmet.isData() ) {
         weight = 1;
+        DorkyEventIdentifier id(zmet.run(), zmet.evt(), zmet.lumi());
+        if (is_duplicate(id) ){
+          ++nDuplicates;
+          continue;
+        }
       }
+
       else{
         weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
       }
@@ -426,6 +438,7 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
   bmark->Stop("benchmark");
   cout << endl;
   cout << nEventsTotal << " Events Processed" << endl;
+  cout << nDuplicates << " Duplicates" << endl;
   cout << "------------------------------" << endl;
   cout << "CPU  Time:	" << Form( "%.01f", bmark->GetCpuTime("benchmark")  ) << endl;
   cout << "Real Time:	" << Form( "%.01f", bmark->GetRealTime("benchmark") ) << endl;

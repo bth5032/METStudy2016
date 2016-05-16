@@ -83,7 +83,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     plotpad->SetBottomMargin(0.12);
     plotpad->Draw();
     plotpad->cd();
-    if (plot_name.Contains("_pt") || plot_name.Contains("type1") || plot_name.Contains("MET") )
+    if (plot_name.Contains("PT") || plot_name.Contains("type1") || plot_name.Contains("MET") )
     {
         cout<<"Plot tagged for log y-axis"<<endl;
         plotpad->SetLogy();
