@@ -30,7 +30,7 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
   //=======================================
   
   TDirectory *rootdir = gDirectory->GetDirectory("Rint:");
-  TFile * output = new TFile(savePath+"METStudy_"+sampleName+"_just10to50.root", "create");
+  TFile * output = new TFile(savePath+"METStudy_"+sampleName+".root", "create");
 
   TH1I *numEvents = new TH1I("numEvents_"+sampleName, "Number of events in "+sampleName, 1, 0, 1);
   numEvents->SetDirectory(rootdir);

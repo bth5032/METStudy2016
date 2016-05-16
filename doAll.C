@@ -81,7 +81,7 @@
   //====================================
 
   TChain *ch_ST = new TChain("t"); 
-  chch_ST->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V07-06-09/ST_tW_antitop_5f_inclusiveDecays_13TeV.root");
+  ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V07-06-09/ST_tW_antitop_5f_inclusiveDecays_13TeV.root");
   ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V07-06-09/ST_tW_top_5f_inclusiveDecays_13TeV.root");
   ScanChain(ch_ST, "SingleTop"); 
 
