@@ -362,7 +362,7 @@ void drawPlots(bool pt=true, bool phi=true, bool extra=true, TString save_dir = 
     plot_names.push_back("type1MET_2Jets_mu");
     plot_names.push_back("nVert");
     plot_names.push_back("dilmass");
-    plot_names.push_back("bumpPhi");
+    plot_names.push_back("PHIinBump");
     drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
   }
