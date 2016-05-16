@@ -32,7 +32,8 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
   TDirectory *rootdir = gDirectory->GetDirectory("Rint:");
   TFile * output = new TFile(savePath+"METStudy_"+sampleName+"_just10to50.root", "create");
 
-  int numEvents = 0;
+  TH1I *numEvents = new TH1I("numEvents_"+sampleName, "Number of events in "+sampleName, 1, 0, 1);
+  numEvents->SetDirectory(rootdir);
 
   //MET Histos
   TH1F *t1met = new TH1F(sampleName+"_type1MET", "Type 1 MET for "+sampleName, 500,0,500);
@@ -183,7 +184,6 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
   nu_30in_pt->SetDirectory(rootdir);
   nu_30in_pt->Sumw2();
 
-
   
   // Loop over events to Analyze
   unsigned int nEventsTotal = 0;
@@ -207,7 +207,7 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
     if( nEventsTotal >= nEventsChain ) continue;
     unsigned int nEventsTree = tree->GetEntriesFast();
     for( unsigned int event = 0; event < nEventsTree; ++event) {
-    
+      numEvents->Fill(0);
       // Get Event Content
       if( nEventsTotal >= nEventsChain ) continue;
       if(fast) tree->LoadTree(event);
@@ -224,10 +224,26 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
       double weight = phys.evt_scale1fb() * 2.3 * phys.puWeight();
 
       // Base Cut
-      if (!(phys.dilmass() < 101 && phys.dilmass() > 81 && phys.nlep() >= 2 && phys.lep_pt().at(0) > 20 && phys.lep_pt().at(1) > 20 && abs(phys.lep_p4().at(0).eta()) < 2.4 && abs(phys.lep_p4().at(1).eta()) < 2.4 && phys.dRll() > 0.1 && phys.evt_type() == 0 && (( phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso() ) && phys.hyp_type() == 1 ) || (( phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) && phys.evt_passgoodrunlist() > 0))
-      {
-        continue; 
+      if (!(phys.dilmass() < 101 && phys.dilmass() > 81)) continue;
+
+      if (!(phys.nlep() >= 2)) continue;
+      if (!(phys.lep_pt().at(0) > 20 && phys.lep_pt().at(1) > 20)) continue;
+
+      if (!(abs(phys.lep_p4().at(0).eta()) < 2.4 && abs(phys.lep_p4().at(1).eta()) < 2.4)) continue;
+
+
+      if (!(phys.dRll() > 0.1)) continue; 
+
+      if (!(phys.evt_type() == 0)) continue;
+      
+      if (! ((phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
+        if (! ((phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) )
+        {
+          continue; 
+        }
       }
+
+      if (! (phys.evt_passgoodrunlist() > 0)) continue;
 
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
@@ -388,6 +404,7 @@ int ScanChain( TChain* chain, TString sampleName, bool fast = true, int nEvents 
   nVert->Write();
   bumpPhi->Write();
   dilmass->Write();
+  numEvents->Write();
 
   //close output file
   output->Write();
