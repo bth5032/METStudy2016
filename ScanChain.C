@@ -233,9 +233,9 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
       
       double weight; 
 
-      if( zmet.isData() ) {
+      if( phys.isData() ) {
         weight = 1;
-        DorkyEventIdentifier id(zmet.run(), zmet.evt(), zmet.lumi());
+        DorkyEventIdentifier id(phys.run(), phys.evt(), phys.lumi());
         if (is_duplicate(id) ){
           ++nDuplicates;
           continue;
