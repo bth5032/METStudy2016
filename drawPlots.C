@@ -28,13 +28,13 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     TString plot_name = plot_names.back();
     plot_names.pop_back();
 
-    TH1F* data = (TH1F*) ((TH1F*) f->Get("data_"+plot_name))->Clone("datahist_"+plot_name);
-    TH1F* zjets = (TH1F*) ((TH1F*) f->Get("DY_"+plot_name))->Clone("zjetshist_"+plot_name);
-    TH1F* fsbkg= (TH1F*) ((TH1F*) f->Get("TTBar_"+plot_name))->Clone("fsbkghist_"+plot_name);
-    TH1F* extra= (TH1F*) ((TH1F*) f->Get("VVV_"+plot_name))->Clone("fsbkghist_"+plot_name);
-    extra->Add(((TH1F*) f->Get("WW_"+plot_name))->Clone("fsbkghist_"+plot_name));
-    extra->Add(((TH1F*) f->Get("WZ_"+plot_name))->Clone("fsbkghist_"+plot_name));
-    extra->Add(((TH1F*) f->Get("ZZ_"+plot_name))->Clone("fsbkghist_"+plot_name));
+    TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_name))->Clone("datahist_"+plot_name);
+    TH1F* zjets = (TH1F*) ((TH1F*) f_DY->Get("DY_"+plot_name))->Clone("zjetshist_"+plot_name);
+    TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_name))->Clone("fsbkghist_"+plot_name);
+    TH1F* extra= (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("fsbkghist_"+plot_name);
+    extra->Add(((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("fsbkghist_"+plot_name));
+    extra->Add(((TH1F*) f_WZ->Get("WZ_"+plot_name))->Clone("fsbkghist_"+plot_name));
+    extra->Add(((TH1F*) f_ZZ->Get("ZZ_"+plot_name))->Clone("fsbkghist_"+plot_name));
 
     TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
     mc_sum->Add(fsbkg);
