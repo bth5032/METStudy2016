@@ -19,7 +19,7 @@ function env {
 	cmsenv
 	popd
 
-	sed -e 's,^//#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky\.h"$,#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky\.h",' -e 's,^#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky\.h"$,//#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky\.h",' > scanchain_tmp
+	sed -e 's,^//#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky\.h"$,#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky\.h",' -e 's,^#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky\.h"$,//#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky\.h",' < ScanChain.C > scanchain_tmp
 
 	mv scanchain_tmp ScanChain.C
 }
@@ -37,7 +37,7 @@ function 76env {
 	cmsenv
 	popd
 
-	sed -e 's,^//#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky\.h"$,#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky\.h",' -e 's,^#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky\.h"$,//#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky\.h",' > scanchain_tmp
+	sed -e 's,^//#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky\.h"$,#include "CMSSW_7_6_4/src/CORE/Tools/dorky/dorky\.h",' -e 's,^#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky\.h"$,//#include "CMSSW_8_0_6/src/CORE/Tools/dorky/dorky\.h",' < ScanChain.C > scanchain_tmp
 
 	mv scanchain_tmp ScanChain.C
 }
