@@ -21,7 +21,7 @@
 #include "ZMET2016.cc"
 
 // CORE
-#include "dorky.h"
+#include "dorky.cc"
 
 
 using namespace std;
