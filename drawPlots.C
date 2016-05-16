@@ -235,11 +235,28 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     delete fullpad;
     delete c;
   }
-  f->Close();
-  delete f;
+
+  f_DY->Close();
+  f_ST->Close();
+  f_TTbar->Close();
+  f_VVV->Close();
+  f_WW->Close();
+  f_WZ->Close();
+  f_ZZ->Close();
+  f_data->Close();
+
+  delete f_DY;
+  delete f_ST;
+  delete f_TTbar;
+  delete f_VVV;
+  delete f_WW;
+  delete f_WZ;
+  delete f_ZZ;
+  delete f_data;
+  
 }
 
-void DrawPlots(bool pt=true, bool phi=true, bool extra=false, TString save_dir = "~/public_html/ZMET2016/looper/", TString input_dir = "/nfs-7/userdata/bobak/METStudy2016/76Histos/")
+void DrawPlots(bool pt=true, bool phi=true, bool extra=true, TString save_dir = "~/public_html/ZMET2016/looper/", TString input_dir = "/nfs-7/userdata/bobak/METStudy2016/76Histos/")
 {
   
 
