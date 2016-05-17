@@ -72,3 +72,18 @@ function 76env {
 
 	mv scanchain_tmp ScanChain.C
 }
+
+
+##
+# Make directories
+##
+
+if [[ ! -d $MET_STUDY_PLOTS_OUTPUT_DIR ]]
+then
+	mkdir -p $MET_STUDY_PLOTS_OUTPUT_DIR
+fi
+
+if [[ ! -d $MET_STUDY_HISTO_DIR ]]
+then
+	mkdir -p $MET_STUDY_HISTO_DIR
+fi
