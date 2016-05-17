@@ -39,6 +39,8 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
   //=======================================
   
   TDirectory *rootdir = gDirectory->GetDirectory("Rint:");
+
+  cout<<"Opening file "<<savePath<<endl;
   TFile * output = new TFile(savePath+"METStudy_"+sampleName+".root", "create");
 
   TH1I *numEvents = new TH1I("numEvents_"+sampleName, "Number of events in "+sampleName, 1, 0, 1);
