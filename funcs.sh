@@ -8,7 +8,7 @@ MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/80/
 
 
 function makePlots {
-	root -l -b -q drawPlots.C\(\""$MET_STUDY_PLOTS_OUTPUT_DIR"\", \""$MET_STUDY_HISTO_DIR"\", true, true, true\)
+	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", true, true, true)"
 }
 
 function makeHistos {

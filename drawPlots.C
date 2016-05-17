@@ -15,12 +15,12 @@ using namespace std;
 void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   
   TFile* f_DY = new TFile(input_dir+"METStudy_DY.root");
-  TFile* f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
+  //TFile* f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
   TFile* f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");
-  TFile* f_VVV = new TFile(input_dir+"METStudy_VVV.root");
+  /*TFile* f_VVV = new TFile(input_dir+"METStudy_VVV.root");
   TFile* f_WW = new TFile(input_dir+"METStudy_WW.root");
   TFile* f_WZ = new TFile(input_dir+"METStudy_WZ.root");
-  TFile* f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");
+  TFile* f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");*/
   TFile* f_data = new TFile(input_dir+"METStudy_data.root");
 
   cout << "Found files"<<endl;
