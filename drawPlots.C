@@ -289,12 +289,12 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   f_data->Close();
 
   delete f_DY;
-  delete f_ST;
+  //delete f_ST;
   delete f_TTbar;
-  delete f_VVV;
-  delete f_WW;
-  delete f_WZ;
-  delete f_ZZ;
+  //delete f_VVV;
+  //delete f_WW;
+  //delete f_WZ;
+  //delete f_ZZ;
   delete f_data;
   
 }
