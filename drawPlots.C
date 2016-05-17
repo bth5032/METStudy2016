@@ -299,7 +299,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   
 }
 
-void drawPlots(bool pt=true, bool phi=true, bool extra=true, TString save_dir, TString input_dir)
+void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true, bool extra=true)
 {
   
 
