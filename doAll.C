@@ -14,7 +14,7 @@ void doAll(TString histo_dir){
   //MuMu
   ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/data_2016B_Prompt_mm.root");
 
-  ScanChain(ch_data, "data", true); 
+  ScanChain(ch_data, "data", histo_dir); 
 
   //====================================
   // DYJets
@@ -27,7 +27,7 @@ void doAll(TString histo_dir){
 
   //50+
   ch_DY->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/dy_m50_amcnlo*");
-  ScanChain(ch_DY, "DY"); 
+  ScanChain(ch_DY, "DY", histo_dir); 
 
   //====================================
   // TTbar
@@ -35,7 +35,7 @@ void doAll(TString histo_dir){
 
   TChain *ch_ttbar = new TChain("t"); 
   ch_ttbar->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/ttbar_dilep_mgmlm*");
-  ScanChain(ch_ttbar, "TTBar"); 
+  ScanChain(ch_ttbar, "TTBar", histo_dir); 
 
 /*
   //====================================
@@ -53,7 +53,7 @@ void doAll(TString histo_dir){
   //4L -- Doesn't exist
   //ch_ZZ->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/");
 
-  ScanChain(ch_ZZ, "ZZ"); 
+  ScanChain(ch_ZZ, "ZZ", histo_dir); 
 
 
   //====================================
@@ -68,7 +68,7 @@ void doAll(TString histo_dir){
   //Top
   ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/sttw_top_powheg*");
 
-  ScanChain(ch_ST, "SingleTop"); 
+  ScanChain(ch_ST, "SingleTop", histo_dir); 
 
 
   //====================================
@@ -80,7 +80,7 @@ void doAll(TString histo_dir){
   //2L2Nu
   ch_WW->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/ww_2l2nu_powheg*");
   
-  ScanChain(ch_WW, "WW"); 
+  ScanChain(ch_WW, "WW", histo_dir); 
 
 
   //====================================
@@ -95,7 +95,7 @@ void doAll(TString histo_dir){
   //3LNu
   ch_WZ->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/");
   
-  ScanChain(ch_WZ, "WZ"); 
+  ScanChain(ch_WZ, "WZ", histo_dir); 
 
   //====================================
   // VVV
@@ -116,7 +116,7 @@ void doAll(TString histo_dir){
   ch_VVV->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/zzz_incl_mgmlm*");
 
   
-  ScanChain(ch_VVV, "VVV"); 
+  ScanChain(ch_VVV, "VVV", histo_dir); 
 
 
 */

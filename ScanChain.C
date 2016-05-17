@@ -28,7 +28,7 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
-int ScanChain( TChain* chain, TString sampleName, TString savePath, bool isData = 0, bool fast = true, int nEvents = -1) {
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = true, int nEvents = -1) {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
