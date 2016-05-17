@@ -280,12 +280,12 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 
   cout<<"Cleaning up file variables"<<endl;
   f_DY->Close();
-  f_ST->Close();
+  //f_ST->Close();
   f_TTbar->Close();
-  f_VVV->Close();
-  f_WW->Close();
-  f_WZ->Close();
-  f_ZZ->Close();
+  //f_VVV->Close();
+  //f_WW->Close();
+  //f_WZ->Close();
+  //f_ZZ->Close();
   f_data->Close();
 
   delete f_DY;
