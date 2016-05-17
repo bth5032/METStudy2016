@@ -41,7 +41,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     cout<<plot_name<<" found in "<<f_TTbar->GetName()<<endl;
 
     // Build Extra Plots
-    TH1F* VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
+    /*TH1F* VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
     cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
 
     TH1F* WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("WWhist_"+plot_name);
@@ -56,11 +56,11 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     TH1F* extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("extrahist_"+plot_name);
     extra->Add(WW);
     extra->Add(WZ);
-    extra->Add(ZZ);
+    extra->Add(ZZ);*/
 
     TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
     mc_sum->Add(fsbkg);
-    mc_sum->Add(extra);
+    //mc_sum->Add(extra);
 
     cout << "Histograms pulled from files, adding draw options"<<endl;
 
@@ -92,7 +92,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         data->Rebin(5);
         zjets->Rebin(5);
         fsbkg->Rebin(5);
-        extra->Rebin(5);
+        //extra->Rebin(5);
         mc_sum->Rebin(5);
 
     }
@@ -107,8 +107,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     fsbkg->SetFillColor(kYellow+1);
     fsbkg->SetFillStyle(1001);
 
-    extra->SetFillColor(kMagenta);
-    extra->SetFillStyle(1001);
+    //extra->SetFillColor(kMagenta);
+    //extra->SetFillStyle(1001);
 
 
     data->SetMarkerStyle(20);
@@ -118,7 +118,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     THStack * stack = new THStack("stack_"+plot_name, data->GetTitle());
     stack->Add(fsbkg);
     stack->Add(zjets);
-    stack->Add(extra);
+    //stack->Add(extra);
 
     double ymax = 0;
     if (mc_sum->GetMaximum() < data->GetMaximum()){
@@ -166,19 +166,19 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         int overflow_data = data->GetBinContent(n_bins + 1);
         int overflow_zjets = zjets->GetBinContent(n_bins + 1);
         int overflow_fsbkg = fsbkg->GetBinContent(n_bins + 1);
-        int overflow_extra = extra->GetBinContent(n_bins + 1);
+        //int overflow_extra = extra->GetBinContent(n_bins + 1);
         int overflow_mcsum = zjets->GetBinContent(n_bins + 1);
 
         int max_data = data->GetBinContent(n_bins);
         int max_zjets = zjets->GetBinContent(n_bins);
         int max_fsbkg = fsbkg->GetBinContent(n_bins);
-        int max_extra = extra->GetBinContent(n_bins);
+        //int max_extra = extra->GetBinContent(n_bins);
         int max_mcsum = mc_sum->GetBinContent(n_bins);
 
         data->SetBinContent(n_bins, max_data+overflow_data);
         zjets->SetBinContent(n_bins, max_zjets+overflow_zjets);
         fsbkg->SetBinContent(n_bins, max_fsbkg+overflow_fsbkg);
-        extra->SetBinContent(n_bins, max_extra+overflow_extra);
+        //extra->SetBinContent(n_bins, max_extra+overflow_extra);
         mc_sum->SetBinContent(n_bins, max_mcsum+overflow_mcsum);
     }
 
@@ -203,7 +203,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     l1->AddEntry(data, "data", "p");
     l1->AddEntry(zjets, "Z+jets", "f");
     l1->AddEntry(fsbkg, "t#bar{t}", "f");
-    l1->AddEntry(extra, "Low #sigma", "f");
+    //l1->AddEntry(extra, "Low #sigma", "f");
 
     l1->Draw("same");
 
@@ -267,7 +267,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     delete stack;
     delete zjets;
     delete fsbkg;
-    delete extra;
+    //delete extra;
     delete data;
     delete residual;
     delete ratiopad;
