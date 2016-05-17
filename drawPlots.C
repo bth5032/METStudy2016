@@ -315,8 +315,6 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
 {
   
   vector<TString> plot_names;
-  
-  getScaleValues(input_dir);
 
   if (phi) {
   //============================================
