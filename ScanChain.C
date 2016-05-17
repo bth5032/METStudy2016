@@ -28,7 +28,7 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
-int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = true, int nEvents = -1, TString savePath="/nfs-7/userdata/bobak/METStudy2016/76Histos/noDup/") {
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool isData = 0, bool fast = true, int nEvents = -1) {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
@@ -238,12 +238,13 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
         DorkyEventIdentifier id(phys.run(), phys.evt(), phys.lumi());
         if (is_duplicate(id) ){
           ++nDuplicates;
-          //continue;
+          continue;
         }
       }
 
       else{
-        weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
+        //weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
+        weight = phys.evt_scale1fb() * 2.3; 
       }
 
       // Base Cut
