@@ -16,7 +16,7 @@ function makeHistos {
 	then
 		echo "Please clean up the old directory as you see fit before you run."
 	else
-		root -l -b -q \"doAll.C(\'${MET_STUDY_HISTO_DIR}\')\"
+		root -l -b -q "doAll.C(\'${MET_STUDY_HISTO_DIR}\')"
 	fi
 }	
 
