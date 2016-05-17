@@ -11,7 +11,7 @@
 #include "TH1F.h"
 
 using namespace std;
-
+    
 void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   
   TFile* f_DY = new TFile(input_dir+"METStudy_DY.root");
@@ -96,6 +96,18 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         mc_sum->Rebin(5);
 
     }
+
+    //===========================
+    // Normalize MC
+    //===========================
+    double numEventsData = data->Integral(0,500);
+    double numEventsMC = mc_sum->Integral(0,500);
+    double scaleFactor = ((double) numEventsData/numEventsMC);
+
+    zjets->Scale(scaleFactor);
+    fsbkg->Scale(scaleFactor);
+    mc_sum->Scale(scaleFactor);
+
 
     //===========================
     // SET MC COLORS
@@ -302,9 +314,9 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true, bool extra=true)
 {
   
-
   vector<TString> plot_names;
   
+  getScaleValues(input_dir);
 
   if (phi) {
   //============================================

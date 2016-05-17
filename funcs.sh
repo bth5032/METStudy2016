@@ -16,7 +16,7 @@ function makeHistos {
 	then
 		echo "Please clean up the old directory as you see fit before you run."
 	else
-		root -l -b -q doAll.C\(\""$MET_STUDY_HISTO_DIR"\"\)
+		root -l -b -q "doAll.C(\"$MET_STUDY_HISTO_DIR\")"
 	fi
 }	
 
@@ -81,9 +81,11 @@ function 76env {
 if [[ ! -d $MET_STUDY_PLOTS_OUTPUT_DIR ]]
 then
 	mkdir -p $MET_STUDY_PLOTS_OUTPUT_DIR
+	cp ~/public_html/ZMET2016/index.php ${$MET_STUDY_PLOTS_OUTPUT_DIR}/
 fi
 
 if [[ ! -d $MET_STUDY_HISTO_DIR ]]
 then
 	mkdir -p $MET_STUDY_HISTO_DIR
 fi
+
