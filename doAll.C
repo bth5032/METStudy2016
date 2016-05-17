@@ -2,6 +2,8 @@
 
 void doAll(TString histo_dir){
 
+  cout<<"Using Histogram Directory: "<<histo_dir<<endl;
+
   //====================================
   // Data
   //====================================
