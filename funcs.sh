@@ -43,31 +43,24 @@ function 76env {
 }
 
 function makePlots {
-	git pull
 	root -l -b -q "drawPlots.C(true, true, true)"
 }
 
 function makeHistos {
-	git pull
-	rm ${MET_STUDY_HISTO_DIR}MET*.root
-	root -l -b -q doAll.C
-}
-
-function makeAll {
-	git pull
-	rm ${MET_STUDY_HISTO_DIR}MET*.root
-	root -l -b -q doAll.C
-	root -l -b -q "drawPlots.C(true, true, true)"
-}
-
-function pc {
-	echo root -l -b -q doAll.C
-	echo root -l -b -q "drawPlots.C(true, true, true)"
-}
+	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_data.root ]]
+	then
+		echo "Please clean up the old directory as you see fit before you run."
+	else
+		root -l -b -q doAll.C
+	fi
+}	
 
 function moveHistos {
 	# This function helps with moving the histograms before we make new ones.
+	
+	# gets number of last hidden folder.
 	MET_STUDY_LASTDIR=`ls -la ${MET_STUDY_HISTO_DIR} | tr -s " " | cut -d ' ' -f 9 | grep "^\.[0-9]" | sed 's/^\.//g' | sort -n | tail -n1`
+
 
 	NEXTDIR=$((MET_STUDY_LASTDIR+1))
 
