@@ -8,7 +8,7 @@ MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/80/
 
 
 function makePlots {
-	root -l -b -q 'drawPlots.C(true, true, true, "${MET_STUDY_PLOTS_OUTPUT_DIR}", "${MET_STUDY_HISTO_DIR}")'
+	root -l -b -q "drawPlots.C(true, true, true, $MET_STUDY_PLOTS_OUTPUT_DIR, $MET_STUDY_HISTO_DIR)"
 }
 
 function makeHistos {
@@ -16,7 +16,7 @@ function makeHistos {
 	then
 		echo "Please clean up the old directory as you see fit before you run."
 	else
-		root -l -b -q 'doAll.C("${MET_STUDY_HISTO_DIR}")'
+		root -l -b -q "doAll.C($MET_STUDY_HISTO_DIR)"
 	fi
 }	
 
