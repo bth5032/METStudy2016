@@ -34,6 +34,7 @@ class PlotList {
             current=head;
             tail=head;
 
+            null = new plotnode();
             null->name = "NULL";
             null->title = "NULL";
             null->xlabel = "NULL";
