@@ -197,12 +197,12 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
 
   // Photonic SET
   TH1F *ph_0013_set = new TH1F(sampleName+"_photonSET0013", "Photonic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  ph_0013_phi->SetDirectory(rootdir);
-  ph_0013_phi->Sumw2();
+  ph_0013_set->SetDirectory(rootdir);
+  ph_0013_set->Sumw2();
 
   TH1F *ph_1624_set = new TH1F(sampleName+"_photonSET1624", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  ph_1624_phi->SetDirectory(rootdir);
-  ph_1624_phi->Sumw2();
+  ph_1624_set->SetDirectory(rootdir);
+  ph_1624_set->Sumw2();
 
   TH1F *ph_2430_set = new TH1F(sampleName+"_photonSET2430", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
   ph_2430_set->SetDirectory(rootdir);
@@ -494,6 +494,16 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
   nu_1624_phi->Write();
   nu_2430_phi->Write();
   nu_30in_phi->Write();
+  ph_0013_set->Write();
+  ph_1624_set->Write();
+  ph_2430_set->Write();
+  ch_0013_set->Write();
+  ch_1624_set->Write();
+  ch_2430_set->Write();
+  nu_0013_set->Write();
+  nu_1624_set->Write();
+  nu_2430_set->Write();
+  nu_30in_set->Write();
   nVert->Write();
   bumpPhi->Write();
   dilmass->Write();
