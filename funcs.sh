@@ -65,7 +65,7 @@ function moveHistos {
 	mkdir ${MET_STUDY_HISTO_DIR}.$NEXTDIR
 	echo -n "Enter Comment For Move: "
 	read MET_STUDY_comment
-	echo $MET_STUDY_comment ${MET_STUDY_HISTO_DIR}.${NEXTDIR}/README
+	echo $MET_STUDY_comment > ${MET_STUDY_HISTO_DIR}.${NEXTDIR}/README
 
 	cp ${MET_STUDY_HISTO_DIR}*.root ${MET_STUDY_HISTO_DIR}.${NEXTDIR}/
 }
