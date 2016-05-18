@@ -41,15 +41,58 @@ function makePlots {
 	  fi
 	done
 
+
 	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_PLOTS_FLAG_PT, $MET_STUDY_PLOTS_FLAG_PHI, $MET_STUDY_PLOTS_FLAG_SUMET, $MET_STUDY_PLOTS_FLAG_MET, $MET_STUDY_PLOTS_FLAG_EXTRA)"
 }
 
 function makeHistos {
+	MET_STUDY_HISTOS_FLAG_DATA="false"
+	MET_STUDY_HISTOS_FLAG_DY="false"
+	MET_STUDY_HISTOS_FLAG_TTBAR="false"
+	MET_STUDY_HISTOS_FLAG_ST="false"
+	MET_STUDY_HISTOS_FLAG_ZZ="false"
+	MET_STUDY_HISTOS_FLAG_WW="false"
+	MET_STUDY_HISTOS_FLAG_WZ="false"
+	MET_STUDY_HISTOS_FLAG_VVV="false"
+
+
+	for i in $@
+	do
+	  if [[ ${i,,} == "data" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_DATA="true"
+	  elif [[ ${i,,} == "dy" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_DY="true"
+	  elif [[ ${i,,} == "ttbar" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_TTBAR="true"
+	  elif [[ ${i,,} == "st" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_ST="true"
+	  elif [[ ${i,,} == "zz" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_ZZ="true"
+	  fi
+	  elif [[ ${i,,} == "ww" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_WW="true"
+	  fi
+	  elif [[ ${i,,} == "wz" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_WZ="true"
+	  fi
+	  elif [[ ${i,,} == "vvv" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_ZZ="true"
+	  fi
+	done
+
 	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_data.root ]]
 	then
 		echo "Please clean up the old directory as you see fit before you run."
 	else
-		root -l -b -q "doAll.C(\"$MET_STUDY_HISTO_DIR\")"
+		root -l -b -q "doAll.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_PLOTS_FLAG_DATA, $MET_STUDY_PLOTS_FLAG_DY, $MET_STUDY_PLOTS_FLAG_TTBAR, $MET_STUDY_PLOTS_FLAG_ST, $MET_STUDY_PLOTS_FLAG_ZZ, $MET_STUDY_PLOTS_FLAG_WW, $MET_STUDY_PLOTS_FLAG_WZ, $MET_STUDY_PLOTS_FLAG_VVV)"
 	fi
 }	
 
@@ -67,7 +110,7 @@ function moveHistos {
 	read MET_STUDY_comment
 	echo $MET_STUDY_comment > ${MET_STUDY_HISTO_DIR}.${NEXTDIR}/README
 
-	cp ${MET_STUDY_HISTO_DIR}*.root ${MET_STUDY_HISTO_DIR}.${NEXTDIR}/
+	mv ${MET_STUDY_HISTO_DIR}*.root ${MET_STUDY_HISTO_DIR}.${NEXTDIR}/
 }
 
 function env {

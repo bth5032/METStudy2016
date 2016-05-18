@@ -387,51 +387,51 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
       if (phys.phpfcands_1624_pt()>0){
         ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
         ph_1624_phi->Fill(phys.phpfcands_1624_phi(), weight);
-        ph_1624_set->Fill(phys.phpfcands_1624_set(), weight);
+        ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
       }
       if (phys.phpfcands_2430_pt()>0){
         ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
         ph_2430_phi->Fill(phys.phpfcands_2430_phi(), weight);
-        ph_2430_set->Fill(phys.phpfcands_2430_set(), weight);
+        ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
       }
 
       // Draw charged hadron histos
       if (phys.chpfcands_0013_pt()>0){
         ch_0013_pt->Fill(phys.chpfcands_0013_pt(), weight);
         ch_0013_phi->Fill(phys.chpfcands_0013_phi(), weight);
-        ch_0013_set->Fill(phys.chpfcands_0013_set(), weight);
+        ch_0013_set->Fill(phys.chpfcands_0013_sumet(), weight);
       }
       if (phys.chpfcands_1624_pt()>0){
         ch_1624_pt->Fill(phys.chpfcands_1624_pt(), weight);
         ch_1624_phi->Fill(phys.chpfcands_1624_phi(), weight);
-        ch_1624_set->Fill(phys.chpfcands_1624_set(), weight);
+        ch_1624_set->Fill(phys.chpfcands_1624_sumet(), weight);
       }
       if (phys.chpfcands_2430_pt()>0){
         ch_2430_pt->Fill(phys.chpfcands_2430_pt(), weight);
         ch_2430_phi->Fill(phys.chpfcands_2430_phi(), weight);
-        ch_2430_set->Fill(phys.chpfcands_2430_set(), weight);
+        ch_2430_set->Fill(phys.chpfcands_2430_sumet(), weight);
       }
 
       // Draw neutral hadron histos
       if (phys.nupfcands_0013_pt()>0){
         nu_0013_pt->Fill(phys.nupfcands_0013_pt(), weight);
         nu_0013_phi->Fill(phys.nupfcands_0013_phi(), weight);
-        nu_0013_set->Fill(phys.nupfcands_0013_set(), weight);
+        nu_0013_set->Fill(phys.nupfcands_0013_sumet(), weight);
       }
       if (phys.nupfcands_1624_pt()>0){
         nu_1624_pt->Fill(phys.nupfcands_1624_pt(), weight);
         nu_1624_phi->Fill(phys.nupfcands_1624_phi(), weight);
-        nu_1624_set->Fill(phys.nupfcands_1624_set(), weight);
+        nu_1624_set->Fill(phys.nupfcands_1624_sumet(), weight);
       }
       if (phys.nupfcands_2430_pt()>0){
         nu_2430_pt->Fill(phys.nupfcands_2430_pt(), weight);
         nu_2430_phi->Fill(phys.nupfcands_2430_phi(), weight);
-        nu_2430_set->Fill(phys.nupfcands_2430_set(), weight);
+        nu_2430_set->Fill(phys.nupfcands_2430_sumet(), weight);
       }
       if (phys.nupfcands_30in_pt()>0){
         nu_30in_pt->Fill(phys.nupfcands_30in_pt(), weight);
         nu_30in_phi->Fill(phys.nupfcands_30in_phi(), weight);
-        nu_30in_set->Fill(phys.nupfcands_30in_set(), weight);
+        nu_30in_set->Fill(phys.nupfcands_30in_sumet(), weight);
       }
 
       // Draw bump-phi histo
