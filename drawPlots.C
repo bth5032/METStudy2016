@@ -375,8 +375,11 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.clear();
   }
   
-  if (MET)
-  {
+  if (MET){
+  //============================================
+  // MET
+  //============================================
+  //-----------------define---------------------
     plot_names.push_back("type1MET");
     plot_names.push_back("type1MET_2jets");
     plot_names.push_back("type1MET_el");
@@ -390,6 +393,9 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("rawMET_2jets_el");
     plot_names.push_back("rawMET_mu");
     plot_names.push_back("rawMET_2jets_mu");
+
+    drawAll(plot_names, input_dir, save_dir);
+    plot_names.clear();
   }
 
   if (extra) { 
