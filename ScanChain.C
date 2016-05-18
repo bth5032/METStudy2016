@@ -196,45 +196,45 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
   //=================================
 
   // Photonic SET
-  TH1F *ph_0013_set = new TH1F(sampleName+"_photonSET0013", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  TH1F *ph_0013_set = new TH1F(sampleName+"_photonSET0013", "Photonic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ph_0013_phi->SetDirectory(rootdir);
   ph_0013_phi->Sumw2();
 
-  TH1F *ph_1624_set = new TH1F(sampleName+"_photonSET1624", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  TH1F *ph_1624_set = new TH1F(sampleName+"_photonSET1624", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
   ph_1624_phi->SetDirectory(rootdir);
   ph_1624_phi->Sumw2();
 
-  TH1F *ph_2430_set = new TH1F(sampleName+"_photonSET2430", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  TH1F *ph_2430_set = new TH1F(sampleName+"_photonSET2430", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
   ph_2430_set->SetDirectory(rootdir);
   ph_2430_set->Sumw2();
 
   // Charged Hadronic SET
-  TH1F *ch_0013_set = new TH1F(sampleName+"_chargedSET0013", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  TH1F *ch_0013_set = new TH1F(sampleName+"_chargedSET0013", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ch_0013_set->SetDirectory(rootdir);
   ch_0013_set->Sumw2();
 
-  TH1F *ch_1624_set = new TH1F(sampleName+"_chargedSET1624", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  TH1F *ch_1624_set = new TH1F(sampleName+"_chargedSET1624", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
   ch_1624_set->SetDirectory(rootdir);
   ch_1624_set->Sumw2();
 
-  TH1F *ch_2430_set = new TH1F(sampleName+"_chargedSET2430", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  TH1F *ch_2430_set = new TH1F(sampleName+"_chargedSET2430", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
   ch_2430_set->SetDirectory(rootdir);
   ch_2430_set->Sumw2();
 
   // Neutral Hadronic SET
-  TH1F *nu_0013_set = new TH1F(sampleName+"_neutralSET0013", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  TH1F *nu_0013_set = new TH1F(sampleName+"_neutralSET0013", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   nu_0013_set->SetDirectory(rootdir);
   nu_0013_set->Sumw2();
 
-  TH1F *nu_1624_set = new TH1F(sampleName+"_neutralSET1624", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  TH1F *nu_1624_set = new TH1F(sampleName+"_neutralSET1624", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
   nu_1624_set->SetDirectory(rootdir);
   nu_1624_set->Sumw2();
 
-  TH1F *nu_2430_set = new TH1F(sampleName+"_neutralSET2430", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  TH1F *nu_2430_set = new TH1F(sampleName+"_neutralSET2430", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
   nu_2430_set->SetDirectory(rootdir);
   nu_2430_set->Sumw2();
 
-  TH1F *nu_30in_set = new TH1F(sampleName+"_neutralSET30in", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| > 3.0", 500,0,500);
+  TH1F *nu_30in_set = new TH1F(sampleName+"_neutralSET30in", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| > 3.0", 500,0,500);
   nu_30in_set->SetDirectory(rootdir);
   nu_30in_set->Sumw2();
 

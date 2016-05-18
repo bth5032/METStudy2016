@@ -34,7 +34,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     TString plot_name = plot_names.back();
     plot_names.pop_back();
 
-    plot_info->setPlot(plot_name);
+    //don't make plots if we can't look up the info.
+    if (! plot_info->setPlot(plot_name) ) continue;
     
     cout << "Making Plots for: "<<plot_name<<endl;
     
@@ -362,12 +363,12 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("type1MET_mu");
     plot_names.push_back("type1MET_2jets_mu");
     
-    /*plot_names.push_back("rawMET");
+    plot_names.push_back("rawMET");
     plot_names.push_back("rawMET_2jets");
     plot_names.push_back("rawMET_el");
     plot_names.push_back("rawMET_2jets_el");
     plot_names.push_back("rawMET_mu");
-    plot_names.push_back("rawMET_2jets_mu");*/
+    plot_names.push_back("rawMET_2jets_mu");
     
     plot_names.push_back("nVert");
     plot_names.push_back("dilmass");
