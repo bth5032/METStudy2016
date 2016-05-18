@@ -68,7 +68,7 @@ class PlotList {
             node->options+="<overflow>";
           }
           else if (node->type == "sumet"){
-            node->options+="<logy>";
+            //node->options+="<logy>";
             node->options+="<overflow>";
           }
           else if (node->type == "extra"){
