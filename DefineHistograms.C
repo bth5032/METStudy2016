@@ -186,6 +186,9 @@ class PlotList {
         TString ylabel(){
             return current->ylabel;
         }
+        TString type(){
+            return current->type;
+        }
         bool hasOpt(TString query){
             return current->options.Contains("<"+query+">");
         }
