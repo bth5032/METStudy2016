@@ -17,7 +17,7 @@ using namespace std;
     
 void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   
-  PlotList plot_info = getPlotList();
+  PlotList *plot_info = getPlotList();
 
   TFile* f_DY = new TFile(input_dir+"METStudy_DY.root");
   //TFile* f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
