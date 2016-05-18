@@ -73,15 +73,12 @@ function makeHistos {
 	  elif [[ ${i,,} == "zz" ]]
 	  then
 	    MET_STUDY_HISTOS_FLAG_ZZ="true"
-	  fi
 	  elif [[ ${i,,} == "ww" ]]
 	  then
 	    MET_STUDY_HISTOS_FLAG_WW="true"
-	  fi
 	  elif [[ ${i,,} == "wz" ]]
 	  then
 	    MET_STUDY_HISTOS_FLAG_WZ="true"
-	  fi
 	  elif [[ ${i,,} == "vvv" ]]
 	  then
 	    MET_STUDY_HISTOS_FLAG_ZZ="true"
