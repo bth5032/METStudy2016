@@ -2,196 +2,107 @@
 // This file doesn't actually do anything right now.  
 // It is just where I am storing some info for which histos to draw.
 
-
 #include "TString.h"
 
-TCut base_cut = "dilmass < 101 && dilmass > 81 && nlep >= 2 && lep_pt[0] > 20 && lep_pt[1] > 20 && abs(lep_p4[0].eta()) < 2.4 && abs(lep_p4[1].eta()) < 2.4 && dRll > 0.1 && evt_type == 0 && (( HLT_DoubleMu || HLT_DoubleMu_tk || HLT_DoubleMu_noiso ) && hyp_type == 1 ) || (( HLT_DoubleEl_DZ || HLT_DoubleEl_noiso ) && hyp_type == 0) && evt_passgoodrunlist > 0";
+//TCut base_cut = "dilmass < 101 && dilmass > 81 && nlep >= 2 && lep_pt[0] > 20 && lep_pt[1] > 20 && abs(lep_p4[0].eta()) < 2.4 && abs(lep_p4[1].eta()) < 2.4 && dRll > 0.1 && evt_type == 0 && (( HLT_DoubleMu || HLT_DoubleMu_tk || HLT_DoubleMu_noiso ) && hyp_type == 1 ) || (( HLT_DoubleEl_DZ || HLT_DoubleEl_noiso ) && hyp_type == 0) && evt_passgoodrunlist > 0";
 
-class ZMEThistogram
-{
-	public:
-		TString title;
-		TString 
+class PlotList {
+    
+    struct plotnode;
+    struct plotnode {
+        TString name, title, xlabel, ylabel;
+        double xmin, xmax, bin_size;
+        struct plotnode *next, *prev;
+    };    
+
+    private:
+        plotnode *head, *current, *tail;
+    
+    public:
+        PlotList(TString name, TString title, TString xlabel, TString ylabel, double xmin, double xmax, double bin_size){
+            head = new plotnode();
+            head->name = name;
+            head->title = title;
+            head->xlabel = xlabel;
+            head->ylabel = ylabel;
+            head->xmin = xmin;
+            head->xmax = xmax;
+            head->prev=NULL;
+            head->next=NULL;
+
+            current=head;
+            tail=head;
+        }
+
+        void add(TString name, TString title, TString xlabel, TString ylabel, double xmin, double xmax, double bin_size){
+            plotnode* next = new plotnode();
+            next->name = name;
+            next->title = title;
+            next->xlabel = xlabel;
+            next->ylabel = ylabel;
+            next->xmin = xmin;
+            next->xmax = xmax;
+
+            next->next=NULL;
+            next->prev=tail;
+            tail->next=next;
+            tail=next;
+        }
+
+        //return node with plotname, always puts last plot name if the plot can't be found!!
+        void setPlot(TString plotname){
+            current=head;
+            do
+            {
+                if (current->name == plotname)
+                {
+                    break;
+                }
+                current=current->next;
+            }while (current != tail);
+        }
+
+        TString name(){
+            return current->name;
+        }
+        TString title(){
+            return current->title;
+        }
+        TString xlabel(){
+            return current->xlabel;
+        }
+        TString ylabel(){
+            return current->ylabel;
+        }
+        double xmin(){
+            return current->xmin;
+        }
+        double xmax(){
+            return current->xmax;
+        }
+        double binSize(){
+            return current->bin_size;
+        }
+
+};
+
+PlotList* getPlotList(){
+  
+  //========================
+  // MET plots
+  //========================
+  
+  PlotList* all_plots = new PlotList("type1MET", "Type 1 MET for All Events in Study", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("type1MET_2Jets", "Type 1 MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  
+  //electron/muon
+  all_plots->add("type1MET_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("type1MET_mu", "Type 1 MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+
+  //electron/muon with jets
+  all_plots->add("type1MET_2jets_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("type1MET_2jets_mu", "Type 1 MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+
+return all_plots;
 
 }
-
-//============================================
-  // Define plots
-  //============================================
-  // Type1 MET
-  plot_names.push_back("type1MET");
-  plot_vars.push_back("met_T1CHS_miniAOD_CORE_pt");
-  plot_titles.push_back("Type 1 MET for All Events in Study");
-  cuts.push_back(base_cut+"met_T1CHS_miniAOD_CORE_pt > 0");
-  plot_types.push_back("pt");
-
-  // Type1 MET
-  plot_names.push_back("type1MET_2Jets");
-  plot_vars.push_back("met_T1CHS_miniAOD_CORE_pt");
-  plot_titles.push_back("Type 1 MET for All Events with at Least 2 Jets");
-  cuts.push_back(base_cut+"met_T1CHS_miniAOD_CORE_pt > 0 && njets >= 2");
-  plot_types.push_back("pt");
-
-/*
-  //Pileup Weight
-  plot_names.push_back("puWeight");
-  plot_vars.push_back("puWeight");
-  plot_titles.push_back("Pileup Weight");
-  cuts.push_back(base_cut+"met_rawPt > 0");
-  plot_types.push_back("puWeight");
-*/
-
-  //Number of Verticies
-  plot_names.push_back("nVert");
-  plot_vars.push_back("nVert");
-  plot_titles.push_back("Number of Verticies");
-  cuts.push_back(base_cut+"met_rawPt > 0");
-  plot_types.push_back("nVert");
-
-/*
-  // Photon MET-Phi in Barrel
-  plot_names.push_back("ph_0013_phi");
-  plot_vars.push_back("phpfcands_0013_phi");
-  plot_titles.push_back("Photon MET-Phi in Barrel |#eta| < 1.3");
-  cuts.push_back(base_cut+"phpfcands_0013_pt > 0");
-  plot_types.push_back("phi");
-
-  // Charged Hadron MET-Phi in Barrel
-  plot_names.push_back("ch_0013_phi");
-  plot_vars.push_back("chpfcands_0013_phi");
-  plot_titles.push_back("Charged Hadron MET-Phi in Barrel |#eta| < 1.3");
-  cuts.push_back(base_cut+"chpfcands_0013_pt > 0");
-  plot_types.push_back("phi");
-
-  // Neutral Hadron MET-Phi in Barrel
-  plot_names.push_back("nu_0013_phi");
-  plot_vars.push_back("nupfcands_0013_phi");
-  plot_titles.push_back("Neutral Hadron MET-Phi in Barrel |#eta| < 1.3");
-  cuts.push_back(base_cut+"nupfcands_0013_pt > 0");
-  plot_types.push_back("phi");
-
-  // Photon MET-Phi in Endcap
-  plot_names.push_back("ph_1624_phi");
-  plot_vars.push_back("phpfcands_1624_phi");
-  plot_titles.push_back("Photon MET-Phi in Endcap |#eta| #in (1.6,2.4)");
-  cuts.push_back(base_cut+"phpfcands_1624_pt > 0");
-  plot_types.push_back("phi");
-
-  // Charged Hadron MET-Phi in Endcap
-  plot_names.push_back("ch_1624_phi");
-  plot_vars.push_back("chpfcands_1624_phi");
-  plot_titles.push_back("Charged Hadron MET-Phi in Endcap |#eta| #in (1.6,2.4)");
-  cuts.push_back(base_cut+"chpfcands_1624_pt > 0");
-  plot_types.push_back("phi");
-
-  // Neutral Hadron MET-Phi in Endcap
-  plot_names.push_back("nu_1624_phi");
-  plot_vars.push_back("nupfcands_1624_phi");
-  plot_titles.push_back("Neutral Hadron MET-Phi in Endcap |#eta| #in (1.6,2.4)");
-  cuts.push_back(base_cut+"nupfcands_1624_pt > 0");
-  plot_types.push_back("phi");
-
-  // Photon MET-Phi in Forward Endcap (No Tracker)
-  plot_names.push_back("ph_2430_phi");
-  plot_vars.push_back("phpfcands_2430_phi");
-  plot_titles.push_back("Photon MET-Phi in Forward Endcap |#eta| #in (2.4,3.0) (No Tracker)");
-  cuts.push_back(base_cut+"phpfcands_2430_pt > 0");
-  plot_types.push_back("phi");
-
-  // Charged Hadron MET-Phi in Forward Endcap (No Tracker)
-  plot_names.push_back("ch_2430_phi");
-  plot_vars.push_back("chpfcands_2430_phi");
-  plot_titles.push_back("Charged Hadron MET-Phi in Forward Endcap |#eta| #in (2.4,3.0) (No Tracker)");
-  cuts.push_back(base_cut+"chpfcands_2430_pt > 0");
-  plot_types.push_back("phi");
-
-  // Neutral Hadron MET-Phi in Forward Endcap (No Tracker)
-  plot_names.push_back("nu_2430_phi");
-  plot_vars.push_back("nupfcands_2430_phi");
-  plot_titles.push_back("Neutral Hadron MET-Phi in Forward Endcap |#eta| #in (2.4,3.0) (No Tracker)");
-  cuts.push_back(base_cut+"nupfcands_2430_pt > 0");
-  plot_types.push_back("phi");
-*/
-  // Raw Met
-  plot_names.push_back("MET");
-  plot_vars.push_back("met_rawPt");
-  plot_titles.push_back("Raw MET for all events in study.");
-  cuts.push_back(base_cut+"met_rawPt>0");
-  plot_types.push_back("pt");
-
-  // Raw Met With at least 2 jets
-  plot_names.push_back("MET_2Jets");
-  plot_vars.push_back("met_rawPt");
-  plot_titles.push_back("Raw MET for all events in study with a minimum 2 jet requirement.");
-  cuts.push_back(base_cut+"met_rawPt>0 && njets >= 2");
-  plot_types.push_back("pt");
-
-  // Photon Pt in Barrel
-  plot_names.push_back("ph_0013_pt");
-  plot_vars.push_back("phpfcands_0013_pt");
-  plot_titles.push_back("Photon Pt in Barrel |#eta| < 1.3");
-  cuts.push_back(base_cut+"phpfcands_0013_pt>0");
-  plot_types.push_back("pt");
-
-  // Charged Hadron Pt in Barrel
-  plot_names.push_back("ch_0013_pt");
-  plot_vars.push_back("chpfcands_0013_pt");
-  plot_titles.push_back("Charged Hadron Pt in Barrel |#eta| < 1.3");
-  cuts.push_back(base_cut+"chpfcands_0013_pt>0");
-  plot_types.push_back("pt");
-
-  // Neutral Hadron Pt in Barrel
-  plot_names.push_back("nu_0013_pt");
-  plot_vars.push_back("nupfcands_0013_pt");
-  plot_titles.push_back("Neutral Hadron Pt in Barrel |#eta| < 1.3");
-  cuts.push_back(base_cut+"nupfcands_0013_pt>0");
-  plot_types.push_back("pt");
-
-  // Photon Pt in Endcap
-  plot_names.push_back("ph_1624_pt");
-  plot_vars.push_back("phpfcands_1624_pt");
-  plot_titles.push_back("Photon Pt in Endcap |#eta| #in (1.6,2.4)");
-  cuts.push_back(base_cut+"phpfcands_1624_pt>0");
-  plot_types.push_back("pt");
-
-  // Charged Hadron Pt in Endcap
-  plot_names.push_back("ch_1624_pt");
-  plot_vars.push_back("chpfcands_1624_pt");
-  plot_titles.push_back("Charged Hadron Pt in Endcap |#eta| #in (1.6,2.4)");
-  cuts.push_back(base_cut+"chpfcands_1624_pt>0");
-  plot_types.push_back("pt");
-
-  // Neutral Hadron Pt in Endcap
-  plot_names.push_back("nu_1624_pt");
-  plot_vars.push_back("nupfcands_1624_pt");
-  plot_titles.push_back("Neutral Hadron Pt in Endcap |#eta| #in (1.6,2.4)");
-  cuts.push_back(base_cut+"nupfcands_1624_pt>0");
-  plot_types.push_back("pt");
-
-  // Photon Pt in Forward Endcap (No Tracker)
-  plot_names.push_back("ph_2430_pt");
-  plot_vars.push_back("phpfcands_2430_pt");
-  plot_titles.push_back("Photon Pt in Forward Endcap |#eta| #in (2.4,3.0) (No Tracker)");
-  cuts.push_back(base_cut+"phpfcands_2430_pt>0");
-  plot_types.push_back("pt");
-/*
-  // Charged Hadron Pt in Forward Endcap (No Tracker)
-  plot_names.push_back("ch_2430_pt");
-  plot_vars.push_back("chpfcands_2430_pt");
-  plot_titles.push_back("Charged Hadron Pt in Forward Endcap |#eta| #in (2.4,3.0) (No Tracker)");
-  cuts.push_back(base_cut+"chpfcands_2430_pt>0");
-  plot_types.push_back("pt");
-*/
-  // Neutral Hadron Pt in Forward Endcap (No Tracker)
-  plot_names.push_back("nu_2430_pt");
-  plot_vars.push_back("nupfcands_2430_pt");
-  plot_titles.push_back("Neutral Hadron Pt in Forward Endcap |#eta| #in (2.4,3.0) (No Tracker)");
-  cuts.push_back(base_cut+"nupfcands_2430_pt>0");
-  plot_types.push_back("pt");
-
-  // Neutral Hadron Pt in Forward Calorimeter (|eta| > 3)
-  plot_names.push_back("nu_30in_pt");
-  plot_vars.push_back("nupfcands_30in_pt");
-  plot_titles.push_back("Neutral Hadron Pt in HF |#eta| > 3 (No Tracker)");
-  cuts.push_back(base_cut+"nupfcands_30in_pt>0");
-  plot_types.push_back("pt");
