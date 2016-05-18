@@ -169,7 +169,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     //----------------------
     // ADD OVERFLOW BIN
     //----------------------
-    if (plot_info.hasOpt("overflow")){
+    if (plot_info->hasOpt("overflow")){
         cout<<"Plot tagged for overflow bin, building..."<<endl;
         int n_bins = data->GetNbinsX();
         int overflow_data = data->GetBinContent(n_bins + 1);

@@ -39,37 +39,37 @@ class PlotList {
 
         void _setType(plotnode* node){
           if node->name.Contains("PT"){
-            node->type = "pt"
+            node->type = "pt";
           }
           else if node->name.Contains("PHI"){
-            node->type = "phi"
+            node->type = "phi";
           }
           else if node->name.Contains("SET"){
-            node->type = "sumet"
+            node->type = "sumet";
           }
           else if node->name.Contains("MET"){
-            node->type = "met"
+            node->type = "met";
           }
           else{
-            node->type = "extra"
+            node->type = "extra";
           }
         }
 
         void _setOptions(plotnode* node){
           if (node->type == "pt"){
-            node->options+="<logy>"
-            node->options+="<overflow>"
+            node->options+="<logy>";
+            node->options+="<overflow>";
           }
           else if (node->type == "phi"){
             //nothing for now
           }
           else if (node->type == "met"){
-            node->options+="<logy>"
-            node->options+="<overflow>"
+            node->options+="<logy>";
+            node->options+="<overflow>";
           }
           else if (node->type == "sumet"){
-            node->options+="<logy>"
-            node->options+="<overflow>"
+            node->options+="<logy>";
+            node->options+="<overflow>";
           }
           else if (node->type == "extra"){
             //nothing for now
@@ -187,7 +187,7 @@ class PlotList {
             return current->ylabel;
         }
         bool hasOpt(TString query){
-            return current->options->Contains("<"+query+">");
+            return current->options.Contains("<"+query+">");
         }
         double xmin(){
             return current->xmin;
