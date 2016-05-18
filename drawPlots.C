@@ -92,8 +92,16 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     fullpad->cd();
 
     TPad *plotpad = new TPad("plotpad", "plotpad",0,0.2,1.0,0.99);
-    plotpad->SetRightMargin(0.05);
-    plotpad->SetBottomMargin(0.12);
+    
+    if (plot_info->type() == "pt" || plot_info->type() == "met"){
+        plotpad->SetRightMargin(0.05);
+        plotpad->SetBottomMargin(0.12);
+    }
+    else{
+        plotpad->SetRightMargin(0.1);
+        plotpad->SetBottomMargin(0.12);
+    }
+
     plotpad->Draw();
     plotpad->cd();
     
@@ -199,7 +207,12 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     h_axes->GetXaxis()->SetLabelSize(0.04);
     h_axes->GetXaxis()->SetTitleSize(0.05);
     h_axes->GetYaxis()->SetLabelSize(0.04);
-    h_axes->GetYaxis()->SetTitleOffset(0.95);
+    if (plot_info->type() == "pt" || plot_info->type() == "met"){
+        h_axes->GetYaxis()->SetTitleOffset(0.95);
+    }
+    else{
+        h_axes->GetYaxis()->SetTitleOffset(0.92);
+    }
     h_axes->GetYaxis()->SetTitleSize(0.05);
 
     cout<<"Drawing histograms"<<endl;
