@@ -37,7 +37,9 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     //don't make plots if we can't look up the info.
     if (! plot_info->setPlot(plot_name) )
     {
-        cout<<"=======================================\nERROR: Could not find plot info for "<<plotname<<"\n======================================="<<endl;
+        cout<<"=======================================\n\
+        ERROR: Could not find plot info for "<<plot_name<<"\n\
+        ======================================="<<endl;
         continue;
     }
     cout << "Making Plots for: "<<plot_name<<endl;
