@@ -3,8 +3,8 @@
 ## Function for doing 2016 MET study
 ## Bobak Hashemi
 
-MET_STUDY_HISTO_DIR=/nfs-7/userdata/bobak/METStudy2016/80Histos/
-MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/80/
+MET_STUDY_HISTO_DIR=/nfs-7/userdata/bobak/METStudy2016/76Histos/
+MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/76/
 
 
 function makePlots {
