@@ -8,7 +8,40 @@ MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/80/
 
 
 function makePlots {
-	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", true, true, true)"
+	#
+	# Fancy way to call drawPlots script with root. If you run 
+	# makePlots met pt phi sumet extra 
+	# it will make all the plots, any you leave out of the space
+	# seperated string will not be made. If you run without options
+	# no warning is given or anything.
+	#
+	MET_STUDY_PLOTS_FLAG_PT="false"
+	MET_STUDY_PLOTS_FLAG_PHI="false"
+	MET_STUDY_PLOTS_FLAG_SUMET="false"
+	MET_STUDY_PLOTS_FLAG_MET="false"
+	MET_STUDY_PLOTS_FLAG_EXTRA="false"
+
+	for i in $@
+	do
+	  if [[ ${i,,} == "met" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_MET="true"
+	  elif [[ ${i,,} == "pt" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_PT="true"
+	  elif [[ ${i,,} == "phi" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_PHI="true"
+	  elif [[ ${i,,} == "sumet" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_SUMET="true"
+	  elif [[ ${i,,} == "extra" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_EXTRA="true"
+	  fi
+	done
+
+	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_PLOTS_FLAG_PT, $MET_STUDY_PLOTS_FLAG_PHI, $MET_STUDY_PLOTS_FLAG_SUMET, $MET_STUDY_PLOTS_FLAG_MET, $MET_STUDY_PLOTS_FLAG_EXTRA)"
 }
 
 function makeHistos {

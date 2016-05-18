@@ -309,30 +309,10 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   
 }
 
-void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true, bool extra=true)
+void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true)
 {
   
   vector<TString> plot_names;
-
-  if (phi) {
-  //============================================
-  // Phi plots
-  //============================================
-  //-----------------define---------------------
-    plot_names.push_back("photonPHI0013");
-    plot_names.push_back("photonPHI1624");
-    plot_names.push_back("photonPHI2430");
-    plot_names.push_back("chargedPHI0013");
-    plot_names.push_back("chargedPHI1624");
-    plot_names.push_back("neutralPHI0013");
-    plot_names.push_back("neutralPHI1624");
-    plot_names.push_back("neutralPHI2430");
-    plot_names.push_back("neutralPHI30in");   
-    
-    // Run over Phi plots
-    drawAll(plot_names, input_dir, save_dir);
-    plot_names.clear();
-  }
 
   if (pt) {
     //============================================
@@ -354,7 +334,48 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
   }
-  if (extra)
+
+  if (phi) {
+  //============================================
+  // Phi plots
+  //============================================
+  //-----------------define---------------------
+    plot_names.push_back("photonPHI0013");
+    plot_names.push_back("photonPHI1624");
+    plot_names.push_back("photonPHI2430");
+    plot_names.push_back("chargedPHI0013");
+    plot_names.push_back("chargedPHI1624");
+    plot_names.push_back("neutralPHI0013");
+    plot_names.push_back("neutralPHI1624");
+    plot_names.push_back("neutralPHI2430");
+    plot_names.push_back("neutralPHI30in");   
+    
+    // Run over Phi plots
+    drawAll(plot_names, input_dir, save_dir);
+    plot_names.clear();
+  }
+
+  if (sumET) {
+  //============================================
+  // SUMET
+  //============================================
+  //-----------------define---------------------
+    plot_names.push_back("photonSET0013");
+    plot_names.push_back("photonSET1624");
+    plot_names.push_back("photonSET2430");
+    plot_names.push_back("chargedSET0013");
+    plot_names.push_back("chargedSET1624");
+    plot_names.push_back("neutralSET0013");
+    plot_names.push_back("neutralSET1624");
+    plot_names.push_back("neutralSET2430");
+    plot_names.push_back("neutralSET30in");   
+    
+    // Run over Sum ET plots
+    drawAll(plot_names, input_dir, save_dir);
+    plot_names.clear();
+  }
+  
+  if (MET)
   {
     plot_names.push_back("type1MET");
     plot_names.push_back("type1MET_2jets");
@@ -369,7 +390,9 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("rawMET_2jets_el");
     plot_names.push_back("rawMET_mu");
     plot_names.push_back("rawMET_2jets_mu");
-    
+  }
+
+  if (extra) { 
     plot_names.push_back("nVert");
     plot_names.push_back("dilmass");
     plot_names.push_back("PHIinBump");
