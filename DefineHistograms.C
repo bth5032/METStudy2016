@@ -34,12 +34,13 @@ class PlotList {
             current=head;
             tail=head;
 
-            null->name = NULL;
-            null->title = NULL;
-            null->xlabel = NULL;
-            null->ylabel = NULL;
-            null->xmin = NULL;
-            null->xmax = NULL;
+            null->name = "NULL";
+            null->title = "NULL";
+            null->xlabel = "NULL";
+            null->ylabel = "NULL";
+            null->xmin = 0;
+            null->xmax = 0;
+            null->bin_size = 0;
         }
 
         void add(TString name, TString title, TString xlabel, TString ylabel, double xmin, double xmax, double bin_size){
