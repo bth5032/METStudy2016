@@ -165,7 +165,7 @@ class PlotList {
                 current=current->next;
             }while (current != tail);
             
-            if (!current->name == plotname){
+            if (current->name == plotname){
                 return true;
             }
             else{
@@ -325,9 +325,9 @@ void addExtraPlots(PlotList* all_plots){
   // EXTRA
   //======================== 
 
-  all_plots->add("nVert", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("nVert", "Number of verticies for ", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
   all_plots->add("PHIinBump", "Net angle of vector sum PT for events within the 50-120GeV MET bump", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-   all_plots->add("dilmass", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 50, 150, 1);  
+   all_plots->add("dilmass", "Dilepton mass for all events in the study.", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 50, 150, 1);  
 }
 
 PlotList* getPlotList(){

@@ -35,8 +35,11 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     plot_names.pop_back();
 
     //don't make plots if we can't look up the info.
-    if (! plot_info->setPlot(plot_name) ) continue;
-    
+    if (! plot_info->setPlot(plot_name) )
+    {
+        cout<<"=======================================\nERROR: Could not find plot info for "<<plotname<<"\n======================================="<<endl;
+        continue;
+    }
     cout << "Making Plots for: "<<plot_name<<endl;
     
     TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_name))->Clone("datahist_"+plot_name);
