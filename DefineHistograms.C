@@ -38,16 +38,16 @@ class PlotList {
         plotnode *head, *current, *tail, *null;
 
         void _setType(plotnode* node){
-          if node->name.Contains("PT"){
+          if (node->name.Contains("PT")){
             node->type = "pt";
           }
-          else if node->name.Contains("PHI"){
+          else if (node->name.Contains("PHI")){
             node->type = "phi";
           }
-          else if node->name.Contains("SET"){
+          else if (node->name.Contains("SET")){
             node->type = "sumet";
           }
-          else if node->name.Contains("MET"){
+          else if (node->name.Contains("MET")){
             node->type = "met";
           }
           else{
