@@ -20,17 +20,67 @@ class PlotList {
     
     struct plotnode;
     struct plotnode {
-        TString name, title, xlabel, ylabel;
+      //name == Name of plot, used internally for bookkeeping
+      //title == Title that shows up on drawn plots
+      //xlabel == X axis label that shows up on plots
+      //ylabel == Y axis lable that shows up on plots
+      //bin_size == this is the number to 'rebin' in the plot drawing script
+      //xmin == lowest bin floor for the histogram
+      //xmax == ceiling of highest bin for the histogram
+      //type == for book keeping, used as flags in drawPlots.C
+      //options == also for book keeping, also used as flags in drawPlots.C
+        TString name, title, xlabel, ylabel, type, options;
         double xmin, xmax, bin_size;
         struct plotnode *next, *prev;
     };    
 
     private:
         plotnode *head, *current, *tail, *null;
+
+        void _setType(plotnode* node){
+          if node->name.Contains("PT"){
+            node->type = "pt"
+          }
+          else if node->name.Contains("PHI"){
+            node->type = "phi"
+          }
+          else if node->name.Contains("SET"){
+            node->type = "sumet"
+          }
+          else if node->name.Contains("MET"){
+            node->type = "met"
+          }
+          else{
+            node->type = "extra"
+          }
+        }
+
+        void _setOptions(plotnode* node){
+          if (node->type == "pt"){
+            node->options+="<logy>"
+            node->options+="<overflow>"
+          }
+          else if (node->type == "phi"){
+            //nothing for now
+          }
+          else if (node->type == "met"){
+            node->options+="<logy>"
+            node->options+="<overflow>"
+          }
+          else if (node->type == "sumet"){
+            node->options+="<logy>"
+            node->options+="<overflow>"
+          }
+          else if (node->type == "extra"){
+            //nothing for now
+          }          
+        }
     
     public:
-        PlotList(TString name, TString title, TString xlabel, TString ylabel, double xmin, double xmax, double bin_size){
+        PlotList(TString name, TString title, TString xlabel, TString ylabel, double xmin, double xmax, double bin_size, TString options="", TString type=""){
             head = new plotnode();
+            
+            //Set vars from user
             head->name = name;
             head->title = title;
             head->xlabel = xlabel;
@@ -38,8 +88,24 @@ class PlotList {
             head->xmin = xmin;
             head->xmax = xmax;
             head->bin_size = bin_size;
+            
+            //compute vars if none given
+            if (type == ""){
+              _setType(head);
+            }
+            else{
+              head->type=type;
+            }
+            if (options == ""){
+              _setOptions(head);
+            }
+            else{
+              head->options=options;
+            }
+
             head->prev=NULL;
             head->next=NULL;
+
 
             current=head;
             tail=head;
@@ -49,12 +115,14 @@ class PlotList {
             null->title = "NULL";
             null->xlabel = "NULL";
             null->ylabel = "NULL";
+            null->options = "NULL";
+            null->type = "NULL";
             null->xmin = 0;
             null->xmax = 0;
             null->bin_size = 0;
         }
 
-        void add(TString name, TString title, TString xlabel, TString ylabel, double xmin, double xmax, double bin_size){
+        void add(TString name, TString title, TString xlabel, TString ylabel, double xmin, double xmax, double bin_size, TString options="", TString type=""){
             plotnode* next = new plotnode();
             next->name = name;
             next->title = title;
@@ -63,6 +131,20 @@ class PlotList {
             next->xmin = xmin;
             next->xmax = xmax;
             next->bin_size = bin_size;
+
+            if (type == ""){
+              _setType(next);
+            }
+            else{
+              next->type=type;
+            }
+            if (options == ""){
+              _setOptions(next);
+            }
+            else{
+              next->options=options;
+            }
+
 
             next->next=NULL;
             next->prev=tail;
@@ -103,6 +185,9 @@ class PlotList {
         }
         TString ylabel(){
             return current->ylabel;
+        }
+        bool hasOpt(TString query){
+            return current->options->Contains("<"+query+">");
         }
         double xmin(){
             return current->xmin;
@@ -187,24 +272,24 @@ void addPhiPlots(PlotList* all_plots){
   // PHOTON
   //-------
 
-  all_plots->add("photonPHI0013", "Net angle of photonic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI1624", "Net angle of photonic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI2430", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI0013", "Net angle of photonic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI1624", "Net angle of photonic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI2430", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 
   //-------
   // CHARGED HADRONS
   //-------
-  all_plots->add("chargedPHI0013", "Net angle of charged hadronic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI1624", "Net angle of charged hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI2430", "Net angle of charged hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI0013", "Net angle of charged hadronic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI1624", "Net angle of charged hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI2430", "Net angle of charged hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 
   //-------
   // NEUTRAL HADRONS
   //-------
-  all_plots->add("neutralPHI0013", "Net angle of neutral hadronic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 1);
-  all_plots->add("neutralPHI1624", "Net angle of neutral hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
-  all_plots->add("neutralPHI2430", "Net angle of neutral hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
-   all_plots->add("neutralPHI30in", "Net angle of neutral hadronic vector sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [2pi / 20]", -3.15, 3.15, 10);
+  all_plots->add("neutralPHI0013", "Net angle of neutral hadronic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 1);
+  all_plots->add("neutralPHI1624", "Net angle of neutral hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("neutralPHI2430", "Net angle of neutral hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+   all_plots->add("neutralPHI30in", "Net angle of neutral hadronic vector sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 }
 
 void addSumETPlots(PlotList* all_plots){
@@ -215,24 +300,24 @@ void addSumETPlots(PlotList* all_plots){
   // PHOTON
   //-------
 
-  all_plots->add("photonPHI0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("photonPHI1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("photonPHI2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
 
   //-------
   // CHARGED HADRONS
   //-------
-  all_plots->add("chargedPHI0013", "Charged hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("chargedPHI1624", "Charged hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("chargedPHI2430", "Charged hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("chargedSET0013", "Charged hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("chargedSET1624", "Charged hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("chargedSET2430", "Charged hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
 
   //-------
   // NEUTRAL HADRONS
   //-------
-  all_plots->add("neutralPHI0013", "Neutral hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("neutralPHI1624", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("neutralPHI2430", "Neutral hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-   all_plots->add("neutralPHI30in", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("neutralSET0013", "Neutral hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("neutralSET1624", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("neutralSET2430", "Neutral hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+   all_plots->add("neutralSET30in", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
 }
 
 void addExtraPlots(PlotList* all_plots){
@@ -241,8 +326,8 @@ void addExtraPlots(PlotList* all_plots){
   //======================== 
 
   all_plots->add("nVert", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("PHIinBump", "Net angle of vector sum PT for events within the 50-120GeV MET bump", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-   all_plots->add("dilmass", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);  
+  all_plots->add("PHIinBump", "Net angle of vector sum PT for events within the 50-120GeV MET bump", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+   all_plots->add("dilmass", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 50, 150, 1);  
 }
 
 PlotList* getPlotList(){

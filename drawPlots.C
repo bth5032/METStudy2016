@@ -91,19 +91,18 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     plotpad->SetBottomMargin(0.12);
     plotpad->Draw();
     plotpad->cd();
-    if (plot_name.Contains("PT") || plot_name.Contains("type1") || plot_name.Contains("MET") )
+    
+    if (plot_info->hasOpt("logy"))
     {
         cout<<"Plot tagged for log y-axis"<<endl;
         plotpad->SetLogy();
-        
-
-        data->Rebin(plot_info->binSize());
-        zjets->Rebin(plot_info->binSize());
-        fsbkg->Rebin(plot_info->binSize());
-        //extra->Rebin(5);
-        mc_sum->Rebin(plot_info->binSize());
-
     }
+
+    data->Rebin(plot_info->binSize());
+    zjets->Rebin(plot_info->binSize());
+    fsbkg->Rebin(plot_info->binSize());
+    //extra->Rebin(plot_info->binSize());
+    mc_sum->Rebin(plot_info->binSize());
 
     //===========================
     // Normalize MC
@@ -170,8 +169,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     //----------------------
     // ADD OVERFLOW BIN
     //----------------------
-    cout<<"Building overflow bin"<<endl;
-    if (plot_name.Contains("_pt")){
+    if (plot_info.hasOpt("overflow")){
+        cout<<"Plot tagged for overflow bin, building..."<<endl;
         int n_bins = data->GetNbinsX();
         int overflow_data = data->GetBinContent(n_bins + 1);
         int overflow_zjets = zjets->GetBinContent(n_bins + 1);
