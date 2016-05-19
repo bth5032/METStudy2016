@@ -95,6 +95,10 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     TPad *plotpad = new TPad("plotpad", "plotpad",0,0.2,1.0,0.99);
     
     plotpad->SetRightMargin(0.05);
+    if (plot_info->hasOpt("extraRightMargin"))
+    {
+        plotpad->SetRightMargin(0.8);
+    }
     plotpad->SetBottomMargin(0.12);
 
     plotpad->Draw();
