@@ -211,7 +211,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     else if (plot_info->type() == "phi"){
         h_axes->GetYaxis()->SetTitleOffset(1);
         h_axes->GetYaxis()->SetTitleSize(0.04);
-        h_axes->GetYaxis()->SetLabelSize(0.01);
+        h_axes->GetYaxis()->SetLabelSize(0.03);
     }
 
     cout<<"Drawing histograms"<<endl;
