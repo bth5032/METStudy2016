@@ -106,7 +106,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     }
 
     if (plot_info->type() == "phi"){
-        plotpad->SetLeftMargin(.1);
+        plotpad->SetLeftMargin(.15);
     }
 
     data->Rebin(plot_info->binSize());
