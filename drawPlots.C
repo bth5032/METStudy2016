@@ -258,7 +258,13 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     cout<<"Building axes"<<endl;
     TH1F* h_axis_ratio = new TH1F(Form("%s_residual_axes",plot_name.Data()),"",residual->GetNbinsX(),residual->GetXaxis()->GetXmin(),residual->GetXaxis()->GetXmax());
 
-    h_axis_ratio->GetYaxis()->SetTitleOffset(0.25);
+    if (plot_info->type() == "phi"){
+        h_axis_ratio->GetYaxis()->SetTitleOffset(0.7);    
+    }
+    else{
+        h_axis_ratio->GetYaxis()->SetTitleOffset(0.25);
+    }
+    
     h_axis_ratio->GetYaxis()->SetTitleSize(0.18);
     h_axis_ratio->GetYaxis()->SetNdivisions(5);
     h_axis_ratio->GetYaxis()->SetLabelSize(0.15);
