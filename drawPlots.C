@@ -163,10 +163,10 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         TGaxis::SetMaxDigits(2);
     }
 
-    TLatex label;
+/*    TLatex label;
     label.SetNDC();
     label.SetTextSize(0.032);
-    label.DrawLatex(0.5,0.73,data->GetTitle());
+    label.DrawLatex(0.5,0.73,data->GetTitle());*/
 
     //-----------------------
     // AXES FIX
@@ -202,19 +202,16 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         mc_sum->SetBinContent(n_bins, max_mcsum+overflow_mcsum);
     }
 
-    h_axes->GetXaxis()->SetLabelSize(0.04);
-    h_axes->GetXaxis()->SetTitleSize(0.05);
-    
-    
+        
     if (plot_info->type() == "pt" || plot_info->type() == "met"){
         h_axes->GetYaxis()->SetTitleOffset(0.95);
         h_axes->GetYaxis()->SetTitleSize(0.05);
         h_axes->GetYaxis()->SetLabelSize(0.04);
     }
-    else if (plot_info->type() == "phi "){
-        h_axes->GetYaxis()->SetTitleOffset(1.2);
+    else if (plot_info->type() == "phi"){
+        h_axes->GetYaxis()->SetTitleOffset(1);
         h_axes->GetYaxis()->SetTitleSize(0.04);
-        h_axes->GetYaxis()->SetLabelSize(0.005);
+        h_axes->GetYaxis()->SetLabelSize(0.01);
     }
 
     cout<<"Drawing histograms"<<endl;
@@ -223,7 +220,6 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     data->Draw("E1 SAME");
 
     plotpad->RedrawAxis();
-    //c->RedrawAxis();
 
     TLegend *l1 = new TLegend(0.73, 0.73, 0.88, 0.88);
     l1->SetLineColor(kWhite);  
