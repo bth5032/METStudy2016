@@ -221,7 +221,14 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 
     plotpad->RedrawAxis();
 
-    TLegend *l1 = new TLegend(0.73, 0.73, 0.88, 0.88);
+    TLegend *l1;
+    if (plot_info->type()=="phi"){
+     l1 = new TLegend(0.73, 0.23, 0.88, 0.38);
+    }
+    else{
+     l1 = new TLegend(0.73, 0.73, 0.88, 0.88);
+    }
+
     l1->SetLineColor(kWhite);  
     l1->SetShadowColor(kWhite);
     l1->SetFillColor(kWhite);
