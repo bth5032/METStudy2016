@@ -4,6 +4,8 @@
 //******************************************
 //******************************************
 
+#include "ScanChain.C"
+
 void doAll_76(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, bool ST=true, bool zz=true, bool ww=true, bool wz=true, bool vvv=true){
 
   cout<<"Using Histogram Directory: "<<histo_dir<<endl;
