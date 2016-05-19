@@ -97,7 +97,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     plotpad->SetRightMargin(0.05);
     if (plot_info->hasOpt("extraRightMargin"))
     {
-        plotpad->SetRightMargin(0.8);
+        plotpad->SetRightMargin(0.08);
     }
     plotpad->SetBottomMargin(0.12);
 
