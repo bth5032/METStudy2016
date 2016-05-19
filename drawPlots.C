@@ -209,7 +209,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         h_axes->GetYaxis()->SetTitleOffset(0.95);
     }
     else if (plot_info->type() == "phi "){
-        h_axes->GetYaxis()->SetTitleOffset(1.5);
+        h_axes->GetYaxis()->SetTitleOffset(20);
     }
     else{
         h_axes->GetYaxis()->SetTitleOffset(0.95);   
