@@ -106,11 +106,6 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         plotpad->SetLogy();
     }
 
-    if (plot_info->type() == "phi"){
-        //plotpad->SetLeftMargin(.15);
-        TGaxis::SetMaxDigits(2);
-    }
-
     data->Rebin(plot_info->binSize());
     zjets->Rebin(plot_info->binSize());
     fsbkg->Rebin(plot_info->binSize());
@@ -207,16 +202,17 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     h_axes->GetXaxis()->SetLabelSize(0.04);
     h_axes->GetXaxis()->SetTitleSize(0.05);
     h_axes->GetYaxis()->SetLabelSize(0.04);
+    
+    
     if (plot_info->type() == "pt" || plot_info->type() == "met"){
         h_axes->GetYaxis()->SetTitleOffset(0.95);
+        h_axes->GetYaxis()->SetTitleSize(0.05);
     }
     else if (plot_info->type() == "phi "){
-        h_axes->GetYaxis()->SetTitleOffset(20);
+        TGaxis::SetMaxDigits(2);
+        h_axes->GetYaxis()->SetTitleOffset(1);
+        h_axes->GetYaxis()->SetTitleSize(0.04);
     }
-    else{
-        h_axes->GetYaxis()->SetTitleOffset(0.95);   
-    }
-    h_axes->GetYaxis()->SetTitleSize(0.05);
 
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
