@@ -61,7 +61,7 @@ class PlotList {
             node->options+="<overflow>";
           }
           else if (node->type == "phi"){
-            //nothing for now
+            node->options+="<maxDigits2>";
           }
           else if (node->type == "met"){
             node->options+="<logy>";
@@ -329,7 +329,7 @@ void addExtraPlots(PlotList* all_plots){
   //======================== 
 
   all_plots->add("nVert", "Number of verticies for events in the study", "Number of verticies in event", "Count / [1 vertex]", 0, 50, 1);
-  all_plots->add("PHIinBump", "Net angle of vector sum PT for events within the 50-120GeV MET bump", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("PHIinBump", "Net angle of vector sum PT for events within the 50-120GeV MET bump", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10, "maxDigits2");
   all_plots->add("dilmass", "Dilepton mass for all events in the study.", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 75, 105, 1);  
 }
 

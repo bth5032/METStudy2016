@@ -159,6 +159,9 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 
     TH2F* h_axes = new TH2F(Form("%s_axes",plot_name.Data()),plot_info->title(),data->GetNbinsX(),plot_info->xmin(),plot_info->xmax(),1000,0.001,ymax);
 
+    if(plot_info->hasOpt("maxDigits2")){
+        TGaxis::SetMaxDigits(2);
+    }
 
     TLatex label;
     label.SetNDC();
@@ -209,7 +212,6 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         h_axes->GetYaxis()->SetTitleSize(0.05);
     }
     else if (plot_info->type() == "phi "){
-        TGaxis::SetMaxDigits(2);
         h_axes->GetYaxis()->SetTitleOffset(1);
         h_axes->GetYaxis()->SetTitleSize(0.04);
     }
