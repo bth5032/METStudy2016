@@ -204,16 +204,17 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 
     h_axes->GetXaxis()->SetLabelSize(0.04);
     h_axes->GetXaxis()->SetTitleSize(0.05);
-    h_axes->GetYaxis()->SetLabelSize(0.04);
     
     
     if (plot_info->type() == "pt" || plot_info->type() == "met"){
         h_axes->GetYaxis()->SetTitleOffset(0.95);
         h_axes->GetYaxis()->SetTitleSize(0.05);
+        h_axes->GetYaxis()->SetLabelSize(0.04);
     }
     else if (plot_info->type() == "phi "){
         h_axes->GetYaxis()->SetTitleOffset(1);
         h_axes->GetYaxis()->SetTitleSize(0.04);
+        h_axes->GetYaxis()->SetLabelSize(0.02);
     }
 
     cout<<"Drawing histograms"<<endl;
