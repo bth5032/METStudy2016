@@ -28,7 +28,7 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
-int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = true, int nEvents = -1, TString savePath="/nfs-7/userdata/bobak/METStudy2016/76Histos/noDup/") {
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = true, int nEvents = -1) {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
@@ -39,6 +39,8 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
   //=======================================
   
   TDirectory *rootdir = gDirectory->GetDirectory("Rint:");
+
+  cout<<"Opening file "<<savePath<<endl;
   TFile * output = new TFile(savePath+"METStudy_"+sampleName+".root", "create");
 
   TH1I *numEvents = new TH1I("numEvents_"+sampleName, "Number of events in "+sampleName, 1, 0, 1);
@@ -93,6 +95,11 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
   rawmet_2jets_mu->SetDirectory(rootdir);
   rawmet_2jets_mu->Sumw2();
   
+
+  //=================================
+  // PFClass-MET
+  //=================================
+
   // Photonic Pts
   TH1F *ph_0013_pt = new TH1F(sampleName+"_photonPT0013", "Photonic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ph_0013_pt->SetDirectory(rootdir);
@@ -137,6 +144,10 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
   nu_30in_pt->Sumw2();
 
 
+  //=================================
+  // MET-PHI
+  //=================================
+
   // Photonic MET-Phi
   TH1F *ph_0013_phi = new TH1F(sampleName+"_photonPHI0013", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 200,-3.15,3.15);
   ph_0013_phi->SetDirectory(rootdir);
@@ -179,6 +190,53 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
   TH1F *nu_30in_phi = new TH1F(sampleName+"_neutralPHI30in", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| > 3.0", 200,-3.15,3.15);
   nu_30in_phi->SetDirectory(rootdir);
   nu_30in_phi->Sumw2();
+
+  //=================================
+  // SUM ET
+  //=================================
+
+  // Photonic SET
+  TH1F *ph_0013_set = new TH1F(sampleName+"_photonSET0013", "Photonic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  ph_0013_set->SetDirectory(rootdir);
+  ph_0013_set->Sumw2();
+
+  TH1F *ph_1624_set = new TH1F(sampleName+"_photonSET1624", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  ph_1624_set->SetDirectory(rootdir);
+  ph_1624_set->Sumw2();
+
+  TH1F *ph_2430_set = new TH1F(sampleName+"_photonSET2430", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  ph_2430_set->SetDirectory(rootdir);
+  ph_2430_set->Sumw2();
+
+  // Charged Hadronic SET
+  TH1F *ch_0013_set = new TH1F(sampleName+"_chargedSET0013", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  ch_0013_set->SetDirectory(rootdir);
+  ch_0013_set->Sumw2();
+
+  TH1F *ch_1624_set = new TH1F(sampleName+"_chargedSET1624", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  ch_1624_set->SetDirectory(rootdir);
+  ch_1624_set->Sumw2();
+
+  TH1F *ch_2430_set = new TH1F(sampleName+"_chargedSET2430", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  ch_2430_set->SetDirectory(rootdir);
+  ch_2430_set->Sumw2();
+
+  // Neutral Hadronic SET
+  TH1F *nu_0013_set = new TH1F(sampleName+"_neutralSET0013", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  nu_0013_set->SetDirectory(rootdir);
+  nu_0013_set->Sumw2();
+
+  TH1F *nu_1624_set = new TH1F(sampleName+"_neutralSET1624", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  nu_1624_set->SetDirectory(rootdir);
+  nu_1624_set->Sumw2();
+
+  TH1F *nu_2430_set = new TH1F(sampleName+"_neutralSET2430", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  nu_2430_set->SetDirectory(rootdir);
+  nu_2430_set->Sumw2();
+
+  TH1F *nu_30in_set = new TH1F(sampleName+"_neutralSET30in", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| > 3.0", 500,0,500);
+  nu_30in_set->SetDirectory(rootdir);
+  nu_30in_set->Sumw2();
 
   //Extra Histos
   TH1F *nVert = new TH1F(sampleName+"_nVert", "Number of verticies for "+sampleName, 50,0,50);
@@ -243,7 +301,8 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
       }
 
       else{
-        weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
+        //weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
+        weight = phys.evt_scale1fb() * 2.3; 
       }
 
       // Base Cut
@@ -323,46 +382,56 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
       if (phys.phpfcands_0013_pt()>0){
         ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
         ph_0013_phi->Fill(phys.phpfcands_0013_phi(), weight);
+        ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
       }
       if (phys.phpfcands_1624_pt()>0){
         ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
         ph_1624_phi->Fill(phys.phpfcands_1624_phi(), weight);
+        ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
       }
       if (phys.phpfcands_2430_pt()>0){
         ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
         ph_2430_phi->Fill(phys.phpfcands_2430_phi(), weight);
+        ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
       }
 
       // Draw charged hadron histos
       if (phys.chpfcands_0013_pt()>0){
         ch_0013_pt->Fill(phys.chpfcands_0013_pt(), weight);
         ch_0013_phi->Fill(phys.chpfcands_0013_phi(), weight);
+        ch_0013_set->Fill(phys.chpfcands_0013_sumet(), weight);
       }
       if (phys.chpfcands_1624_pt()>0){
         ch_1624_pt->Fill(phys.chpfcands_1624_pt(), weight);
         ch_1624_phi->Fill(phys.chpfcands_1624_phi(), weight);
+        ch_1624_set->Fill(phys.chpfcands_1624_sumet(), weight);
       }
       if (phys.chpfcands_2430_pt()>0){
         ch_2430_pt->Fill(phys.chpfcands_2430_pt(), weight);
         ch_2430_phi->Fill(phys.chpfcands_2430_phi(), weight);
+        ch_2430_set->Fill(phys.chpfcands_2430_sumet(), weight);
       }
 
       // Draw neutral hadron histos
       if (phys.nupfcands_0013_pt()>0){
         nu_0013_pt->Fill(phys.nupfcands_0013_pt(), weight);
         nu_0013_phi->Fill(phys.nupfcands_0013_phi(), weight);
+        nu_0013_set->Fill(phys.nupfcands_0013_sumet(), weight);
       }
       if (phys.nupfcands_1624_pt()>0){
         nu_1624_pt->Fill(phys.nupfcands_1624_pt(), weight);
         nu_1624_phi->Fill(phys.nupfcands_1624_phi(), weight);
+        nu_1624_set->Fill(phys.nupfcands_1624_sumet(), weight);
       }
       if (phys.nupfcands_2430_pt()>0){
         nu_2430_pt->Fill(phys.nupfcands_2430_pt(), weight);
         nu_2430_phi->Fill(phys.nupfcands_2430_phi(), weight);
+        nu_2430_set->Fill(phys.nupfcands_2430_sumet(), weight);
       }
       if (phys.nupfcands_30in_pt()>0){
         nu_30in_pt->Fill(phys.nupfcands_30in_pt(), weight);
         nu_30in_phi->Fill(phys.nupfcands_30in_phi(), weight);
+        nu_30in_set->Fill(phys.nupfcands_30in_sumet(), weight);
       }
 
       // Draw bump-phi histo
@@ -425,6 +494,16 @@ int ScanChain( TChain* chain, TString sampleName, bool isData = 0, bool fast = t
   nu_1624_phi->Write();
   nu_2430_phi->Write();
   nu_30in_phi->Write();
+  ph_0013_set->Write();
+  ph_1624_set->Write();
+  ph_2430_set->Write();
+  ch_0013_set->Write();
+  ch_1624_set->Write();
+  ch_2430_set->Write();
+  nu_0013_set->Write();
+  nu_1624_set->Write();
+  nu_2430_set->Write();
+  nu_30in_set->Write();
   nVert->Write();
   bumpPhi->Write();
   dilmass->Write();
