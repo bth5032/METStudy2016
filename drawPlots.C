@@ -7,6 +7,7 @@
 #include "TCanvas.h"
 #include "TColor.h"
 #include "THStack.h"
+#include "TGAxis.h"
 #include "TCut.h"
 #include "TH1F.h"
 
