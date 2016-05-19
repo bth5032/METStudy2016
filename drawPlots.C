@@ -93,14 +93,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 
     TPad *plotpad = new TPad("plotpad", "plotpad",0,0.2,1.0,0.99);
     
-    if (plot_info->type() == "pt" || plot_info->type() == "met"){
-        plotpad->SetRightMargin(0.05);
-        plotpad->SetBottomMargin(0.12);
-    }
-    else{
-        plotpad->SetRightMargin(0.1);
-        plotpad->SetBottomMargin(0.12);
-    }
+    plotpad->SetRightMargin(0.05);
+    plotpad->SetBottomMargin(0.12);
 
     plotpad->Draw();
     plotpad->cd();
@@ -287,6 +281,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     cout<<"Saving..."<<endl;
     c->SaveAs(save_dir+plot_name+TString(".pdf"));
     c->SaveAs(save_dir+plot_name+TString(".png"));
+    c->SaveAs(save_dir+plot_name+TString(".root"));
+    c->SaveAs(save_dir+plot_name+TString(".C"));
 
     cout<<"Cleaning up plot variables"<<endl;
     delete l1;
