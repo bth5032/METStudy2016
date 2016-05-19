@@ -7,7 +7,7 @@
 #include "TCanvas.h"
 #include "TColor.h"
 #include "THStack.h"
-#include "TGAxis.h"
+#include "TGaxis.h"
 #include "TCut.h"
 #include "TH1F.h"
 
@@ -108,7 +108,7 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
 
     if (plot_info->type() == "phi"){
         //plotpad->SetLeftMargin(.15);
-        TGAxis::SetMaxDigits(2);
+        TGaxis::SetMaxDigits(2);
     }
 
     data->Rebin(plot_info->binSize());
