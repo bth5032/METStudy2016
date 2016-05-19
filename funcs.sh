@@ -179,7 +179,7 @@ function make80Histos {
 	    MET_STUDY_HISTOS_FLAG_WZ="true"
 	  elif [[ ${i,,} == "vvv" ]]
 	  then
-	    MET_STUDY_HISTOS_FLAG_ZZ="true"
+	    MET_STUDY_HISTOS_FLAG_VVV="true"
 	  fi
 	done
 
