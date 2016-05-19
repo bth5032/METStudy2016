@@ -105,6 +105,10 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
         plotpad->SetLogy();
     }
 
+    if (plot_info->type() == "phi"){
+        plotpad->SetLeftMargin(.1);
+    }
+
     data->Rebin(plot_info->binSize());
     zjets->Rebin(plot_info->binSize());
     fsbkg->Rebin(plot_info->binSize());
@@ -281,8 +285,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     cout<<"Saving..."<<endl;
     c->SaveAs(save_dir+plot_name+TString(".pdf"));
     c->SaveAs(save_dir+plot_name+TString(".png"));
-    c->SaveAs(save_dir+plot_name+TString(".root"));
-    c->SaveAs(save_dir+plot_name+TString(".C"));
+    //c->SaveAs(save_dir+plot_name+TString(".root"));
+    //c->SaveAs(save_dir+plot_name+TString(".C"));
 
     cout<<"Cleaning up plot variables"<<endl;
     delete l1;
