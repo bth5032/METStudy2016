@@ -251,7 +251,11 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
   dilmass->SetDirectory(rootdir);
   dilmass->Sumw2();
 
-  
+  TH2F *metSumET2D = new TH2F(sampleName+"_METSumET", "MET vs SumET for "+sampleName, 1000, 0, 1000, 10000, 0, 10000);
+  metSumET2D->SetDirectory(rootdir);
+  metSumET2D->Sumw2();
+
+
   // Loop over events to Analyze
   unsigned int nEventsTotal = 0;
   unsigned int nEventsChain = chain->GetEntries();
@@ -445,6 +449,9 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
 
       // Fill Dilepton Mass
       dilmass->Fill(phys.dilmass(), weight);
+
+      //met vs. sumet plot
+      metSumET2D->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), phys.sumet_raw(), weight);
 
 
     }
