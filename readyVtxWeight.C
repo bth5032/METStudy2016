@@ -33,7 +33,7 @@ void makeReweightVtxHist(TString output_dir)
   return;
 }
 
-void readyVtxWeight(){
+void readyVtxWeight(TString histo_dir){
     ScanChain(getDataChain(data_set), "data", histo_dir, false); 
     ScanChain(getDYChain(data_set), "DY", histo_dir, false);
     makeReweightVtxHist(histo_dir);
