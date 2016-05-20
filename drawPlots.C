@@ -16,18 +16,30 @@
 using namespace std;
 
     
-TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
+TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir, bool do_extra=false){
   TString errors="";
   PlotList *plot_info = getPlotList();
 
   TFile* f_DY = new TFile(input_dir+"METStudy_DY.root");
   TFile* f_data = new TFile(input_dir+"METStudy_data.root");
-  TFile* f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");
-  TFile* f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
-  TFile* f_VVV = new TFile(input_dir+"METStudy_VVV.root");
-  TFile* f_WW = new TFile(input_dir+"METStudy_WW.root");
-  TFile* f_WZ = new TFile(input_dir+"METStudy_WZ.root");
-  TFile* f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");
+
+  TFile* f_TTbar;
+  TFile* f_ST;
+  TFile* f_VVV;
+  TFile* f_WW;
+  TFile* f_WZ;
+  TFile* f_ZZ;
+
+
+  if (do_extra){
+    f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");
+    f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
+    f_VVV = new TFile(input_dir+"METStudy_VVV.root");
+    f_WW = new TFile(input_dir+"METStudy_WW.root");
+    f_WZ = new TFile(input_dir+"METStudy_WZ.root");
+    f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");
+  }
+
 
   cout << "Found files"<<endl;
 
@@ -55,26 +67,34 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<plot_name<<" found in "<<f_TTbar->GetName()<<endl;
 
     // Build Extra Plots
-    /*TH1F* VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
+    TH1F* VVV;
+    TH1F* WZ;
+    TH1F* WW;
+    TH1F* ZZ;
 
-    TH1F* WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("WWhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
+    if (do_extra)
+    {
+        VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
+        cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
 
-    TH1F* WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_name))->Clone("WZhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
+        WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("WWhist_"+plot_name);
+        cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
 
-    TH1F* ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_name))->Clone("ZZhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
+        WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_name))->Clone("WZhist_"+plot_name);
+        cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
 
-    TH1F* extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("extrahist_"+plot_name);
-    extra->Add(WW);
-    extra->Add(WZ);
-    extra->Add(ZZ);*/
+        ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_name))->Clone("ZZhist_"+plot_name);
+        cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
+
+        extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("extrahist_"+plot_name);
+        extra->Add(WW);
+        extra->Add(WZ);
+        extra->Add(ZZ);
+    }
 
     TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
     mc_sum->Add(fsbkg);
-    //mc_sum->Add(extra);
+    if (do_extra) {mc_sum->Add(extra);}
 
     cout << "Histograms pulled from files, adding draw options"<<endl;
 
@@ -113,7 +133,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     data->Rebin(plot_info->binSize());
     zjets->Rebin(plot_info->binSize());
     fsbkg->Rebin(plot_info->binSize());
-    //extra->Rebin(plot_info->binSize());
+    if (do_extra){extra->Rebin(plot_info->binSize());}
     mc_sum->Rebin(plot_info->binSize());
 
     //===========================
@@ -138,9 +158,10 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     fsbkg->SetFillColor(kYellow+1);
     fsbkg->SetFillStyle(1001);
 
-    //extra->SetFillColor(kMagenta);
-    //extra->SetFillStyle(1001);
-
+    if (do_extra) {
+        extra->SetFillColor(kMagenta);
+        extra->SetFillStyle(1001);
+    }
 
     data->SetMarkerStyle(20);
 
@@ -149,7 +170,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     THStack * stack = new THStack("stack_"+plot_name, plot_info->title());
     stack->Add(fsbkg);
     stack->Add(zjets);
-    //stack->Add(extra);
+    if (do_extra) {stack->Add(extra);}
 
     double ymax = 0;
     if (mc_sum->GetMaximum() < data->GetMaximum()){
@@ -166,11 +187,6 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     if(plot_info->hasOpt("maxDigits2")){
         TGaxis::SetMaxDigits(2);
     }
-
-/*    TLatex label;
-    label.SetNDC();
-    label.SetTextSize(0.032);
-    label.DrawLatex(0.5,0.73,data->GetTitle());*/
 
     //-----------------------
     // AXES FIX
@@ -190,19 +206,20 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         int overflow_data = data->GetBinContent(n_bins + 1);
         int overflow_zjets = zjets->GetBinContent(n_bins + 1);
         int overflow_fsbkg = fsbkg->GetBinContent(n_bins + 1);
-        //int overflow_extra = extra->GetBinContent(n_bins + 1);
+        int overflow_extra 
+        if (do_extra) {overflow_extra= extra->GetBinContent(n_bins + 1);}
         int overflow_mcsum = zjets->GetBinContent(n_bins + 1);
 
         int max_data = data->GetBinContent(n_bins);
         int max_zjets = zjets->GetBinContent(n_bins);
         int max_fsbkg = fsbkg->GetBinContent(n_bins);
-        //int max_extra = extra->GetBinContent(n_bins);
+        int max_extra = extra->GetBinContent(n_bins);
         int max_mcsum = mc_sum->GetBinContent(n_bins);
 
         data->SetBinContent(n_bins, max_data+overflow_data);
         zjets->SetBinContent(n_bins, max_zjets+overflow_zjets);
         fsbkg->SetBinContent(n_bins, max_fsbkg+overflow_fsbkg);
-        //extra->SetBinContent(n_bins, max_extra+overflow_extra);
+        if (do_extra) {extra->SetBinContent(n_bins, max_extra+overflow_extra);}
         mc_sum->SetBinContent(n_bins, max_mcsum+overflow_mcsum);
     }
 
@@ -239,7 +256,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     l1->AddEntry(data, "data", "p");
     l1->AddEntry(zjets, "Z+jets", "f");
     l1->AddEntry(fsbkg, "t#bar{t}", "f");
-    //l1->AddEntry(extra, "Low #sigma", "f");
+    if (do_extra) {1->AddEntry(extra, "Low #sigma", "f");}
 
     l1->Draw("same");
 
@@ -305,7 +322,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     delete stack;
     delete zjets;
     delete fsbkg;
-    //delete extra;
+    if (do_extra) {delete extra;}
     delete data;
     delete residual;
     delete ratiopad;
@@ -318,23 +335,27 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
   cout<<"Cleaning up file variables"<<endl;
   f_DY->Close();
-  //f_ST->Close();
   f_TTbar->Close();
-  //f_VVV->Close();
-  //f_WW->Close();
-  //f_WZ->Close();
-  //f_ZZ->Close();
-  f_data->Close();
-
+  if (do_extra) {
+      f_ST->Close();
+      f_VVV->Close();
+      f_WW->Close();
+      f_WZ->Close();
+      f_ZZ->Close();
+  }
   delete f_DY;
-  //delete f_ST;
   delete f_TTbar;
-  //delete f_VVV;
-  //delete f_WW;
-  //delete f_WZ;
-  //delete f_ZZ;
-  delete f_data;
+  
+  if (do_extra) {
+    delete f_ST;
+    delete f_VVV;
+    delete f_WW;
+    delete f_WZ;
+    delete f_ZZ;
+  }
 
+  f_data->Close();
+  delete f_data;
   return errors;
   
 }
