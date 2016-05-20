@@ -154,15 +154,14 @@ function makeHistos {
 	  fi
 	done
 
-	if [[ $MET_STUDY_DO_VTX == "true" ]]
-	then
-		readyVtxWeights $MET_STUDY_DATASET
-	fi
-
 	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_ttbar.root ]]
 	then
 		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
 	else
+		if [[ $MET_STUDY_DO_VTX == "true" ]]
+		then
+			readyVtxWeights $MET_STUDY_DATASET
+		fi
 		root -l -b -q "doAll.C(\"$1\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX)"
 	fi
 }	
