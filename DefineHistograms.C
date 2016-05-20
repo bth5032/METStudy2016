@@ -305,13 +305,13 @@ void addSumETPlots(PlotList* all_plots){
 
   all_plots->add("photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 0, 200, 1);
   all_plots->add("photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 0, 100, 1);
-  all_plots->add("photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 0, 150, 1);
+  all_plots->add("photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 0, 150, 1, "<maxDigits2><extraRightMargin>");
 
   //-------
   // CHARGED HADRONS
   //-------
   all_plots->add("chargedSET0013", "Charged hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("chargedSET1624", "Charged hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("chargedSET1624", "Charged hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5, "<maxDigits2><extraRightMargin>");
   all_plots->add("chargedSET2430", "Charged hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
 
   //-------
