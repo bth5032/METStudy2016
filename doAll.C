@@ -2,7 +2,7 @@
 #include "DefineDatasets.C"
 #include "getReweightVtxHist.C"
 
-void doAll(TString histo_dir, TString data_set, bool data=true, bool DY=true, bool ttbar=true, bool ST=true, bool zz=true, bool ww=true, bool wz=true, bool vvv=true, bool makeVTXCorrections=false){
+void doAll(TString data_set, TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, bool ST=true, bool zz=true, bool ww=true, bool wz=true, bool vvv=true, bool makeVTXCorrections=false){
 
   cout<<"Using Histogram Directory: "<<histo_dir<<endl;
 
