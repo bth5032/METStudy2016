@@ -159,7 +159,7 @@ function makeHistos {
 }	
 
 function readyVtxWeights {
-	root -l -b -q "doAll.C(\"$1\", \"$MET_STUDY_HISTO_DIR\", false, false, false, false, false, false, false, false, true)"
+	root -l -b -q "readyVtxWeights(\"$MET_STUDY_HISTO_DIR\")"
 	
 	rm ${MET_STUDY_HISTO_DIR}METStudy_DY.root
 	rm ${MET_STUDY_HISTO_DIR}METStudy_data.root
