@@ -323,7 +323,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     delete stack;
     delete zjets;
     delete fsbkg;
-    delete extra;
+    //delete extra;
     delete data;
     delete residual;
     delete ratiopad;
