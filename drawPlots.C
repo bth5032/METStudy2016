@@ -214,7 +214,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         int max_data = data->GetBinContent(n_bins);
         int max_zjets = zjets->GetBinContent(n_bins);
         int max_fsbkg = fsbkg->GetBinContent(n_bins);
-        int max_extra = extra->GetBinContent(n_bins);
+        //int max_extra = extra->GetBinContent(n_bins);
         int max_mcsum = mc_sum->GetBinContent(n_bins);
 
         data->SetBinContent(n_bins, max_data+overflow_data);
