@@ -86,24 +86,29 @@ function makePlots {
 function makeHistos {
 	
 	MET_STUDY_DO_VTX="false"
+	MET_STUDY_DATASET=""
 
 	if [[ $1 == "76x" ]]
 	then 
 		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
 		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76
+		MET_STUDY_DATASET="76x"
 	elif [[ $1 == "76x_vtx" ]]
 	then
 		MET_STUDY_DO_VTX="true"
 		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76_vtxFix
 		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76_vtxFix
+		MET_STUDY_DATASET="76x"
 	elif [[ $1 == "80x_vtx" ]]
 	then
 		MET_STUDY_DO_VTX="true"
 		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80_vtxFix
 		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80_vtxFix
+		MET_STUDY_DATASET="80x"
 	else
 		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
 		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80
+		MET_STUDY_DATASET="80x"
 	fi
 
 	makeDirectories
@@ -151,7 +156,7 @@ function makeHistos {
 
 	if [[ $MET_STUDY_DO_VTX == "true" ]]
 	then
-		readyVtxWeights
+		readyVtxWeights $MET_STUDY_DATASET
 	fi
 
 	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_ttbar.root ]]
@@ -163,7 +168,7 @@ function makeHistos {
 }	
 
 function readyVtxWeights {
-	root -l -b -q "readyVtxWeight.C(\"$MET_STUDY_HISTO_DIR\")"
+	root -l -b -q "readyVtxWeight.C(\"$MET_STUDY_HISTO_DIR\", \"$1\")"
 	
 	rm ${MET_STUDY_HISTO_DIR}METStudy_DY.root
 	rm ${MET_STUDY_HISTO_DIR}METStudy_data.root
