@@ -66,12 +66,12 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_name))->Clone("ttbarhist_"+plot_name);
     cout<<plot_name<<" found in "<<f_TTbar->GetName()<<endl;
 
+    TH1F* extra;
     // Build Extra Plots
     /*TH1F* VVV;
     TH1F* WZ;
     TH1F* WW;
     TH1F* ZZ;
-    TH1F* extra;
 
     if (do_extra)
     {
