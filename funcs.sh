@@ -5,12 +5,19 @@
 
 #80 runs
 MET_STUDY_HISTO_DIR_80=/nfs-7/userdata/bobak/METStudy2016/80Histos/
-MET_STUDY_PLOTS_OUTPUT_DIR_80=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxFix/
+MET_STUDY_PLOTS_OUTPUT_DIR_80=/home/users/bhashemi/public_html/ZMET2016/looper/80/
+
+MET_STUDY_HISTO_DIR_80_vtxFix=/nfs-7/userdata/bobak/METStudy2016/80Histos/vtxFix/
+MET_STUDY_PLOTS_OUTPUT_DIR_80_vtxFix=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxFix/
 
 #76 runs
-MET_STUDY_HISTO_DIR_76=/nfs-7/userdata/bobak/METStudy2016/76Histos/old-cutfix/
-#MET_STUDY_PLOTS_OUTPUT_DIR_76=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxFix/
-MET_STUDY_PLOTS_OUTPUT_DIR_76=/home/users/bhashemi/public_html/ZMET2016/plots/MET_study/V07-06-09/cutfix
+MET_STUDY_HISTO_DIR_76_vtxFix=/nfs-7/userdata/bobak/METStudy2016/76Histos/vtxFix/
+MET_STUDY_PLOTS_OUTPUT_DIR_76_vtxFix=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxFix/
+
+MET_STUDY_HISTO_DIR_76=/nfs-7/userdata/bobak/METStudy2016/76Histos/
+MET_STUDY_PLOTS_OUTPUT_DIR_76=/home/users/bhashemi/public_html/ZMET2016/looper/76/
+
+
 function makePlots {
 	#
 	# Fancy way to call drawPlots script with root. If you run 
@@ -20,14 +27,28 @@ function makePlots {
 	# no warning is given or anything.
 	#
 
+	MET_STUDY_DO_VTX="0"
+
 	if [[ $1 == "76x" ]]
 	then 
 		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
 		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76
+	elif [[ $1 == "76x_vtx" ]]
+	then
+		MET_STUDY_DO_VTX="1"
+		MET_STUDY_HISTO_DIR_vtx=$MET_STUDY_HISTO_DIR_76_vtxFix
+		MET_STUDY_PLOTS_OUTPUT_DIR_vtx=$MET_STUDY_PLOTS_OUTPUT_DIR_76_vtxFix
+
+	elif [[ $1 == "80x_vtx" ]]
+		MET_STUDY_DO_VTX="1"
+		MET_STUDY_HISTO_DIR_vtx=$MET_STUDY_HISTO_DIR_80_vtxFix
+		MET_STUDY_PLOTS_OUTPUT_DIR_vtx=$MET_STUDY_PLOTS_OUTPUT_DIR_80_vtxFix
 	else
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80
+		MET_STUDY_HISTO_DIR_vtx=$MET_STUDY_HISTO_DIR_80
+		MET_STUDY_PLOTS_OUTPUT_DIR_vtx=$MET_STUDY_PLOTS_OUTPUT_DIR_80
 	fi
+
+	makeDirectories
 
 	MET_STUDY_PLOTS_FLAG_PT="false"
 	MET_STUDY_PLOTS_FLAG_PHI="false"
@@ -61,14 +82,28 @@ function makePlots {
 
 function makeHistos {
 	
-	if [[ $1 == "76" ]]
+	MET_STUDY_DO_VTX="false"
+
+	if [[ $1 == "76x" ]]
 	then 
 		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
 		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76
+	elif [[ $1 == "76x_vtx" ]]
+	then
+		MET_STUDY_DO_VTX="true"
+		MET_STUDY_HISTO_DIR_vtx=$MET_STUDY_HISTO_DIR_76_vtxFix
+		MET_STUDY_PLOTS_OUTPUT_DIR_vtx=$MET_STUDY_PLOTS_OUTPUT_DIR_76_vtxFix
+
+	elif [[ $1 == "80x_vtx" ]]
+		MET_STUDY_DO_VTX="true"
+		MET_STUDY_HISTO_DIR_vtx=$MET_STUDY_HISTO_DIR_80_vtxFix
+		MET_STUDY_PLOTS_OUTPUT_DIR_vtx=$MET_STUDY_PLOTS_OUTPUT_DIR_80_vtxFix
 	else
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80
+		MET_STUDY_HISTO_DIR_vtx=$MET_STUDY_HISTO_DIR_80
+		MET_STUDY_PLOTS_OUTPUT_DIR_vtx=$MET_STUDY_PLOTS_OUTPUT_DIR_80
 	fi
+
+	makeDirectories
 
 	MET_STUDY_HISTOS_FLAG_DATA="false"
 	MET_STUDY_HISTOS_FLAG_DY="false"
@@ -109,20 +144,25 @@ function makeHistos {
 	  fi
 	done
 
+	if [[ $MET_STUDY_DO_VTX == "true" ]]
+	then
+		readyVtxWeights
+	fi
+
 	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_ttbar.root ]]
 	then
 		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
 	else
-		root -l -b -q "doAll.C(\"$1\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, false)"
+		root -l -b -q "doAll.C(\"$1\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX)"
 	fi
 }	
 
 function readyVtxWeights {
 	if [[ $1 == "76x" ]]
 	then
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
+		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76_vtxFix
 	else
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
+		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80_vtxFix
 	fi
 	root -l -b -q "doAll.C(\"$1\", \"$MET_STUDY_HISTO_DIR\", false, false, false, false, false, false, false, false, true)"
 }
@@ -180,19 +220,15 @@ function 76env {
 	mv scanchain_tmp ScanChain.C
 }
 
+function makeDirectories {
+	if [[ ! -d $MET_STUDY_PLOTS_OUTPUT_DIR ]]
+	then
+		mkdir -p $MET_STUDY_PLOTS_OUTPUT_DIR
+		cp ~/public_html/ZMET2016/index.php ${$MET_STUDY_PLOTS_OUTPUT_DIR}/
+	fi
 
-##
-# Make directories
-##
-
-if [[ ! -d $MET_STUDY_PLOTS_OUTPUT_DIR ]]
-then
-	mkdir -p $MET_STUDY_PLOTS_OUTPUT_DIR
-	cp ~/public_html/ZMET2016/index.php ${$MET_STUDY_PLOTS_OUTPUT_DIR}/
-fi
-
-if [[ ! -d $MET_STUDY_HISTO_DIR ]]
-then
-	mkdir -p $MET_STUDY_HISTO_DIR
-fi
-
+	if [[ ! -d $MET_STUDY_HISTO_DIR ]]
+	then
+		mkdir -p $MET_STUDY_HISTO_DIR
+	fi
+}

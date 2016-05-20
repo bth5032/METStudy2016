@@ -17,6 +17,19 @@ void makeReweightVtxHist(TString output_dir)
   TH1F * h_data = (TH1F*)f_data->Get("data_nVert")->Clone("h_data");
   TH1F * h_zjet = (TH1F*)f_zjet->Get("DY_nVert")->Clone("h_zjet");
 
+  // double bins[23] = {0,5,6,7,8,
+  // 					9,10,11,12,13,
+  // 					14,15,16,17,18,
+  // 					 19,20,21,22,23,24,25,35};
+
+  // int nbins = 22;
+
+  // h_data = (TH1F*) h_data->Rebin(nbins, "h_data_rebinned", bins);
+  // h_zjet = (TH1F*) h_zjet->Rebin(nbins, "h_zjet_rebinned", bins);
+
+  // h_data->Rebin(5);
+  // h_zjet->Rebin(5);
+
   h_zjet->Scale(1./h_zjet->GetSumOfWeights());
   h_data->Scale(1./h_data->GetSumOfWeights());
 
@@ -33,7 +46,7 @@ void makeReweightVtxHist(TString output_dir)
   return;
 }
 
-void readyVtxWeight(TString histo_dir){
+void readyVtxWeight(){
     ScanChain(getDataChain(data_set), "data", histo_dir, false); 
     ScanChain(getDYChain(data_set), "DY", histo_dir, false);
     makeReweightVtxHist(histo_dir);
