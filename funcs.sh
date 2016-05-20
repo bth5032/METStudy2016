@@ -213,7 +213,7 @@ function makePlots {
 	# no warning is given or anything.
 	#
 
-	if [[ $1 == "76" ]]
+	if [[ $1 == "76x" ]]
 	then 
 		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
 		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76
