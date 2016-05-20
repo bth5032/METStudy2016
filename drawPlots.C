@@ -71,6 +71,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     TH1F* WZ;
     TH1F* WW;
     TH1F* ZZ;
+    TH1F* extra;
 
     if (do_extra)
     {
@@ -322,7 +323,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     delete stack;
     delete zjets;
     delete fsbkg;
-    if (do_extra) {delete extra;}
+    delete extra;
     delete data;
     delete residual;
     delete ratiopad;
