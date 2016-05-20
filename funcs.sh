@@ -311,6 +311,12 @@ function makeHistos {
 }	
 
 function readyVtxWeights {
+	if [[ $1 == "76x" ]]
+	then
+		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
+	else
+		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
+	fi
 	root -l -b -q "doAll.C(\"$1\", \"$MET_STUDY_HISTO_DIR\", false, false, false, false, false, false, false, false, true)"
 }
 
