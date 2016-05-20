@@ -257,14 +257,12 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
   //Set up manual vertex reweighting.
   
-  TH1F * h_vtxweight = NULL;
-  TFile * f_vtx = NULL;
+  TH1F *h_vtxweight;
+  TFile *f_vtx;
   
   if( dovtxreweighting ){
     f_vtx = TFile::Open(savePath+"nvtx_ratio.root","READ");
     h_vtxweight = (TH1F*)f_vtx->Get("h_vtx_ratio")->Clone("h_vtxweight");
-    // f_vtx = TFile::Open("puWeights_nTrueInt.root","READ");
-    // h_vtxweight = (TH1F*)f_vtx->Get("weights")->Clone("h_vtxweight");
     h_vtxweight->SetDirectory(rootdir);
     f_vtx->Close();
   }
