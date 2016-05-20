@@ -303,9 +303,9 @@ void addSumETPlots(PlotList* all_plots){
   // PHOTON
   //-------
 
-  all_plots->add("photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 100, 5);
-  all_plots->add("photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 0, 200, 1);
+  all_plots->add("photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 0, 100, 1);
+  all_plots->add("photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 0, 150, 1);
 
   //-------
   // CHARGED HADRONS
@@ -317,10 +317,10 @@ void addSumETPlots(PlotList* all_plots){
   //-------
   // NEUTRAL HADRONS
   //-------
-  all_plots->add("neutralSET0013", "Neutral hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
-  all_plots->add("neutralSET1624", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
-  all_plots->add("neutralSET2430", "Neutral hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
-  all_plots->add("neutralSET30in", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("neutralSET0013", "Neutral hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [2 GeV]", 0, 150, 2);
+  all_plots->add("neutralSET1624", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [2 GeV]", 0, 150, 2);
+  all_plots->add("neutralSET2430", "Neutral hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [2 GeV]", 0, 150, 2);
+  all_plots->add("neutralSET30in", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
 }
 
 void addExtraPlots(PlotList* all_plots){
