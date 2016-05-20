@@ -23,7 +23,7 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
   TFile* f_DY = new TFile(input_dir+"METStudy_DY.root");
   TFile* f_data = new TFile(input_dir+"METStudy_data.root");
 
-  TFile* f_TTbar;
+  /*TFile* f_TTbar;
   TFile* f_ST;
   TFile* f_VVV;
   TFile* f_WW;
@@ -38,7 +38,7 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
     f_WW = new TFile(input_dir+"METStudy_WW.root");
     f_WZ = new TFile(input_dir+"METStudy_WZ.root");
     f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");
-  }
+  }*/
 
 
   cout << "Found files"<<endl;
