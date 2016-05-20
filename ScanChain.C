@@ -326,7 +326,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
 
       if( !phys.isData() && dovtxreweighting ){
-        weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(zmet.nVert()));   
+        weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(phys.nVert()));   
       }
 
       // Base Cut
