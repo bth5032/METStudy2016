@@ -22,8 +22,8 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
 
   TFile* f_DY = new TFile(input_dir+"METStudy_DY.root");
   TFile* f_data = new TFile(input_dir+"METStudy_data.root");
+  TFile* f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");;
 
-  /*TFile* f_TTbar;
   TFile* f_ST;
   TFile* f_VVV;
   TFile* f_WW;
@@ -31,7 +31,7 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
   TFile* f_ZZ;
 
 
-  if (do_extra) {
+  /*if (do_extra) {
     f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");
     f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
     f_VVV = new TFile(input_dir+"METStudy_VVV.root");
@@ -67,13 +67,13 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<plot_name<<" found in "<<f_TTbar->GetName()<<endl;
 
     // Build Extra Plots
-    /*TH1F* VVV;
+    TH1F* VVV;
     TH1F* WZ;
     TH1F* WW;
     TH1F* ZZ;
     TH1F* extra;
 
-    if (do_extra)
+    /*if (do_extra)
     {
         VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
         cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
