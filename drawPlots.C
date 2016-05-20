@@ -257,7 +257,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     l1->AddEntry(data, "data", "p");
     l1->AddEntry(zjets, "Z+jets", "f");
     l1->AddEntry(fsbkg, "t#bar{t}", "f");
-    if (do_extra) {1->AddEntry(extra, "Low #sigma", "f");}
+    if (do_extra) {l1->AddEntry(extra, "Low #sigma", "f");}
 
     l1->Draw("same");
 
