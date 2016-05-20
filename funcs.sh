@@ -159,13 +159,10 @@ function makeHistos {
 }	
 
 function readyVtxWeights {
-	if [[ $1 == "76x" ]]
-	then
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76_vtxFix
-	else
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80_vtxFix
-	fi
 	root -l -b -q "doAll.C(\"$1\", \"$MET_STUDY_HISTO_DIR\", false, false, false, false, false, false, false, false, true)"
+	
+	rm ${MET_STUDY_HISTO_DIR}METStudy_DY.root
+	rm ${MET_STUDY_HISTO_DIR}METStudy_data.root
 }
 
 function moveHistos {
@@ -232,4 +229,11 @@ function makeDirectories {
 	then
 		mkdir -p $MET_STUDY_HISTO_DIR
 	fi
+}
+
+function makeAll {
+	makeHistos 76x ttbar dy data && makePlots 76x extra pt phi met sumet
+	makeHistos 76x_vtx ttbar dy data && makePlots 76x_vtx extra pt phi met sumet
+	makeHistos 80x ttbar dy data && makePlots 80x extra pt phi met sumet
+	makeHistos 80x_vtx ttbar dy data && makePlots 80x_vtx extra pt phi met sumet
 }
