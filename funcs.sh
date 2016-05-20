@@ -3,6 +3,15 @@
 ## Function for doing 2016 MET study
 ## Bobak Hashemi
 
+#80 runs
+MET_STUDY_HISTO_DIR_80=/nfs-7/userdata/bobak/METStudy2016/80Histos/
+MET_STUDY_PLOTS_OUTPUT_DIR_80=/home/users/bhashemi/public_html/ZMET2016/looper/80/
+
+#76 runs
+MET_STUDY_HISTO_DIR_76=/nfs-7/userdata/bobak/METStudy2016/76Histos/
+MET_STUDY_PLOTS_OUTPUT_DIR_76=/home/users/bhashemi/public_html/ZMET2016/looper/76/
+
+
 function make76Plots {
 	#
 	# Fancy way to call drawPlots script with root. If you run 
@@ -58,6 +67,7 @@ function make76Histos {
 	MET_STUDY_HISTOS_FLAG_WW="false"
 	MET_STUDY_HISTOS_FLAG_WZ="false"
 	MET_STUDY_HISTOS_FLAG_VVV="false"
+	MET_STUDY_HISTOS_FLAG_76_VTX="false"
 
 
 	for i in $@
@@ -86,14 +96,17 @@ function make76Histos {
 	  elif [[ ${i,,} == "vvv" ]]
 	  then
 	    MET_STUDY_HISTOS_FLAG_VVV="true"
+	  elif [[ ${i,,} == "vtx" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_76_VTX="true"
 	  fi
 	done
 
-	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_data.root ]]
+	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_ttbar.root ]]
 	then
 		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
 	else
-		root -l -b -q "doAll_76.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV)"
+		root -l -b -q "doAll_76.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_HISTOS_FLAG_76_VTX)"
 	fi
 }
 
@@ -183,13 +196,123 @@ function make80Histos {
 	  fi
 	done
 
-	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_data.root ]]
+	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_ttbar.root ]]
 	then
 		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
 	else
 		root -l -b -q "doAll_80.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV)"
 	fi
 }	
+
+function makePlots {
+	#
+	# Fancy way to call drawPlots script with root. If you run 
+	# makePlots met pt phi sumet extra 
+	# it will make all the plots, any you leave out of the space
+	# seperated string will not be made. If you run without options
+	# no warning is given or anything.
+	#
+
+	if [[ $1 == "76" ]]
+	then 
+		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
+		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76
+	else
+		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
+		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80
+	fi
+
+	MET_STUDY_PLOTS_FLAG_PT="false"
+	MET_STUDY_PLOTS_FLAG_PHI="false"
+	MET_STUDY_PLOTS_FLAG_SUMET="false"
+	MET_STUDY_PLOTS_FLAG_MET="false"
+	MET_STUDY_PLOTS_FLAG_EXTRA="false"
+
+	for i in $@
+	do
+	  if [[ ${i,,} == "met" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_MET="true"
+	  elif [[ ${i,,} == "pt" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_PT="true"
+	  elif [[ ${i,,} == "phi" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_PHI="true"
+	  elif [[ ${i,,} == "sumet" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_SUMET="true"
+	  elif [[ ${i,,} == "extra" ]]
+	  then
+	    MET_STUDY_PLOTS_FLAG_EXTRA="true"
+	  fi
+	done
+
+
+	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_PLOTS_FLAG_PT, $MET_STUDY_PLOTS_FLAG_PHI, $MET_STUDY_PLOTS_FLAG_SUMET, $MET_STUDY_PLOTS_FLAG_MET, $MET_STUDY_PLOTS_FLAG_EXTRA)"
+}
+
+function makeHistos {
+	
+	if [[ $1 == "76" ]]
+	then 
+		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
+		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76
+	else
+		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
+		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80
+	fi
+
+	MET_STUDY_HISTOS_FLAG_DATA="false"
+	MET_STUDY_HISTOS_FLAG_DY="false"
+	MET_STUDY_HISTOS_FLAG_TTBAR="false"
+	MET_STUDY_HISTOS_FLAG_ST="false"
+	MET_STUDY_HISTOS_FLAG_ZZ="false"
+	MET_STUDY_HISTOS_FLAG_WW="false"
+	MET_STUDY_HISTOS_FLAG_WZ="false"
+	MET_STUDY_HISTOS_FLAG_VVV="false"
+
+
+	for i in $@
+	do
+	  if [[ ${i,,} == "data" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_DATA="true"
+	  elif [[ ${i,,} == "dy" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_DY="true"
+	  elif [[ ${i,,} == "ttbar" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_TTBAR="true"
+	  elif [[ ${i,,} == "st" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_ST="true"
+	  elif [[ ${i,,} == "zz" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_ZZ="true"
+	  elif [[ ${i,,} == "ww" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_WW="true"
+	  elif [[ ${i,,} == "wz" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_WZ="true"
+	  elif [[ ${i,,} == "vvv" ]]
+	  then
+	    MET_STUDY_HISTOS_FLAG_VVV="true"
+	  fi
+	done
+
+	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_ttbar.root ]]
+	then
+		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
+	else
+		root -l -b -q "doAll_80.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV)"
+	fi
+}	
+
+function readyVtxWeights {
+	root -l -b -q "doAll.C(\"$1\", \"$MET_STUDY_HISTO_DIR\", false, false, false, false, false, false, false, false, true)"
+}
 
 function moveHistos {
 	# This function helps with moving the histograms before we make new ones.

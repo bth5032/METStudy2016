@@ -28,7 +28,7 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
-int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = true, int nEvents = -1) {
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool fast = true, int nEvents = -1) {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
@@ -255,6 +255,20 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
   metSumET2D->SetDirectory(rootdir);
   metSumET2D->Sumw2();
 
+  //Set up manual vertex reweighting.
+  
+  TH1F * h_vtxweight = NULL;
+  TFile * f_vtx = NULL;
+  
+  if( dovtxreweighting ){
+    f_vtx = TFile::Open(savePath+"nvtx_ratio.root","READ");
+    h_vtxweight = (TH1F*)f_vtx->Get("h_vtx_ratio")->Clone("h_vtxweight");
+    // f_vtx = TFile::Open("puWeights_nTrueInt.root","READ");
+    // h_vtxweight = (TH1F*)f_vtx->Get("weights")->Clone("h_vtxweight");
+    h_vtxweight->SetDirectory(rootdir);
+    f_vtx->Close();
+  }
+
 
   // Loop over events to Analyze
   unsigned int nEventsTotal = 0;
@@ -293,6 +307,8 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
       // Analysis Code
       //=======================================
       
+
+      //Set up event weight
       double weight; 
 
       if( phys.isData() ) {
@@ -307,6 +323,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
       else{
         //weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
         weight = phys.evt_scale1fb() * 2.3; 
+      }
+
+      if( !phys.isData() && dovtxreweighting ){
+        weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(zmet.nVert()));   
       }
 
       // Base Cut

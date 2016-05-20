@@ -1,8 +1,44 @@
 #include "ScanChain.C"
+#include "getReweightVtxHist.C"
 
-void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, bool ST=true, bool zz=true, bool ww=true, bool wz=true, bool vvv=true){
+
+
+void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, bool ST=true, bool zz=true, bool ww=true, bool wz=true, bool vvv=true, makeVTXCorrections=false){
 
   cout<<"Using Histogram Directory: "<<histo_dir<<endl;
+
+  if (makeVTXCorrections){
+    //====================================
+    // Data
+    //====================================
+    TChain *ch_data = new TChain("t"); 
+    
+    //EE
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/data_2016B_Prompt_ee.root");
+    
+    //MuMu
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/data_2016B_Prompt_mm.root");
+
+    ScanChain(ch_data, "data", histo_dir, false); 
+
+    //====================================
+    // DYJets
+    //====================================
+
+    TChain *ch_DY = new TChain("t"); 
+    
+    //10-50
+    ch_DY->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/dy_m1050_amcnlo*");
+
+    //50+
+    ch_DY->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/dy_m50_amcnlo*");
+    ScanChain(ch_DY, "DY", histo_dir, false);
+
+    getReweightVtxHist(histo_dir);
+
+    return;
+
+  }
 
   if (data){
   //====================================
@@ -16,7 +52,7 @@ void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, 
     //MuMu
     ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/data_2016B_Prompt_mm.root");
 
-    ScanChain(ch_data, "data", histo_dir); 
+    ScanChain(ch_data, "data", histo_dir, true); 
   }
 
   if (DY){
@@ -31,7 +67,7 @@ void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, 
 
     //50+
     ch_DY->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/dy_m50_amcnlo*");
-    ScanChain(ch_DY, "DY", histo_dir);  
+    ScanChain(ch_DY, "DY", histo_dir, true);  
   }
 
   if (ttbar){
@@ -42,7 +78,7 @@ void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, 
 
     TChain *ch_ttbar = new TChain("t"); 
     ch_ttbar->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/ttbar_dilep_mgmlm*");
-    ScanChain(ch_ttbar, "TTBar", histo_dir); 
+    ScanChain(ch_ttbar, "TTBar", histo_dir, true); 
   }
 
   if (zz) {
@@ -61,7 +97,7 @@ void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, 
     //4L -- Doesn't exist
     //ch_ZZ->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/");
 
-    ScanChain(ch_ZZ, "ZZ", histo_dir); 
+    ScanChain(ch_ZZ, "ZZ", histo_dir, true); 
   }
 
   if (ST) {
@@ -77,7 +113,7 @@ void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, 
     //Top
     ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/sttw_top_powheg*");
 
-    ScanChain(ch_ST, "SingleTop", histo_dir); 
+    ScanChain(ch_ST, "SingleTop", histo_dir, true); 
   }
 
   if (ww){
@@ -90,7 +126,7 @@ void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, 
     //2L2Nu
     ch_WW->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/ww_2l2nu_powheg*");
     
-    ScanChain(ch_WW, "WW", histo_dir); 
+    ScanChain(ch_WW, "WW", histo_dir, true); 
   }
 
   if (wz) {
@@ -106,7 +142,7 @@ void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, 
     //3LNu
     ch_WZ->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/");
     
-    ScanChain(ch_WZ, "WZ", histo_dir); 
+    ScanChain(ch_WZ, "WZ", histo_dir, true); 
   }
   
   if (vvv) {
@@ -129,7 +165,7 @@ void doAll_80(TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, 
     ch_VVV->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/zzz_incl_mgmlm*");
 
     
-    ScanChain(ch_VVV, "VVV", histo_dir); 
+    ScanChain(ch_VVV, "VVV", histo_dir, true); 
   }
 
 }
