@@ -91,7 +91,7 @@ function make76Histos {
 
 	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_data.root ]]
 	then
-		echo "Please clean up the old directory as you see fit before you run."
+		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
 	else
 		root -l -b -q "doAll_76.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV)"
 	fi
@@ -185,7 +185,7 @@ function make80Histos {
 
 	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_data.root ]]
 	then
-		echo "Please clean up the old directory as you see fit before you run."
+		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
 	else
 		root -l -b -q "doAll_80.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV)"
 	fi
