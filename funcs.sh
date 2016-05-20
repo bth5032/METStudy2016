@@ -8,9 +8,9 @@ MET_STUDY_HISTO_DIR_80=/nfs-7/userdata/bobak/METStudy2016/80Histos/
 MET_STUDY_PLOTS_OUTPUT_DIR_80=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxFix/
 
 #76 runs
-MET_STUDY_HISTO_DIR_76=/nfs-7/userdata/bobak/METStudy2016/76Histos/
-MET_STUDY_PLOTS_OUTPUT_DIR_76=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxFix/
-
+MET_STUDY_HISTO_DIR_76=/nfs-7/userdata/bobak/METStudy2016/76Histos/old-cutfix/
+#MET_STUDY_PLOTS_OUTPUT_DIR_76=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxFix/
+MET_STUDY_PLOTS_OUTPUT_DIR_76=/home/users/bhashemi/public_html/ZMET2016/plots/MET_study/V07-06-09/cutfix
 function makePlots {
 	#
 	# Fancy way to call drawPlots script with root. If you run 
