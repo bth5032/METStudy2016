@@ -39,7 +39,7 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir)
     if (! plot_info->setPlot(plot_name) )
     {
         errors+="=======================================\n\
-ERROR: Could not find plot info for "<<plot_name<<"\n\
+ERROR: Could not find plot info for "+plot_name+"\n\
 =======================================\n";
         continue;
     }
