@@ -515,6 +515,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool fast = 
   bumpPhi->Write();
   dilmass->Write();
   numEvents->Write();
+  metSumET2D->Write();
 
   //close output file
   output->Write();
