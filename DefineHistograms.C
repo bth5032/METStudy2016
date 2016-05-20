@@ -212,30 +212,30 @@ void addMETPlots(PlotList* all_plots){
   //-------
   //TYPE1
   //-------
-  all_plots->add("type1MET_2jets", "Type 1 MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("type1MET_2jets", "Type 1 MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
   
   //electron/muon
-  all_plots->add("type1MET_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("type1MET_mu", "Type 1 MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("type1MET_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("type1MET_mu", "Type 1 MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   //electron/muon with jets
-  all_plots->add("type1MET_2jets_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("type1MET_2jets_mu", "Type 1 MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("type1MET_2jets_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("type1MET_2jets_mu", "Type 1 MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   //-------
   // RAW
   //-------
 
-  all_plots->add("rawMET", "Raw MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("rawMET_2jets", "Raw MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("rawMET", "Raw MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("rawMET_2jets", "Raw MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
   
   //electron/muon
-  all_plots->add("rawMET_el", "Raw MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("rawMET_mu", "Raw MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("rawMET_el", "Raw MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("rawMET_mu", "Raw MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   //electron/muon with jets
-  all_plots->add("rawMET_2jets_el", "Raw MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("rawMET_2jets_mu", "Raw MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("rawMET_2jets_el", "Raw MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("rawMET_2jets_mu", "Raw MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 }
 
 void addPTPlots(PlotList* all_plots){
@@ -303,9 +303,9 @@ void addSumETPlots(PlotList* all_plots){
   // PHOTON
   //-------
 
-  all_plots->add("photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
+  all_plots->add("photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 100, 5);
+  all_plots->add("photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   //-------
   // CHARGED HADRONS
@@ -317,10 +317,10 @@ void addSumETPlots(PlotList* all_plots){
   //-------
   // NEUTRAL HADRONS
   //-------
-  all_plots->add("neutralSET0013", "Neutral hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("neutralSET1624", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("neutralSET2430", "Neutral hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("neutralSET30in", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("neutralSET0013", "Neutral hadronic scalar sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("neutralSET1624", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("neutralSET2430", "Neutral hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("neutralSET30in", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 }
 
 void addExtraPlots(PlotList* all_plots){
