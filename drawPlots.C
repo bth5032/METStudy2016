@@ -31,7 +31,7 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
   TFile* f_ZZ;
 
 
-  if (do_extra){
+  if (do_extra) {
     f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");
     f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
     f_VVV = new TFile(input_dir+"METStudy_VVV.root");
@@ -67,7 +67,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<plot_name<<" found in "<<f_TTbar->GetName()<<endl;
 
     // Build Extra Plots
-    TH1F* VVV;
+    /*TH1F* VVV;
     TH1F* WZ;
     TH1F* WW;
     TH1F* ZZ;
@@ -91,7 +91,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         extra->Add(WW);
         extra->Add(WZ);
         extra->Add(ZZ);
-    }
+    }*/
 
     TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
     mc_sum->Add(fsbkg);
