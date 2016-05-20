@@ -1,6 +1,5 @@
 #include "ScanChain.C"
 #include "DefineDatasets.C"
-#include "getReweightVtxHist.C"
 
 void doAll(TString data_set, TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, bool ST=true, bool zz=true, bool ww=true, bool wz=true, bool vvv=true, bool doVtxFix=false){
 
