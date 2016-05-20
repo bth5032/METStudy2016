@@ -212,7 +212,7 @@ void addMETPlots(PlotList* all_plots){
   //-------
   //TYPE1
   //-------
-  all_plots->add("type1MET_2Jets", "Type 1 MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("type1MET_2jets", "Type 1 MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
   
   //electron/muon
   all_plots->add("type1MET_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
