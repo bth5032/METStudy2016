@@ -5,6 +5,7 @@
 #include <TH1F.h>
 
 #include "ScanChain.C"
+#include "DefineDatasets.C"
 
 using namespace std;
 
