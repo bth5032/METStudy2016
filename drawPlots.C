@@ -16,8 +16,8 @@
 using namespace std;
 
     
-void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
-  
+TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
+  TString errors="";
   PlotList *plot_info = getPlotList();
 
   TFile* f_DY = new TFile(input_dir+"METStudy_DY.root");
@@ -38,9 +38,9 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
     //don't make plots if we can't look up the info.
     if (! plot_info->setPlot(plot_name) )
     {
-        cout<<"=======================================\n\
-        ERROR: Could not find plot info for "<<plot_name<<"\n\
-        ======================================="<<endl;
+        errors+="=======================================\n\
+ERROR: Could not find plot info for "<<plot_name<<"\n\
+=======================================\n";
         continue;
     }
     cout << "Making Plots for: "<<plot_name<<endl;
@@ -334,6 +334,8 @@ void drawAll(vector<TString> plot_names, TString input_dir, TString save_dir){
   //delete f_WZ;
   //delete f_ZZ;
   delete f_data;
+
+  return errors;
   
 }
 
@@ -341,6 +343,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
 {
   
   vector<TString> plot_names;
+  TString errors=""
 
   if (pt) {
     //============================================
@@ -359,7 +362,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralPT30in");   
 
     // Run over PT plots
-    drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
   }
 
@@ -379,7 +382,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralPHI30in");   
     
     // Run over Phi plots
-    drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
   }
 
@@ -399,7 +402,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralSET30in");   
     
     // Run over Sum ET plots
-    drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
   }
   
@@ -422,7 +425,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("rawMET_mu");
     plot_names.push_back("rawMET_2jets_mu");
 
-    drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
   }
 
@@ -431,10 +434,12 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("dilmass");
     plot_names.push_back("PHIinBump");
     
-    drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
   }
 
+
+  cout<<errors<<endl;
   return;
 }
 
