@@ -236,8 +236,8 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         h_axes->GetYaxis()->SetLabelSize(0.03);
     }
 
-    plotpad->SetLeftMargin(0.9);
-    h_axes->GetYaxis()->SetTitleOffset(1.5);
+    plotpad->SetLeftMargin(0.1);
+    h_axes->GetYaxis()->SetTitleOffset(2);
 
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
