@@ -1,7 +1,7 @@
 #include "ScanChain.C"
 #include "DefineDatasets.C"
 
-void doAll(TString data_set, TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, bool ST=true, bool zz=true, bool ww=true, bool wz=true, bool vvv=true, bool doVtxFix=false, bool do_STD_vtx_reweight){
+void doAll(TString data_set, TString histo_dir, bool data=true, bool DY=true, bool ttbar=true, bool ST=true, bool zz=true, bool ww=true, bool wz=true, bool vvv=true, bool doVtxFix=false, bool do_STD_vtx_reweight=false){
 
   cout<<"Using Histogram Directory: "<<histo_dir<<endl;
 
