@@ -8,8 +8,8 @@ function setConfig {
 	MET_STUDY_DATASET=""
 	MET_STUDY_HISTO_DIR=""
 	MET_STUDY_PLOTS_OUTPUT_DIR=""
-	MET_STUDY_DO_VTX=false
-	MET_STUDY_DO_STD_VTX=false
+	MET_STUDY_DO_VTX="false"
+	MET_STUDY_DO_STD_VTX="false"
 
 	MET_STUDY_SETVARS_OPTS=`grep -A5 "Name=$1$" < config | xargs`
 	
@@ -43,18 +43,18 @@ function setConfig {
 		then
 			if [[ ${i#*=} == "Yes" ]]
 			then
-				MET_STUDY_DO_VTX=true
-				MET_STUDY_DO_STD_VTX=false
+				MET_STUDY_DO_VTX="true"
+				MET_STUDY_DO_STD_VTX="false"
 					echo "Vertex Reweighting: Cutsom"
 			elif [[ ${i#*=} == "No" ]]
 			then
-				MET_STUDY_DO_VTX=false
-				MET_STUDY_DO_STD_VTX=false
+				MET_STUDY_DO_VTX="false"
+				MET_STUDY_DO_STD_VTX="false"
 				echo "Vertex Reweighting: None"
 			elif [[ ${i#*=} == "Std" ]]
 			then
-				MET_STUDY_DO_VTX=false
-				MET_STUDY_DO_STD_VTX=true
+				MET_STUDY_DO_VTX="false"
+				MET_STUDY_DO_STD_VTX="true"
 					echo "Vertex Reweighting: Standard"
 			fi
 		fi
@@ -153,7 +153,7 @@ function makeHistos {
 	  fi
 	done
 
-	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_ttbar.root ]]
+	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_TTBar.root ]]
 	then
 		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
 	else
