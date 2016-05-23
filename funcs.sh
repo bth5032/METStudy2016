@@ -39,7 +39,7 @@ function setConfig {
 		then
 			MET_STUDY_PLOTS_OUTPUT_DIR=${i#*=}
 			echo "Plot Output Directory: $MET_STUDY_PLOTS_OUTPUT_DIR"
-		elif [[ ${i%=*} == "vertex_reweight" ]]
+		elif [[ ${i%=*} == "vertex_reweighting" ]]
 		then
 			if [[ ${i#*=} == "Yes" ]]
 			then
