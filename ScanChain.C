@@ -643,19 +643,29 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
   output->cd();
 
-  //MET
+  //Type 1 MET
   t1met->Write();
   t1met_2jets->Write();
   t1met_el->Write();
   t1met_2jets_el->Write();
   t1met_mu->Write();
   t1met_2jets_mu->Write();
+  
+  //RAW MET
   rawmet->Write();
   rawmet_2jets->Write();
   rawmet_el->Write();
   rawmet_2jets_el->Write();
   rawmet_mu->Write();
   rawmet_2jets_mu->Write();
+
+  //NET MET-PHI
+  net_phi->Write();
+  net_phi_2jets->Write();
+  net_phi_el->Write();
+  net_phi_2jets_el->Write();
+  net_phi_mu->Write();
+  net_phi_2jets_mu->Write();
   
   //Photon
   ph_0013_pt->Write();
