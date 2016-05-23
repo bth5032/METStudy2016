@@ -449,14 +449,14 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
           t1met_2jets->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
           if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
           {
-            net_phi_2jets->Fill(phys.met_T1CHS_phi(), weight);
+            net_phi_2jets->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
           }
           if (phys.hyp_type() == 0)
           {
             t1met_2jets_el->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
             if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
             {
-              net_phi_2jets_el->Fill(phys.met_T1CHS_phi(), weight);
+              net_phi_2jets_el->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
             }
           }
           else
@@ -464,7 +464,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
             t1met_2jets_mu->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
             if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
             {
-              net_phi_2jets_mu->Fill(phys.met_T1CHS_phi(), weight);
+              net_phi_2jets_mu->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
             } 
           }
         }
@@ -494,19 +494,18 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         {
           rawmet_mu->Fill(phys.met_rawPt(), weight); 
         }
-
-        //Type 1 MET
+      }
+      
+      //Type 1 MET
+      if(phys.met_T1CHS_miniAOD_CORE_pt() > 0){
         t1met->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
-        if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
-        {
-          net_phi->Fill(phys.met_T1CHS_phi(), weight);
+        if (phys.met_T1CHS_miniAOD_CORE_pt() > 20){
+          net_phi->Fill(phys.phys.met_T1CHS_miniAOD_CORE_phi(), weight);
         }
-        if (phys.hyp_type() == 0)
-        {
+        if (phys.hyp_type() == 0){
           t1met_el->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
-          if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
-          {
-            net_phi_el->Fill(phys.met_T1CHS_phi(), weight);
+          if (phys.met_T1CHS_miniAOD_CORE_pt() > 20){
+            net_phi_el->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
           }
         }
         else
@@ -514,7 +513,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
           t1met_mu->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight); 
           if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
           {
-            net_phi_mu->Fill(phys.met_T1CHS_phi(), weight);
+            net_phi_mu->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
           }
         }
       }
