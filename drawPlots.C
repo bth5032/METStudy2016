@@ -225,7 +225,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     }
 
         
-    if (plot_info->type() == "pt" || plot_info->type() == "met"){
+    /*if (plot_info->type() == "pt" || plot_info->type() == "met"){
         h_axes->GetYaxis()->SetTitleOffset(1.5);
         h_axes->GetYaxis()->SetTitleSize(0.05);
         h_axes->GetYaxis()->SetLabelSize(0.04);
@@ -234,10 +234,12 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         h_axes->GetYaxis()->SetTitleOffset(1);
         h_axes->GetYaxis()->SetTitleSize(0.04);
         h_axes->GetYaxis()->SetLabelSize(0.03);
-    }
+    }*/
 
     plotpad->SetLeftMargin(0.15);
     h_axes->GetYaxis()->SetTitleOffset(1.5);
+    h_axes->GetYaxis()->SetTitleSize(0.05);
+    h_axes->GetYaxis()->SetLabelSize(0.04);
 
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
