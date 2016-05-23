@@ -237,7 +237,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     }*/
 
     plotpad->SetLeftMargin(0.15);
-    h_axes->GetYaxis()->SetTitleOffset(1.5);
+    h_axes->GetYaxis()->SetTitleOffset(1.3);
     h_axes->GetYaxis()->SetTitleSize(0.05);
     h_axes->GetYaxis()->SetLabelSize(0.04);
 
