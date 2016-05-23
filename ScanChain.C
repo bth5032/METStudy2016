@@ -500,7 +500,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if(phys.met_T1CHS_miniAOD_CORE_pt() > 0){
         t1met->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 20){
-          net_phi->Fill(phys.phys.met_T1CHS_miniAOD_CORE_phi(), weight);
+          net_phi->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
         }
         if (phys.hyp_type() == 0){
           t1met_el->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
