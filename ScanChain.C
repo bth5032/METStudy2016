@@ -153,6 +153,31 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   // MET-PHI
   //=================================
 
+  // Overall MET-Phi
+  TH1F *net_phi = new TH1F(sampleName+"_netPHI", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
+  net_phi->SetDirectory(rootdir);
+  net_phi->Sumw2();
+
+  TH1F *net_phi_2jets = new TH1F(sampleName+"_netPHI_2jets", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
+  net_phi_2jets->SetDirectory(rootdir);
+  net_phi_2jets->Sumw2();
+
+  TH1F *net_phi_el = new TH1F(sampleName+"_netPHI_el", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
+  net_phi_el->SetDirectory(rootdir);
+  net_phi_el->Sumw2();
+
+  TH1F *net_phi_2jets_el = new TH1F(sampleName+"_netPHI_2jets_el", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
+  net_phi_2jets_el->SetDirectory(rootdir);
+  net_phi_2jets_el->Sumw2();
+
+  TH1F *net_phi_mu = new TH1F(sampleName+"_netPHI_mu", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
+  net_phi_mu->SetDirectory(rootdir);
+  net_phi_mu->Sumw2();
+
+  TH1F *net_phi_2jets_mu = new TH1F(sampleName+"_netPHI_2jets_mu", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
+  net_phi_2jets_mu->SetDirectory(rootdir);
+  net_phi_2jets_mu->Sumw2();
+
   // Photonic MET-Phi
   TH1F *ph_0013_phi = new TH1F(sampleName+"_photonPHI0013", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 200,-3.15,3.15);
   ph_0013_phi->SetDirectory(rootdir);
@@ -422,13 +447,25 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
         {
           t1met_2jets->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
+          if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
+          {
+            net_phi_2jets->Fill(phys.met_T1CHS_phi(), weight);
+          }
           if (phys.hyp_type() == 0)
           {
             t1met_2jets_el->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
+            if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
+            {
+              net_phi_2jets_el->Fill(phys.met_T1CHS_phi(), weight);
+            }
           }
           else
           {
-            t1met_2jets_mu->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight); 
+            t1met_2jets_mu->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
+            if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
+            {
+              net_phi_2jets_mu->Fill(phys.met_T1CHS_phi(), weight);
+            } 
           }
         }
         if (phys.met_rawPt() > 0)
@@ -447,6 +484,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       // Draw other MET hists
       if(phys.met_rawPt() > 0){
+        //Raw MET
         rawmet->Fill(phys.met_rawPt(), weight);
         if (phys.hyp_type() == 0)
         {
@@ -457,14 +495,27 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
           rawmet_mu->Fill(phys.met_rawPt(), weight); 
         }
 
+        //Type 1 MET
         t1met->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
+        if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
+        {
+          net_phi->Fill(phys.met_T1CHS_phi(), weight);
+        }
         if (phys.hyp_type() == 0)
         {
           t1met_el->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
+          if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
+          {
+            net_phi_el->Fill(phys.met_T1CHS_phi(), weight);
+          }
         }
         else
         {
           t1met_mu->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight); 
+          if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
+          {
+            net_phi_mu->Fill(phys.met_T1CHS_phi(), weight);
+          }
         }
       }
 

@@ -451,6 +451,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
   // MET
   //============================================
   //-----------------define---------------------
+    //Type 1 MET
     plot_names.push_back("type1MET");
     plot_names.push_back("type1MET_2jets");
     plot_names.push_back("type1MET_el");
@@ -458,12 +459,21 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("type1MET_mu");
     plot_names.push_back("type1MET_2jets_mu");
     
+    //RAW MET
     plot_names.push_back("rawMET");
     plot_names.push_back("rawMET_2jets");
     plot_names.push_back("rawMET_el");
     plot_names.push_back("rawMET_2jets_el");
     plot_names.push_back("rawMET_mu");
     plot_names.push_back("rawMET_2jets_mu");
+
+    //MET-PHI
+    plot_names.push_back("netPHI");
+    plot_names.push_back("netPHI_2jets");
+    plot_names.push_back("netPHI_el");
+    plot_names.push_back("netPHI_2jets_el");
+    plot_names.push_back("netPHI_mu");
+    plot_names.push_back("netPHI_2jets_mu");
 
     errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
