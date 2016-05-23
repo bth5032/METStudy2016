@@ -297,6 +297,35 @@ void addPhiPlots(PlotList* all_plots){
    all_plots->add("neutralPHI30in", "Net angle of neutral hadronic vector sum of pt in HF |#eta| > 3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 }
 
+void addPhiPTCUTPlots(PlotList* all_plots){
+  //========================
+  // PHI plots
+  //======================== 
+  //-------
+  // PHOTON
+  //-------
+
+  all_plots->add("photonPHI0013_PCUT20", "Net angle of photonic vector sum of pt in barrel |#eta| < 1.3 where |#Sum_{ph} #vec{p}_t| > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI1624_PCUT20", "Net angle of photonic vector sum of pt in endcap |#eta| #in (1.6,2.4) where |#Sum_{ph} #vec{p}_t| > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI2430_PCUT20", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0) where |#Sum_{ph} #vec{p}_t| > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI30in_PCUT20", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| > 3 where |#Sum_{ph} #vec{p}_t| > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+
+  //-------
+  // CHARGED HADRONS
+  //-------
+  all_plots->add("chargedPHI0013_PCUT20", "Net angle of charged hadronic vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI1624_PCUT20", "Net angle of charged hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI2430_PCUT20", "Net angle of charged hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+
+  //-------
+  // NEUTRAL HADRONS
+  //-------
+  all_plots->add("neutralPHI0013_PCUT20", "Net angle of neutral hadronic vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("neutralPHI1624_PCUT20", "Net angle of neutral hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("neutralPHI2430_PCUT20", "Net angle of neutral hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+   all_plots->add("neutralPHI30in_PCUT20", "Net angle of neutral hadronic vector sum of pt in HF |#eta| > 3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+}
+
 void addSumETPlots(PlotList* all_plots){
   //========================
   // SUM ET
@@ -343,6 +372,7 @@ PlotList* getPlotList(){
   addMETPlots(all_plots);
   addPTPlots(all_plots);
   addPhiPlots(all_plots);
+  addPhiPTCUTPlots(all_plots);
   addSumETPlots(all_plots);
   addExtraPlots(all_plots);
 
