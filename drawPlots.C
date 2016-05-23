@@ -291,7 +291,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<"Building axes"<<endl;
     TH1F* h_axis_ratio = new TH1F(Form("%s_residual_axes",plot_name.Data()),"",residual->GetNbinsX(),plot_info->xmin(),plot_info->xmax());
 
-    h_axis_ratio->GetYaxis()->SetTitleOffset(0.3);
+    h_axis_ratio->GetYaxis()->SetTitleOffset(0.33);
     h_axis_ratio->GetYaxis()->SetTitleSize(0.18);
     h_axis_ratio->GetYaxis()->SetNdivisions(5);
     h_axis_ratio->GetYaxis()->SetLabelSize(0.15);
