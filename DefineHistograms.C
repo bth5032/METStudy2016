@@ -321,10 +321,10 @@ void addPhiPTCUTPlots(PlotList* all_plots){
   // PHOTON
   //-------
 
-  all_plots->add("photonPHI0013_PCUT20", "Net angle of photonic vector sum of pt in barrel |#eta| < 1.3 where | #Sum_{ph} #vec{p}_t | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI1624_PCUT20", "Net angle of photonic vector sum of pt in endcap |#eta| #in (1.6,2.4) where | #Sum_{ph} #vec{p}_t | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI2430_PCUT20", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0) where | #Sum_{ph} #vec{p}_t | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI30in_PCUT20", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| > 3 where | #Sum_{ph} #vec{p}_t | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI0013_PCUT20", "Net angle of photonic vector sum of pt in barrel |#eta| < 1.3 where | #Sigma_{ph} #vec{p}_t | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI1624_PCUT20", "Net angle of photonic vector sum of pt in endcap |#eta| #in (1.6,2.4) where | #Sigma_{ph} #vec{p}_t | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI2430_PCUT20", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0) where | #Sigma_{ph} #vec{p}_t | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI30in_PCUT20", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| > 3 where | #Sigma_{ph} #vec{p}_t | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 
   //-------
   // CHARGED HADRONS
