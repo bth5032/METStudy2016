@@ -215,8 +215,8 @@ void addMETPlots(PlotList* all_plots){
   all_plots->add("type1MET_2jets", "Type 1 MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
   
   //electron/muon
-  all_plots->add("type1MET_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
-  all_plots->add("type1MET_mu", "Type 1 MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("type1MET_el", "Type 1 MET for Dielectron Events", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("type1MET_mu", "Type 1 MET for Dimuon Events", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   //electron/muon with jets
   all_plots->add("type1MET_2jets_el", "Type 1 MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
@@ -230,8 +230,8 @@ void addMETPlots(PlotList* all_plots){
   all_plots->add("rawMET_2jets", "Raw MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
   
   //electron/muon
-  all_plots->add("rawMET_el", "Raw MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
-  all_plots->add("rawMET_mu", "Raw MET for Dimuon Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("rawMET_el", "Raw MET for Dielectron Events", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("rawMET_mu", "Raw MET for Dimuon Events", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   //electron/muon with jets
   all_plots->add("rawMET_2jets_el", "Raw MET for Dielectron Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
