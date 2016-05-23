@@ -237,7 +237,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     }
 
     plotpad->SetLeftMargin(0.1);
-    h_axes->GetYaxis()->SetTitleOffset(2);
+    h_axes->GetYaxis()->SetTitleOffset(1.5);
 
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
@@ -301,7 +301,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     h_axis_ratio->GetXaxis()->SetTitleSize(0.);
     h_axis_ratio->GetXaxis()->SetLabelSize(0.);
     
-    TLine* line1 = new TLine(data->GetXaxis()->GetXmin(),1,data->GetXaxis()->GetXmax(),1);
+    TLine* line1 = new TLine(plot_info->xmin(),1,plot_info->xmax(),1);
     line1->SetLineStyle(2);
     
 //    h_axis_ratio->GetXaxis()->SetTitle(data->GetXaxis()->GetTitle());
