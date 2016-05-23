@@ -55,7 +55,7 @@ function setConfig {
 			then
 				MET_STUDY_DO_VTX="false"
 				MET_STUDY_DO_STD_VTX="true"
-					echo "Vertex Reweighting: Standard"
+				echo "Vertex Reweighting: Standard"
 			fi
 		fi
 	done

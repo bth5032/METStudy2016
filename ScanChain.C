@@ -412,11 +412,11 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         weight = phys.evt_scale1fb() * 2.3; 
       }
 
-      if( !phys.isData() && dovtxreweighting ){
+      if( (! phys.isData()) && dovtxreweighting ){
         weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(phys.nVert()));   
       }
 
-      if( !phys.isData() && do_stdvtx_reweighting){
+      if( (! phys.isData()) && do_stdvtx_reweighting){
         weight *= phys.puWeight();   
       }
 
@@ -440,13 +440,9 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         }
       }
 
-      if (! (phys.evt_passgoodrunlist() > 0))
-      { 
-        continue;
-      }
-      else{
-        cout<<"Event Passed"<<endl;
-      }
+      if (! (phys.evt_passgoodrunlist() > 0)) continue;
+
+
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
