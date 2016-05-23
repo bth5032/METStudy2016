@@ -23,34 +23,43 @@ function setConfig {
 		MET_STUDY_SETVARS_OPTS=`grep -A5 "Name=$NEXTOPT$" < config | xargs`
 	done
 
+	echo "Running On Set: $1"
+
 	for i in $MET_STUDY_SETVARS_OPTS
 	do
 		if [[ ${i%=*} == "Dataset" ]]
 		then
 			MET_STUDY_DATASET=${i#*=}
+			echo "Dataset: $MET_STUDY_DATASET"
 		elif [[ ${i%=*} == "histogram_output" ]]
 		then
 			MET_STUDY_HISTO_DIR=${i#*=}
+			echo "Histogram Output Directory: $MET_STUDY_HISTO_DIR"
 		elif [[ ${i%=*} == "plot_output" ]]
 		then
 			MET_STUDY_PLOTS_OUTPUT_DIR=${i#*=}
+			echo "Plot Output Directory: $MET_STUDY_PLOTS_OUTPUT_DIR"
 		elif [[ ${i%=*} == "vertex_reweight" ]]
 		then
 			if [[ ${i#*=} == "Yes" ]]
 			then
 				MET_STUDY_DO_VTX=true
-				MET_STUDY_DO_STD_VTX=true
+				MET_STUDY_DO_STD_VTX=false
+					echo "Vertex Reweighting: Cutsom"
 			elif [[ ${i#*=} == "Yes" ]]
 			then
 				MET_STUDY_DO_VTX=false
-				MET_STUDY_DO_STD_VTX=true
+				MET_STUDY_DO_STD_VTX=false
+					echo "Vertex Reweighting: None"
 			elif [[ ${i#*=} == "Std" ]]
 			then
 				MET_STUDY_DO_VTX=false
 				MET_STUDY_DO_STD_VTX=true
+					echo "Vertex Reweighting: Standard"
 			fi
 		fi
 	done
+
 }
 
 function makePlots {
