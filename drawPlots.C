@@ -380,6 +380,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("photonPT0013");
     plot_names.push_back("photonPT1624");
     plot_names.push_back("photonPT2430");
+    plot_names.push_back("photonPT30in");
     plot_names.push_back("chargedPT0013");
     plot_names.push_back("chargedPT1624");
     plot_names.push_back("neutralPT0013");
@@ -400,6 +401,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("photonPHI0013");
     plot_names.push_back("photonPHI1624");
     plot_names.push_back("photonPHI2430");
+    plot_names.push_back("photonPHI30in");
     plot_names.push_back("chargedPHI0013");
     plot_names.push_back("chargedPHI1624");
     plot_names.push_back("neutralPHI0013");
@@ -420,6 +422,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("photonSET0013");
     plot_names.push_back("photonSET1624");
     plot_names.push_back("photonSET2430");
+    plot_names.push_back("photonSET30in");
     plot_names.push_back("chargedSET0013");
     plot_names.push_back("chargedSET1624");
     plot_names.push_back("neutralSET0013");
@@ -456,7 +459,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
   }
 
   if (extra) { 
-    //plot_names.push_back("nVert");
+    plot_names.push_back("nVert");
     plot_names.push_back("dilmass");
     //plot_names.push_back("PHIinBump");
     
