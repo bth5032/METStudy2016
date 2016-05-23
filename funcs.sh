@@ -156,6 +156,7 @@ function makeHistos {
 	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_TTBar.root ]]
 	then
 		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
+		exit 1
 	else
 		if [[ $MET_STUDY_DO_VTX == "true" ]]
 		then
