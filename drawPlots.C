@@ -140,8 +140,8 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     //===========================
     // Normalize MC
     //===========================
-    double numEventsData = data->Integral(0,500);
-    double numEventsMC = mc_sum->Integral(0,500);
+    double numEventsData = data->Integral(0,-1);
+    double numEventsMC = mc_sum->Integral(0,-1);
     double scaleFactor = ((double) numEventsData/numEventsMC);
 
     zjets->Scale(scaleFactor);
@@ -224,9 +224,12 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         mc_sum->SetBinContent(n_bins, max_mcsum+overflow_mcsum);
     }
 
+
+    plotpad->SetLeftMargin(0.15);
+    h_axes->GetYaxis()->SetTitleOffset(1.5);
         
     if (plot_info->type() == "pt" || plot_info->type() == "met"){
-        h_axes->GetYaxis()->SetTitleOffset(0.95);
+        h_axes->GetYaxis()->SetTitleOffset(1.5);
         h_axes->GetYaxis()->SetTitleSize(0.05);
         h_axes->GetYaxis()->SetLabelSize(0.04);
     }
@@ -303,8 +306,6 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     
     TLine* line1 = new TLine(plot_info->xmin(),1,plot_info->xmax(),1);
     line1->SetLineStyle(2);
-    
-//    h_axis_ratio->GetXaxis()->SetTitle(data->GetXaxis()->GetTitle());
     
     cout<<"Drawing ratio plot"<<endl;
     h_axis_ratio->Draw("axis");
