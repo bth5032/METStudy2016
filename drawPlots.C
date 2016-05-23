@@ -407,7 +407,18 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralPHI0013");
     plot_names.push_back("neutralPHI1624");
     plot_names.push_back("neutralPHI2430");
-    plot_names.push_back("neutralPHI30in");   
+    plot_names.push_back("neutralPHI30in");
+
+    plot_names.push_back("photonPHI0013_PCUT20");
+    plot_names.push_back("photonPHI1624_PCUT20");
+    plot_names.push_back("photonPHI2430_PCUT20");
+    plot_names.push_back("photonPHI30in_PCUT20");
+    plot_names.push_back("chargedPHI0013_PCUT20");
+    plot_names.push_back("chargedPHI1624_PCUT20");
+    plot_names.push_back("neutralPHI0013_PCUT20");
+    plot_names.push_back("neutralPHI1624_PCUT20");
+    plot_names.push_back("neutralPHI2430_PCUT20");
+    plot_names.push_back("neutralPHI30in_PCUT20");   
     
     // Run over Phi plots
     errors+=drawAll(plot_names, input_dir, save_dir);
