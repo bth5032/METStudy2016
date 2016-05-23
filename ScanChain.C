@@ -440,8 +440,13 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         }
       }
 
-      if (! (phys.evt_passgoodrunlist() > 0)) continue;
-
+      if (! (phys.evt_passgoodrunlist() > 0))
+      { 
+        continue;
+      }
+      else{
+        cout<<"Event Passed"<<endl;
+      }
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
