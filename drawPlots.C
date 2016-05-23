@@ -272,6 +272,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     fullpad->cd();
     TPad *ratiopad = new TPad("ratiopad", "ratiopad" ,0.,0.,1,0.21);
     ratiopad->SetTopMargin(0.05);
+    ratiopad->SetLeftMargin(0.15);
     ratiopad->SetBottomMargin(0.1);
     ratiopad->SetRightMargin(0.05);
     ratiopad->SetGridy();  // doesn't actually appear for some reason..
