@@ -224,9 +224,6 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         mc_sum->SetBinContent(n_bins, max_mcsum+overflow_mcsum);
     }
 
-
-    plotpad->SetLeftMargin(0.15);
-    h_axes->GetYaxis()->SetTitleOffset(1.5);
         
     if (plot_info->type() == "pt" || plot_info->type() == "met"){
         h_axes->GetYaxis()->SetTitleOffset(1.5);
@@ -239,7 +236,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         h_axes->GetYaxis()->SetLabelSize(0.03);
     }
 
-    plotpad->SetLeftMargin(0.1);
+    plotpad->SetLeftMargin(0.15);
     h_axes->GetYaxis()->SetTitleOffset(1.5);
 
     cout<<"Drawing histograms"<<endl;
