@@ -226,7 +226,7 @@ void addMETPlots(PlotList* all_plots){
   // RAW
   //-------
 
-  all_plots->add("rawMET", "Raw MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
+  all_plots->add("rawMET", "Raw MET for All Events", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
   all_plots->add("rawMET_2jets", "Raw MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
   
   //electron/muon
