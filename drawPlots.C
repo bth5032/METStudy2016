@@ -236,6 +236,9 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         h_axes->GetYaxis()->SetLabelSize(0.03);
     }
 
+    plotpad->SetLeftMargin(0.9);
+    h_axes->GetYaxis()->SetTitleOffset(1.5);
+
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
     stack->Draw("HIST SAME");
@@ -452,9 +455,9 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
   }
 
   if (extra) { 
-    plot_names.push_back("nVert");
+    //plot_names.push_back("nVert");
     plot_names.push_back("dilmass");
-    plot_names.push_back("PHIinBump");
+    //plot_names.push_back("PHIinBump");
     
     errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
