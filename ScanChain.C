@@ -28,7 +28,8 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
-int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool fast = true, int nEvents = -1) {
+
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool fast = true, int nEvents = -1) {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
@@ -113,6 +114,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_2430_pt->SetDirectory(rootdir);
   ph_2430_pt->Sumw2();
 
+  TH1F *ph_30in_pt = new TH1F(sampleName+"_photonPT30in", "Photonic vector sum of pt for "+sampleName+" with |#eta| > 3", 500,0,500);
+  ph_30in_pt->SetDirectory(rootdir);
+  ph_30in_pt->Sumw2();
+
   // Charged Hadronic Pts
   TH1F *ch_0013_pt = new TH1F(sampleName+"_chargedPT0013", "Charged hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ch_0013_pt->SetDirectory(rootdir);
@@ -161,6 +166,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_2430_phi->SetDirectory(rootdir);
   ph_2430_phi->Sumw2();
 
+  TH1F *ph_30in_phi = new TH1F(sampleName+"_photonPHI30in", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| > 3.0", 200,-3.15,3.15);
+  ph_30in_phi->SetDirectory(rootdir);
+  ph_30in_phi->Sumw2();
+
   // Charged Hadronic MET-Phi
   TH1F *ch_0013_phi = new TH1F(sampleName+"_chargedPHI0013", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 200,-3.15,3.15);
   ch_0013_phi->SetDirectory(rootdir);
@@ -207,6 +216,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   TH1F *ph_2430_set = new TH1F(sampleName+"_photonSET2430", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
   ph_2430_set->SetDirectory(rootdir);
   ph_2430_set->Sumw2();
+
+  TH1F *ph_30in_set = new TH1F(sampleName+"_photonSET30in", "Photonic scalar sum of pt for "+sampleName+" with |#eta| > 3.0", 500,0,500);
+  ph_30in_set->SetDirectory(rootdir);
+  ph_30in_set->Sumw2();
 
   // Charged Hadronic SET
   TH1F *ch_0013_set = new TH1F(sampleName+"_chargedSET0013", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
@@ -325,6 +338,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       if( !phys.isData() && dovtxreweighting ){
         weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(phys.nVert()));   
+      }
+
+      if( !phys.isData() && do_stdvtx_reweighting){
+        weight *= phys.puWeight();   
       }
 
       // Base Cut
@@ -487,6 +504,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
   output->cd();
 
+  //MET
   t1met->Write();
   t1met_2jets->Write();
   t1met_el->Write();
@@ -499,36 +517,47 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   rawmet_2jets_el->Write();
   rawmet_mu->Write();
   rawmet_2jets_mu->Write();
+  
+  //Photon
   ph_0013_pt->Write();
   ph_1624_pt->Write();
   ph_2430_pt->Write();
+  ph_30in_pt->Write();
+  ph_0013_phi->Write();
+  ph_1624_phi->Write();
+  ph_2430_phi->Write();
+  ph_30in_phi->Write();
+  ph_0013_set->Write();
+  ph_1624_set->Write();
+  ph_2430_set->Write();
+  ph_30in_set->Write();
+  
+  //Charged
   ch_0013_pt->Write();
   ch_1624_pt->Write();
   ch_2430_pt->Write();
+  ch_0013_phi->Write();
+  ch_1624_phi->Write();
+  ch_2430_phi->Write();
+  ch_0013_set->Write();
+  ch_1624_set->Write();
+  ch_2430_set->Write();
+  
+  //Neutral
   nu_0013_pt->Write();
   nu_1624_pt->Write();
   nu_2430_pt->Write();
   nu_30in_pt->Write();
-  ph_0013_phi->Write();
-  ph_1624_phi->Write();
-  ph_2430_phi->Write();
-  ch_0013_phi->Write();
-  ch_1624_phi->Write();
-  ch_2430_phi->Write();
   nu_0013_phi->Write();
   nu_1624_phi->Write();
   nu_2430_phi->Write();
   nu_30in_phi->Write();
-  ph_0013_set->Write();
-  ph_1624_set->Write();
-  ph_2430_set->Write();
-  ch_0013_set->Write();
-  ch_1624_set->Write();
-  ch_2430_set->Write();
   nu_0013_set->Write();
   nu_1624_set->Write();
   nu_2430_set->Write();
   nu_30in_set->Write();
+  
+  //Extra
   nVert->Write();
   bumpPhi->Write();
   dilmass->Write();

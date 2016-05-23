@@ -3,20 +3,55 @@
 ## Function for doing 2016 MET study
 ## Bobak Hashemi
 
-#80 runs
-MET_STUDY_HISTO_DIR_80=/nfs-7/userdata/bobak/METStudy2016/80Histos/
-MET_STUDY_PLOTS_OUTPUT_DIR_80=/home/users/bhashemi/public_html/ZMET2016/looper/80/
 
-MET_STUDY_HISTO_DIR_80_vtxFix=/nfs-7/userdata/bobak/METStudy2016/80Histos/vtxFix/
-MET_STUDY_PLOTS_OUTPUT_DIR_80_vtxFix=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxFix/
+function setConfig {
+	MET_STUDY_DATASET=""
+	MET_STUDY_HISTO_DIR=""
+	MET_STUDY_PLOTS_OUTPUT_DIR=""
+	MET_STUDY_DO_VTX=false
+	MET_STUDY_DO_STD_VTX=false
 
-#76 runs
-MET_STUDY_HISTO_DIR_76_vtxFix=/nfs-7/userdata/bobak/METStudy2016/76Histos/vtxFix/
-MET_STUDY_PLOTS_OUTPUT_DIR_76_vtxFix=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxFix/
+	MET_STUDY_SETVARS_OPTS=`grep -A5 "Name=$1$" < config | xargs`
+	
+	
+	while [[ -z $MET_STUDY_SETVARS_OPTS ]]
+	do
+		echo "Can not find sample specified in config. Please choose from one of the following and try again"
+		grep "Name=" < config | cut -f2 -d '='
+		echo -n "Type name of sample: "
+		read NEXTOPT
+		MET_STUDY_SETVARS_OPTS=`grep -A5 "Name=$NEXTOPT$" < config | xargs`
+	done
 
-MET_STUDY_HISTO_DIR_76=/nfs-7/userdata/bobak/METStudy2016/76Histos/
-MET_STUDY_PLOTS_OUTPUT_DIR_76=/home/users/bhashemi/public_html/ZMET2016/looper/76/
-
+	for i in $MET_STUDY_SETVARS_OPTS
+	do
+		if [[ ${i%=*} == "Dataset" ]]
+		then
+			MET_STUDY_DATASET=${i#*=}
+		elif [[ ${i%=*} == "histogram_output" ]]
+		then
+			MET_STUDY_HISTO_DIR=${i#*=}
+		elif [[ ${i%=*} == "plot_output" ]]
+		then
+			MET_STUDY_PLOTS_OUTPUT_DIR=${i#*=}
+		elif [[ ${i%=*} == "vertex_reweight" ]]
+		then
+			if [[ ${i#*=} == "Yes" ]]
+			then
+				MET_STUDY_DO_VTX=true
+				MET_STUDY_DO_STD_VTX=true
+			elif [[ ${i#*=} == "Yes" ]]
+			then
+				MET_STUDY_DO_VTX=false
+				MET_STUDY_DO_STD_VTX=true
+			elif [[ ${i#*=} == "Std" ]]
+			then
+				MET_STUDY_DO_VTX=false
+				MET_STUDY_DO_STD_VTX=true
+			fi
+		fi
+	done
+}
 
 function makePlots {
 	#
@@ -26,28 +61,7 @@ function makePlots {
 	# seperated string will not be made. If you run without options
 	# no warning is given or anything.
 	#
-
-	MET_STUDY_DO_VTX="false"
-
-	if [[ $1 == "76x" ]]
-	then 
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76
-	elif [[ $1 == "76x_vtx" ]]
-	then
-		MET_STUDY_DO_VTX="true"
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76_vtxFix
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76_vtxFix
-
-	elif [[ $1 == "80x_vtx" ]]
-	then
-		MET_STUDY_DO_VTX="true"
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80_vtxFix
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80_vtxFix
-	else
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80
-	fi
+	setConfig $1
 
 	makeDirectories
 
@@ -85,31 +99,7 @@ function makePlots {
 
 function makeHistos {
 	
-	MET_STUDY_DO_VTX="false"
-	MET_STUDY_DATASET=""
-
-	if [[ $1 == "76x" ]]
-	then 
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76
-		MET_STUDY_DATASET="76x"
-	elif [[ $1 == "76x_vtx" ]]
-	then
-		MET_STUDY_DO_VTX="true"
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_76_vtxFix
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_76_vtxFix
-		MET_STUDY_DATASET="76x"
-	elif [[ $1 == "80x_vtx" ]]
-	then
-		MET_STUDY_DO_VTX="true"
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80_vtxFix
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80_vtxFix
-		MET_STUDY_DATASET="80x"
-	else
-		MET_STUDY_HISTO_DIR=$MET_STUDY_HISTO_DIR_80
-		MET_STUDY_PLOTS_OUTPUT_DIR=$MET_STUDY_PLOTS_OUTPUT_DIR_80
-		MET_STUDY_DATASET="80x"
-	fi
+	setConfig $1
 
 	makeDirectories
 
@@ -162,7 +152,7 @@ function makeHistos {
 		then
 			readyVtxWeights $MET_STUDY_DATASET
 		fi
-		root -l -b -q "doAll.C(\"$MET_STUDY_DATASET\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX)"
+		root -l -b -q "doAll.C(\"$MET_STUDY_DATASET\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX, $MET_STUDY_DO_STD_VTX)"
 	fi
 }	
 
@@ -230,7 +220,7 @@ function makeDirectories {
 	if [[ ! -d $MET_STUDY_PLOTS_OUTPUT_DIR ]]
 	then
 		mkdir -p $MET_STUDY_PLOTS_OUTPUT_DIR
-		cp ~/public_html/ZMET2016/index.php ${$MET_STUDY_PLOTS_OUTPUT_DIR}/
+		cp ~/public_html/ZMET2016/index.php ${MET_STUDY_PLOTS_OUTPUT_DIR}/
 	fi
 
 	if [[ ! -d $MET_STUDY_HISTO_DIR ]]

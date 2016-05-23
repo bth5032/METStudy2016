@@ -250,6 +250,7 @@ void addPTPlots(PlotList* all_plots){
   all_plots->add("photonPT0013", "Photonic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
   all_plots->add("photonPT1624", "Photonic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
   all_plots->add("photonPT2430", "Photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
+  all_plots->add("photonPT30in", "Photonic vector sum of pt in endcap (no tracker) |#eta| > 3.0", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
 
   //-------
   // CHARGED HADRONS
@@ -278,6 +279,7 @@ void addPhiPlots(PlotList* all_plots){
   all_plots->add("photonPHI0013", "Net angle of photonic vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
   all_plots->add("photonPHI1624", "Net angle of photonic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
   all_plots->add("photonPHI2430", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("photonPHI30in", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| > 3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 
   //-------
   // CHARGED HADRONS
@@ -306,6 +308,7 @@ void addSumETPlots(PlotList* all_plots){
   all_plots->add("photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 200, 1);
   all_plots->add("photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 100, 1);
   all_plots->add("photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 150, 1);
+  all_plots->add("photonSET30in", "Photonic scalar sum of pt in HF |#eta| > 3", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
 
   //-------
   // CHARGED HADRONS
