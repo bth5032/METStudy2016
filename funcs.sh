@@ -46,8 +46,8 @@ function setConfig {
 				MET_STUDY_DO_VTX=true
 				MET_STUDY_DO_STD_VTX=false
 					echo "Vertex Reweighting: Cutsom"
-			elif [[ ${i#*=} == "Yes" ]]
-			then
+			elif [[ ${i#*=} == "No" ]]
+			thens
 				MET_STUDY_DO_VTX=false
 				MET_STUDY_DO_STD_VTX=false
 					echo "Vertex Reweighting: None"
