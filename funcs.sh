@@ -1,6 +1,6 @@
 #!/bin/bash
 ##
-## Function for doing 2016 MET study
+## Functions for doing 2016 MET study
 ## Bobak Hashemi
 
 
