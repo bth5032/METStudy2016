@@ -28,8 +28,25 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
+bool passMETFilters()
+{
 
-int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool fast = true, int nEvents = -1) {
+  if( phys.isData()                   ){
+  if (phys.nVert() == 0               ) return false;
+
+      if (!phys.Flag_HBHENoiseFilter                   ()      ) return false;
+      if (!phys.Flag_HBHEIsoNoiseFilter                ()      ) return false;
+      if (!phys.Flag_CSCTightHalo2015Filter            ()      ) return false;
+      if (!phys.Flag_EcalDeadCellTriggerPrimitiveFilter()      ) return false;
+      if (!phys.Flag_goodVertices                      ()      ) return false;
+      if (!phys.Flag_eeBadScFilter                     ()      ) return false;
+
+  }
+  return true;
+}
+
+
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool fast = true, int nEvents = -1) {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
@@ -441,6 +458,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
 
       if (! (phys.evt_passgoodrunlist() > 0)) continue;
+
+      if (do_MET_filters){
+        if (! passMETFilters()) continue;
+      }
 
 
       // Draw samples with 2 jet cut

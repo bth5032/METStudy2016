@@ -10,8 +10,9 @@ function setConfig {
 	MET_STUDY_PLOTS_OUTPUT_DIR=""
 	MET_STUDY_DO_VTX="false"
 	MET_STUDY_DO_STD_VTX="false"
+	MET_STUDY_DO_MET_FILTERS="false"
 
-	MET_STUDY_SETVARS_OPTS=`grep -A5 "Name=$1$" < config | xargs`
+	MET_STUDY_SETVARS_OPTS=`grep -A6 "Name=$1$" < config | xargs`
 	
 	
 	while [[ -z $MET_STUDY_SETVARS_OPTS ]]
@@ -20,7 +21,7 @@ function setConfig {
 		grep "Name=" < config | cut -f2 -d '='
 		echo -n "Type name of sample: "
 		read NEXTOPT
-		MET_STUDY_SETVARS_OPTS=`grep -A5 "Name=$NEXTOPT$" < config | xargs`
+		MET_STUDY_SETVARS_OPTS=`grep -A6 "Name=$NEXTOPT$" < config | xargs`
 	done
 
 	echo "Running On Set: $1"
@@ -39,6 +40,17 @@ function setConfig {
 		then
 			MET_STUDY_PLOTS_OUTPUT_DIR=${i#*=}
 			echo "Plot Output Directory: $MET_STUDY_PLOTS_OUTPUT_DIR"
+		elif [[ ${i%=*} == "met_filters" ]]
+		then
+			if [[ ${i#*=} == "Yes" ]]
+			then
+				MET_STUDY_DO_MET_FILTERS="true"
+				echo "Applying MET Filters"
+			elif [[ ${i#*=} == "No" ]]
+			then
+				MET_STUDY_DO_MET_FILTERS="false"
+				echo "No MET Filters."
+			fi
 		elif [[ ${i%=*} == "vertex_reweighting" ]]
 		then
 			if [[ ${i#*=} == "Yes" ]]
@@ -59,7 +71,6 @@ function setConfig {
 			fi
 		fi
 	done
-
 }
 
 function makePlots {
@@ -162,12 +173,12 @@ function makeHistos {
 		then
 			readyVtxWeights $MET_STUDY_DATASET
 		fi
-		root -l -b -q "doAll.C(\"$MET_STUDY_DATASET\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX, $MET_STUDY_DO_STD_VTX)"
+		root -l -b -q "doAll.C(\"$MET_STUDY_DATASET\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX, $MET_STUDY_DO_STD_VTX, $MET_STUDY_DO_MET_FILTERS)"
 	fi
 }	
 
 function readyVtxWeights {
-	root -l -b -q "readyVtxWeight.C(\"$MET_STUDY_HISTO_DIR\", \"$1\")"
+	root -l -b -q "readyVtxWeight.C(\"$MET_STUDY_HISTO_DIR\", \"$1\", $MET_STUDY_DO_MET_FILTERS)"
 	
 	rm ${MET_STUDY_HISTO_DIR}METStudy_DY.root
 	rm ${MET_STUDY_HISTO_DIR}METStudy_data.root

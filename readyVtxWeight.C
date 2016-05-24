@@ -34,8 +34,8 @@ void makeReweightVtxHist(TString output_dir)
   return;
 }
 
-void readyVtxWeight(TString histo_dir, TString data_set){
-    ScanChain(getDataChain(data_set), "data", histo_dir, false); 
-    ScanChain(getDYChain(data_set), "DY", histo_dir, false);
+void readyVtxWeight(TString histo_dir, TString data_set, bool do_MET_filters){
+    ScanChain(getDataChain(data_set), "data", histo_dir, false, false, do_MET_filters); 
+    ScanChain(getDYChain(data_set), "DY", histo_dir, false, false, do_MET_filters);
     makeReweightVtxHist(histo_dir);
 }
