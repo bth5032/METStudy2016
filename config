@@ -18,8 +18,8 @@ met_filters=No
 
 Name=76_vtxstd_mf
 Dataset=76x
-histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/vtxStd/
-plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxStd/
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/vtxMET/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxMET/
 vertex_reweighting=Std
 met_filters=Yes
 
