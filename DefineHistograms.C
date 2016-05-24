@@ -271,9 +271,9 @@ void addPTPlots(PlotList* all_plots){
   //-------
   // CHARGED HADRONS
   //-------
-  all_plots->add("chargedPT0013", "Charged hadronic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("chargedPT1624", "Charged hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("chargedPT2430", "Charged hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
+  all_plots->add("chargedPT0013", "Charged object vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
+  all_plots->add("chargedPT1624", "Charged object vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
+  all_plots->add("chargedPT2430", "Charged object vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
 
   //-------
   // NEUTRAL HADRONS
@@ -300,9 +300,9 @@ void addPhiPlots(PlotList* all_plots){
   //-------
   // CHARGED HADRONS
   //-------
-  all_plots->add("chargedPHI0013", "Net angle of charged hadronic vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI1624", "Net angle of charged hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI2430", "Net angle of charged hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI0013", "Net angle of charged object vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI1624", "Net angle of charged object vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI2430", "Net angle of charged object vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 
   //-------
   // NEUTRAL HADRONS
@@ -329,9 +329,9 @@ void addPhiPTCUTPlots(PlotList* all_plots){
   //-------
   // CHARGED HADRONS
   //-------
-  all_plots->add("chargedPHI0013_PCUT20", "Net angle of charged hadronic vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI1624_PCUT20", "Net angle of charged hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI2430_PCUT20", "Net angle of charged hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI0013_PCUT20", "Net angle of charged object vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI1624_PCUT20", "Net angle of charged object vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+  all_plots->add("chargedPHI2430_PCUT20", "Net angle of charged object vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 
   //-------
   // NEUTRAL HADRONS
@@ -358,9 +358,9 @@ void addSumETPlots(PlotList* all_plots){
   //-------
   // CHARGED HADRONS
   //-------
-  all_plots->add("chargedSET0013", "Charged hadronic scalar sum of pt in barrel |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("chargedSET1624", "Charged hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("chargedSET2430", "Charged hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("chargedSET0013", "Charged object scalar sum of pt in barrel |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("chargedSET1624", "Charged object scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  all_plots->add("chargedSET2430", "Charged object scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
 
   //-------
   // NEUTRAL HADRONS
