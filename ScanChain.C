@@ -464,6 +464,13 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
 
 
+      if (phys.met_T1CHS_miniAOD_CORE_pt() > 400){
+        cout<<"run: "<<phys.run()<<endl;
+        cout<<"lumi: "<<phys.lumi()<<endl;
+        cout<<"event: "<<phys.evt()<<endl;
+      }
+
+
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
