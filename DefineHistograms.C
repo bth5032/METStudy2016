@@ -383,7 +383,7 @@ void addExtraPlots(PlotList* all_plots){
 
 PlotList* getPlotList(){
 
-  PlotList* all_plots = new PlotList("type1MET", "Type 1 MET for All Events in Study", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5);
+  PlotList* all_plots = new PlotList("type1MET", "Type 1 MET for All Events in Study", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   addMETPlots(all_plots);
   addPTPlots(all_plots);
