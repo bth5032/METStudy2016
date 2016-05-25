@@ -212,16 +212,16 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         int overflow_mcsum = zjets->GetBinContent(n_bins + 1);
 
         int max_data = data->Integral(data->FindBin(plot_info->xmax()), n_bins);
-        int max_zjets = zjets->GetBinContent(n_bins);
-        int max_fsbkg = fsbkg->GetBinContent(n_bins);
+        int max_zjets = zjets->Integral(zjets->FindBin(plot_info->xmax()), n_bins);
+        int max_fsbkg = max_fsbkg->Integral(max_fsbkg->FindBin(plot_info->xmax()), n_bins);
         //int max_extra = extra->GetBinContent(n_bins);
-        int max_mcsum = mc_sum->GetBinContent(n_bins);
+        int max_mcsum = max_mcsum->Integral(max_mcsum->FindBin(plot_info->xmax()), n_bins);
 
-        data->SetBinContent(n_bins, max_data+overflow_data);
-        zjets->SetBinContent(n_bins, max_zjets+overflow_zjets);
-        fsbkg->SetBinContent(n_bins, max_fsbkg+overflow_fsbkg);
+        data->SetBinContent(FindBin(plot_info->xmax()), max_data+overflow_data);
+        zjets->SetBinContent(FindBin(plot_info->xmax()), max_zjets+overflow_zjets);
+        fsbkg->SetBinContent(FindBin(plot_info->xmax()), max_fsbkg+overflow_fsbkg);
         //if (do_extra) {extra->SetBinContent(n_bins, max_extra+overflow_extra);}
-        mc_sum->SetBinContent(n_bins, max_mcsum+overflow_mcsum);
+        mc_sum->SetBinContent(FindBin(plot_info->xmax()), max_mcsum+overflow_mcsum);
     }
 
         
