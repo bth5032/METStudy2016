@@ -55,7 +55,7 @@ plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxMET/
 vertex_reweighting=Yes
 met_filters=Yes
 
-Name=80_vtx_mf
+Name=testtest
 Dataset=80x
 histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/testtest
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxMET/testtest/
