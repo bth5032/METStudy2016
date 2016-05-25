@@ -57,10 +57,10 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     }
     cout << "Making Plots for: "<<plot_name<<endl;
     
-    TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_info->histName()))->Clone("datahist_"+plot_name;
+    TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_info->histName()))->Clone("datahist_"+plot_name);
     cout<<plot_info->histName()<<" found in "<<f_data->GetName()<<endl;
 
-    TH1F* zjets = (TH1F*) ((TH1F*) f_DY->Get("DY_"+plot_info->histName()))->Clone("zjetshist_"+plot_name);
+    TH1F* zjets = (TH1F*) ( (TH1F*) f_DY->Get("DY_"+plot_info->histName()) )->Clone("zjetshist_"+plot_name);
     cout<<plot_info->histName()<<" found in "<<f_DY->GetName()<<endl;
 
     TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_"+plot_name);
