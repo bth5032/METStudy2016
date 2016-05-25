@@ -203,19 +203,19 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     //----------------------
     if (plot_info->hasOpt("overflow")){
         cout<<"Plot tagged for overflow bin, building..."<<endl;
-        int n_bins = data->GetNbinsX();
-        int overflow_data = data->GetBinContent(n_bins + 1);
-        int overflow_zjets = zjets->GetBinContent(n_bins + 1);
-        int overflow_fsbkg = fsbkg->GetBinContent(n_bins + 1);
-        int overflow_extra;
+        double n_bins = data->GetNbinsX();
+        double overflow_data = data->GetBinContent(n_bins + 1);
+        double overflow_zjets = zjets->GetBinContent(n_bins + 1);
+        double overflow_fsbkg = fsbkg->GetBinContent(n_bins + 1);
+        double overflow_extra;
         //if (do_extra) {overflow_extra= extra->GetBinContent(n_bins + 1);}
-        int overflow_mcsum = zjets->GetBinContent(n_bins + 1);
+        double overflow_mcsum = zjets->GetBinContent(n_bins + 1);
 
-        int max_data = data->Integral(data->FindBin(plot_info->xmax()) - 1, n_bins);
-        int max_zjets = zjets->Integral(zjets->FindBin(plot_info->xmax()) - 1, n_bins);
-        int max_fsbkg = fsbkg->Integral(fsbkg->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_data = data->Integral(data->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_zjets = zjets->Integral(zjets->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_fsbkg = fsbkg->Integral(fsbkg->FindBin(plot_info->xmax()) - 1, n_bins);
         //int max_extra = extra->GetBinContent(n_bins);
-        int max_mcsum = mc_sum->Integral(mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_mcsum = mc_sum->Integral(mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
 
         data->SetBinContent(data->FindBin(plot_info->xmax()) - 1, max_data+overflow_data);
         zjets->SetBinContent(zjets->FindBin(plot_info->xmax()) - 1, max_zjets+overflow_zjets);
