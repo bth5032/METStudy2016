@@ -297,6 +297,11 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   // SUM ET
   //=================================
 
+  // Overall SumEt
+  TH1F *net_set = new TH1F(sampleName+"_netSET", "Overall sumET for "+sampleName, 500,0,500);
+  net_set->SetDirectory(rootdir);
+  net_set->Sumw2();
+
   // Photonic SET
   TH1F *ph_0013_set = new TH1F(sampleName+"_photonSET0013", "Photonic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ph_0013_set->SetDirectory(rootdir);
@@ -655,6 +660,8 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       //met vs. sumet plot
       metSumET2D->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), phys.sumet_raw(), weight);
 
+      //net sumet
+      net_set->Fill(phys.sumet_raw(), weight);
 
     }
     // Clean Up
@@ -678,6 +685,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   t1met_2jets_el->Write();
   t1met_mu->Write();
   t1met_2jets_mu->Write();
+  net_set->Write();
   
   //RAW MET
   rawmet->Write();
