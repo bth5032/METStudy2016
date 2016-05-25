@@ -32,8 +32,8 @@ met_filters=No
 
 Name=76_zenyp
 Dataset=76x
-histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/vtxFix/zenyp/
-plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxFix/zenyp/
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/zenyp/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/zenyp/
 vertex_reweighting=Std
 met_filters=Yes
 
@@ -62,9 +62,9 @@ plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxMET/
 vertex_reweighting=Yes
 met_filters=Yes
 
-Name=testtest
+Name=80_zenyp
 Dataset=80x
-histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/testtest/
-plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxMET/testtest/
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/zenyp/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/zenyp/
 vertex_reweighting=Yes
 met_filters=Yes
