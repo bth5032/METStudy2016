@@ -161,14 +161,14 @@ class PlotList {
             
             do
             {
-                if (current->histo_name == name)
+                if (current->name == name)
                 {
                     return true;
                 }
                 current=current->next;
             }while (current != tail);
             
-            if (current->histo_name == name){
+            if (current->name == name){
                 return true;
             }
             else{
@@ -179,6 +179,9 @@ class PlotList {
 
         TString name(){
             return current->name;
+        }
+        TString histName(){
+            return current->histo_name;
         }
         TString title(){
             return current->title;

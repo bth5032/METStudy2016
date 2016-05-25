@@ -57,14 +57,14 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     }
     cout << "Making Plots for: "<<plot_name<<endl;
     
-    TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_name))->Clone("datahist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_data->GetName()<<endl;
+    TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_info->histName()))->Clone("datahist_"+plot_name;
+    cout<<plot_info->histName()<<" found in "<<f_data->GetName()<<endl;
 
-    TH1F* zjets = (TH1F*) ((TH1F*) f_DY->Get("DY_"+plot_name))->Clone("zjetshist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_DY->GetName()<<endl;
+    TH1F* zjets = (TH1F*) ((TH1F*) f_DY->Get("DY_"+plot_info->histName()))->Clone("zjetshist_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_DY->GetName()<<endl;
 
-    TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_name))->Clone("ttbarhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_TTbar->GetName()<<endl;
+    TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_TTbar->GetName()<<endl;
 
     // Build Extra Plots
     TH1F* VVV;
@@ -441,7 +441,8 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralSET2430");
     plot_names.push_back("neutralSET30in");  
 
-        plot_names.push_back("netSET");   
+    plot_names.push_back("netSET");
+    plot_names.push_back("netSET_log");
     
     // Run over Sum ET plots
     errors+=drawAll(plot_names, input_dir, save_dir);
