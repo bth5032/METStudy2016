@@ -298,7 +298,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   //=================================
 
   // Overall SumEt
-  TH1F *net_set = new TH1F(sampleName+"_netSET", "Overall sumET for "+sampleName, 500,0,500);
+  TH1F *net_set = new TH1F(sampleName+"_netSET", "Overall sumET for "+sampleName, 500,0,6000);
   net_set->SetDirectory(rootdir);
   net_set->Sumw2();
 
