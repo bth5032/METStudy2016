@@ -215,6 +215,10 @@ void addMETPlots(PlotList* all_plots){
   // MET plots
   //========================
   
+  // long range type1 MET
+  all_plots->add("type1MET_long", "type1MET", "Type 1 MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 6000, 5);
+  
+
   //-------
   //TYPE1
   //-------

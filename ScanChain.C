@@ -65,51 +65,51 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   numEvents->SetDirectory(rootdir);
 
   //MET Histos
-  TH1F *t1met = new TH1F(sampleName+"_type1MET", "Type 1 MET for "+sampleName, 500,0,500);
+  TH1F *t1met = new TH1F(sampleName+"_type1MET", "Type 1 MET for "+sampleName, 6000,0,6000);
   t1met->SetDirectory(rootdir);
   t1met->Sumw2();
 
-  TH1F *t1met_2jets = new TH1F(sampleName+"_type1MET_2jets", "Type 1 MET for events with at least 2 jets in "+sampleName, 500,0,500);
+  TH1F *t1met_2jets = new TH1F(sampleName+"_type1MET_2jets", "Type 1 MET for events with at least 2 jets in "+sampleName, 6000,0,6000);
   t1met_2jets->SetDirectory(rootdir);
   t1met_2jets->Sumw2();
 
-  TH1F *t1met_el = new TH1F(sampleName+"_type1MET_el", "Type 1 MET for "+sampleName+" (just dielectron events)", 500,0,500);
+  TH1F *t1met_el = new TH1F(sampleName+"_type1MET_el", "Type 1 MET for "+sampleName+" (just dielectron events)", 6000,0,6000);
   t1met_el->SetDirectory(rootdir);
   t1met_el->Sumw2();
 
-  TH1F *t1met_2jets_el = new TH1F(sampleName+"_type1MET_2jets_el", "Type 1 MET for events with at least 2 jets in "+sampleName+" (just dielectron events)", 500,0,500);
+  TH1F *t1met_2jets_el = new TH1F(sampleName+"_type1MET_2jets_el", "Type 1 MET for events with at least 2 jets in "+sampleName+" (just dielectron events)", 6000,0,6000);
   t1met_2jets_el->SetDirectory(rootdir);
   t1met_2jets_el->Sumw2();
 
-  TH1F *t1met_mu = new TH1F(sampleName+"_type1MET_mu", "Type 1 MET for "+sampleName+" (just dimuon events)", 500,0,500);
+  TH1F *t1met_mu = new TH1F(sampleName+"_type1MET_mu", "Type 1 MET for "+sampleName+" (just dimuon events)", 6000,0,6000);
   t1met_mu->SetDirectory(rootdir);
   t1met_mu->Sumw2();
 
-  TH1F *t1met_2jets_mu = new TH1F(sampleName+"_type1MET_2jets_mu", "Type 1 MET for events with at least 2 jets in "+sampleName+" (just dimuon events)", 500,0,500);
+  TH1F *t1met_2jets_mu = new TH1F(sampleName+"_type1MET_2jets_mu", "Type 1 MET for events with at least 2 jets in "+sampleName+" (just dimuon events)", 6000,0,6000);
   t1met_2jets_mu->SetDirectory(rootdir);
   t1met_2jets_mu->Sumw2();
 
-  TH1F *rawmet = new TH1F(sampleName+"_rawMET", "Raw MET for "+sampleName, 500,0,500);
+  TH1F *rawmet = new TH1F(sampleName+"_rawMET", "Raw MET for "+sampleName, 6000,0,6000);
   rawmet->SetDirectory(rootdir);
   rawmet->Sumw2();
 
-  TH1F *rawmet_2jets = new TH1F(sampleName+"_rawMET_2jets", "Raw MET for events with at least 2 jets in "+sampleName, 500,0,500);
+  TH1F *rawmet_2jets = new TH1F(sampleName+"_rawMET_2jets", "Raw MET for events with at least 2 jets in "+sampleName, 6000,0,6000);
   rawmet_2jets->SetDirectory(rootdir);
   rawmet_2jets->Sumw2();
 
-  TH1F *rawmet_el = new TH1F(sampleName+"_rawMET_el", "Raw MET for "+sampleName+" (just dielectron events)", 500,0,500);
+  TH1F *rawmet_el = new TH1F(sampleName+"_rawMET_el", "Raw MET for "+sampleName+" (just dielectron events)", 6000,0,6000);
   rawmet_el->SetDirectory(rootdir);
   rawmet_el->Sumw2();
 
-  TH1F *rawmet_2jets_el = new TH1F(sampleName+"_rawMET_2jets_el", "Raw MET for events with at least 2 jets in "+sampleName+" (just dielectron events)", 500,0,500);
+  TH1F *rawmet_2jets_el = new TH1F(sampleName+"_rawMET_2jets_el", "Raw MET for events with at least 2 jets in "+sampleName+" (just dielectron events)", 6000,0,6000);
   rawmet_2jets_el->SetDirectory(rootdir);
   rawmet_2jets_el->Sumw2();
 
-  TH1F *rawmet_mu = new TH1F(sampleName+"_rawMET_mu", "Raw MET for "+sampleName+" (just dimuon events)", 500,0,500);
+  TH1F *rawmet_mu = new TH1F(sampleName+"_rawMET_mu", "Raw MET for "+sampleName+" (just dimuon events)", 6000,0,6000);
   rawmet_mu->SetDirectory(rootdir);
   rawmet_mu->Sumw2();
 
-  TH1F *rawmet_2jets_mu = new TH1F(sampleName+"_rawMET_2jets_mu", "Raw MET for events with at least 2 jets in "+sampleName+" (just dimuon events)", 500,0,500);
+  TH1F *rawmet_2jets_mu = new TH1F(sampleName+"_rawMET_2jets_mu", "Raw MET for events with at least 2 jets in "+sampleName+" (just dimuon events)", 6000,0,6000);
   rawmet_2jets_mu->SetDirectory(rootdir);
   rawmet_2jets_mu->Sumw2();
   
