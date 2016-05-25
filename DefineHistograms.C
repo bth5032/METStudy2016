@@ -350,7 +350,6 @@ void addSumETPlots(PlotList* all_plots){
   //Net SumET
   all_plots->add("netSET", "Overall SumET for all Events", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 500, 1);
 
-
   //-------
   // PHOTON
   //-------

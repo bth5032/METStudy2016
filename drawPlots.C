@@ -439,7 +439,9 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralSET0013");
     plot_names.push_back("neutralSET1624");
     plot_names.push_back("neutralSET2430");
-    plot_names.push_back("neutralSET30in");   
+    plot_names.push_back("neutralSET30in");  
+
+        plot_names.push_back("netSET");   
     
     // Run over Sum ET plots
     errors+=drawAll(plot_names, input_dir, save_dir);
