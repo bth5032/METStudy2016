@@ -1,9 +1,79 @@
 #!/bin/bash
 ##
-## Function for doing 2016 MET study
+## Functions for doing 2016 MET study
 ## Bobak Hashemi
 
-function make76Plots {
+
+function setConfig {
+	MET_STUDY_DATASET=""
+	MET_STUDY_HISTO_DIR=""
+	MET_STUDY_PLOTS_OUTPUT_DIR=""
+	MET_STUDY_DO_VTX="false"
+	MET_STUDY_DO_STD_VTX="false"
+	MET_STUDY_DO_MET_FILTERS="false"
+
+	MET_STUDY_SETVARS_OPTS=`grep -A6 "Name=$1$" < config | xargs`
+	
+	
+	while [[ -z $MET_STUDY_SETVARS_OPTS ]]
+	do
+		echo "Can not find sample specified in config. Please choose from one of the following and try again"
+		grep "Name=" < config | cut -f2 -d '='
+		echo -n "Type name of sample: "
+		read NEXTOPT
+		MET_STUDY_SETVARS_OPTS=`grep -A6 "Name=$NEXTOPT$" < config | xargs`
+	done
+
+	echo "Running On Set: $1"
+
+	for i in $MET_STUDY_SETVARS_OPTS
+	do
+		if [[ ${i%=*} == "Dataset" ]]
+		then
+			MET_STUDY_DATASET=${i#*=}
+			echo "Dataset: $MET_STUDY_DATASET"
+		elif [[ ${i%=*} == "histogram_output" ]]
+		then
+			MET_STUDY_HISTO_DIR=${i#*=}
+			echo "Histogram Output Directory: $MET_STUDY_HISTO_DIR"
+		elif [[ ${i%=*} == "plot_output" ]]
+		then
+			MET_STUDY_PLOTS_OUTPUT_DIR=${i#*=}
+			echo "Plot Output Directory: $MET_STUDY_PLOTS_OUTPUT_DIR"
+		elif [[ ${i%=*} == "met_filters" ]]
+		then
+			if [[ ${i#*=} == "Yes" ]]
+			then
+				MET_STUDY_DO_MET_FILTERS="true"
+				echo "Applying MET Filters"
+			elif [[ ${i#*=} == "No" ]]
+			then
+				MET_STUDY_DO_MET_FILTERS="false"
+				echo "No MET Filters."
+			fi
+		elif [[ ${i%=*} == "vertex_reweighting" ]]
+		then
+			if [[ ${i#*=} == "Yes" ]]
+			then
+				MET_STUDY_DO_VTX="true"
+				MET_STUDY_DO_STD_VTX="false"
+					echo "Vertex Reweighting: Cutsom"
+			elif [[ ${i#*=} == "No" ]]
+			then
+				MET_STUDY_DO_VTX="false"
+				MET_STUDY_DO_STD_VTX="false"
+				echo "Vertex Reweighting: None"
+			elif [[ ${i#*=} == "Std" ]]
+			then
+				MET_STUDY_DO_VTX="false"
+				MET_STUDY_DO_STD_VTX="true"
+				echo "Vertex Reweighting: Standard"
+			fi
+		fi
+	done
+}
+
+function makePlots {
 	#
 	# Fancy way to call drawPlots script with root. If you run 
 	# makePlots met pt phi sumet extra 
@@ -11,9 +81,11 @@ function make76Plots {
 	# seperated string will not be made. If you run without options
 	# no warning is given or anything.
 	#
-	
-	MET_STUDY_HISTO_DIR=/nfs-7/userdata/bobak/METStudy2016/76Histos/
-	MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/76/
+	setConfig $1
+
+	makeDirectories
+
+	echo "Running on "$MET_STUDY_HISTO_DIR" and "$MET_STUDY_PLOTS_OUTPUT_DIR
 
 	MET_STUDY_PLOTS_FLAG_PT="false"
 	MET_STUDY_PLOTS_FLAG_PHI="false"
@@ -45,10 +117,11 @@ function make76Plots {
 	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_PLOTS_FLAG_PT, $MET_STUDY_PLOTS_FLAG_PHI, $MET_STUDY_PLOTS_FLAG_SUMET, $MET_STUDY_PLOTS_FLAG_MET, $MET_STUDY_PLOTS_FLAG_EXTRA)"
 }
 
-function make76Histos {
+function makeHistos {
 	
-	MET_STUDY_HISTO_DIR=/nfs-7/userdata/bobak/METStudy2016/76Histos/
-	MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/76/
+	setConfig $1
+
+	makeDirectories
 
 	MET_STUDY_HISTOS_FLAG_DATA="false"
 	MET_STUDY_HISTOS_FLAG_DY="false"
@@ -58,6 +131,8 @@ function make76Histos {
 	MET_STUDY_HISTOS_FLAG_WW="false"
 	MET_STUDY_HISTOS_FLAG_WZ="false"
 	MET_STUDY_HISTOS_FLAG_VVV="false"
+
+	echo "Running on "$MET_STUDY_HISTO_DIR
 
 
 	for i in $@
@@ -85,111 +160,29 @@ function make76Histos {
 	    MET_STUDY_HISTOS_FLAG_WZ="true"
 	  elif [[ ${i,,} == "vvv" ]]
 	  then
-	    MET_STUDY_HISTOS_FLAG_ZZ="true"
+	    MET_STUDY_HISTOS_FLAG_VVV="true"
 	  fi
 	done
 
-	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_data.root ]]
+	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_TTBar.root ]]
 	then
-		echo "Please clean up the old directory as you see fit before you run."
+		echo "Please clean up the old directory: $MET_STUDY_HISTO_DIR as you see fit before you run."
+		return 1
 	else
-		root -l -b -q "doAll_76.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV)"
-	fi
-}
-
-function make80Plots {
-	#
-	# Fancy way to call drawPlots script with root. If you run 
-	# makePlots met pt phi sumet extra 
-	# it will make all the plots, any you leave out of the space
-	# seperated string will not be made. If you run without options
-	# no warning is given or anything.
-	#
-
-	MET_STUDY_HISTO_DIR=/nfs-7/userdata/bobak/METStudy2016/80Histos/
-	MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/80/
-
-	MET_STUDY_PLOTS_FLAG_PT="false"
-	MET_STUDY_PLOTS_FLAG_PHI="false"
-	MET_STUDY_PLOTS_FLAG_SUMET="false"
-	MET_STUDY_PLOTS_FLAG_MET="false"
-	MET_STUDY_PLOTS_FLAG_EXTRA="false"
-
-	for i in $@
-	do
-	  if [[ ${i,,} == "met" ]]
-	  then
-	    MET_STUDY_PLOTS_FLAG_MET="true"
-	  elif [[ ${i,,} == "pt" ]]
-	  then
-	    MET_STUDY_PLOTS_FLAG_PT="true"
-	  elif [[ ${i,,} == "phi" ]]
-	  then
-	    MET_STUDY_PLOTS_FLAG_PHI="true"
-	  elif [[ ${i,,} == "sumet" ]]
-	  then
-	    MET_STUDY_PLOTS_FLAG_SUMET="true"
-	  elif [[ ${i,,} == "extra" ]]
-	  then
-	    MET_STUDY_PLOTS_FLAG_EXTRA="true"
-	  fi
-	done
-
-
-	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_PLOTS_FLAG_PT, $MET_STUDY_PLOTS_FLAG_PHI, $MET_STUDY_PLOTS_FLAG_SUMET, $MET_STUDY_PLOTS_FLAG_MET, $MET_STUDY_PLOTS_FLAG_EXTRA)"
-}
-
-function make80Histos {
-	
-	MET_STUDY_HISTO_DIR=/nfs-7/userdata/bobak/METStudy2016/80Histos/
-	MET_STUDY_PLOTS_OUTPUT_DIR=/home/users/bhashemi/public_html/ZMET2016/looper/80/
-
-	MET_STUDY_HISTOS_FLAG_DATA="false"
-	MET_STUDY_HISTOS_FLAG_DY="false"
-	MET_STUDY_HISTOS_FLAG_TTBAR="false"
-	MET_STUDY_HISTOS_FLAG_ST="false"
-	MET_STUDY_HISTOS_FLAG_ZZ="false"
-	MET_STUDY_HISTOS_FLAG_WW="false"
-	MET_STUDY_HISTOS_FLAG_WZ="false"
-	MET_STUDY_HISTOS_FLAG_VVV="false"
-
-
-	for i in $@
-	do
-	  if [[ ${i,,} == "data" ]]
-	  then
-	    MET_STUDY_HISTOS_FLAG_DATA="true"
-	  elif [[ ${i,,} == "dy" ]]
-	  then
-	    MET_STUDY_HISTOS_FLAG_DY="true"
-	  elif [[ ${i,,} == "ttbar" ]]
-	  then
-	    MET_STUDY_HISTOS_FLAG_TTBAR="true"
-	  elif [[ ${i,,} == "st" ]]
-	  then
-	    MET_STUDY_HISTOS_FLAG_ST="true"
-	  elif [[ ${i,,} == "zz" ]]
-	  then
-	    MET_STUDY_HISTOS_FLAG_ZZ="true"
-	  elif [[ ${i,,} == "ww" ]]
-	  then
-	    MET_STUDY_HISTOS_FLAG_WW="true"
-	  elif [[ ${i,,} == "wz" ]]
-	  then
-	    MET_STUDY_HISTOS_FLAG_WZ="true"
-	  elif [[ ${i,,} == "vvv" ]]
-	  then
-	    MET_STUDY_HISTOS_FLAG_ZZ="true"
-	  fi
-	done
-
-	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_data.root ]]
-	then
-		echo "Please clean up the old directory as you see fit before you run."
-	else
-		root -l -b -q "doAll_80.C(\"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV)"
+		if [[ $MET_STUDY_DO_VTX == "true" ]]
+		then
+			readyVtxWeights $MET_STUDY_DATASET
+		fi
+		root -l -b -q "doAll.C(\"$MET_STUDY_DATASET\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX, $MET_STUDY_DO_STD_VTX, $MET_STUDY_DO_MET_FILTERS)"
 	fi
 }	
+
+function readyVtxWeights {
+	root -l -b -q "readyVtxWeight.C(\"$MET_STUDY_HISTO_DIR\", \"$1\", $MET_STUDY_DO_MET_FILTERS)"
+	
+	rm ${MET_STUDY_HISTO_DIR}METStudy_DY.root
+	rm ${MET_STUDY_HISTO_DIR}METStudy_data.root
+}
 
 function moveHistos {
 	# This function helps with moving the histograms before we make new ones.
@@ -244,19 +237,22 @@ function 76env {
 	mv scanchain_tmp ScanChain.C
 }
 
+function makeDirectories {
+	if [[ ! -d $MET_STUDY_PLOTS_OUTPUT_DIR ]]
+	then
+		mkdir -p $MET_STUDY_PLOTS_OUTPUT_DIR
+		cp ~/public_html/ZMET2016/index.php ${MET_STUDY_PLOTS_OUTPUT_DIR}/
+	fi
 
-##
-# Make directories
-##
+	if [[ ! -d $MET_STUDY_HISTO_DIR ]]
+	then
+		mkdir -p $MET_STUDY_HISTO_DIR
+	fi
+}
 
-if [[ ! -d $MET_STUDY_PLOTS_OUTPUT_DIR ]]
-then
-	mkdir -p $MET_STUDY_PLOTS_OUTPUT_DIR
-	cp ~/public_html/ZMET2016/index.php ${$MET_STUDY_PLOTS_OUTPUT_DIR}/
-fi
-
-if [[ ! -d $MET_STUDY_HISTO_DIR ]]
-then
-	mkdir -p $MET_STUDY_HISTO_DIR
-fi
-
+function makeAll {
+	makeHistos 76x ttbar dy data && makePlots 76x extra pt phi met sumet
+	makeHistos 76x_vtx ttbar dy data && makePlots 76x_vtx extra pt phi met sumet
+	makeHistos 80x ttbar dy data && makePlots 80x extra pt phi met sumet
+	makeHistos 80x_vtx ttbar dy data && makePlots 80x_vtx extra pt phi met sumet
+}
