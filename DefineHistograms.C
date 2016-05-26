@@ -218,7 +218,6 @@ void addMETPlots(PlotList* all_plots){
   // long range type1 MET
   all_plots->add("type1MET_long", "type1MET", "Type 1 MET for All Events with at Least 2 Jets", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 6000, 5);
   
-
   //-------
   //TYPE1
   //-------
@@ -260,8 +259,6 @@ void addMETPlots(PlotList* all_plots){
   //electron/muon with jets
   all_plots->add("netPHI_2jets_el", "netPHI_2jets_el", "Direction of #vec{E}^{miss}_{T} for Dielectron Events with at Least 2 Jets and E^{miss}_{T} > 20GeV", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
   all_plots->add("netPHI_2jets_mu", "netPHI_2jets_mu", "Direction of #vec{E}^{miss}_{T} for Dimuon Events with at Least 2 Jets and E^{miss}_{T} > 20GeV", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-
-
 }
 
 void addPTPlots(PlotList* all_plots){
