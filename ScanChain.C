@@ -28,8 +28,7 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
-bool passMETFilters()
-{
+bool passMETFilters(){
 
   if( phys.isData()                   ){
   if (phys.nVert() == 0               ) return false;
@@ -42,6 +41,31 @@ bool passMETFilters()
       if (!phys.Flag_eeBadScFilter                     ()      ) return false;
 
   }
+  return true;
+}
+
+bool passBaseCut(){
+  if (!(phys.dilmass() < 101 && phys.dilmass() > 81)) return false;
+
+  if (!(phys.nlep() >= 2)) return false;
+  if (!(phys.lep_pt().at(0) > 20 && phys.lep_pt().at(1) > 20)) return false;
+
+  if (!(abs(phys.lep_p4().at(0).eta()) < 2.4 && abs(phys.lep_p4().at(1).eta()) < 2.4)) return false;
+
+
+  if (!(phys.dRll() > 0.1)) return false; 
+
+  if (!(phys.evt_type() == 0)) return false;
+  
+  if (! ((phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
+    if (! ((phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) )
+    {
+      return false; 
+    }
+  }
+
+  if (! (phys.evt_passgoodrunlist() > 0)) return false;
+
   return true;
 }
 
@@ -366,6 +390,9 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   metSumET2D->SetDirectory(rootdir);
   metSumET2D->Sumw2();
 
+  TH1F *numMETFilters = new TH1F(sampleName+"_numMETFilter", "Number of MET Filters passed for events in "+sampleName, 50,0,50);
+  numMETFilters->SetDirectory(rootdir);
+  numMETFilters->Sumw2();
   //Set up manual vertex reweighting.
   
   TH1F *h_vtxweight;
@@ -443,37 +470,21 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
 
       // Base Cut
-      if (!(phys.dilmass() < 101 && phys.dilmass() > 81)) continue;
-
-      if (!(phys.nlep() >= 2)) continue;
-      if (!(phys.lep_pt().at(0) > 20 && phys.lep_pt().at(1) > 20)) continue;
-
-      if (!(abs(phys.lep_p4().at(0).eta()) < 2.4 && abs(phys.lep_p4().at(1).eta()) < 2.4)) continue;
-
-
-      if (!(phys.dRll() > 0.1)) continue; 
-
-      if (!(phys.evt_type() == 0)) continue;
-      
-      if (! ((phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
-        if (! ((phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) )
-        {
-          continue; 
-        }
-      }
-
-      if (! (phys.evt_passgoodrunlist() > 0)) continue;
+      if (! passBaseCut()) continue;
 
       if (do_MET_filters){
         if (! passMETFilters()) continue;
       }
 
+      double sumMETFilters = phys.Flag_HBHENoiseFilter()+phys.Flag_HBHEIsoNoiseFilter()+phys.Flag_CSCTightHaloFilter()+phys.Flag_EcalDeadCellTriggerPrimitiveFilter()+phys.Flag_goodVertices()+phys.Flag_eeBadScFilter()
 
-/*      if (phys.met_T1CHS_miniAOD_CORE_pt() > 400){
+      numMETFilters->Fill(sumMETFilters);
+
+      if (phys.met_T1CHS_miniAOD_CORE_pt() > 1000){
         cout<<"run: "<<phys.run()<<endl;
         cout<<"lumi: "<<phys.lumi()<<endl;
         cout<<"event: "<<phys.evt()<<endl;
-      }*/
+      }
 
 
       // Draw samples with 2 jet cut
