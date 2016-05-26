@@ -481,13 +481,13 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       numMETFilters->Fill(sumMETFilters);
 
       if (phys.met_T1CHS_miniAOD_CORE_pt() > 5800){
-        cout<<"6000"
+        cout<<"6000";
         cout<<"run: "<<phys.run()<<endl;
         cout<<"lumi: "<<phys.lumi()<<endl;
         cout<<"event: "<<phys.evt()<<endl;
       }
       else if (phys.met_T1CHS_miniAOD_CORE_pt() > 3500){
-        cout<<"3500"
+        cout<<"3500";
         cout<<"run: "<<phys.run()<<endl;
         cout<<"lumi: "<<phys.lumi()<<endl;
         cout<<"event: "<<phys.evt()<<endl;
