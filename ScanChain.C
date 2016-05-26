@@ -775,6 +775,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   bumpPhi->Write();
   dilmass->Write();
   numEvents->Write();
+  numMETFilters->Write();
   metSumET2D->Write();
 
   //close output file
