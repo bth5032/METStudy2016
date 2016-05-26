@@ -390,7 +390,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   metSumET2D->SetDirectory(rootdir);
   metSumET2D->Sumw2();
 
-  TH1F *numMETFilters = new TH1F(sampleName+"_numMETFilter", "Number of MET Filters passed for events in "+sampleName, 50,0,50);
+  TH1F *numMETFilters = new TH1F(sampleName+"_numMETFilters", "Number of MET Filters passed for events in "+sampleName, 50,0,50);
   numMETFilters->SetDirectory(rootdir);
   numMETFilters->Sumw2();
   //Set up manual vertex reweighting.

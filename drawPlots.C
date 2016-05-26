@@ -487,6 +487,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("dilmass");
     //plot_names.push_back("PHIinBump");
     plot_names.push_back("type1MET_long");
+    plot_names.push_back("numMETFilters");
     
     errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
