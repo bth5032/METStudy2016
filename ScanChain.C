@@ -421,7 +421,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ptll_mt2cut->SetDirectory(rootdir);
   ptll_mt2cut->Sumw2();
 
-  TH1F *mt2_ll = new TH1F(sampleName+"mt2_ll", "MT2 of Dilepton System for"+sampleName, 1000,0,1000);
+  TH1F *mt2_ll = new TH1F(sampleName+"_mt2_ll", "MT2 of Dilepton System for"+sampleName, 1000,0,1000);
   mt2_ll->SetDirectory(rootdir);
   mt2_ll->Sumw2();
 
