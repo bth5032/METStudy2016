@@ -70,8 +70,8 @@ bool passBaseCut(){
 }
 
 bool vinceRegion(){
-  if (! phys.njets() >= 2) return false;
-  if (! phys.nBJetMedium() == 0) return false;
+  if (! (phys.njets() >= 2)) return false;
+  if (! (phys.nBJetMedium() == 0)) return false;
 
   return true;
 }
