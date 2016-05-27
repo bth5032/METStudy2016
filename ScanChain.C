@@ -69,6 +69,13 @@ bool passBaseCut(){
   return true;
 }
 
+bool vinceRegion(){
+  if (! phys.njets() >= 2) return false;
+  if (! phys.nBJetMedium() == 0) return false;
+
+  return true;
+}
+
 
 int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool fast = true, int nEvents = -1) {
 
@@ -406,6 +413,19 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   deltaR_2jets_mt2cut->SetDirectory(rootdir);
   deltaR_2jets_mt2cut->Sumw2();
 
+  TH2F *mt2PT2D = new TH2F(sampleName+"_mt2PT2D", "MT2_{ll} vs P_{T,ll} for "+sampleName, 1000, 0, 1000, 1000, 0, 1000);
+  mt2PT2D->SetDirectory(rootdir);
+  mt2PT2D->Sumw2();
+
+  TH1F *ptll_mt2cut = new TH1F(sampleName+"_ptll_mt2cut", "P_{T} of Dilepton Combination With MT2>80 for"+sampleName, 1000,0,1000);
+  ptll_mt2cut->SetDirectory(rootdir);
+  ptll_mt2cut->Sumw2();
+
+  TH1F *mt2_ll = new TH1F(sampleName+"mt2_ll", "MT2 of Dilepton System for"+sampleName, 1000,0,1000);
+  mt2_ll->SetDirectory(rootdir);
+  mt2_ll->Sumw2();
+
+
 
   //Set up manual vertex reweighting.
   
@@ -493,6 +513,16 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       double sumMETFilters = phys.Flag_HBHENoiseFilter()+phys.Flag_HBHEIsoNoiseFilter()+phys.Flag_CSCTightHaloFilter()+phys.Flag_EcalDeadCellTriggerPrimitiveFilter()+phys.Flag_goodVertices()+phys.Flag_eeBadScFilter();
 
       numMETFilters->Fill(sumMETFilters);
+
+      if ( vinceRegion() ){
+        mt2_ll->Fill(phys.mt2(),weight);
+        
+        if (phys.mt2() > 80 ){
+          ptll_mt2cut->Fill(phys.dilpt(),weight);
+        }
+
+        mt2PT2D->Fill(phys.mt2(),phys.dilpt(),weight);
+      }
 
       if (phys.met_T1CHS_miniAOD_CORE_pt() > 5800){
         cout<<"6000+ MET event:"<<endl;
@@ -807,6 +837,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   deltaR->Write();
   deltaR_2jets->Write();
   deltaR_2jets_mt2cut->Write();
+
+  mt2_ll->Write();
+  ptll_mt2cut->Write();
+  mt2PT2D->Write();
 
   //close output file
   output->Write();
