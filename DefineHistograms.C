@@ -394,6 +394,10 @@ void addExtraPlots(PlotList* all_plots){
   all_plots->add("dilmass", "dilmass", "Dilepton mass for all events in the study.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);  
   all_plots->add("numMETFilters", "numMETFilters", "Number of MET filters passed", "Num Filters Passed", "Count / [1 filter]", 0, 10, 1);  
 
+  all_plots->add("deltaR", "deltaR", "Separation Between 2 Leading Leptons", "Separation", "Count / [0.1]", 0, 5.8, 1);  
+  all_plots->add("deltaR_2jets", "deltaR_2jets", "Separation Between 2 Leading Leptons With a 2 Jet Cut", "Separation", "Count / [0.1]", 0, 5.8, 1); 
+  all_plots->add("deltaR_2jets_mt2cut", "deltaR_2jets_mt2cut", "Separation Between 2 Leading Leptons With a 2 Jet Cut and MT2>80", "Separation", "Count / [0.1]", 0, 5.8, 1); 
+
 }
 
 PlotList* getPlotList(){

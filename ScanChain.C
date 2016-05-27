@@ -393,6 +393,20 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   TH1F *numMETFilters = new TH1F(sampleName+"_numMETFilters", "Number of MET Filters passed for events in "+sampleName, 50,0,50);
   numMETFilters->SetDirectory(rootdir);
   numMETFilters->Sumw2();
+
+  TH1F *deltaR = new TH1F(sampleName+"_deltaR", "Separation Between 2 Leading Leptons "+sampleName, 58,0,5.8);
+  deltaR->SetDirectory(rootdir);
+  deltaR->Sumw2();
+
+  TH1F *deltaR_2jets = new TH1F(sampleName+"_deltaR_2jets", "Separation Between 2 Leading Leptons With a 2 Jet Cut "+sampleName, 58,0,5.8);
+  deltaR_2jets->SetDirectory(rootdir);
+  deltaR_2jets->Sumw2();
+
+  TH1F *deltaR_2jets_mt2cut = new TH1F(sampleName+"_deltaR_2jets_mt2cut", "Separation Between 2 Leading Leptons With a 2 Jet Cut and MT2>80 "+sampleName, 58,0,5.8);
+  deltaR_2jets_mt2cut->SetDirectory(rootdir);
+  deltaR_2jets_mt2cut->Sumw2();
+
+
   //Set up manual vertex reweighting.
   
   TH1F *h_vtxweight;
@@ -493,9 +507,14 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         cout<<"event: "<<phys.evt()<<endl;
       }
 
-
+      deltaR->Fill(phys.dRll(), weight);
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
+        deltaR_2jets->Fill(phys.dRll(), weight);
+
+        if (phys.mt2() > 80 ){
+          deltaR_2jets_mt2cut->Fill(phys.dRll(), weight);
+        }
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
         {
           t1met_2jets->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
@@ -784,6 +803,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   numEvents->Write();
   numMETFilters->Write();
   metSumET2D->Write();
+
+  deltaR->Write();
+  deltaR_2jets->Write();
+  deltaR_2jets_mt2cut->Write();
 
   //close output file
   output->Write();
