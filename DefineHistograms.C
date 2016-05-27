@@ -398,6 +398,10 @@ void addExtraPlots(PlotList* all_plots){
   all_plots->add("deltaR_2jets", "deltaR_2jets", "Separation Between 2 Leading Leptons With a 2 Jet Cut", "Separation", "Count / [0.1]", 0, 5.8, 1); 
   all_plots->add("deltaR_2jets_mt2cut", "deltaR_2jets_mt2cut", "Separation Between 2 Leading Leptons With a 2 Jet Cut and MT2>80", "Separation", "Count / [0.1]", 0, 5.8, 1); 
 
+  all_plots->add("mt2_ll", "mt2_ll", "MT2 of Dilepton System With a 2 Jet Cut and 0 B-Tags", "MT_{2} (GeV)", "Count / [5 GeV]", 0, 500, 5); 
+
+  all_plots->add("ptll_mt2cut", "ptll_mt2cut", "P_{T} of Dilepton Combination With a 2 Jet Cut, MT2>80, and 0 B-Tags", "P_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5); 
+
 }
 
 PlotList* getPlotList(){

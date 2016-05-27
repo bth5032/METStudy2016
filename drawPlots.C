@@ -493,6 +493,9 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("deltaR_2jets");
     plot_names.push_back("deltaR_2jets_mt2cut");
     
+    plot_names.push_back("mt2_ll");
+    plot_names.push_back("ptll_mt2cut");
+
     errors+=drawAll(plot_names, input_dir, save_dir);
     plot_names.clear();
   }
