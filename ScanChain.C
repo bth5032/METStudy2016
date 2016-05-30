@@ -393,6 +393,14 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   dilmass->SetDirectory(rootdir);
   dilmass->Sumw2();
 
+  TH1F *dilmass_ee = new TH1F(sampleName+"_dilmass", "Dilepton Mass (just dielectron events) for "+sampleName, 300,0,150);
+  dilmass_ee->SetDirectory(rootdir);
+  dilmass_ee->Sumw2();
+
+  TH1F *dilmass_mm = new TH1F(sampleName+"_dilmass", "Dilepton Mass (just dimuon events) for "+sampleName, 300,0,150);
+  dilmass_mm->SetDirectory(rootdir);
+  dilmass_mm->Sumw2();
+
   TH2F *metSumET2D = new TH2F(sampleName+"_METSumET", "MET vs SumET for "+sampleName, 1000, 0, 1000, 10000, 0, 10000);
   metSumET2D->SetDirectory(rootdir);
   metSumET2D->Sumw2();
@@ -623,7 +631,9 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (phys.phpfcands_0013_pt()>0){
         ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
         ph_0013_phi->Fill(phys.phpfcands_0013_phi(), weight);
-        ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
+        if (phys.phpfcands_0013_pt()>5) {
+          ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
+        }
         if (phys.phpfcands_0013_pt()>20) {
           ph_0013_phi_pcut20->Fill(phys.phpfcands_0013_phi(), weight);
         }
@@ -631,7 +641,9 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (phys.phpfcands_1624_pt()>0){
         ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
         ph_1624_phi->Fill(phys.phpfcands_1624_phi(), weight);
-        ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
+        if (phys.phpfcands_1624_pt()>5) {
+          ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
+        }
         if (phys.phpfcands_1624_pt()>20) {
           ph_1624_phi_pcut20->Fill(phys.phpfcands_1624_phi(), weight);
         }
@@ -639,7 +651,9 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (phys.phpfcands_2430_pt()>0){
         ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
         ph_2430_phi->Fill(phys.phpfcands_2430_phi(), weight);
-        ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
+        if (phys.phpfcands_2430_pt()>5) {
+          ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
+        }
         if (phys.phpfcands_2430_pt()>20) {
           ph_2430_phi_pcut20->Fill(phys.phpfcands_2430_phi(), weight);
         }
@@ -647,7 +661,9 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (phys.phpfcands_30in_pt()>0){
         ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
         ph_30in_phi->Fill(phys.phpfcands_30in_phi(), weight);
-        ph_30in_set->Fill(phys.phpfcands_30in_sumet(), weight);
+        if (phys.phpfcands_30in_pt()>5) {
+          ph_30in_set->Fill(phys.phpfcands_30in_sumet(), weight);
+        }
         if (phys.phpfcands_30in_pt()>20) {
           ph_30in_phi_pcut20->Fill(phys.phpfcands_30in_phi(), weight);
         }
@@ -723,6 +739,13 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       // Fill Dilepton Mass
       dilmass->Fill(phys.dilmass(), weight);
+
+      if (phys.hyp_type() == 0){
+        dilmass_mm->Fill(phys.dilmass(), weight);        
+      }
+      else if (phys.hyp_type() == 1){
+        dilmass_ee->Fill(phys.dilmass(), weight);        
+      }
 
       //met vs. sumet plot
       metSumET2D->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), phys.sumet_raw(), weight);
@@ -830,6 +853,8 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   nVert->Write();
   bumpPhi->Write();
   dilmass->Write();
+  dilmass_ee->Write();
+  dilmass_mm->Write();
   numEvents->Write();
   numMETFilters->Write();
   metSumET2D->Write();

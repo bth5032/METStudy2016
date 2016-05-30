@@ -391,7 +391,9 @@ void addExtraPlots(PlotList* all_plots){
 
   all_plots->add("nVert", "nVert", "Number of verticies for events in the study", "Number of verticies in event", "Count / [1 vertex]", 0, 50, 1);
   all_plots->add("PHIinBump", "PHIinBump", "Net angle of vector sum PT for events within the 50-120GeV MET bump", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("dilmass", "dilmass", "Dilepton mass for all events in the study.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);  
+  all_plots->add("dilmass", "dilmass", "Dilepton mass for all events in the study.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);
+  all_plots->add("dilmass_ee", "dilmass_ee", "Dilepton mass for just dielectron events.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);
+  all_plots->add("dilmass_mm", "dilmass_mm", "Dilepton mass for just dimuon events.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);  
   all_plots->add("numMETFilters", "numMETFilters", "Number of MET filters passed", "Num Filters Passed", "Count / [1 filter]", 0, 10, 1);  
 
   all_plots->add("deltaR", "deltaR", "Separation Between 2 Leading Leptons", "Separation", "Count / [0.1]", 0, 5.8, 1);  
