@@ -74,19 +74,19 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     if (do_extra)
     {
-        VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
+        VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_info->histName()))->Clone("VVVhist_"+plot_name);
         cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
 
-        WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("WWhist_"+plot_name);
+        WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_info->histName()))->Clone("WWhist_"+plot_name);
         cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
 
-        WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_name))->Clone("WZhist_"+plot_name);
+        WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_info->histName()))->Clone("WZhist_"+plot_name);
         cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
 
-        ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_name))->Clone("ZZhist_"+plot_name);
+        ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_info->histName()))->Clone("ZZhist_"+plot_name);
         cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
 
-        extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("extrahist_"+plot_name);
+        extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_info->histName()))->Clone("extrahist_"+plot_name);
         extra->Add(WW);
         extra->Add(WZ);
         extra->Add(ZZ);
