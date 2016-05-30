@@ -145,6 +145,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     zjets->Scale(scaleFactor);
     fsbkg->Scale(scaleFactor);
+    extra->Scale(scaleFactor);
     mc_sum->Scale(scaleFactor);
 
 
@@ -168,9 +169,9 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<"Building Stack"<<endl;
     
     THStack * stack = new THStack("stack_"+plot_name, plot_info->title());
+    if (do_extra) {stack->Add(extra);}
     stack->Add(fsbkg);
     stack->Add(zjets);
-    if (do_extra) {stack->Add(extra);}
 
     double ymax = 0;
     if (mc_sum->GetMaximum() < data->GetMaximum()){

@@ -631,9 +631,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (phys.phpfcands_0013_pt()>0){
         ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
         ph_0013_phi->Fill(phys.phpfcands_0013_phi(), weight);
-        if (phys.phpfcands_0013_pt()>5) {
-          ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
-        }
+        ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
         if (phys.phpfcands_0013_pt()>20) {
           ph_0013_phi_pcut20->Fill(phys.phpfcands_0013_phi(), weight);
         }
@@ -641,9 +639,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (phys.phpfcands_1624_pt()>0){
         ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
         ph_1624_phi->Fill(phys.phpfcands_1624_phi(), weight);
-        if (phys.phpfcands_1624_pt()>5) {
-          ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
-        }
+        ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
         if (phys.phpfcands_1624_pt()>20) {
           ph_1624_phi_pcut20->Fill(phys.phpfcands_1624_phi(), weight);
         }
@@ -651,9 +647,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (phys.phpfcands_2430_pt()>0){
         ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
         ph_2430_phi->Fill(phys.phpfcands_2430_phi(), weight);
-        if (phys.phpfcands_2430_pt()>5) {
-          ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
-        }
+        ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
         if (phys.phpfcands_2430_pt()>20) {
           ph_2430_phi_pcut20->Fill(phys.phpfcands_2430_phi(), weight);
         }
@@ -661,9 +655,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (phys.phpfcands_30in_pt()>0){
         ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
         ph_30in_phi->Fill(phys.phpfcands_30in_phi(), weight);
-        if (phys.phpfcands_30in_pt()>5) {
-          ph_30in_set->Fill(phys.phpfcands_30in_sumet(), weight);
-        }
+        ph_30in_set->Fill(phys.phpfcands_30in_sumet(), weight);
         if (phys.phpfcands_30in_pt()>20) {
           ph_30in_phi_pcut20->Fill(phys.phpfcands_30in_phi(), weight);
         }
