@@ -75,3 +75,10 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/vince/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/vince/
 vertex_reweighting=Yes
 met_filters=Yes
+
+Name=80_extra
+Dataset=80x
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/extra/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/extra/
+vertex_reweighting=Yes
+met_filters=Yes
