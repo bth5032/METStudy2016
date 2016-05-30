@@ -393,11 +393,11 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   dilmass->SetDirectory(rootdir);
   dilmass->Sumw2();
 
-  TH1F *dilmass_ee = new TH1F(sampleName+"_dilmass", "Dilepton Mass (just dielectron events) for "+sampleName, 300,0,150);
+  TH1F *dilmass_ee = new TH1F(sampleName+"_dilmass_ee", "Dilepton Mass (just dielectron events) for "+sampleName, 300,0,150);
   dilmass_ee->SetDirectory(rootdir);
   dilmass_ee->Sumw2();
 
-  TH1F *dilmass_mm = new TH1F(sampleName+"_dilmass", "Dilepton Mass (just dimuon events) for "+sampleName, 300,0,150);
+  TH1F *dilmass_mm = new TH1F(sampleName+"_dilmass_mm", "Dilepton Mass (just dimuon events) for "+sampleName, 300,0,150);
   dilmass_mm->SetDirectory(rootdir);
   dilmass_mm->Sumw2();
 
