@@ -32,7 +32,6 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
 
 
   if (do_extra) {
-    f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");
     f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
     f_VVV = new TFile(input_dir+"METStudy_VVV.root");
     f_WW = new TFile(input_dir+"METStudy_WW.root");
