@@ -37,6 +37,13 @@ plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/zenyp/
 vertex_reweighting=Std
 met_filters=Yes
 
+Name=76_extra
+Dataset=76x
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/extra/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/extra/
+vertex_reweighting=Std
+met_filters=Yes
+
 ###########
 # 80x
 ###########
