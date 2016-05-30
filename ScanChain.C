@@ -532,7 +532,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         mt2PT2D->Fill(phys.mt2(),phys.dilpt(),weight);
       }
 
-      if (phys.met_T1CHS_miniAOD_CORE_pt() > 5800){
+/*      if (phys.met_T1CHS_miniAOD_CORE_pt() > 5800){
         cout<<"6000+ MET event:"<<endl;
         cout<<"run: "<<phys.run()<<endl;
         cout<<"lumi: "<<phys.lumi()<<endl;
@@ -543,7 +543,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         cout<<"run: "<<phys.run()<<endl;
         cout<<"lumi: "<<phys.lumi()<<endl;
         cout<<"event: "<<phys.evt()<<endl;
-      }
+      }*/
 
       deltaR->Fill(phys.dRll(), weight);
       // Draw samples with 2 jet cut
@@ -740,10 +740,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       // Fill Dilepton Mass
       dilmass->Fill(phys.dilmass(), weight);
 
-      if (phys.hyp_type() == 0){
+      if (phys.hyp_type() == 1){
         dilmass_mm->Fill(phys.dilmass(), weight);        
       }
-      else if (phys.hyp_type() == 1){
+      else if (phys.hyp_type() == 0){
         dilmass_ee->Fill(phys.dilmass(), weight);        
       }
 
