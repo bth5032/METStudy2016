@@ -171,7 +171,12 @@ function makeHistos {
 	else
 		if [[ $MET_STUDY_DO_VTX == "true" ]]
 		then
-			readyVtxWeights $MET_STUDY_DATASET
+			if [[ ! -s $MET_STUDY_HISTO_DIR/nvtx_ratio.root ]]
+			then 
+				readyVtxWeights $MET_STUDY_DATASET
+			else
+				echo "Using existsing vertex ratio file."
+			fi
 		fi
 		root -l -b -q "doAll.C(\"$MET_STUDY_DATASET\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX, $MET_STUDY_DO_STD_VTX, $MET_STUDY_DO_MET_FILTERS)"
 	fi
