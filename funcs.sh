@@ -114,7 +114,7 @@ function makePlots {
 	done
 
 
-	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_VVV.root]]
+	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_VVV.root ]]
 	then
 		MET_STUDY_PLOTS_DO_EXTRA="true"
 	else
