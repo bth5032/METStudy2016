@@ -217,7 +217,7 @@ void addMETPlots(PlotList* all_plots){
   
   // long range type1 MET
   all_plots->add("type1MET_long", "type1MET", "Type 1 MET for All Events", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 6000, 5);
-  all_plots->add("type1MET_zoom", "type1MET", "Type 1 MET in between 110 and 125 GeV", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 110, 125, 1);
+  all_plots->add("zoombump", "type1MET", "Type 1 MET in between 110 and 125 GeV", "E^{miss}_{T} (GeV)", "Count / [1 GeV]", 110, 125, 1);
   
   //-------
   //TYPE1
