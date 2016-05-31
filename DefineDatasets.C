@@ -26,6 +26,17 @@ TChain * getDataChain(TString data_set){
     ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/data_2016B_Promptv2_mm.root");
   }
 
+  else if (data_set == "80x_Bobak"){
+    //EE
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/data_2016B_Prompt_ee_v1*");
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/data_2016B_Prompt_ee_v2*");
+    
+    //MuMu
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/data_2016B_Prompt_mm_v1*");
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/data_2016B_Prompt_mm_v2*");
+    ch_data->Add("");
+  }
+
   return ch_data;
 }
 
