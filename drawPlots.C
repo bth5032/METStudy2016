@@ -491,7 +491,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("dilmass_mm");
     //plot_names.push_back("PHIinBump");
     plot_names.push_back("type1MET_long");
-    plot_names.push_back("type1MET_zoom");
+    plot_names.push_back("zoomBump");
     plot_names.push_back("numMETFilters");
 
     /*plot_names.push_back("deltaR");
