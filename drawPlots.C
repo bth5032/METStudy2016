@@ -173,13 +173,13 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     stack->Add(fsbkg);
     stack->Add(zjets);
 
-    double ymax = 0;
-    if (mc_sum->GetMaximum() < data->GetMaximum()){
+    double ymax = 50;
+    /*if (mc_sum->GetMaximum() < data->GetMaximum()){
         ymax = 1.2*data->GetMaximum();
     }
     else {
         ymax = 1.2*mc_sum->GetMaximum();   
-    }
+    }*/
 
     cout<<"Proper plot maximum set"<<endl;
 
