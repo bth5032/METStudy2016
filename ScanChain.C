@@ -166,6 +166,23 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_30in_pt->SetDirectory(rootdir);
   ph_30in_pt->Sumw2();
 
+  // Photonic Pts with 5gcut
+  TH1F *ph_0013_pt_5gcut = new TH1F(sampleName+"_photonPT0013__5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  ph_0013_pt_5gcut->SetDirectory(rootdir);
+  ph_0013_pt_5gcut->Sumw2();
+
+  TH1F *ph_1624_pt_5gcut = new TH1F(sampleName+"_photonPT1624_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  ph_1624_pt_5gcut->SetDirectory(rootdir);
+  ph_1624_pt_5gcut->Sumw2();
+
+  TH1F *ph_2430_pt_5gcut = new TH1F(sampleName+"_photonPT2430_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  ph_2430_pt_5gcut->SetDirectory(rootdir);
+  ph_2430_pt_5gcut->Sumw2();
+
+  TH1F *ph_30in_pt_5gcut = new TH1F(sampleName+"_photonPT30in_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| > 3", 500,0,500);
+  ph_30in_pt_5gcut->SetDirectory(rootdir);
+  ph_30in_pt_5gcut->Sumw2();
+
   // Charged Hadronic Pts
   TH1F *ch_0013_pt = new TH1F(sampleName+"_chargedPT0013", "Charged hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ch_0013_pt->SetDirectory(rootdir);
@@ -630,6 +647,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       // Draw photon histos
       if (phys.phpfcands_0013_pt()>0){
         ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
+        ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt()_5gcut, weight);
         ph_0013_phi->Fill(phys.phpfcands_0013_phi(), weight);
         ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
         if (phys.phpfcands_0013_pt()>20) {
@@ -638,6 +656,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       if (phys.phpfcands_1624_pt()>0){
         ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
+        ph_1624_pt_5gcut->Fill(phys.phpfcands_1624_pt_5gcut(), weight);
         ph_1624_phi->Fill(phys.phpfcands_1624_phi(), weight);
         ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
         if (phys.phpfcands_1624_pt()>20) {
@@ -646,6 +665,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       if (phys.phpfcands_2430_pt()>0){
         ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
+        ph_2430_pt_5gcut->Fill(phys.phpfcands_2430_pt_5gcut(), weight);
         ph_2430_phi->Fill(phys.phpfcands_2430_phi(), weight);
         ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
         if (phys.phpfcands_2430_pt()>20) {
@@ -654,6 +674,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       if (phys.phpfcands_30in_pt()>0){
         ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
+        ph_30in_pt_5gcut->Fill(phys.phpfcands_30in_pt_5gcut(), weight);
         ph_30in_phi->Fill(phys.phpfcands_30in_phi(), weight);
         ph_30in_set->Fill(phys.phpfcands_30in_sumet(), weight);
         if (phys.phpfcands_30in_pt()>20) {
@@ -790,6 +811,12 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_1624_pt->Write();
   ph_2430_pt->Write();
   ph_30in_pt->Write();
+
+  ph_0013_pt_5gcut->Write();
+  ph_1624_pt_5gcut->Write();
+  ph_2430_pt_5gcut->Write();
+  ph_30in_pt_5gcut->Write();
+
   ph_0013_phi->Write();
   ph_1624_phi->Write();
   ph_2430_phi->Write();

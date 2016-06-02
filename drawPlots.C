@@ -379,10 +379,17 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     //============================================
 
     //-----------------define---------------------
+
     plot_names.push_back("photonPT0013");
     plot_names.push_back("photonPT1624");
     plot_names.push_back("photonPT2430");
     plot_names.push_back("photonPT30in");
+
+    plot_names.push_back("photonPT0013_5gcut");
+    plot_names.push_back("photonPT1624_5gcut");
+    plot_names.push_back("photonPT2430_5gcut");
+    plot_names.push_back("photonPT30in_5gcut");
+
     plot_names.push_back("chargedPT0013");
     plot_names.push_back("chargedPT1624");
     plot_names.push_back("neutralPT0013");

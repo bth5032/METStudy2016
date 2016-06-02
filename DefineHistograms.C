@@ -277,6 +277,15 @@ void addPTPlots(PlotList* all_plots){
   all_plots->add("photonPT30in", "photonPT30in", "Photonic vector sum of pt in endcap (no tracker) |#eta| > 3.0", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 80, 5);
 
   //-------
+  // PHOTON with 5gcut
+  //-------
+
+  all_plots->add("photonPT0013_5gcut", "photonPT0013_5gcut", "Photonic vector sum of pt in barrel for 5GeV+ Photons |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
+  all_plots->add("photonPT1624_5gcut", "photonPT1624_5gcut", "Photonic vector sum of pt in endcap for 5GeV+ Photons |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
+  all_plots->add("photonPT2430_5gcut", "photonPT2430_5gcut", "Photonic vector sum of pt in endcap for 5GeV+ Photons (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
+  all_plots->add("photonPT30in_5gcut", "photonPT30in_5gcut", "Photonic vector sum of pt in endcap for 5GeV+ Photons (no tracker) |#eta| > 3.0", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 80, 5);  
+
+  //-------
   // CHARGED HADRONS
   //-------
   all_plots->add("chargedPT0013", "chargedPT0013", "Charged object vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
