@@ -367,6 +367,24 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_30in_set->SetDirectory(rootdir);
   ph_30in_set->Sumw2();
 
+
+  // Photonic SET With 5GeV Cuts
+  TH1F *ph_0013_set_5gcut = new TH1F(sampleName+"_photonSET0013_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  ph_0013_set_5gcut->SetDirectory(rootdir);
+  ph_0013_set_5gcut->Sumw2();
+
+  TH1F *ph_1624_set_5gcut = new TH1F(sampleName+"_photonSET1624_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  ph_1624_set_5gcut->SetDirectory(rootdir);
+  ph_1624_set_5gcut->Sumw2();
+
+  TH1F *ph_2430_set_5gcut = new TH1F(sampleName+"_photonSET2430_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  ph_2430_set_5gcut->SetDirectory(rootdir);
+  ph_2430_set_5gcut->Sumw2();
+
+  TH1F *ph_30in_set_5gcut = new TH1F(sampleName+"_photonSET30in_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| > 3.0", 500,0,500);
+  ph_30in_set_5gcut->SetDirectory(rootdir);
+  ph_30in_set_5gcut->Sumw2();
+
   // Charged Hadronic SET
   TH1F *ch_0013_set = new TH1F(sampleName+"_chargedSET0013", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ch_0013_set->SetDirectory(rootdir);
@@ -831,6 +849,11 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_1624_set->Write();
   ph_2430_set->Write();
   ph_30in_set->Write();
+
+  ph_0013_set_5gcut->Write();
+  ph_1624_set_5gcut->Write();
+  ph_2430_set_5gcut->Write();
+  ph_30in_set_5gcut->Write();
   
   //Charged
   ch_0013_pt->Write();
