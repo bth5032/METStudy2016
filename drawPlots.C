@@ -455,6 +455,12 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("photonSET1624");
     plot_names.push_back("photonSET2430");
     plot_names.push_back("photonSET30in");
+
+    plot_names.push_back("photonSET0013_5gcut");
+    plot_names.push_back("photonSET1624_5gcut");
+    plot_names.push_back("photonSET2430_5gcut");
+    plot_names.push_back("photonSET30in_5gcut");
+
     plot_names.push_back("chargedSET0013");
     plot_names.push_back("chargedSET1624");
     plot_names.push_back("neutralSET0013");
@@ -504,12 +510,12 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
   }
 
   if (extra) { 
-    /*plot_names.push_back("nVert");
+    plot_names.push_back("nVert");
     plot_names.push_back("dilmass");
     plot_names.push_back("dilmass_ee");
     plot_names.push_back("dilmass_mm");
     plot_names.push_back("PHIinBump");
-    plot_names.push_back("type1MET_long");*/
+    plot_names.push_back("type1MET_long");
     plot_names.push_back("zoomBump");
     //plot_names.push_back("numMETFilters");
 
