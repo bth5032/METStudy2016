@@ -11,6 +11,7 @@ function setConfig {
 	MET_STUDY_DO_VTX="false"
 	MET_STUDY_DO_STD_VTX="false"
 	MET_STUDY_DO_MET_FILTERS="false"
+	MET_STUDY_INCLUDED_LOW_XSEC_SAMPLES="false"
 
 	MET_STUDY_SETVARS_OPTS=`grep -A6 "Name=$1$" < config | xargs`
 	
@@ -40,6 +41,10 @@ function setConfig {
 		then
 			MET_STUDY_PLOTS_OUTPUT_DIR=${i#*=}
 			echo "Plot Output Directory: $MET_STUDY_PLOTS_OUTPUT_DIR"
+		elif [[ ${i%=*} == "low_xsec" ]]
+		then
+			MET_STUDY_INCLUDED_LOW_XSEC_SAMPLES=${i#*=}
+			echo "Include low cross section samples: $MET_STUDY_INCLUDED_LOW_XSEC_SAMPLES"	
 		elif [[ ${i%=*} == "met_filters" ]]
 		then
 			if [[ ${i#*=} == "Yes" ]]
@@ -114,14 +119,14 @@ function makePlots {
 	done
 
 
-	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_VVV.root ]]
+	if [[ $MET_STUDY_INCLUDED_LOW_XSEC_SAMPLES == "Yes" ]]
 	then
-		MET_STUDY_PLOTS_DO_EXTRA="true"
+		MET_STUDY_PLOTS_DO_LOW_XSEC="true"
 	else
-		MET_STUDY_PLOTS_DO_EXTRA="false"
+		MET_STUDY_PLOTS_DO_LOW_XSEC="false"
 	fi
 
-	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_PLOTS_FLAG_PT, $MET_STUDY_PLOTS_FLAG_PHI, $MET_STUDY_PLOTS_FLAG_SUMET, $MET_STUDY_PLOTS_FLAG_MET, $MET_STUDY_PLOTS_FLAG_EXTRA, $MET_STUDY_PLOTS_DO_EXTRA)"
+	root -l -b -q "drawPlots.C(\"$MET_STUDY_PLOTS_OUTPUT_DIR\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_PLOTS_FLAG_PT, $MET_STUDY_PLOTS_FLAG_PHI, $MET_STUDY_PLOTS_FLAG_SUMET, $MET_STUDY_PLOTS_FLAG_MET, $MET_STUDY_PLOTS_FLAG_EXTRA, $MET_STUDY_PLOTS_DO_LOW_XSEC)"
 }
 
 function makeHistos {
@@ -170,6 +175,15 @@ function makeHistos {
 	    MET_STUDY_HISTOS_FLAG_VVV="true"
 	  fi
 	done
+
+	if [[ $MET_STUDY_INCLUDED_LOW_XSEC_SAMPLES == "Yes" ]]
+	then
+		MET_STUDY_HISTOS_FLAG_VVV="true"
+		MET_STUDY_HISTOS_FLAG_WZ="true"
+		MET_STUDY_HISTOS_FLAG_WW="true"
+		MET_STUDY_HISTOS_FLAG_ZZ="true"
+		MET_STUDY_HISTOS_FLAG_ST="true"
+	fi
 
 	if [[ -s ${MET_STUDY_HISTO_DIR}METStudy_TTBar.root ]]
 	then
