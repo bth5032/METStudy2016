@@ -148,7 +148,7 @@ TChain * getZZChain(TString data_set){
   }
   else if (data_set == "80x_Bobak"){
      //2L2Nu
-    ch_ZZ->Add("//nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/zz_2l2nu_powheg*");
+    ch_ZZ->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/zz_2l2nu_powheg*");
     
     //2L2Q
     ch_ZZ->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/zz_2l2q_amcnlo*");
