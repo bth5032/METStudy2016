@@ -227,7 +227,8 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         double max_data = data->Integral(data->FindBin(plot_info->xmax()) - 1, n_bins);
         double max_zjets = zjets->Integral(zjets->FindBin(plot_info->xmax()) - 1, n_bins);
         double max_fsbkg = fsbkg->Integral(fsbkg->FindBin(plot_info->xmax()) - 1, n_bins);
-        double max_extra = extra->Integral(extra->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_extra;
+        if (do_extra) max_extra = extra->Integral(extra->FindBin(plot_info->xmax()) - 1, n_bins);
         double max_mcsum = mc_sum->Integral(mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
 
         data->SetBinContent(data->FindBin(plot_info->xmax()) - 1, max_data+overflow_data);
