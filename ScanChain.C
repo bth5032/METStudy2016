@@ -647,7 +647,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       // Draw photon histos
       if (phys.phpfcands_0013_pt()>0){
         ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
-        ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt()_5gcut, weight);
+        ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
         ph_0013_phi->Fill(phys.phpfcands_0013_phi(), weight);
         ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
         if (phys.phpfcands_0013_pt()>20) {
