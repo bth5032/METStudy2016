@@ -665,8 +665,8 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       // Draw photon histos
       if (phys.phpfcands_0013_pt()>0){
         //5GeV cut
-        ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
-        ph_0013_set_5gcut->Fill(phys.phpfcands_0013_sumet_5gcut(), weight);
+        //ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
+        //ph_0013_set_5gcut->Fill(phys.phpfcands_0013_sumet_5gcut(), weight);
 
         //regular
         ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
@@ -678,8 +678,8 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       if (phys.phpfcands_1624_pt()>0){
         //5GeV cut
-        ph_1624_pt_5gcut->Fill(phys.phpfcands_1624_pt_5gcut(), weight);
-        ph_1624_set_5gcut->Fill(phys.phpfcands_1624_sumet_5gcut(), weight);
+        //ph_1624_pt_5gcut->Fill(phys.phpfcands_1624_pt_5gcut(), weight);
+        //ph_1624_set_5gcut->Fill(phys.phpfcands_1624_sumet_5gcut(), weight);
 
         //regular
         ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
@@ -691,8 +691,8 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       if (phys.phpfcands_2430_pt()>0){
         //5GeV cut
-        ph_2430_pt_5gcut->Fill(phys.phpfcands_2430_pt_5gcut(), weight);
-        ph_2430_set_5gcut->Fill(phys.phpfcands_2430_sumet_5gcut(), weight);
+        //ph_2430_pt_5gcut->Fill(phys.phpfcands_2430_pt_5gcut(), weight);
+        //ph_2430_set_5gcut->Fill(phys.phpfcands_2430_sumet_5gcut(), weight);
 
         //regular
         ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
@@ -704,8 +704,8 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       if (phys.phpfcands_30in_pt()>0){
         //5GeV cut
-        ph_30in_set_5gcut->Fill(phys.phpfcands_30in_sumet_5gcut(), weight);
-        ph_30in_pt_5gcut->Fill(phys.phpfcands_30in_pt_5gcut(), weight);
+        //ph_30in_set_5gcut->Fill(phys.phpfcands_30in_sumet_5gcut(), weight);
+        //ph_30in_pt_5gcut->Fill(phys.phpfcands_30in_pt_5gcut(), weight);
         
         //regular
         ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
