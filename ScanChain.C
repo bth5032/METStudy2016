@@ -664,8 +664,12 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       // Draw photon histos
       if (phys.phpfcands_0013_pt()>0){
-        ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
+        //5GeV cut
         ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
+        ph_0013_set_5gcut->Fill(phys.phpfcands_0013_sumet_5gcut(), weight);
+
+        //regular
+        ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
         ph_0013_phi->Fill(phys.phpfcands_0013_phi(), weight);
         ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
         if (phys.phpfcands_0013_pt()>20) {
@@ -673,8 +677,12 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         }
       }
       if (phys.phpfcands_1624_pt()>0){
-        ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
+        //5GeV cut
         ph_1624_pt_5gcut->Fill(phys.phpfcands_1624_pt_5gcut(), weight);
+        ph_1624_set_5gcut->Fill(phys.phpfcands_1624_sumet_5gcut(), weight);
+
+        //regular
+        ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
         ph_1624_phi->Fill(phys.phpfcands_1624_phi(), weight);
         ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
         if (phys.phpfcands_1624_pt()>20) {
@@ -682,8 +690,12 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         }
       }
       if (phys.phpfcands_2430_pt()>0){
-        ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
+        //5GeV cut
         ph_2430_pt_5gcut->Fill(phys.phpfcands_2430_pt_5gcut(), weight);
+        ph_2430_set_5gcut->Fill(phys.phpfcands_2430_sumet_5gcut(), weight);
+
+        //regular
+        ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
         ph_2430_phi->Fill(phys.phpfcands_2430_phi(), weight);
         ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
         if (phys.phpfcands_2430_pt()>20) {
@@ -691,8 +703,12 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         }
       }
       if (phys.phpfcands_30in_pt()>0){
-        ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
+        //5GeV cut
+        ph_30in_set_5gcut->Fill(phys.phpfcands_30in_sumet_5gcut(), weight);
         ph_30in_pt_5gcut->Fill(phys.phpfcands_30in_pt_5gcut(), weight);
+        
+        //regular
+        ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
         ph_30in_phi->Fill(phys.phpfcands_30in_phi(), weight);
         ph_30in_set->Fill(phys.phpfcands_30in_sumet(), weight);
         if (phys.phpfcands_30in_pt()>20) {
