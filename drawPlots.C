@@ -178,8 +178,8 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     //===========================
     
     double ymax = 0;
-    TH1F* clonedMC = mc_sum->Clone("clonedMC_forReweight_"+plot_name);
-    TH1F* clonedData = data->Clone("clonedData_forReweight_"+plot_name);
+    TH1F* clonedMC = (TH1F*) mc_sum->Clone("clonedMC_forReweight_"+plot_name);
+    TH1F* clonedData = (TH1F*) data->Clone("clonedData_forReweight_"+plot_name);
 
     clonedMC->SetRange(plot_info->xmin(), plot_info->xmax());
     clonedData->SetRange(plot_info->xmin(), plot_info->xmax());
