@@ -173,15 +173,27 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     stack->Add(fsbkg);
     stack->Add(zjets);
 
-    double ymax = 50;
-    /*if (mc_sum->GetMaximum() < data->GetMaximum()){
-        ymax = 1.2*data->GetMaximum();
+    //===========================
+    // Find Plot Maxima
+    //===========================
+    
+    double ymax = 0;
+    TH1F* clonedMC = mc_sum->Clone("clonedMC_forReweight_"+plot_name);
+    TH1F* clonedData = data->Clone("clonedData_forReweight_"+plot_name);
+
+    clonedMC->SetRange(plot_info->xmin(), plot_info->xmax());
+    clonedData->SetRange(plot_info->xmin(), plot_info->xmax());
+    if (clonedMC->GetMaximum() < clonedData->GetMaximum()){
+        ymax = 1.2*clonedData->GetMaximum();
     }
     else {
-        ymax = 1.2*mc_sum->GetMaximum();   
-    }*/
+        ymax = 1.2*clonedMC->GetMaximum();   
+    }
 
-    cout<<"Proper plot maximum set"<<endl;
+    delete clonedMC;
+    delete clonedData;
+
+    cout<<"Proper plot maximum set to "<<ymax<<endl;
 
     TH2F* h_axes = new TH2F(Form("%s_axes",plot_name.Data()),plot_info->title(),data->GetNbinsX(),plot_info->xmin(),plot_info->xmax(),1000,0.001,ymax);
 
