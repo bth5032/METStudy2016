@@ -167,7 +167,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_30in_pt->Sumw2();
 
   // Photonic Pts with 5gcut
-  TH1F *ph_0013_pt_5gcut = new TH1F(sampleName+"_photonPT0013__5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  TH1F *ph_0013_pt_5gcut = new TH1F(sampleName+"_photonPT0013_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ph_0013_pt_5gcut->SetDirectory(rootdir);
   ph_0013_pt_5gcut->Sumw2();
 
