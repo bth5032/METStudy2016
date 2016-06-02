@@ -183,14 +183,6 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     clonedMC->GetXaxis()->SetRangeUser(plot_info->xmin(), plot_info->xmax());
     clonedData->GetXaxis()->SetRangeUser(plot_info->xmin(), plot_info->xmax());
-    
-    if (plot_name.Contains("neutralPHI2430"))
-    {
-        cout<<"Montecarlo Maximum: "<<mc_sum->GetMaximum()<<endl;
-        cout<<"Montecarlo Maximum in cloned: "<<clonedMC->GetMaximum()<<endl;
-        cout<<"Data Maximum: "<<data->GetMaximum()<<endl;
-        cout<<"Data Maximum in cloned: "<<clonedData->GetMaximum()<<endl;
-    }
 
     if (clonedMC->GetMaximum() < clonedData->GetMaximum()){
         ymax = 1.2*clonedData->GetMaximum();
