@@ -665,7 +665,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       // Draw photon histos
       
       //5GeV cut
-      if (phys.phpfcands_0013_sumet_5gcut() > 0){
+      if (phys.phpfcands_0013_pt_5gcut() > 0){
         ph_0013_set_5gcut->Fill(phys.phpfcands_0013_sumet_5gcut(), weight);
         ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
       }
