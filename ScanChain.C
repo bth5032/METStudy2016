@@ -669,6 +669,9 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         ph_0013_set_5gcut->Fill(phys.phpfcands_0013_sumet_5gcut(), weight);
         ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
       }
+      else{
+        cout<<"PHOTON PT"<<phys.phpfcands_0013_pt_5gcut()<<endl;
+      }
       
       if (phys.phpfcands_0013_pt()>0){
         //regular
