@@ -145,7 +145,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     zjets->Scale(scaleFactor);
     fsbkg->Scale(scaleFactor);
-    extra->Scale(scaleFactor);
+    if (do_extra) extra->Scale(scaleFactor);
     mc_sum->Scale(scaleFactor);
 
 
