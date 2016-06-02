@@ -28,7 +28,7 @@ protected:
 	int      lumi_;
 	TBranch *lumi_branch;
 	bool     lumi_isLoaded;
-	unsigned long longevt_;
+	unsigned long long evt_;
 	TBranch *evt_branch;
 	bool     evt_isLoaded;
 	int      isData_;
