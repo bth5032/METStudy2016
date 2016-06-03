@@ -50,6 +50,15 @@ vertex_reweighting=Std
 met_filters=Yes
 low_xsec=Yes
 
+Name=76_maria_rwt
+Dataset=76x
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/maria/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/maria/
+vertex_reweighting=Yes
+met_filters=Yes
+low_xsec=Yes
+
+
 ###########
 # 80x
 ###########
