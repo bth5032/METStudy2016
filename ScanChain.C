@@ -77,7 +77,7 @@ bool vinceRegion(){
 }
 
 
-int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool fast = true, int nEvents = -1) {
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool force_vtx_reweight=false, bool fast = true, int nEvents = -1) {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
@@ -544,6 +544,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       if( (! phys.isData()) && do_stdvtx_reweighting){
         weight *= phys.puWeight();   
+      }
+
+      if ( force_vtx_reweight ){
+        weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(phys.nVert())); 
       }
 
       // Base Cut

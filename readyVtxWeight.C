@@ -9,33 +9,39 @@
 
 using namespace std;
 
-void makeReweightVtxHist(TString output_dir)
+void makeReweightVtxHist(TString output_dir, TString primary_loc, TString secondary_loc,  TString primary_name, TString secondary_name)
 {
 
-  TFile * f_data = TFile::Open(output_dir+"METStudy_data.root" , "READ");
-  TFile * f_zjet = TFile::Open(output_dir+"METStudy_DY.root", "READ");
+  TFile * f_primary = TFile::Open(primary_loc , "READ"); //typically location to data hist
+  TFile * f_secondary = TFile::Open(secondary_loc, "READ"); //typically location to zjets hist
 
-  TH1F * h_data = (TH1F*)f_data->Get("data_nVert")->Clone("h_data");
-  TH1F * h_zjet = (TH1F*)f_zjet->Get("DY_nVert")->Clone("h_zjet");
+  TH1F * h_primary = (TH1F*)f_primary->Get("data_nVert")->Clone("h_"+primary_name);
+  TH1F * h_secondary = (TH1F*)f_secondary->Get("DY_nVert")->Clone("h_"+secondary_name);
 
-  h_zjet->Scale(1./h_zjet->GetSumOfWeights());
-  h_data->Scale(1./h_data->GetSumOfWeights());
+  h_secondary->Scale(1./h_secondary->GetSumOfWeights());
+  h_primary->Scale(1./h_primary->GetSumOfWeights());
 
-  TH1F * h_vtx_ratio = (TH1F*) h_data->Clone("h_vtx_ratio");
-  h_vtx_ratio->Divide(h_zjet);
+  TH1F * h_vtx_ratio = (TH1F*) h_primary->Clone("h_vtx_ratio");
+  h_vtx_ratio->Divide(h_secondary);
 
   TFile * file = TFile::Open(output_dir+"nvtx_ratio.root","RECREATE");
   file->cd();
   h_vtx_ratio->Write();
-  h_data->Write();
-  h_zjet->Write();
+  h_primary->Write();
+  h_secondary->Write();
   file->Close();
   
   return;
 }
 
 void readyVtxWeight(TString histo_dir, TString data_set, bool do_MET_filters){
+    TString primary_loc, secondary_loc, primary_name, secondary_name;
+    primary_name="";
+    primary_loc="";
+    secondary_name="";
+    secondary_loc="";
+
     ScanChain(getDataChain(data_set), "data", histo_dir, false, false, do_MET_filters); 
     ScanChain(getDYChain(data_set), "DY", histo_dir, false, false, do_MET_filters);
-    makeReweightVtxHist(histo_dir);
+    makeReweightVtxHist(histo_dir, primary_loc, secondary_loc, primary_name, secondary_name);
 }
