@@ -669,10 +669,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       // Draw photon histos
       
       //5GeV cut
-      if (phys.phpfcands_0013_pt_5gcut() > 0){
+      /*if (phys.phpfcands_0013_pt_5gcut() > 0){
         ph_0013_set_5gcut->Fill(phys.phpfcands_0013_sumet_5gcut(), weight);
         ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
-      }
+      }*/
       
       if (phys.phpfcands_0013_pt()>0){
         //regular
@@ -685,10 +685,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       
       //5Gev Cut
-      if (phys.phpfcands_1624_pt_5gcut()>0){
+      /*if (phys.phpfcands_1624_pt_5gcut()>0){
           ph_1624_pt_5gcut->Fill(phys.phpfcands_1624_pt_5gcut(), weight);
           ph_1624_set_5gcut->Fill(phys.phpfcands_1624_sumet_5gcut(), weight);
-      }
+      }*/
 
       //regular
       if (phys.phpfcands_1624_pt()>0){
@@ -701,10 +701,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       
       //5GeV Cut
-      if (phys.phpfcands_2430_pt_5gcut() > 0){
+      /*if (phys.phpfcands_2430_pt_5gcut() > 0){
         ph_2430_pt_5gcut->Fill(phys.phpfcands_2430_pt_5gcut(), weight);
         ph_2430_set_5gcut->Fill(phys.phpfcands_2430_sumet_5gcut(), weight);
-      }
+      }*/
 
       //regular
       if (phys.phpfcands_2430_pt()>0){
@@ -717,10 +717,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
       
       //5GeV cut
-      if (phys.phpfcands_30in_pt_5gcut() > 0 ){
+      /*if (phys.phpfcands_30in_pt_5gcut() > 0 ){
         ph_30in_pt_5gcut->Fill(phys.phpfcands_30in_pt_5gcut(), weight);
         ph_30in_set_5gcut->Fill(phys.phpfcands_30in_sumet_5gcut(), weight);
-      }
+      }*/
       if (phys.phpfcands_30in_pt()>0){  
         //regular
         ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
