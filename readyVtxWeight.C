@@ -15,8 +15,8 @@ void makeReweightVtxHist(TString output_dir, TString primary_loc, TString second
   TFile * f_primary = TFile::Open(primary_loc , "READ"); //typically location to data hist
   TFile * f_secondary = TFile::Open(secondary_loc, "READ"); //typically location to zjets hist
 
-  TH1F * h_primary = (TH1F*)f_primary->Get("data_nVert")->Clone("h_"+primary_name);
-  TH1F * h_secondary = (TH1F*)f_secondary->Get("DY_nVert")->Clone("h_"+secondary_name);
+  TH1F * h_primary = (TH1F*)f_primary->Get(primary_name+"_nVert")->Clone("h_"+primary_name);
+  TH1F * h_secondary = (TH1F*)f_secondary->Get(secondary_name+"_nVert")->Clone("h_"+secondary_name);
 
   h_secondary->Scale(1./h_secondary->GetSumOfWeights());
   h_primary->Scale(1./h_primary->GetSumOfWeights());
@@ -36,10 +36,10 @@ void makeReweightVtxHist(TString output_dir, TString primary_loc, TString second
 
 void readyVtxWeight(TString histo_dir, TString data_set, bool do_MET_filters){
     TString primary_loc, secondary_loc, primary_name, secondary_name;
-    primary_name="";
-    primary_loc="";
-    secondary_name="";
-    secondary_loc="";
+    primary_name="data";
+    primary_loc=histo_dir+"METStudy_"+primary_name;   
+    secondary_name="DY";
+    secondary_loc=histo_dir+"METStudy_"+secondary_name;
 
     ScanChain(getDataChain(data_set), "data", histo_dir, false, false, do_MET_filters); 
     ScanChain(getDYChain(data_set), "DY", histo_dir, false, false, do_MET_filters);
