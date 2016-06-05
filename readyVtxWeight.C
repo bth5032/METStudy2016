@@ -37,11 +37,11 @@ void makeReweightVtxHist(TString output_dir, TString primary_loc, TString second
 void readyVtxWeight(TString histo_dir, TString data_set, bool do_MET_filters){
     TString primary_loc, secondary_loc, primary_name, secondary_name;
     primary_name="data";
-    primary_loc=histo_dir+"METStudy_"+primary_name;   
+    primary_loc=histo_dir+"METStudy_"+primary_name+".root";   
     secondary_name="DY";
-    secondary_loc=histo_dir+"METStudy_"+secondary_name;
+    secondary_loc=histo_dir+"METStudy_"+secondary_name+".root";
 
-    ScanChain(getDataChain(data_set), "data", histo_dir, false, false, do_MET_filters); 
-    ScanChain(getDYChain(data_set), "DY", histo_dir, false, false, do_MET_filters);
+    //ScanChain(getDataChain(data_set), "data", histo_dir, false, false, do_MET_filters); 
+    //ScanChain(getDYChain(data_set), "DY", histo_dir, false, false, do_MET_filters);
     makeReweightVtxHist(histo_dir, primary_loc, secondary_loc, primary_name, secondary_name);
 }
