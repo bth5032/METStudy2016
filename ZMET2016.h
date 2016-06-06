@@ -20,7 +20,7 @@ typedef ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > LorentzVector;
 using namespace std; 
 class ZMET2016 {
 private: 
-public: 
+protected: 
 	unsigned int index;
 	int      run_;
 	TBranch *run_branch;
@@ -153,7 +153,6 @@ public:
 	bool     Flag_HBHEIsoNoiseFilter_isLoaded;
 	int      Flag_CSCTightHalo2015Filter_;
 	TBranch *Flag_CSCTightHalo2015Filter_branch;
-	bool     Flag_CSCTightHalo2015Filter_isLoaded;
 	int      Flag_EcalDeadCellTriggerPrimitiveFilter_;
 	TBranch *Flag_EcalDeadCellTriggerPrimitiveFilter_branch;
 	bool     Flag_EcalDeadCellTriggerPrimitiveFilter_isLoaded;
@@ -778,10 +777,13 @@ public:
 	float    isrboost_;
 	TBranch *isrboost_branch;
 	bool     isrboost_isLoaded;
-
+public: 
 void Init(TTree *tree);
 void GetEntry(unsigned int idx); 
 void LoadAllBranches(); 
+	
+	bool     Flag_CSCTightHalo2015Filter_isLoaded;
+	
 	const int &run();
 	const int &lumi();
 	const unsigned long long &evt();
