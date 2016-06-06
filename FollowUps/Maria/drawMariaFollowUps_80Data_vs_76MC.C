@@ -25,7 +25,7 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
   PlotList *plot_info = getPlotList();
 
   //80Data vs 76 MC
-  TFile* f_data = new TFile(input_dir+"80MC/METStudy_DY.root");
+  TFile* f_data = new TFile(input_dir+"80MC/METStudy_data.root");
 
   TFile* f_DY = new TFile(input_dir+"76MC/METStudy_DY.root");
   TFile* f_TTbar = new TFile(input_dir+"76MC/METStudy_TTBar.root");;
