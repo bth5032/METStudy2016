@@ -24,25 +24,43 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
   TString errors="";
   PlotList *plot_info = getPlotList();
 
-  //80Data vs 76 MC
-  TFile* f_data = new TFile(input_dir+"80MC/METStudy_DY.root");
+  //80MC vs 76MC
+  
+  TFile* f_80_DY = new TFile(input_dir+"80MC/METStudy_DY.root");
+  TFile* f_80_TTbar = new TFile(input_dir+"80MC/METStudy_TTBar.root");;
 
-  TFile* f_DY = new TFile(input_dir+"76MC/METStudy_DY.root");
-  TFile* f_TTbar = new TFile(input_dir+"76MC/METStudy_TTBar.root");;
-
-  TFile* f_ST;
-  TFile* f_VVV;
-  TFile* f_WW;
-  TFile* f_WZ;
-  TFile* f_ZZ;
+  TFile* f_80_ST;
+  TFile* f_80_VVV;
+  TFile* f_80_WW;
+  TFile* f_80_WZ;
+  TFile* f_80_ZZ;
 
 
   if (do_extra) {
-    f_ST = new TFile(input_dir+"76MC/METStudy_SingleTop.root");
-    f_VVV = new TFile(input_dir+"76MC/METStudy_VVV.root");
-    f_WW = new TFile(input_dir+"76MC/METStudy_WW.root");
-    f_WZ = new TFile(input_dir+"76MC/METStudy_WZ.root");
-    f_ZZ = new TFile(input_dir+"76MC/METStudy_ZZ.root");
+    f_80_ST = new TFile(input_dir+"80MC/METStudy_SingleTop.root");
+    f_80_VVV = new TFile(input_dir+"80MC/METStudy_VVV.root");
+    f_80_WW = new TFile(input_dir+"80MC/METStudy_WW.root");
+    f_80_WZ = new TFile(input_dir+"80MC/METStudy_WZ.root");
+    f_80_ZZ = new TFile(input_dir+"80MC/METStudy_ZZ.root");
+  }
+
+
+  TFile* f_76_DY = new TFile(input_dir+"76MC/METStudy_DY.root");
+  TFile* f_76_TTbar = new TFile(input_dir+"76MC/METStudy_TTBar.root");;
+
+  TFile* f_76_ST;
+  TFile* f_76_VVV;
+  TFile* f_76_WW;
+  TFile* f_76_WZ;
+  TFile* f_76_ZZ;
+
+
+  if (do_extra) {
+    f_76_ST = new TFile(input_dir+"76MC/METStudy_SingleTop.root");
+    f_76_VVV = new TFile(input_dir+"76MC/METStudy_VVV.root");
+    f_76_WW = new TFile(input_dir+"76MC/METStudy_WW.root");
+    f_76_WZ = new TFile(input_dir+"76MC/METStudy_WZ.root");
+    f_76_ZZ = new TFile(input_dir+"76MC/METStudy_ZZ.root");
   }
 
   cout << "Found files"<<endl;
@@ -61,45 +79,87 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     }
     cout << "Making Plots for: "<<plot_name<<endl;
     
-    TH1F* data = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_info->histName()))->Clone("datahist_"+plot_name);
-    cout<<plot_info->histName()<<" found in "<<f_data->GetName()<<endl;
+    // --------------
+    // 80
+    //---------------
 
-    TH1F* zjets = (TH1F*) ( (TH1F*) f_DY->Get("DY_"+plot_info->histName()) )->Clone("zjetshist_"+plot_name);
+    TH1F* 80_zjets = (TH1F*) ( (TH1F*) f_DY->Get("DY_"+plot_info->histName()) )->Clone("zjetshist_80_"+plot_name);
     cout<<plot_info->histName()<<" found in "<<f_DY->GetName()<<endl;
 
-    TH1F* fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_"+plot_name);
+    TH1F* 80_fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_80_"+plot_name);
     cout<<plot_info->histName()<<" found in "<<f_TTbar->GetName()<<endl;
 
     // Build Extra Plots
-    TH1F* VVV;
-    TH1F* WZ;
-    TH1F* WW;
-    TH1F* ZZ;
-    TH1F* extra;
+    TH1F* 80_VVV;
+    TH1F* 80_WZ;
+    TH1F* 80_WW;
+    TH1F* 80_ZZ;
+    TH1F* 80_extra;
 
     if (do_extra)
     {
-        VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_info->histName()))->Clone("VVVhist_"+plot_name);
-        cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
+        80_VVV = (TH1F*) ((TH1F*) f_80_VVV->Get("VVV_"+plot_info->histName()))->Clone("VVVhist_80_"+plot_name);
+        cout<<plot_name<<" found in "<<f_80_VVV->GetName()<<endl;
 
-        WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_info->histName()))->Clone("WWhist_"+plot_name);
-        cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
+        80_WW = (TH1F*) ((TH1F*) f_80_WW->Get("WW_"+plot_info->histName()))->Clone("WWhist_80_"+plot_name);
+        cout<<plot_name<<" found in "<<f_80_WW->GetName()<<endl;
 
-        WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_info->histName()))->Clone("WZhist_"+plot_name);
-        cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
+        80_WZ = (TH1F*) ((TH1F*) f_80_WZ->Get("WZ_"+plot_info->histName()))->Clone("WZhist_80_"+plot_name);
+        cout<<plot_name<<" found in "<<f_80_WZ->GetName()<<endl;
 
-        ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_info->histName()))->Clone("ZZhist_"+plot_name);
-        cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
+        80_ZZ = (TH1F*) ((TH1F*) f_80_ZZ->Get("ZZ_"+plot_info->histName()))->Clone("ZZhist_80_"+plot_name);
+        cout<<plot_name<<" found in "<<f_80_ZZ->GetName()<<endl;
 
-        extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_info->histName()))->Clone("extrahist_"+plot_name);
-        extra->Add(WW);
-        extra->Add(WZ);
-        extra->Add(ZZ);
+        80_extra = (TH1F*) ((TH1F*) f_80_VVV->Get("VVV_"+plot_info->histName()))->Clone("extrahist_80_"+plot_name);
+        80_extra->Add(80_WW);
+        80_extra->Add(80_WZ);
+        80_extra->Add(80_ZZ);
     }
 
-    TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
-    mc_sum->Add(fsbkg);
-    if (do_extra) {mc_sum->Add(extra);}
+    TH1F* 80_mc_sum = (TH1F*) 80_zjets->Clone("mc_sum");
+    80_mc_sum->Add(80_fsbkg);
+    if (do_extra) {80_mc_sum->Add(80_extra);}
+
+    // --------------
+    // 76
+    //---------------
+
+    TH1F* 76_zjets = (TH1F*) ( (TH1F*) f_DY->Get("DY_"+plot_info->histName()) )->Clone("zjetshist_76_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_DY->GetName()<<endl;
+
+    TH1F* 76_fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_76_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_TTbar->GetName()<<endl;
+
+    // Build Extra Plots
+    TH1F* 76_VVV;
+    TH1F* 76_WZ;
+    TH1F* 76_WW;
+    TH1F* 76_ZZ;
+    TH1F* 76_extra;
+
+    if (do_extra)
+    {
+        76_VVV = (TH1F*) ((TH1F*) f_76_VVV->Get("VVV_"+plot_info->histName()))->Clone("VVVhist_76_"+plot_name);
+        cout<<plot_name<<" found in "<<f_76_VVV->GetName()<<endl;
+
+        76_WW = (TH1F*) ((TH1F*) f_76_WW->Get("WW_"+plot_info->histName()))->Clone("WWhist_76_"+plot_name);
+        cout<<plot_name<<" found in "<<f_76_WW->GetName()<<endl;
+
+        76_WZ = (TH1F*) ((TH1F*) f_76_WZ->Get("WZ_"+plot_info->histName()))->Clone("WZhist_76_"+plot_name);
+        cout<<plot_name<<" found in "<<f_76_WZ->GetName()<<endl;
+
+        76_ZZ = (TH1F*) ((TH1F*) f_76_ZZ->Get("ZZ_"+plot_info->histName()))->Clone("ZZhist_76_"+plot_name);
+        cout<<plot_name<<" found in "<<f_76_ZZ->GetName()<<endl;
+
+        76_extra = (TH1F*) ((TH1F*) f_76_VVV->Get("VVV_"+plot_info->histName()))->Clone("extrahist_76_"+plot_name);
+        76_extra->Add(76_WW);
+        76_extra->Add(76_WZ);
+        76_extra->Add(76_ZZ);
+    }
+
+    TH1F* 76_mc_sum = (TH1F*) 76_zjets->Clone("mc_sum");
+    76_mc_sum->Add(76_fsbkg);
+    if (do_extra) {76_mc_sum->Add(76_extra);}
 
     cout << "Histograms pulled from files, adding draw options"<<endl;
 
@@ -135,56 +195,38 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         plotpad->SetLogy();
     }
 
-    data->Rebin(plot_info->binSize());
-    zjets->Rebin(plot_info->binSize());
-    fsbkg->Rebin(plot_info->binSize());
-    if (do_extra){extra->Rebin(plot_info->binSize());}
-    mc_sum->Rebin(plot_info->binSize());
+    76_mc_sum->Rebin(plot_info->binSize());
+    80_mc_sum->Rebin(plot_info->binSize());
 
     //===========================
     // Normalize MC
     //===========================
-    double numEventsData = data->Integral(0,-1);
-    double numEventsMC = mc_sum->Integral(0,-1);
+    double numEventsData = 80_mc_sum->Integral(0,-1);
+    double numEventsMC = 76_mc_sum->Integral(0,-1);
     double scaleFactor = ((double) numEventsData/numEventsMC);
 
-    zjets->Scale(scaleFactor);
-    fsbkg->Scale(scaleFactor);
-    if (do_extra) extra->Scale(scaleFactor);
-    mc_sum->Scale(scaleFactor);
+    76_mc_sum->Scale(scaleFactor);
 
 
     //===========================
     // SET MC COLORS
     //===========================
     
-    zjets->SetFillColor(kAzure+5);
-    zjets->SetFillStyle(1001);
+    76_mc_sum->SetFillColor(kAzure+5);
+    76_mc_sum->SetFillStyle(1001);
 
-    fsbkg->SetFillColor(kYellow+1);
-    fsbkg->SetFillStyle(1001);
-
-    if (do_extra) {
-        extra->SetFillColor(kMagenta);
-        extra->SetFillStyle(1001);
-    }
-
-    data->SetMarkerStyle(20);
+    80_mc_sum->SetMarkerStyle(20);
 
     cout<<"Building Stack"<<endl;
-    
-    THStack * stack = new THStack("stack_"+plot_name, plot_info->title());
-    if (do_extra) {stack->Add(extra);}
-    stack->Add(fsbkg);
-    stack->Add(zjets);
+
 
     //===========================
     // Find Plot Maxima
     //===========================
     
     double ymax = 0;
-    TH1F* clonedMC = (TH1F*) mc_sum->Clone("clonedMC_forReweight_"+plot_name);
-    TH1F* clonedData = (TH1F*) data->Clone("clonedData_forReweight_"+plot_name);
+    TH1F* clonedMC = (TH1F*) 76_mc_sum->Clone("clonedMC_forReweight_"+plot_name);
+    TH1F* clonedData = (TH1F*) 80_mc_sum->Clone("clonedData_forReweight_"+plot_name);
 
     clonedMC->GetXaxis()->SetRangeUser(plot_info->xmin(), plot_info->xmax());
     clonedData->GetXaxis()->SetRangeUser(plot_info->xmin(), plot_info->xmax());
@@ -201,7 +243,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     cout<<"Proper plot maximum set to "<<ymax<<endl;
 
-    TH2F* h_axes = new TH2F(Form("%s_axes",plot_name.Data()),plot_info->title(),data->GetNbinsX(),plot_info->xmin(),plot_info->xmax(),1000,0.001,ymax);
+    TH2F* h_axes = new TH2F(Form("%s_axes",plot_name.Data()),plot_info->title(),80_mc_sum->GetNbinsX(),plot_info->xmin(),plot_info->xmax(),1000,0.001,ymax);
 
     /*if(plot_info->hasOpt("maxDigits2")){
         //TGaxis::SetMaxDigits(2);
@@ -221,28 +263,16 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     //----------------------
     if (plot_info->hasOpt("overflow")){
         cout<<"Plot tagged for overflow bin, building..."<<endl;
-        double n_bins = data->GetNbinsX();
-        double overflow_data = data->GetBinContent(n_bins + 1);
-        double overflow_zjets = zjets->GetBinContent(n_bins + 1);
-        double overflow_fsbkg = fsbkg->GetBinContent(n_bins + 1);
-        double overflow_extra;
-        if (do_extra) {overflow_extra= extra->GetBinContent(n_bins + 1);}
-        double overflow_mcsum = zjets->GetBinContent(n_bins + 1);
+        double n_bins = 80_mc_sum->GetNbinsX();
+        
+        double overflow_80_mc_sum = 80_mc_sum->GetBinContent(n_bins + 1);
+        double overflow_76_mc_sum = 76_mc_sum->GetBinContent(n_bins + 1);
 
-        double max_data = data->Integral(data->FindBin(plot_info->xmax()) - 1, n_bins);
-        double max_zjets = zjets->Integral(zjets->FindBin(plot_info->xmax()) - 1, n_bins);
-        double max_fsbkg = fsbkg->Integral(fsbkg->FindBin(plot_info->xmax()) - 1, n_bins);
-        double max_extra;
-        if (do_extra) max_extra = extra->Integral(extra->FindBin(plot_info->xmax()) - 1, n_bins);
-        double max_mcsum = mc_sum->Integral(mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_80_mc_sum = 80_mc_sum->Integral(80_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_76_mc_sum = 76_mc_sum->Integral(76_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
 
-        data->SetBinContent(data->FindBin(plot_info->xmax()) - 1, max_data+overflow_data);
-        zjets->SetBinContent(zjets->FindBin(plot_info->xmax()) - 1, max_zjets+overflow_zjets);
-        fsbkg->SetBinContent(fsbkg->FindBin(plot_info->xmax()) - 1, max_fsbkg+overflow_fsbkg);
-        if (do_extra) {
-            extra->SetBinContent(extra->FindBin(plot_info->xmax()) - 1, max_extra+overflow_extra);
-        }
-        mc_sum->SetBinContent(mc_sum->FindBin(plot_info->xmax()) - 1 , max_mcsum+overflow_mcsum);
+        80_mc_sum->SetBinContent(80_mc_sum->FindBin(plot_info->xmax()) - 1, max_80_mc_sum+overflow_80_mc_sum);
+        76_mc_sum->SetBinContent(76_mc_sum->FindBin(plot_info->xmax()) - 1 , max_76_mc_sum+overflow_76_mc_sum);
     }
 
         
@@ -265,7 +295,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
     stack->Draw("HIST SAME");
-    data->Draw("E1 SAME");
+    80_mc_sum->Draw("E1 SAME");
 
     plotpad->RedrawAxis();
 
@@ -280,10 +310,8 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     l1->SetLineColor(kWhite);  
     l1->SetShadowColor(kWhite);
     l1->SetFillColor(kWhite);
-    l1->AddEntry(data, "data", "p");
-    l1->AddEntry(zjets, "Z+jets", "f");
-    l1->AddEntry(fsbkg, "t#bar{t}", "f");
-    if (do_extra) {l1->AddEntry(extra, "Low #sigma", "f");}
+    l1->AddEntry(80_mc_sum, "Sum of 80 (2016) MC", "p");
+    l1->AddEntry(76_mc_sum, "Sum of 76 (2015) MC", "f");
 
     l1->Draw("same");
 
@@ -302,8 +330,8 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     ratiopad->Draw();
     ratiopad->cd();
     
-    TH1F* residual = (TH1F*) data->Clone("residual");
-    residual->Divide(mc_sum);
+    TH1F* residual = (TH1F*) 80_mc_sum->Clone("residual");
+    residual->Divide(76_mc_sum);
 
     /*cout<<"Fixing error bars"<<endl;
     for (int count=1; count<=mc_sum->GetNbinsX(); count++){ 
@@ -344,12 +372,9 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     cout<<"Cleaning up plot variables"<<endl;
     delete l1;
-    delete mc_sum;
-    delete stack;
-    delete zjets;
-    delete fsbkg;
+    delete 76_mc_sum;
     //delete extra;
-    delete data;
+    delete 80_mc_sum;
     delete residual;
     delete ratiopad;
     delete plotpad;
@@ -380,13 +405,13 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     delete f_ZZ;
   }
 
-  f_data->Close();
-  delete f_data;
+  f_80_mc_sum->Close();
+  delete f_80_mc_sum;
   return errors;
   
 }
 
-void drawMariaFollowUps(TString save_dir="~/public_html/ZMET2016/looper/maria/80DataVs76MC/", TString input_dir="~/maria/", bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=false)
+void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper/maria/80DataVs76MC/", TString input_dir="~/maria/", bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=false)
 {
   
   vector<TString> plot_names;
