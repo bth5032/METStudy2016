@@ -20,7 +20,7 @@ typedef ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > LorentzVector;
 using namespace std; 
 class ZMET2016 {
 private: 
-protected: 
+public: 
 	unsigned int index;
 	int      run_;
 	TBranch *run_branch;
@@ -778,7 +778,7 @@ protected:
 	float    isrboost_;
 	TBranch *isrboost_branch;
 	bool     isrboost_isLoaded;
-public: 
+
 void Init(TTree *tree);
 void GetEntry(unsigned int idx); 
 void LoadAllBranches(); 
