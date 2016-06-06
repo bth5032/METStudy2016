@@ -20,7 +20,7 @@ This file draws the plots that Maria wanted after showing the sumET at the JetME
 using namespace std;
 
     
-TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir="~/public_html/ZMET2016/looper/maria/80DataVs76MC/", bool do_extra=true){
+TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir, bool do_extra=true){
   TString errors="";
   PlotList *plot_info = getPlotList();
 
@@ -386,7 +386,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   
 }
 
-void drawMariaFollUps(TString save_dir, TString input_dir="~/maria/", bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=false)
+void drawMariaFollUps(TString save_dir="~/public_html/ZMET2016/looper/maria/80DataVs76MC/", TString input_dir="~/maria/", bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=false)
 {
   
   vector<TString> plot_names;
