@@ -31,14 +31,13 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
   TFile* f_ZZ;
 
 
-  /*if (do_extra) {
-    f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");
+  if (do_extra) {
     f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
     f_VVV = new TFile(input_dir+"METStudy_VVV.root");
     f_WW = new TFile(input_dir+"METStudy_WW.root");
     f_WZ = new TFile(input_dir+"METStudy_WZ.root");
     f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");
-  }*/
+  }
 
 
   cout << "Found files"<<endl;
@@ -73,29 +72,29 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     TH1F* ZZ;
     TH1F* extra;
 
-    /*if (do_extra)
+    if (do_extra)
     {
-        VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("VVVhist_"+plot_name);
-        cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
+        VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_info->histName()))->Clone("VVVhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
 
-        WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_name))->Clone("WWhist_"+plot_name);
-        cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
+        WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_info->histName()))->Clone("WWhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
 
-        WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_name))->Clone("WZhist_"+plot_name);
-        cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
+        WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_info->histName()))->Clone("WZhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
 
-        ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_name))->Clone("ZZhist_"+plot_name);
-        cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
+        ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_info->histName()))->Clone("ZZhist_"+plot_name);
+    cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
 
-        extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_name))->Clone("extrahist_"+plot_name);
-        extra->Add(WW);
-        extra->Add(WZ);
-        extra->Add(ZZ);
-    }*/
+        extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_info->histName()))->Clone("extrahist_"+plot_name);
+    extra->Add(WW);
+    extra->Add(WZ);
+    extra->Add(ZZ);
+    }
 
     TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
     mc_sum->Add(fsbkg);
-    //if (do_extra) {mc_sum->Add(extra);}
+    if (do_extra) {mc_sum->Add(extra);}
 
     cout << "Histograms pulled from files, adding draw options"<<endl;
 
@@ -134,7 +133,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     data->Rebin(plot_info->binSize());
     zjets->Rebin(plot_info->binSize());
     fsbkg->Rebin(plot_info->binSize());
-    //if (do_extra){extra->Rebin(plot_info->binSize());}
+    if (do_extra){extra->Rebin(plot_info->binSize());}
     mc_sum->Rebin(plot_info->binSize());
 
     //===========================
@@ -146,6 +145,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     zjets->Scale(scaleFactor);
     fsbkg->Scale(scaleFactor);
+    if (do_extra) extra->Scale(scaleFactor);
     mc_sum->Scale(scaleFactor);
 
 
@@ -159,35 +159,48 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     fsbkg->SetFillColor(kYellow+1);
     fsbkg->SetFillStyle(1001);
 
-    /*if (do_extra) {
-        extra->SetFillColor(kMagenta);
-        extra->SetFillStyle(1001);
-    }*/
+    if (do_extra) {
+    extra->SetFillColor(kMagenta);
+    extra->SetFillStyle(1001);
+    }
 
     data->SetMarkerStyle(20);
 
     cout<<"Building Stack"<<endl;
     
     THStack * stack = new THStack("stack_"+plot_name, plot_info->title());
+    if (do_extra) {stack->Add(extra);}
     stack->Add(fsbkg);
     stack->Add(zjets);
-    //if (do_extra) {stack->Add(extra);}
 
+    //===========================
+    // Find Plot Maxima
+    //===========================
+    
     double ymax = 0;
-    if (mc_sum->GetMaximum() < data->GetMaximum()){
-        ymax = 1.2*data->GetMaximum();
+    TH1F* clonedMC = (TH1F*) mc_sum->Clone("clonedMC_forReweight_"+plot_name);
+    TH1F* clonedData = (TH1F*) data->Clone("clonedData_forReweight_"+plot_name);
+
+    clonedMC->GetXaxis()->SetRangeUser(plot_info->xmin(), plot_info->xmax());
+    clonedData->GetXaxis()->SetRangeUser(plot_info->xmin(), plot_info->xmax());
+
+    if (clonedMC->GetMaximum() < clonedData->GetMaximum()){
+        ymax = 1.2*clonedData->GetMaximum();
     }
     else {
-        ymax = 1.2*mc_sum->GetMaximum();   
+        ymax = 1.2*clonedMC->GetMaximum();   
     }
 
-    cout<<"Proper plot maximum set"<<endl;
+    delete clonedMC;
+    delete clonedData;
+
+    cout<<"Proper plot maximum set to "<<ymax<<endl;
 
     TH2F* h_axes = new TH2F(Form("%s_axes",plot_name.Data()),plot_info->title(),data->GetNbinsX(),plot_info->xmin(),plot_info->xmax(),1000,0.001,ymax);
 
-    if(plot_info->hasOpt("maxDigits2")){
+    /*if(plot_info->hasOpt("maxDigits2")){
         //TGaxis::SetMaxDigits(2);
-    }
+    }*/
 
     //-----------------------
     // AXES FIX
@@ -208,19 +221,22 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         double overflow_zjets = zjets->GetBinContent(n_bins + 1);
         double overflow_fsbkg = fsbkg->GetBinContent(n_bins + 1);
         double overflow_extra;
-        //if (do_extra) {overflow_extra= extra->GetBinContent(n_bins + 1);}
+        if (do_extra) {overflow_extra= extra->GetBinContent(n_bins + 1);}
         double overflow_mcsum = zjets->GetBinContent(n_bins + 1);
 
         double max_data = data->Integral(data->FindBin(plot_info->xmax()) - 1, n_bins);
         double max_zjets = zjets->Integral(zjets->FindBin(plot_info->xmax()) - 1, n_bins);
         double max_fsbkg = fsbkg->Integral(fsbkg->FindBin(plot_info->xmax()) - 1, n_bins);
-        //int max_extra = extra->GetBinContent(n_bins);
+        double max_extra;
+        if (do_extra) max_extra = extra->Integral(extra->FindBin(plot_info->xmax()) - 1, n_bins);
         double max_mcsum = mc_sum->Integral(mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
 
         data->SetBinContent(data->FindBin(plot_info->xmax()) - 1, max_data+overflow_data);
         zjets->SetBinContent(zjets->FindBin(plot_info->xmax()) - 1, max_zjets+overflow_zjets);
         fsbkg->SetBinContent(fsbkg->FindBin(plot_info->xmax()) - 1, max_fsbkg+overflow_fsbkg);
-        //if (do_extra) {extra->SetBinContent(n_bins, max_extra+overflow_extra);}
+        if (do_extra) {
+            extra->SetBinContent(extra->FindBin(plot_info->xmax()) - 1, max_extra+overflow_extra);
+        }
         mc_sum->SetBinContent(mc_sum->FindBin(plot_info->xmax()) - 1 , max_mcsum+overflow_mcsum);
     }
 
@@ -262,7 +278,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     l1->AddEntry(data, "data", "p");
     l1->AddEntry(zjets, "Z+jets", "f");
     l1->AddEntry(fsbkg, "t#bar{t}", "f");
-    //if (do_extra) {l1->AddEntry(extra, "Low #sigma", "f");}
+    if (do_extra) {l1->AddEntry(extra, "Low #sigma", "f");}
 
     l1->Draw("same");
 
@@ -341,23 +357,23 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   cout<<"Cleaning up file variables"<<endl;
   f_DY->Close();
   f_TTbar->Close();
-  /*if (do_extra) {
+  if (do_extra) {
       f_ST->Close();
-      f_VVV->Close();
-      f_WW->Close();
-      f_WZ->Close();
-      f_ZZ->Close();
-  }*/
+  f_VVV->Close();
+  f_WW->Close();
+  f_WZ->Close();
+  f_ZZ->Close();
+  }
   delete f_DY;
   delete f_TTbar;
   
-  /*if (do_extra) {
+  if (do_extra) {
     delete f_ST;
-    delete f_VVV;
-    delete f_WW;
-    delete f_WZ;
-    delete f_ZZ;
-  }*/
+  delete f_VVV;
+  delete f_WW;
+  delete f_WZ;
+  delete f_ZZ;
+  }
 
   f_data->Close();
   delete f_data;
@@ -365,22 +381,29 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   
 }
 
-void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true)
+void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=false)
 {
   
   vector<TString> plot_names;
   TString errors="";
-
+  
   if (pt) {
     //============================================
     // PT plots
     //============================================
 
     //-----------------define---------------------
+
     plot_names.push_back("photonPT0013");
     plot_names.push_back("photonPT1624");
     plot_names.push_back("photonPT2430");
     plot_names.push_back("photonPT30in");
+
+    plot_names.push_back("photonPT0013_5gcut");
+    plot_names.push_back("photonPT1624_5gcut");
+    plot_names.push_back("photonPT2430_5gcut");
+    plot_names.push_back("photonPT30in_5gcut");
+
     plot_names.push_back("chargedPT0013");
     plot_names.push_back("chargedPT1624");
     plot_names.push_back("neutralPT0013");
@@ -389,7 +412,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralPT30in");   
 
     // Run over PT plots
-    errors+=drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
     plot_names.clear();
   }
 
@@ -421,19 +444,25 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralPHI30in_PCUT20");   
     
     // Run over Phi plots
-    errors+=drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
     plot_names.clear();
   }
 
   if (sumET) {
-  //============================================
-  // SUMET
-  //============================================
-  //-----------------define---------------------
+    //============================================
+    // SUMET
+    //============================================
+    //-----------------define---------------------
     plot_names.push_back("photonSET0013");
     plot_names.push_back("photonSET1624");
     plot_names.push_back("photonSET2430");
     plot_names.push_back("photonSET30in");
+
+    plot_names.push_back("photonSET0013_5gcut");
+    plot_names.push_back("photonSET1624_5gcut");
+    plot_names.push_back("photonSET2430_5gcut");
+    plot_names.push_back("photonSET30in_5gcut");
+
     plot_names.push_back("chargedSET0013");
     plot_names.push_back("chargedSET1624");
     plot_names.push_back("neutralSET0013");
@@ -445,7 +474,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("netSET_log");
     
     // Run over Sum ET plots
-    errors+=drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
     plot_names.clear();
   }
   
@@ -478,17 +507,28 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("netPHI_mu");
     plot_names.push_back("netPHI_2jets_mu");
 
-    errors+=drawAll(plot_names, input_dir, save_dir);
+    errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
     plot_names.clear();
   }
 
   if (extra) { 
     plot_names.push_back("nVert");
     plot_names.push_back("dilmass");
-    //plot_names.push_back("PHIinBump");
+    plot_names.push_back("dilmass_ee");
+    plot_names.push_back("dilmass_mm");
+    plot_names.push_back("PHIinBump");
     plot_names.push_back("type1MET_long");
+    plot_names.push_back("zoomBump");
+    //plot_names.push_back("numMETFilters");
+
+    /*plot_names.push_back("deltaR");
+    plot_names.push_back("deltaR_2jets");
+    plot_names.push_back("deltaR_2jets_mt2cut");
     
-    errors+=drawAll(plot_names, input_dir, save_dir);
+    plot_names.push_back("mt2_ll");
+    plot_names.push_back("ptll_mt2cut");*/
+
+    errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
     plot_names.clear();
   }
 

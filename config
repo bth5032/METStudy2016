@@ -8,6 +8,7 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/
 vertex_reweighting=No
 met_filters=No
+low_xsec=No
 
 Name=76_vtxstd
 Dataset=76x
@@ -15,6 +16,7 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/vtxStd/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxStd/
 vertex_reweighting=Std
 met_filters=No
+low_xsec=No
 
 Name=76_vtxstd_mf
 Dataset=76x
@@ -22,6 +24,7 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/vtxMET/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxMET/
 vertex_reweighting=Std
 met_filters=Yes
+low_xsec=No
 
 Name=76_vtx
 Dataset=76x
@@ -29,6 +32,7 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/vtxFix/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/vtxFix/
 vertex_reweighting=Yes
 met_filters=No
+low_xsec=No
 
 Name=76_zeynep
 Dataset=76x
@@ -36,6 +40,25 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/zenyp/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/zenyp/
 vertex_reweighting=Std
 met_filters=Yes
+low_xsec=No
+
+Name=76_extra
+Dataset=76x
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/extra/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/extra/
+vertex_reweighting=Std
+met_filters=Yes
+low_xsec=Yes
+
+Name=76_maria_rwt
+Dataset=76x
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/76Histos/maria/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/76/maria/
+vertex_reweighting=Yes
+met_filters=Yes
+low_xsec=Yes
+reweight_data=False
+
 
 ###########
 # 80x
@@ -47,6 +70,7 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/
 vertex_reweighting=No
 met_filters=No
+low_xsec=No
 
 Name=80_vtx
 Dataset=80x
@@ -54,6 +78,7 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/vtxFix/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxFix/
 vertex_reweighting=Yes
 met_filters=No
+low_xsec=No
 
 Name=80_vtx_mf
 Dataset=80x
@@ -61,6 +86,7 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/vtxMET/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/vtxMET/
 vertex_reweighting=Yes
 met_filters=Yes
+low_xsec=No
 
 Name=80_zeynep
 Dataset=80x
@@ -68,3 +94,28 @@ histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/zenyp/
 plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/zenyp/
 vertex_reweighting=Yes
 met_filters=Yes
+low_xsec=No
+
+Name=80_vince
+Dataset=80x
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/vince/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/vince/
+vertex_reweighting=Yes
+met_filters=Yes
+low_xsec=No
+
+Name=80_extra
+Dataset=80x
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/extra/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/extra/
+vertex_reweighting=Yes
+met_filters=Yes
+low_xsec=Yes
+
+Name=80_bobak
+Dataset=80x_Bobak
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/bobak/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/bobak/
+vertex_reweighting=Yes
+met_filters=Yes
+low_xsec=Yes

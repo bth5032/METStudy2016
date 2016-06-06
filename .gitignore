@@ -6,3 +6,6 @@ sftp-config.json
 #local copies of plots and histograms
 plots/
 histos/
+
+#garbage collection
+NEW/

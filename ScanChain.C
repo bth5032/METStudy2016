@@ -28,15 +28,15 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
-bool passMETFilters()
-{
+bool passMETFilters(){
 
   if( phys.isData()                   ){
   if (phys.nVert() == 0               ) return false;
 
       if (!phys.Flag_HBHENoiseFilter                   ()      ) return false;
       if (!phys.Flag_HBHEIsoNoiseFilter                ()      ) return false;
-      if (!phys.Flag_CSCTightHaloFilter            ()      ) return false;
+      if (!phys.Flag_CSCTightHalo2015Filter            ()      ) return false;
+      //if (!phys.Flag_CSCTightHaloFilter            ()      ) return false;
       if (!phys.Flag_EcalDeadCellTriggerPrimitiveFilter()      ) return false;
       if (!phys.Flag_goodVertices                      ()      ) return false;
       if (!phys.Flag_eeBadScFilter                     ()      ) return false;
@@ -45,8 +45,40 @@ bool passMETFilters()
   return true;
 }
 
+bool passBaseCut(){
+  if (!(phys.dilmass() < 101 && phys.dilmass() > 81)) return false;
 
-int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool fast = true, int nEvents = -1) {
+  if (!(phys.nlep() >= 2)) return false;
+  if (!(phys.lep_pt().at(0) > 20 && phys.lep_pt().at(1) > 20)) return false;
+
+  if (!(abs(phys.lep_p4().at(0).eta()) < 2.4 && abs(phys.lep_p4().at(1).eta()) < 2.4)) return false;
+
+
+  if (!(phys.dRll() > 0.1)) return false; 
+
+  if (!(phys.evt_type() == 0)) return false;
+  
+  if (! ((phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
+    if (! ((phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) )
+    {
+      return false; 
+    }
+  }
+
+  if (! (phys.evt_passgoodrunlist() > 0)) return false;
+
+  return true;
+}
+
+bool vinceRegion(){
+  if (! (phys.njets() >= 2)) return false;
+  if (! (phys.nBJetMedium() == 0)) return false;
+
+  return true;
+}
+
+
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool force_vtx_reweight=false, bool fast = true, int nEvents = -1) {
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
@@ -134,6 +166,23 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   TH1F *ph_30in_pt = new TH1F(sampleName+"_photonPT30in", "Photonic vector sum of pt for "+sampleName+" with |#eta| > 3", 500,0,500);
   ph_30in_pt->SetDirectory(rootdir);
   ph_30in_pt->Sumw2();
+
+  // Photonic Pts with 5gcut
+  TH1F *ph_0013_pt_5gcut = new TH1F(sampleName+"_photonPT0013_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  ph_0013_pt_5gcut->SetDirectory(rootdir);
+  ph_0013_pt_5gcut->Sumw2();
+
+  TH1F *ph_1624_pt_5gcut = new TH1F(sampleName+"_photonPT1624_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  ph_1624_pt_5gcut->SetDirectory(rootdir);
+  ph_1624_pt_5gcut->Sumw2();
+
+  TH1F *ph_2430_pt_5gcut = new TH1F(sampleName+"_photonPT2430_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  ph_2430_pt_5gcut->SetDirectory(rootdir);
+  ph_2430_pt_5gcut->Sumw2();
+
+  TH1F *ph_30in_pt_5gcut = new TH1F(sampleName+"_photonPT30in_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| > 3", 500,0,500);
+  ph_30in_pt_5gcut->SetDirectory(rootdir);
+  ph_30in_pt_5gcut->Sumw2();
 
   // Charged Hadronic Pts
   TH1F *ch_0013_pt = new TH1F(sampleName+"_chargedPT0013", "Charged hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
@@ -319,6 +368,24 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_30in_set->SetDirectory(rootdir);
   ph_30in_set->Sumw2();
 
+
+  // Photonic SET With 5GeV Cuts
+  TH1F *ph_0013_set_5gcut = new TH1F(sampleName+"_photonSET0013_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| < 1.3", 500,0,500);
+  ph_0013_set_5gcut->SetDirectory(rootdir);
+  ph_0013_set_5gcut->Sumw2();
+
+  TH1F *ph_1624_set_5gcut = new TH1F(sampleName+"_photonSET1624_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
+  ph_1624_set_5gcut->SetDirectory(rootdir);
+  ph_1624_set_5gcut->Sumw2();
+
+  TH1F *ph_2430_set_5gcut = new TH1F(sampleName+"_photonSET2430_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
+  ph_2430_set_5gcut->SetDirectory(rootdir);
+  ph_2430_set_5gcut->Sumw2();
+
+  TH1F *ph_30in_set_5gcut = new TH1F(sampleName+"_photonSET30in_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| > 3.0", 500,0,500);
+  ph_30in_set_5gcut->SetDirectory(rootdir);
+  ph_30in_set_5gcut->Sumw2();
+
   // Charged Hadronic SET
   TH1F *ch_0013_set = new TH1F(sampleName+"_chargedSET0013", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
   ch_0013_set->SetDirectory(rootdir);
@@ -362,9 +429,47 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   dilmass->SetDirectory(rootdir);
   dilmass->Sumw2();
 
+  TH1F *dilmass_ee = new TH1F(sampleName+"_dilmass_ee", "Dilepton Mass (just dielectron events) for "+sampleName, 300,0,150);
+  dilmass_ee->SetDirectory(rootdir);
+  dilmass_ee->Sumw2();
+  
+  TH1F *dilmass_mm = new TH1F(sampleName+"_dilmass_mm", "Dilepton Mass (just dimuon events) for "+sampleName, 300,0,150);
+  dilmass_mm->SetDirectory(rootdir);
+  dilmass_mm->Sumw2();
+
   TH2F *metSumET2D = new TH2F(sampleName+"_METSumET", "MET vs SumET for "+sampleName, 1000, 0, 1000, 10000, 0, 10000);
   metSumET2D->SetDirectory(rootdir);
   metSumET2D->Sumw2();
+
+  TH1F *numMETFilters = new TH1F(sampleName+"_numMETFilters", "Number of MET Filters passed for events in "+sampleName, 50,0,50);
+  numMETFilters->SetDirectory(rootdir);
+  numMETFilters->Sumw2();
+
+  TH1F *deltaR = new TH1F(sampleName+"_deltaR", "Separation Between 2 Leading Leptons "+sampleName, 58,0,5.8);
+  deltaR->SetDirectory(rootdir);
+  deltaR->Sumw2();
+
+  TH1F *deltaR_2jets = new TH1F(sampleName+"_deltaR_2jets", "Separation Between 2 Leading Leptons With a 2 Jet Cut "+sampleName, 58,0,5.8);
+  deltaR_2jets->SetDirectory(rootdir);
+  deltaR_2jets->Sumw2();
+
+  TH1F *deltaR_2jets_mt2cut = new TH1F(sampleName+"_deltaR_2jets_mt2cut", "Separation Between 2 Leading Leptons With a 2 Jet Cut and MT2>80 "+sampleName, 58,0,5.8);
+  deltaR_2jets_mt2cut->SetDirectory(rootdir);
+  deltaR_2jets_mt2cut->Sumw2();
+
+  TH2F *mt2PT2D = new TH2F(sampleName+"_mt2PT2D", "MT2_{ll} vs P_{T,ll} for "+sampleName, 1000, 0, 1000, 1000, 0, 1000);
+  mt2PT2D->SetDirectory(rootdir);
+  mt2PT2D->Sumw2();
+
+  TH1F *ptll_mt2cut = new TH1F(sampleName+"_ptll_mt2cut", "P_{T} of Dilepton Combination With MT2>80 for"+sampleName, 1000,0,1000);
+  ptll_mt2cut->SetDirectory(rootdir);
+  ptll_mt2cut->Sumw2();
+
+  TH1F *mt2_ll = new TH1F(sampleName+"_mt2_ll", "MT2 of Dilepton System for"+sampleName, 1000,0,1000);
+  mt2_ll->SetDirectory(rootdir);
+  mt2_ll->Sumw2();
+
+
 
   //Set up manual vertex reweighting.
   
@@ -442,42 +547,52 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         weight *= phys.puWeight();   
       }
 
-      // Base Cut
-      if (!(phys.dilmass() < 101 && phys.dilmass() > 81)) continue;
-
-      if (!(phys.nlep() >= 2)) continue;
-      if (!(phys.lep_pt().at(0) > 20 && phys.lep_pt().at(1) > 20)) continue;
-
-      if (!(abs(phys.lep_p4().at(0).eta()) < 2.4 && abs(phys.lep_p4().at(1).eta()) < 2.4)) continue;
-
-
-      if (!(phys.dRll() > 0.1)) continue; 
-
-      if (!(phys.evt_type() == 0)) continue;
-      
-      if (! ((phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
-        if (! ((phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) )
-        {
-          continue; 
-        }
+      if ( force_vtx_reweight ){
+        weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(phys.nVert())); 
       }
 
-      if (! (phys.evt_passgoodrunlist() > 0)) continue;
+      // Base Cut
+      if (! passBaseCut()) continue;
 
       if (do_MET_filters){
         if (! passMETFilters()) continue;
       }
 
+      double sumMETFilters = phys.Flag_HBHENoiseFilter()+phys.Flag_HBHEIsoNoiseFilter()+phys.Flag_CSCTightHaloFilter()+phys.Flag_EcalDeadCellTriggerPrimitiveFilter()+phys.Flag_goodVertices()+phys.Flag_eeBadScFilter();
 
-/*      if (phys.met_T1CHS_miniAOD_CORE_pt() > 400){
+      numMETFilters->Fill(sumMETFilters);
+
+      if ( vinceRegion() ){
+        mt2_ll->Fill(phys.mt2(),weight);
+        
+        if (phys.mt2() > 80 ){
+          ptll_mt2cut->Fill(phys.dilpt(),weight);
+        }
+
+        mt2PT2D->Fill(phys.mt2(),phys.dilpt(),weight);
+      }
+
+/*      if (phys.met_T1CHS_miniAOD_CORE_pt() > 5800){
+        cout<<"6000+ MET event:"<<endl;
+        cout<<"run: "<<phys.run()<<endl;
+        cout<<"lumi: "<<phys.lumi()<<endl;
+        cout<<"event: "<<phys.evt()<<endl;
+      }
+      else if (phys.met_T1CHS_miniAOD_CORE_pt() > 3500){
+        cout<<"3500+ MET event:"<<endl;
         cout<<"run: "<<phys.run()<<endl;
         cout<<"lumi: "<<phys.lumi()<<endl;
         cout<<"event: "<<phys.evt()<<endl;
       }*/
 
-
+      deltaR->Fill(phys.dRll(), weight);
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
+        deltaR_2jets->Fill(phys.dRll(), weight);
+
+        if (phys.mt2() > 80 ){
+          deltaR_2jets_mt2cut->Fill(phys.dRll(), weight);
+        }
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
         {
           t1met_2jets->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
@@ -553,7 +668,15 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
 
       // Draw photon histos
+      
+      //5GeV cut
+      /*if (phys.phpfcands_0013_pt_5gcut() > 0){
+        ph_0013_set_5gcut->Fill(phys.phpfcands_0013_sumet_5gcut(), weight);
+        ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
+      }*/
+      
       if (phys.phpfcands_0013_pt()>0){
+        //regular
         ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
         ph_0013_phi->Fill(phys.phpfcands_0013_phi(), weight);
         ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
@@ -561,6 +684,14 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
           ph_0013_phi_pcut20->Fill(phys.phpfcands_0013_phi(), weight);
         }
       }
+      
+      //5Gev Cut
+      /*if (phys.phpfcands_1624_pt_5gcut()>0){
+          ph_1624_pt_5gcut->Fill(phys.phpfcands_1624_pt_5gcut(), weight);
+          ph_1624_set_5gcut->Fill(phys.phpfcands_1624_sumet_5gcut(), weight);
+      }*/
+
+      //regular
       if (phys.phpfcands_1624_pt()>0){
         ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
         ph_1624_phi->Fill(phys.phpfcands_1624_phi(), weight);
@@ -569,6 +700,14 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
           ph_1624_phi_pcut20->Fill(phys.phpfcands_1624_phi(), weight);
         }
       }
+      
+      //5GeV Cut
+      /*if (phys.phpfcands_2430_pt_5gcut() > 0){
+        ph_2430_pt_5gcut->Fill(phys.phpfcands_2430_pt_5gcut(), weight);
+        ph_2430_set_5gcut->Fill(phys.phpfcands_2430_sumet_5gcut(), weight);
+      }*/
+
+      //regular
       if (phys.phpfcands_2430_pt()>0){
         ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
         ph_2430_phi->Fill(phys.phpfcands_2430_phi(), weight);
@@ -577,7 +716,14 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
           ph_2430_phi_pcut20->Fill(phys.phpfcands_2430_phi(), weight);
         }
       }
-      if (phys.phpfcands_30in_pt()>0){
+      
+      //5GeV cut
+      /*if (phys.phpfcands_30in_pt_5gcut() > 0 ){
+        ph_30in_pt_5gcut->Fill(phys.phpfcands_30in_pt_5gcut(), weight);
+        ph_30in_set_5gcut->Fill(phys.phpfcands_30in_sumet_5gcut(), weight);
+      }*/
+      if (phys.phpfcands_30in_pt()>0){  
+        //regular
         ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
         ph_30in_phi->Fill(phys.phpfcands_30in_phi(), weight);
         ph_30in_set->Fill(phys.phpfcands_30in_sumet(), weight);
@@ -657,6 +803,13 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       // Fill Dilepton Mass
       dilmass->Fill(phys.dilmass(), weight);
 
+      if (phys.hyp_type() == 1){
+        dilmass_mm->Fill(phys.dilmass(), weight);        
+      }
+      else if (phys.hyp_type() == 0){
+        dilmass_ee->Fill(phys.dilmass(), weight);        
+      }
+
       //met vs. sumet plot
       metSumET2D->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), phys.sumet_raw(), weight);
 
@@ -708,6 +861,12 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_1624_pt->Write();
   ph_2430_pt->Write();
   ph_30in_pt->Write();
+
+  ph_0013_pt_5gcut->Write();
+  ph_1624_pt_5gcut->Write();
+  ph_2430_pt_5gcut->Write();
+  ph_30in_pt_5gcut->Write();
+
   ph_0013_phi->Write();
   ph_1624_phi->Write();
   ph_2430_phi->Write();
@@ -722,6 +881,11 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   ph_1624_set->Write();
   ph_2430_set->Write();
   ph_30in_set->Write();
+
+  ph_0013_set_5gcut->Write();
+  ph_1624_set_5gcut->Write();
+  ph_2430_set_5gcut->Write();
+  ph_30in_set_5gcut->Write();
   
   //Charged
   ch_0013_pt->Write();
@@ -763,8 +927,19 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   nVert->Write();
   bumpPhi->Write();
   dilmass->Write();
+  dilmass_ee->Write();
+  dilmass_mm->Write();
   numEvents->Write();
+  numMETFilters->Write();
   metSumET2D->Write();
+
+  deltaR->Write();
+  deltaR_2jets->Write();
+  deltaR_2jets_mt2cut->Write();
+
+  mt2_ll->Write();
+  ptll_mt2cut->Write();
+  mt2PT2D->Write();
 
   //close output file
   output->Write();

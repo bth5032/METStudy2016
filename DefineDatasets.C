@@ -26,6 +26,16 @@ TChain * getDataChain(TString data_set){
     ch_data->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/data_2016B_Promptv2_mm.root");
   }
 
+  else if (data_set == "80x_Bobak"){
+    //EE
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/data_2016B_Prompt_ee_v1*");
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/data_2016B_Prompt_ee_v2*");
+    
+    //MuMu
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/data_2016B_Prompt_mm_v1*");
+    ch_data->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/data_2016B_Prompt_mm_v2*");
+  }
+
   return ch_data;
 }
 
@@ -50,6 +60,11 @@ TChain * getDYChain(TString data_set){
     //50+
     ch_DY->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/dy_m50_amcnlo*");
   }
+  else if (data_set == "80x_Bobak"){
+    //10-50
+    ch_DY->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/dy_m1050_amcnlo*");
+    ch_DY->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/dy_m50_amcnlo*");
+  }
 
   return ch_DY;
 }
@@ -66,6 +81,9 @@ TChain * getTTbarChain(TString data_set){
 
   else if (data_set == "80x"){
     ch_ttbar->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/ttbar_dilep_mgmlm*");
+  }
+  else if (data_set == "80x_Bobak"){
+    ch_ttbar->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/ttbar_dilep*");
   }
 
   return ch_ttbar;
@@ -87,11 +105,17 @@ TChain * getSTChain(TString data_set){
 
   else if (data_set == "80x"){
     //anti-top
-    ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/sttw_antitop_powheg");
+    ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/sttw_antitop_powheg*");
     
     //Top
     ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/sttw_top_powheg*");
-
+  }
+  else if (data_set == "80x_Bobak"){
+    //anti-top
+    ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/sttw_antitop_powheg*");
+    
+    //Top
+    ch_ST->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/sttw_top_powheg*");
   }
 
   return ch_ST;
@@ -122,6 +146,13 @@ TChain * getZZChain(TString data_set){
     //2L2Q
     ch_ZZ->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/zz_2l2q_amcnlo*");
   }
+  else if (data_set == "80x_Bobak"){
+     //2L2Nu
+    ch_ZZ->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/zz_2l2nu_powheg*");
+    
+    //2L2Q
+    ch_ZZ->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/zz_2l2q_amcnlo*");
+  }
 
   return ch_ZZ;
 }
@@ -140,6 +171,10 @@ TChain * getWWChain(TString data_set){
   else if (data_set == "80x"){
     //2L2Nu
     ch_WW->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/ww_2l2nu_powheg*");
+  }
+  else if (data_set == "80x_Bobak"){
+    //2L2Nu
+    ch_WW->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/ww_2l2nu_powheg*");
   }
 
   return ch_WW;
@@ -161,7 +196,14 @@ TChain * getWZChain(TString data_set){
     ch_WZ->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/wz_2l2q_amcnlo*");
 
     //3LNu
-    ch_WZ->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/");
+    ch_WZ->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/wz_3lnu*");
+  }
+  else if (data_set == "80x_Bobak"){
+    //2L2Q
+    ch_WZ->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/wz_2l2q_amcnlo*");
+
+    //3LNu
+    ch_WZ->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/wz_3lnu*");
   }
 
   return ch_WZ;
@@ -193,6 +235,16 @@ TChain * getVVVChain(TString data_set){
 
     //ZZZ
     ch_VVV->Add("/nfs-7/userdata/ZMEToutput/output/ZMETbabies/V7680-hybrid-00/zzz_incl_mgmlm*");
+  }
+  else if (data_set == "80x_Bobak"){
+    //WWW
+    ch_VVV->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/www_incl_amcnlo*");
+
+    //WZZ
+    ch_VVV->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/wzz_incl_amcnlo*");
+
+    //ZZZ
+    ch_VVV->Add("/nfs-7/userdata/ZMEToutput/output/bobakBabies/V7680-hybrid-00-Bobak/zzz_incl_mgmlm*");
   }
 
   return ch_VVV;
