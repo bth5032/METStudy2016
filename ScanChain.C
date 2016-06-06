@@ -35,7 +35,7 @@ bool passMETFilters(){
 
       if (!phys.Flag_HBHENoiseFilter                   ()      ) return false;
       if (!phys.Flag_HBHEIsoNoiseFilter                ()      ) return false;
-      if ( phys.Flag_CSCTightHalo2015Filter_isloaded ){
+      if ( phys.Flag_CSCTightHalo2015Filter_isLoaded ){
         if (!phys.Flag_CSCTightHalo2015Filter            ()      ) return false;  
       }
       else{
