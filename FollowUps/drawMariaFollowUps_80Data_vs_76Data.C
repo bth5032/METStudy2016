@@ -45,11 +45,11 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     }
     cout << "Making Plots for: "<<plot_name<<endl;
     
-    TH1F* data_80 = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_info->histName()))->Clone("datahist_80_"+plot_name);
-    cout<<plot_info->histName()<<" found in "<<f_data->GetName()<<endl;
+    TH1F* data_80 = (TH1F*) ((TH1F*) f_80_data->Get("data_"+plot_info->histName()))->Clone("datahist_80_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_80_data->GetName()<<endl;
 
-    TH1F* data_76 = (TH1F*) ((TH1F*) f_data->Get("data_"+plot_info->histName()))->Clone("datahist_76_"+plot_name);
-    cout<<plot_info->histName()<<" found in "<<f_data->GetName()<<endl;
+    TH1F* data_76 = (TH1F*) ((TH1F*) f_76_data->Get("data_"+plot_info->histName()))->Clone("datahist_76_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_76_data->GetName()<<endl;
 
 
     cout << "Histograms pulled from files, adding draw options"<<endl;
@@ -151,14 +151,14 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         cout<<"Plot tagged for overflow bin, building..."<<endl;
         double n_bins = data_80->GetNbinsX();
         
-        double overflow_data_80 = data->GetBinContent(n_bins + 1);
-        double overflow_data_76 = zjets->GetBinContent(n_bins + 1);
+        double overflow_data_80 = data_80->GetBinContent(n_bins + 1);
+        double overflow_data_76 = data_76->GetBinContent(n_bins + 1);
         
         double max_data_80 = data_80->Integral(data_80->FindBin(plot_info->xmax()) - 1, n_bins);
         double max_data_76 = data_76->Integral(data_76->FindBin(plot_info->xmax()) - 1, n_bins);
 
-        data_80->SetBinContent(data_80->FindBin(plot_info->xmax()) - 1, max_data_80+overflow_data);
-        data_76->SetBinContent(data_76->FindBin(plot_info->xmax()) - 1, max_data_76+overflow_data);
+        data_80->SetBinContent(data_80->FindBin(plot_info->xmax()) - 1, max_data_80+overflow_data_80);
+        data_76->SetBinContent(data_76->FindBin(plot_info->xmax()) - 1, max_data_76+overflow_data_76);
     }
 
         
