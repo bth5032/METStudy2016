@@ -97,7 +97,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     TH1F* t_80_extra;
 
     if (do_extra)
-    {
+    {   
         t_80_VVV = (TH1F*) ((TH1F*) f_80_VVV->Get("VVV_"+plot_info->histName()))->Clone("VVVhist_80_"+plot_name);
         cout<<plot_name<<" found in "<<f_80_VVV->GetName()<<endl;
 
@@ -201,7 +201,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     //===========================
     // Normalize MC
     //===========================
-    double numEventsData = t_80_mc_sum->Integral(0,-1);
+    double numEventsData = t_80_zjets->Integral(0,-1);
     double numEventsMC = t_76_mc_sum->Integral(0,-1);
     double scaleFactor = ((double) numEventsData/numEventsMC);
 
