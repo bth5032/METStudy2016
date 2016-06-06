@@ -158,25 +158,11 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     // SET MC COLORS
     //===========================
     
-    zjets->SetFillColor(kAzure+5);
-    zjets->SetFillStyle(1001);
-
-    fsbkg->SetFillColor(kYellow+1);
-    fsbkg->SetFillStyle(1001);
-
-    if (do_extra) {
-        extra->SetFillColor(kMagenta);
-        extra->SetFillStyle(1001);
-    }
+    mc_sum->SetFillColor(kAzure+5);
+    mc_sum->SetFillStyle(1001);
 
     data->SetMarkerStyle(20);
 
-    cout<<"Building Stack"<<endl;
-    
-    THStack * stack = new THStack("stack_"+plot_name, plot_info->title());
-    if (do_extra) {stack->Add(extra);}
-    stack->Add(fsbkg);
-    stack->Add(zjets);
 
     //===========================
     // Find Plot Maxima
@@ -281,9 +267,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     l1->SetShadowColor(kWhite);
     l1->SetFillColor(kWhite);
     l1->AddEntry(data, "data", "p");
-    l1->AddEntry(zjets, "Z+jets", "f");
-    l1->AddEntry(fsbkg, "t#bar{t}", "f");
-    if (do_extra) {l1->AddEntry(extra, "Low #sigma", "f");}
+    l1->AddEntry(mc_sum, "Sum of 2015 MC", "f");
 
     l1->Draw("same");
 
