@@ -369,7 +369,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   
 }
 
-void drawMariaFollowUps_80Data_vs_76MC(TString save_dir="~/public_html/ZMET2016/looper/maria/80DataVs76MC/", TString input_dir="~/maria/", bool pt=true, bool phi=false, bool sumET=true, bool MET=false, bool extra=true, bool do_extra=true)
+void drawMariaFollowUps_80Data_vs_76MC(TString save_dir="~/public_html/ZMET2016/looper/maria/76DataVs80MC/", TString input_dir="~/maria/", bool pt=true, bool phi=false, bool sumET=true, bool MET=false, bool extra=true, bool do_extra=true)
 {
   
   vector<TString> plot_names;
