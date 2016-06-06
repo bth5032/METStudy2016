@@ -329,7 +329,6 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<"Cleaning up plot variables"<<endl;
     delete l1;
     delete mc_sum;
-    delete stack;
     delete zjets;
     delete fsbkg;
     //delete extra;
