@@ -404,10 +404,10 @@ void drawMariaFollowUps(TString save_dir="~/public_html/ZMET2016/looper/maria/80
     plot_names.push_back("photonPT2430");
     plot_names.push_back("photonPT30in");
 
-    plot_names.push_back("photonPT0013_5gcut");
+    /*plot_names.push_back("photonPT0013_5gcut");
     plot_names.push_back("photonPT1624_5gcut");
     plot_names.push_back("photonPT2430_5gcut");
-    plot_names.push_back("photonPT30in_5gcut");
+    plot_names.push_back("photonPT30in_5gcut");*/
 
     plot_names.push_back("chargedPT0013");
     plot_names.push_back("chargedPT1624");
@@ -463,10 +463,10 @@ void drawMariaFollowUps(TString save_dir="~/public_html/ZMET2016/looper/maria/80
     plot_names.push_back("photonSET2430");
     plot_names.push_back("photonSET30in");
 
-    plot_names.push_back("photonSET0013_5gcut");
+    /*plot_names.push_back("photonSET0013_5gcut");
     plot_names.push_back("photonSET1624_5gcut");
     plot_names.push_back("photonSET2430_5gcut");
-    plot_names.push_back("photonSET30in_5gcut");
+    plot_names.push_back("photonSET30in_5gcut");*/
 
     plot_names.push_back("chargedSET0013");
     plot_names.push_back("chargedSET1624");
