@@ -384,28 +384,26 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   }
 
   cout<<"Cleaning up file variables"<<endl;
-  f_DY->Close();
-  f_TTbar->Close();
+  f_80_DY->Close();
+  f_80_TTbar->Close();
   if (do_extra) {
-      f_ST->Close();
-      f_VVV->Close();
-      f_WW->Close();
-      f_WZ->Close();
-      f_ZZ->Close();
+      f_80_ST->Close();
+      f_80_VVV->Close();
+      f_80_WW->Close();
+      f_80_WZ->Close();
+      f_80_ZZ->Close();
   }
-  delete f_DY;
-  delete f_TTbar;
+  delete f_76_DY;
+  delete f_76_TTbar;
   
   if (do_extra) {
-    delete f_ST;
-    delete f_VVV;
-    delete f_WW;
-    delete f_WZ;
-    delete f_ZZ;
+    delete f_76_ST;
+    delete f_76_VVV;
+    delete f_76_WW;
+    delete f_76_WZ;
+    delete f_76_ZZ;
   }
 
-  f_80_mc_sum->Close();
-  delete f_80_mc_sum;
   return errors;
   
 }
