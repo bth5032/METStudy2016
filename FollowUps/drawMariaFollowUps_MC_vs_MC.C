@@ -83,11 +83,11 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     // 80
     //---------------
 
-    TH1F* t_80_zjets = (TH1F*) ( (TH1F*) f_DY->Get("DY_"+plot_info->histName()) )->Clone("zjetshist_80_"+plot_name);
-    cout<<plot_info->histName()<<" found in "<<f_DY->GetName()<<endl;
+    TH1F* t_80_zjets = (TH1F*) ( (TH1F*) f_80_DY->Get("DY_"+plot_info->histName()) )->Clone("zjetshist_80_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_80_DY->GetName()<<endl;
 
-    TH1F* t_80_fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_80_"+plot_name);
-    cout<<plot_info->histName()<<" found in "<<f_TTbar->GetName()<<endl;
+    TH1F* t_80_fsbkg= (TH1F*) ((TH1F*) f_80_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_80_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_80_TTbar->GetName()<<endl;
 
     // Build Extra Plots
     TH1F* t_80_VVV;
@@ -124,11 +124,11 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     // 76
     //---------------
 
-    TH1F* t_76_zjets = (TH1F*) ( (TH1F*) f_DY->Get("DY_"+plot_info->histName()) )->Clone("zjetshist_76_"+plot_name);
-    cout<<plot_info->histName()<<" found in "<<f_DY->GetName()<<endl;
+    TH1F* t_76_zjets = (TH1F*) ( (TH1F*) f_76_DY->Get("DY_"+plot_info->histName()) )->Clone("zjetshist_76_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_76_DY->GetName()<<endl;
 
-    TH1F* t_76_fsbkg= (TH1F*) ((TH1F*) f_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_76_"+plot_name);
-    cout<<plot_info->histName()<<" found in "<<f_TTbar->GetName()<<endl;
+    TH1F* t_76_fsbkg= (TH1F*) ((TH1F*) f_76_TTbar->Get("TTBar_"+plot_info->histName()))->Clone("ttbarhist_76_"+plot_name);
+    cout<<plot_info->histName()<<" found in "<<f_76_TTbar->GetName()<<endl;
 
     // Build Extra Plots
     TH1F* t_76_VVV;
@@ -263,16 +263,16 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     //----------------------
     if (plot_info->hasOpt("overflow")){
         cout<<"Plot tagged for overflow bin, building..."<<endl;
-        double n_bins = 80_mc_sum->GetNbinsX();
+        double n_bins = t_80_mc_sum->GetNbinsX();
         
-        double overflow_80_mc_sum = 80_mc_sum->GetBinContent(n_bins + 1);
-        double overflow_76_mc_sum = 76_mc_sum->GetBinContent(n_bins + 1);
+        double overflow_80_mc_sum = t_80_mc_sum->GetBinContent(n_bins + 1);
+        double overflow_76_mc_sum = t_76_mc_sum->GetBinContent(n_bins + 1);
 
-        double max_80_mc_sum = 80_mc_sum->Integral(80_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
-        double max_76_mc_sum = 76_mc_sum->Integral(76_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_80_mc_sum = 80_mc_sum->Integral(t_80_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_76_mc_sum = 76_mc_sum->Integral(t_76_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
 
-        t_80_mc_sum->SetBinContent(80_mc_sum->FindBin(plot_info->xmax()) - 1, max_80_mc_sum+overflow_80_mc_sum);
-        t_76_mc_sum->SetBinContent(76_mc_sum->FindBin(plot_info->xmax()) - 1 , max_76_mc_sum+overflow_76_mc_sum);
+        t_80_mc_sum->SetBinContent(t_80_mc_sum->FindBin(plot_info->xmax()) - 1, max_80_mc_sum+overflow_80_mc_sum);
+        t_76_mc_sum->SetBinContent(t_76_mc_sum->FindBin(plot_info->xmax()) - 1 , max_76_mc_sum+overflow_76_mc_sum);
     }
 
         
