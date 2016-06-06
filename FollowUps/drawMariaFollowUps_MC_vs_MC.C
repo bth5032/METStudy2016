@@ -116,9 +116,9 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         t_80_extra->Add(t_80_ZZ);
     }
 
-    TH1F* 80_mc_sum = (TH1F*) 80_zjets->Clone("mc_sum");
-    80_mc_sum->Add(80_fsbkg);
-    if (do_extra) {80_mc_sum->Add(80_extra);}
+    TH1F* t_80_mc_sum = (TH1F*) t_80_zjets->Clone("mc_sum");
+    t_80_mc_sum->Add(80_fsbkg);
+    if (do_extra) {t_80_mc_sum->Add(t_80_extra);}
 
     // --------------
     // 76
@@ -294,7 +294,6 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
-    stack->Draw("HIST SAME");
     t_80_mc_sum->Draw("E1 SAME");
 
     plotpad->RedrawAxis();
