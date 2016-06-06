@@ -295,6 +295,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
     t_80_mc_sum->Draw("E1 SAME");
+    t_76_mc_sum->Draw("E1 SAME");
 
     plotpad->RedrawAxis();
 
