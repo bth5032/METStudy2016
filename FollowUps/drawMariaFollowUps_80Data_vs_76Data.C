@@ -26,7 +26,7 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
 
   //80Data vs 76Data
   TFile* f_80_data = new TFile(input_dir+"80MC/METStudy_data.root");
-  TFile* f_76_data = new TFile(input_dir+"76MC/METStudy_data.root");
+  TFile* f_76_data = new TFile(input_dir+"76Data/METStudy_data.root");
 
 
   cout << "Found files"<<endl;
