@@ -373,9 +373,9 @@ void addSumETPlots(PlotList* all_plots){
   // PHOTON
   //-------
 
-  all_plots->add("photonSET0013", "photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 80, 1);
-  all_plots->add("photonSET1624", "photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 50, 1);
-  all_plots->add("photonSET2430", "photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 100, 1);
+  all_plots->add("photonSET0013", "photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 200, 1);
+  all_plots->add("photonSET1624", "photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 70, 1);
+  all_plots->add("photonSET2430", "photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 80, 1);
   all_plots->add("photonSET30in", "photonSET30in", "Photonic scalar sum of pt in HF |#eta| > 3", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
 

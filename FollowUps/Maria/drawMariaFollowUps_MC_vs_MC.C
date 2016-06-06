@@ -409,7 +409,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   
 }
 
-void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper/maria/80MCVs76MC/", TString input_dir="~/maria/", bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=true)
+void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper/maria/80MCVs76MC/", TString input_dir="~/maria/", bool pt=true, bool phi=false, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=true)
 {
   
   vector<TString> plot_names;
@@ -432,12 +432,12 @@ void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper
     plot_names.push_back("photonPT2430_5gcut");
     plot_names.push_back("photonPT30in_5gcut");*/
 
-    plot_names.push_back("chargedPT0013");
+    /*plot_names.push_back("chargedPT0013");
     plot_names.push_back("chargedPT1624");
     plot_names.push_back("neutralPT0013");
     plot_names.push_back("neutralPT1624");
     plot_names.push_back("neutralPT2430");
-    plot_names.push_back("neutralPT30in");   
+    plot_names.push_back("neutralPT30in");   */
 
     // Run over PT plots
     errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
@@ -453,7 +453,7 @@ void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper
     plot_names.push_back("photonPHI1624");
     plot_names.push_back("photonPHI2430");
     plot_names.push_back("photonPHI30in");
-    plot_names.push_back("chargedPHI0013");
+    /*plot_names.push_back("chargedPHI0013");
     plot_names.push_back("chargedPHI1624");
     plot_names.push_back("neutralPHI0013");
     plot_names.push_back("neutralPHI1624");
@@ -469,7 +469,7 @@ void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper
     plot_names.push_back("neutralPHI0013_PCUT20");
     plot_names.push_back("neutralPHI1624_PCUT20");
     plot_names.push_back("neutralPHI2430_PCUT20");
-    plot_names.push_back("neutralPHI30in_PCUT20");   
+    plot_names.push_back("neutralPHI30in_PCUT20");   */
     
     // Run over Phi plots
     errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
@@ -491,7 +491,7 @@ void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper
     plot_names.push_back("photonSET2430_5gcut");
     plot_names.push_back("photonSET30in_5gcut");*/
 
-    plot_names.push_back("chargedSET0013");
+    /*plot_names.push_back("chargedSET0013");
     plot_names.push_back("chargedSET1624");
     plot_names.push_back("neutralSET0013");
     plot_names.push_back("neutralSET1624");
@@ -499,7 +499,7 @@ void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper
     plot_names.push_back("neutralSET30in");  
 
     plot_names.push_back("netSET");
-    plot_names.push_back("netSET_log");
+    plot_names.push_back("netSET_log");*/
     
     // Run over Sum ET plots
     errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
@@ -528,12 +528,12 @@ void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper
     plot_names.push_back("rawMET_2jets_mu");
 
     //MET-PHI
-    plot_names.push_back("netPHI");
+    /*plot_names.push_back("netPHI");
     plot_names.push_back("netPHI_2jets");
     plot_names.push_back("netPHI_el");
     plot_names.push_back("netPHI_2jets_el");
     plot_names.push_back("netPHI_mu");
-    plot_names.push_back("netPHI_2jets_mu");
+    plot_names.push_back("netPHI_2jets_mu");/*
 
     errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
     plot_names.clear();
@@ -544,9 +544,9 @@ void drawMariaFollowUps_MC_vs_MC(TString save_dir="~/public_html/ZMET2016/looper
     plot_names.push_back("dilmass");
     plot_names.push_back("dilmass_ee");
     plot_names.push_back("dilmass_mm");
-    plot_names.push_back("PHIinBump");
+    /*plot_names.push_back("PHIinBump");
     plot_names.push_back("type1MET_long");
-    plot_names.push_back("zoomBump");
+    plot_names.push_back("zoomBump");*/
     //plot_names.push_back("numMETFilters");
 
     /*plot_names.push_back("deltaR");
