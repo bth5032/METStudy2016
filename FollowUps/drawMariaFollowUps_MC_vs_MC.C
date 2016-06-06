@@ -117,7 +117,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     }
 
     TH1F* t_80_mc_sum = (TH1F*) t_80_zjets->Clone("mc_sum");
-    t_80_mc_sum->Add(80_fsbkg);
+    t_80_mc_sum->Add(t_80_fsbkg);
     if (do_extra) {t_80_mc_sum->Add(t_80_extra);}
 
     // --------------
@@ -268,8 +268,8 @@ ERROR: Could not find plot info for "+plot_name+"\n\
         double overflow_80_mc_sum = t_80_mc_sum->GetBinContent(n_bins + 1);
         double overflow_76_mc_sum = t_76_mc_sum->GetBinContent(n_bins + 1);
 
-        double max_80_mc_sum = 80_mc_sum->Integral(t_80_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
-        double max_76_mc_sum = 76_mc_sum->Integral(t_76_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_80_mc_sum = t_80_mc_sum->Integral(t_80_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
+        double max_76_mc_sum = t_76_mc_sum->Integral(t_76_mc_sum->FindBin(plot_info->xmax()) - 1, n_bins);
 
         t_80_mc_sum->SetBinContent(t_80_mc_sum->FindBin(plot_info->xmax()) - 1, max_80_mc_sum+overflow_80_mc_sum);
         t_76_mc_sum->SetBinContent(t_76_mc_sum->FindBin(plot_info->xmax()) - 1 , max_76_mc_sum+overflow_76_mc_sum);
