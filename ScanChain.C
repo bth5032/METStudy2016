@@ -35,8 +35,12 @@ bool passMETFilters(){
 
       if (!phys.Flag_HBHENoiseFilter                   ()      ) return false;
       if (!phys.Flag_HBHEIsoNoiseFilter                ()      ) return false;
-      if (!phys.Flag_CSCTightHalo2015Filter            ()      ) return false;
-      //if (!phys.Flag_CSCTightHaloFilter            ()      ) return false;
+      if ( phys.Flag_CSCTightHalo2015Filter_isLoaded ){
+        if (!phys.Flag_CSCTightHalo2015Filter            ()      ) return false;  
+      }
+      else{
+        if (!phys.Flag_CSCTightHaloFilter            ()      ) return false;
+      }
       if (!phys.Flag_EcalDeadCellTriggerPrimitiveFilter()      ) return false;
       if (!phys.Flag_goodVertices                      ()      ) return false;
       if (!phys.Flag_eeBadScFilter                     ()      ) return false;

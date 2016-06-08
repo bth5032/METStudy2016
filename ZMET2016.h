@@ -150,14 +150,13 @@ protected:
 	bool     Flag_HBHENoiseFilter_isLoaded;
 	int      Flag_HBHEIsoNoiseFilter_;
 	TBranch *Flag_HBHEIsoNoiseFilter_branch;
-	bool     Flag_HBHEIsoNoiseFilter_isLoaded;
+	bool Flag_HBHEIsoNoiseFilter_isLoaded;
 	int      Flag_CSCTightHalo2015Filter_;
 	TBranch *Flag_CSCTightHalo2015Filter_branch;
-	bool     Flag_CSCTightHalo2015Filter_isLoaded;
 	int      Flag_EcalDeadCellTriggerPrimitiveFilter_;
 	TBranch *Flag_EcalDeadCellTriggerPrimitiveFilter_branch;
 	bool     Flag_EcalDeadCellTriggerPrimitiveFilter_isLoaded;
-	int      Flag_goodVertices_;
+	int	Flag_goodVertices_;
 	TBranch *Flag_goodVertices_branch;
 	bool     Flag_goodVertices_isLoaded;
 	int      Flag_eeBadScFilter_;
@@ -782,6 +781,9 @@ public:
 void Init(TTree *tree);
 void GetEntry(unsigned int idx); 
 void LoadAllBranches(); 
+	
+	bool     Flag_CSCTightHalo2015Filter_isLoaded;
+	
 	const int &run();
 	const int &lumi();
 	const unsigned long long &evt();

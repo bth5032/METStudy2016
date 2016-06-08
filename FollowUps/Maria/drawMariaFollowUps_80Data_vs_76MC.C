@@ -1,3 +1,7 @@
+/*
+This file draws the plots that Maria wanted after showing the sumET at the JetMET meeting. It's a modified version of plots that plots the MC vs MC or Data vs Data or 80 Data vs. 76 MC.
+*/
+
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -11,18 +15,20 @@
 #include "TCut.h"
 #include "TH1F.h"
 
-#include "DefineHistograms.C"
+#include "../../DefineHistograms.C"
 
 using namespace std;
 
     
-TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir, bool do_extra=false){
+TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir, bool do_extra=true){
   TString errors="";
   PlotList *plot_info = getPlotList();
 
-  TFile* f_DY = new TFile(input_dir+"METStudy_DY.root");
-  TFile* f_data = new TFile(input_dir+"METStudy_data.root");
-  TFile* f_TTbar = new TFile(input_dir+"METStudy_TTBar.root");;
+  //80Data vs 76 MC
+  TFile* f_data = new TFile(input_dir+"80MC/METStudy_data.root");
+
+  TFile* f_DY = new TFile(input_dir+"76MC/METStudy_DY.root");
+  TFile* f_TTbar = new TFile(input_dir+"76MC/METStudy_TTBar.root");;
 
   TFile* f_ST;
   TFile* f_VVV;
@@ -32,13 +38,12 @@ TString drawAll(vector<TString> plot_names, TString input_dir, TString save_dir,
 
 
   if (do_extra) {
-    f_ST = new TFile(input_dir+"METStudy_SingleTop.root");
-    f_VVV = new TFile(input_dir+"METStudy_VVV.root");
-    f_WW = new TFile(input_dir+"METStudy_WW.root");
-    f_WZ = new TFile(input_dir+"METStudy_WZ.root");
-    f_ZZ = new TFile(input_dir+"METStudy_ZZ.root");
+    f_ST = new TFile(input_dir+"76MC/METStudy_SingleTop.root");
+    f_VVV = new TFile(input_dir+"76MC/METStudy_VVV.root");
+    f_WW = new TFile(input_dir+"76MC/METStudy_WW.root");
+    f_WZ = new TFile(input_dir+"76MC/METStudy_WZ.root");
+    f_ZZ = new TFile(input_dir+"76MC/METStudy_ZZ.root");
   }
-
 
   cout << "Found files"<<endl;
 
@@ -75,21 +80,21 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     if (do_extra)
     {
         VVV = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_info->histName()))->Clone("VVVhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
+        cout<<plot_name<<" found in "<<f_VVV->GetName()<<endl;
 
         WW = (TH1F*) ((TH1F*) f_WW->Get("WW_"+plot_info->histName()))->Clone("WWhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
+        cout<<plot_name<<" found in "<<f_WW->GetName()<<endl;
 
         WZ = (TH1F*) ((TH1F*) f_WZ->Get("WZ_"+plot_info->histName()))->Clone("WZhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
+        cout<<plot_name<<" found in "<<f_WZ->GetName()<<endl;
 
         ZZ = (TH1F*) ((TH1F*) f_ZZ->Get("ZZ_"+plot_info->histName()))->Clone("ZZhist_"+plot_name);
-    cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
+        cout<<plot_name<<" found in "<<f_ZZ->GetName()<<endl;
 
         extra = (TH1F*) ((TH1F*) f_VVV->Get("VVV_"+plot_info->histName()))->Clone("extrahist_"+plot_name);
-    extra->Add(WW);
-    extra->Add(WZ);
-    extra->Add(ZZ);
+        extra->Add(WW);
+        extra->Add(WZ);
+        extra->Add(ZZ);
     }
 
     TH1F* mc_sum = (TH1F*) zjets->Clone("mc_sum");
@@ -153,25 +158,11 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     // SET MC COLORS
     //===========================
     
-    zjets->SetFillColor(kAzure+5);
-    zjets->SetFillStyle(1001);
-
-    fsbkg->SetFillColor(kYellow+1);
-    fsbkg->SetFillStyle(1001);
-
-    if (do_extra) {
-    extra->SetFillColor(kMagenta);
-    extra->SetFillStyle(1001);
-    }
+    mc_sum->SetFillColor(kAzure+5);
+    mc_sum->SetFillStyle(1001);
 
     data->SetMarkerStyle(20);
 
-    cout<<"Building Stack"<<endl;
-    
-    THStack * stack = new THStack("stack_"+plot_name, plot_info->title());
-    if (do_extra) {stack->Add(extra);}
-    stack->Add(fsbkg);
-    stack->Add(zjets);
 
     //===========================
     // Find Plot Maxima
@@ -259,7 +250,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     cout<<"Drawing histograms"<<endl;
     h_axes->Draw();
-    stack->Draw("HIST SAME");
+    mc_sum->Draw("HIST SAME");
     data->Draw("E1 SAME");
 
     plotpad->RedrawAxis();
@@ -276,9 +267,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     l1->SetShadowColor(kWhite);
     l1->SetFillColor(kWhite);
     l1->AddEntry(data, "data", "p");
-    l1->AddEntry(zjets, "Z+jets", "f");
-    l1->AddEntry(fsbkg, "t#bar{t}", "f");
-    if (do_extra) {l1->AddEntry(extra, "Low #sigma", "f");}
+    l1->AddEntry(mc_sum, "Sum of 2015 MC", "f");
 
     l1->Draw("same");
 
@@ -340,7 +329,6 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     cout<<"Cleaning up plot variables"<<endl;
     delete l1;
     delete mc_sum;
-    delete stack;
     delete zjets;
     delete fsbkg;
     //delete extra;
@@ -359,20 +347,20 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   f_TTbar->Close();
   if (do_extra) {
       f_ST->Close();
-  f_VVV->Close();
-  f_WW->Close();
-  f_WZ->Close();
-  f_ZZ->Close();
+      f_VVV->Close();
+      f_WW->Close();
+      f_WZ->Close();
+      f_ZZ->Close();
   }
   delete f_DY;
   delete f_TTbar;
   
   if (do_extra) {
     delete f_ST;
-  delete f_VVV;
-  delete f_WW;
-  delete f_WZ;
-  delete f_ZZ;
+    delete f_VVV;
+    delete f_WW;
+    delete f_WZ;
+    delete f_ZZ;
   }
 
   f_data->Close();
@@ -381,12 +369,12 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   
 }
 
-void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=false)
+void drawMariaFollowUps_80Data_vs_76MC(TString save_dir="~/public_html/ZMET2016/looper/maria/80DataVs76MC/", TString input_dir="~/maria/", bool pt=true, bool phi=false, bool sumET=true, bool MET=false, bool extra=true, bool do_extra=true)
 {
   
   vector<TString> plot_names;
   TString errors="";
-  
+
   if (pt) {
     //============================================
     // PT plots
@@ -404,12 +392,12 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("photonPT2430_5gcut");
     plot_names.push_back("photonPT30in_5gcut");*/
 
-    plot_names.push_back("chargedPT0013");
+    /*plot_names.push_back("chargedPT0013");
     plot_names.push_back("chargedPT1624");
     plot_names.push_back("neutralPT0013");
     plot_names.push_back("neutralPT1624");
     plot_names.push_back("neutralPT2430");
-    plot_names.push_back("neutralPT30in");   
+    plot_names.push_back("neutralPT30in");   */
 
     // Run over PT plots
     errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
@@ -449,10 +437,10 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
   }
 
   if (sumET) {
-    //============================================
+  //============================================
   // SUMET
-    //============================================
-    //-----------------define---------------------
+  //============================================
+  //-----------------define---------------------
     plot_names.push_back("photonSET0013");
     plot_names.push_back("photonSET1624");
     plot_names.push_back("photonSET2430");
@@ -463,7 +451,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("photonSET2430_5gcut");
     plot_names.push_back("photonSET30in_5gcut");*/
 
-    plot_names.push_back("chargedSET0013");
+    /*plot_names.push_back("chargedSET0013");
     plot_names.push_back("chargedSET1624");
     plot_names.push_back("neutralSET0013");
     plot_names.push_back("neutralSET1624");
@@ -471,7 +459,7 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("neutralSET30in");  
 
     plot_names.push_back("netSET");
-    plot_names.push_back("netSET_log");
+    plot_names.push_back("netSET_log");*/
     
     // Run over Sum ET plots
     errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
@@ -500,12 +488,12 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("rawMET_2jets_mu");
 
     //MET-PHI
-    plot_names.push_back("netPHI");
+    /*plot_names.push_back("netPHI");
     plot_names.push_back("netPHI_2jets");
     plot_names.push_back("netPHI_el");
     plot_names.push_back("netPHI_2jets_el");
     plot_names.push_back("netPHI_mu");
-    plot_names.push_back("netPHI_2jets_mu");
+    plot_names.push_back("netPHI_2jets_mu");*/
 
     errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
     plot_names.clear();
@@ -516,9 +504,9 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("dilmass");
     plot_names.push_back("dilmass_ee");
     plot_names.push_back("dilmass_mm");
-    plot_names.push_back("PHIinBump");
+    /*plot_names.push_back("PHIinBump");
     plot_names.push_back("type1MET_long");
-    plot_names.push_back("zoomBump");
+    plot_names.push_back("zoomBump");*/
     //plot_names.push_back("numMETFilters");
 
     /*plot_names.push_back("deltaR");

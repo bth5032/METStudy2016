@@ -41,7 +41,8 @@ void readyVtxWeight(TString histo_dir, TString data_set, bool do_MET_filters){
     secondary_name="DY";
     secondary_loc=histo_dir+"METStudy_"+secondary_name+".root";
 
-    ScanChain(getDataChain(data_set), "data", histo_dir, false, false, do_MET_filters); 
-    ScanChain(getDYChain(data_set), "DY", histo_dir, false, false, do_MET_filters);
+    //Make histogram files so that they can be reweighted. 
+    ScanChain(getDataChain(data_set), primary_name, histo_dir, false, false, do_MET_filters); 
+    ScanChain(getDYChain(data_set), secondary_name, histo_dir, false, false, do_MET_filters);
     makeReweightVtxHist(histo_dir, primary_loc, secondary_loc, primary_name, secondary_name);
 }
