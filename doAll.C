@@ -6,7 +6,7 @@ void doAll(TString data_set, TString histo_dir, bool data=true, bool DY=true, bo
   cout<<"Using Histogram Directory: "<<histo_dir<<endl;
 
   if (data){
-    ScanChain(getDataChain(data_set), "data", histo_dir, doVtxFix, do_STD_vtx_reweight, do_MET_filters, force_vtx_reweight); 
+    ScanChain(getDataChain("80_Bobak"), "data", histo_dir, doVtxFix, do_STD_vtx_reweight, do_MET_filters, force_vtx_reweight); 
   }
   
   if (DY){
