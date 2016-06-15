@@ -262,167 +262,20 @@ void addMETPlots(PlotList* all_plots){
   all_plots->add("netPHI_2jets_mu", "netPHI_2jets_mu", "Direction of #vec{E}^{miss}_{T} for Dimuon Events with at Least 2 Jets and E^{miss}_{T} > 20GeV", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
 }
 
-void addPTPlots(PlotList* all_plots){
-  
-  //========================
-  // PT plots
-  //======================== 
-  //-------
-  // PHOTON
-  //-------
-
-  all_plots->add("photonPT0013", "photonPT0013", "Photonic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("photonPT1624", "photonPT1624", "Photonic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("photonPT2430", "photonPT2430", "Photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("photonPT30in", "photonPT30in", "Photonic vector sum of pt in endcap (no tracker) |#eta| > 3.0", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 80, 5);
-
-  //-------
-  // PHOTON with 5gcut
-  //-------
-
-  all_plots->add("photonPT0013_5gcut", "photonPT0013_5gcut", "Photonic vector sum of pt in barrel for 5GeV+ Photons |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("photonPT1624_5gcut", "photonPT1624_5gcut", "Photonic vector sum of pt in endcap for 5GeV+ Photons |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("photonPT2430_5gcut", "photonPT2430_5gcut", "Photonic vector sum of pt in endcap for 5GeV+ Photons (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("photonPT30in_5gcut", "photonPT30in_5gcut", "Photonic vector sum of pt in endcap for 5GeV+ Photons (no tracker) |#eta| > 3.0", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 80, 5);  
-
-  //-------
-  // CHARGED HADRONS
-  //-------
-  all_plots->add("chargedPT0013", "chargedPT0013", "Charged object vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("chargedPT1624", "chargedPT1624", "Charged object vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("chargedPT2430", "chargedPT2430", "Charged object vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-
-  //-------
-  // NEUTRAL HADRONS
-  //-------
-  all_plots->add("neutralPT0013", "neutralPT0013", "Neutral hadronic vector sum of pt in barrel |#eta| < 1.3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("neutralPT1624", "neutralPT1624", "Neutral hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("neutralPT2430", "neutralPT2430", "Neutral hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-  all_plots->add("neutralPT30in", "neutralPT30in", "Neutral hadronic vector sum of pt in HF |#eta| > 3", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 200, 5);
-}
-
-void addPhiPlots(PlotList* all_plots){
-  //========================
-  // PHI plots
-  //======================== 
-  //-------
-  // PHOTON
-  //-------
-
-  all_plots->add("photonPHI0013", "photonPHI0013", "Net angle of photonic vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI1624", "photonPHI1624", "Net angle of photonic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI2430", "photonPHI2430", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI30in", "photonPHI30in", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| > 3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-
-  //-------
-  // CHARGED HADRONS
-  //-------
-  all_plots->add("chargedPHI0013", "chargedPHI0013", "Net angle of charged object vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI1624", "chargedPHI1624", "Net angle of charged object vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI2430", "chargedPHI2430", "Net angle of charged object vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-
-  //-------
-  // NEUTRAL HADRONS
-  //-------
-  all_plots->add("neutralPHI0013", "neutralPHI0013", "Net angle of neutral hadronic vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("neutralPHI1624", "neutralPHI1624", "Net angle of neutral hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("neutralPHI2430", "neutralPHI2430", "Net angle of neutral hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("neutralPHI30in", "neutralPHI30in", "Net angle of neutral hadronic vector sum of pt in HF |#eta| > 3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-}
-
-void addPhiPTCUTPlots(PlotList* all_plots){
-  //========================
-  // PHI plots
-  //======================== 
-  //-------
-  // PHOTON
-  //-------
-
-  all_plots->add("photonPHI0013_PCUT20", "photonPHI0013_PCUT20", "Net angle of photonic vector sum of pt in barrel |#eta| < 1.3 where | #Sigma_{ph} #vec{p}_{t} | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI1624_PCUT20", "photonPHI1624_PCUT20", "Net angle of photonic vector sum of pt in endcap |#eta| #in (1.6,2.4) where | #Sigma_{ph} #vec{p}_{t} | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI2430_PCUT20", "photonPHI2430_PCUT20", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0) where | #Sigma_{ph} #vec{p}_{t} | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("photonPHI30in_PCUT20", "photonPHI30in_PCUT20", "Net angle of photonic vector sum of pt in endcap (no tracker) |#eta| > 3 where | #Sigma_{ph} #vec{p}_{t} | > 20", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-
-  //-------
-  // CHARGED HADRONS
-  //-------
-  all_plots->add("chargedPHI0013_PCUT20", "chargedPHI0013_PCUT20", "Net angle of charged object vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI1624_PCUT20", "chargedPHI1624_PCUT20", "Net angle of charged object vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("chargedPHI2430_PCUT20", "chargedPHI2430_PCUT20", "Net angle of charged object vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-
-  //-------
-  // NEUTRAL HADRONS
-  //-------
-  all_plots->add("neutralPHI0013_PCUT20", "neutralPHI0013_PCUT20", "Net angle of neutral hadronic vector sum of pt in barrel |#eta| < 1.3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("neutralPHI1624_PCUT20", "neutralPHI1624_PCUT20", "Net angle of neutral hadronic vector sum of pt in endcap |#eta| #in (1.6,2.4)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-  all_plots->add("neutralPHI2430_PCUT20", "neutralPHI2430_PCUT20", "Net angle of neutral hadronic vector sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-   all_plots->add("neutralPHI30in_PCUT20", "neutralPHI30in_PCUT20", "Net angle of neutral hadronic vector sum of pt in HF |#eta| > 3", "#phi for #vec{E}^{miss}_{T}(rads)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
-}
-
-void addSumETPlots(PlotList* all_plots){
-  //========================
-  // SUM ET
-  //======================== 
-  
-  //Net SumET
-  all_plots->add("netSET", "netSET", "Overall SumET for all Events", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 6000, 1);
-
-  all_plots->add("netSET_log", "netSET", "Overall SumET for all Events", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 6000, 1, "<logy>");
-
-  //-------
-  // PHOTON
-  //-------
-
-  all_plots->add("photonSET0013", "photonSET0013", "Photonic scalar sum of pt in barrel |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 200, 1);
-  all_plots->add("photonSET1624", "photonSET1624", "Photonic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 70, 1);
-  all_plots->add("photonSET2430", "photonSET2430", "Photonic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 80, 1);
-  all_plots->add("photonSET30in", "photonSET30in", "Photonic scalar sum of pt in HF |#eta| > 3", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 150, 5);
-
-
-  //-------
-  // PHOTON WITH 5GEV CUT
-  //-------
-
-  all_plots->add("photonSET0013_5gcut", "photonSET0013_5gcut", "Photonic scalar sum of pt in barrel for 5GeV+ Photons |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 80, 1);
-  all_plots->add("photonSET1624_5gcut", "photonSET1624_5gcut", "Photonic scalar sum of pt in endcap for 5GeV+ Photons |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 50, 1);
-  all_plots->add("photonSET2430_5gcut", "photonSET2430_5gcut", "Photonic scalar sum of pt in endcap (no tracker) for 5GeV+ Photons |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [1 GeV]", 0, 100, 1);
-  all_plots->add("photonSET30in_5gcut", "photonSET30in_5gcut", "Photonic scalar sum of pt in HF for 5GeV+ Photons |#eta| > 3", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 150, 5);
-
-  //-------
-  // CHARGED HADRONS
-  //-------
-  all_plots->add("chargedSET0013", "chargedSET0013", "Charged object scalar sum of pt in barrel |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("chargedSET1624", "chargedSET1624", "Charged object scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
-  all_plots->add("chargedSET2430", "chargedSET2430", "Charged object scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
-
-  //-------
-  // NEUTRAL HADRONS
-  //-------
-  all_plots->add("neutralSET0013", "neutralSET0013", "Neutral hadronic scalar sum of pt in barrel |#eta| < 1.3", "#Sigma|E_{T}| (GeV)", "Count / [2 GeV]", 0, 150, 2);
-  all_plots->add("neutralSET1624", "neutralSET1624", "Neutral hadronic scalar sum of pt in endcap |#eta| #in (1.6,2.4)", "#Sigma|E_{T}| (GeV)", "Count / [2 GeV]", 0, 150, 2);
-  all_plots->add("neutralSET2430", "neutralSET2430", "Neutral hadronic scalar sum of pt in endcap (no tracker) |#eta| #in (2.4,3.0)", "#Sigma|E_{T}| (GeV)", "Count / [2 GeV]", 0, 150, 2);
-  all_plots->add("neutralSET30in", "neutralSET30in", "Neutral hadronic scalar sum of pt in HF |#eta| > 3", "#Sigma|E_{T}| (GeV)", "Count / [5 GeV]", 0, 500, 5);
-}
-
 void addExtraPlots(PlotList* all_plots){
   //========================
   // EXTRA
   //======================== 
 
   all_plots->add("nVert", "nVert", "Number of verticies for events in the study", "Number of verticies in event", "Count / [1 vertex]", 0, 50, 1);
-  all_plots->add("PHIinBump", "PHIinBump", "Net angle of vector sum PT for events within the 50-120GeV MET bump", "E^{miss}_{T} (GeV)", "Count / [#frac{2 #pi}{20}]", -3.15, 3.15, 10);
+
   all_plots->add("dilmass", "dilmass", "Dilepton mass for all events in the study.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);
   all_plots->add("dilmass_ee", "dilmass_ee", "Dilepton mass for just dielectron events.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);
   all_plots->add("dilmass_mm", "dilmass_mm", "Dilepton mass for just dimuon events.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);  
-  all_plots->add("numMETFilters", "numMETFilters", "Number of MET filters passed", "Num Filters Passed", "Count / [1 filter]", 0, 10, 1);  
 
-  all_plots->add("deltaR", "deltaR", "Separation Between 2 Leading Leptons", "Separation", "Count / [0.1]", 0, 5.8, 1);  
-  all_plots->add("deltaR_2jets", "deltaR_2jets", "Separation Between 2 Leading Leptons With a 2 Jet Cut", "Separation", "Count / [0.1]", 0, 5.8, 1); 
-  all_plots->add("deltaR_2jets_mt2cut", "deltaR_2jets_mt2cut", "Separation Between 2 Leading Leptons With a 2 Jet Cut and MT2>80", "Separation", "Count / [0.1]", 0, 5.8, 1); 
-
-  all_plots->add("mt2_ll", "mt2_ll", "MT2 of Dilepton System With a 2 Jet Cut and 0 B-Tags", "MT_{2} (GeV)", "Count / [5 GeV]", 0, 500, 5); 
-
-  all_plots->add("ptll_mt2cut", "ptll_mt2cut", "P_{T} of Dilepton Combination With a 2 Jet Cut, MT2>80, and 0 B-Tags", "P_{T} (GeV)", "Count / [5 GeV]", 0, 500, 5); 
+  all_plots->add("dilmass_2jets", "dilmass_2jets", "Dilepton mass for events with >=2 jets.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);
+  all_plots->add("dilmass_2jets_ee", "dilmass_2jets_ee", "Dilepton mass for dielectron events with >=2 jets.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);
+  all_plots->add("dilmass_2jets_mm", "dilmass_2jets_mm", "Dilepton mass for dimuon events with >=2 jets.", "Dilepton Mass (GeV)", "Count / [1 GeV]", 75, 105, 1);  
 
 }
 
@@ -431,11 +284,7 @@ PlotList* getPlotList(){
   PlotList* all_plots = new PlotList("type1MET", "type1MET", "Type 1 MET for All Events in Study", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   addMETPlots(all_plots);
-  addPTPlots(all_plots);
-  addPhiPlots(all_plots);
-  addPhiPTCUTPlots(all_plots);
-  addSumETPlots(all_plots);
-  addExtraPlots(all_plots);
+  addMllPlots(all_plots);
 
 return all_plots;
 

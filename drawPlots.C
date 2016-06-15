@@ -393,7 +393,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
   
 }
 
-void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true, bool sumET=true, bool MET=true, bool extra=true, bool do_extra=false)
+void drawPlots(TString save_dir, TString input_dir, bool pt=false, bool phi=false, bool sumET=false, bool MET=true, bool extra=true, bool do_extra=false)
 {
   
   vector<TString> plot_names;
@@ -511,14 +511,6 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("rawMET_mu");
     plot_names.push_back("rawMET_2jets_mu");
 
-    //MET-PHI
-    plot_names.push_back("netPHI");
-    plot_names.push_back("netPHI_2jets");
-    plot_names.push_back("netPHI_el");
-    plot_names.push_back("netPHI_2jets_el");
-    plot_names.push_back("netPHI_mu");
-    plot_names.push_back("netPHI_2jets_mu");
-
     errors+=drawAll(plot_names, input_dir, save_dir, do_extra);
     plot_names.clear();
   }
@@ -528,9 +520,9 @@ void drawPlots(TString save_dir, TString input_dir, bool pt=true, bool phi=true,
     plot_names.push_back("dilmass");
     plot_names.push_back("dilmass_ee");
     plot_names.push_back("dilmass_mm");
-    plot_names.push_back("PHIinBump");
-    plot_names.push_back("type1MET_long");
-    plot_names.push_back("zoomBump");
+    plot_names.push_back("dilmass_2jets");
+    plot_names.push_back("dilmass_2jets_ee");
+    plot_names.push_back("dilmass_2jets_mm");
     //plot_names.push_back("numMETFilters");
 
     /*plot_names.push_back("deltaR");
