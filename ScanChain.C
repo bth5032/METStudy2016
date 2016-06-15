@@ -62,7 +62,7 @@ bool passBaseCut(){
 
   if (!(phys.evt_type() == 0)) return false;
   
-  if (! ((phys.HLT_DoubleMu_nonDZ() || phys.HLT_DoubleMu_tk_nonDZ() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
+  if (! ((phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
     if (! ((phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) )
     {
       return false; 
