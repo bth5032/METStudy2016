@@ -289,13 +289,29 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     l1->Draw("same");
 
-    TLatex tex;
-    tex.SetTextAlign(23);
-    tex.SetTextSize(0.08);
-    tex.DrawLatex(0.5, 0.3, s1);
-    tex.DrawLatex(0.2, 0.5, s2);
-    tex.DrawLatex(0.7, 0.8, "Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb");
-    tex.Draw("Same");
+    TLatex tex1 = NULL;
+    tex1 = new TLatex(0.65,0.5, "Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb" );
+    tex1->SetNDC();    
+    tex1->SetTextSize(0.04);    
+    tex1->SetLineWidth(2);
+    tex1->SetTextFont(42);    
+    tex1->Draw();
+
+    TLatex tex1 = NULL;
+    tex1 = new TLatex(0.7,0.45, s1 );
+    tex1->SetNDC();    
+    tex1->SetTextSize(0.04);    
+    tex1->SetLineWidth(2);
+    tex1->SetTextFont(42);    
+    tex1->Draw();
+
+    TLatex tex1 = NULL;
+    tex1 = new TLatex(0.7,0.4, s2);
+    tex1->SetNDC();    
+    tex1->SetTextSize(0.04);    
+    tex1->SetLineWidth(2);
+    tex1->SetTextFont(42);    
+    tex1->Draw();
 
     //--------------------------
     // Fill in Residual Plot
