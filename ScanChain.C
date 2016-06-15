@@ -283,9 +283,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
-
-        if (phys.mt2() > 80 ){
-        }
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
         {
           t1met_2jets->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
@@ -296,7 +293,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
           else
           {
             t1met_2jets_mu->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
-            if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
           }
         }
         if (phys.met_rawPt() > 0)
