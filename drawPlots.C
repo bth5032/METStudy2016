@@ -292,9 +292,9 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     TLatex tex;
     tex.SetTextAlign(23);
     tex.SetTextSize(0.08);
-    tex.DrawLatex(0.8, 0.85, s1);
-    tex.DrawLatex(0.8, 0.75, s2);
-    tex.DrawLatex(0.8, 0.95, "Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb");
+    tex.DrawLatex(0.5, 0.3, s1);
+    tex.DrawLatex(0.2, 0.5, s2);
+    tex.DrawLatex(0.7, 0.8, "Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb");
     tex.Draw("Same");
 
     //--------------------------
