@@ -289,7 +289,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
 
     l1->Draw("same");
 
-    TLatex tex1 = NULL;
+    TLatex tex1;
     tex1 = new TLatex(0.65,0.5, "Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb" );
     tex1->SetNDC();    
     tex1->SetTextSize(0.04);    
@@ -297,7 +297,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     tex1->SetTextFont(42);    
     tex1->Draw();
 
-    TLatex tex2 = NULL;
+    TLatex tex2;
     tex2 = new TLatex(0.7,0.45, s1 );
     tex2->SetNDC();    
     tex2->SetTextSize(0.04);    
@@ -305,7 +305,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     tex2->SetTextFont(42);    
     tex2->Draw();
 
-    TLatex tex3 = NULL;
+    TLatex tex3;
     tex3 = new TLatex(0.7,0.4, s2);
     tex3->SetNDC();    
     tex3->SetTextSize(0.04);    
