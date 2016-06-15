@@ -295,6 +295,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     tex.DrawLatex(0.8, 0.85, s1);
     tex.DrawLatex(0.8, 0.75, s2);
     tex.DrawLatex(0.8, 0.95, "Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb");
+    tex.Draw("Same");
 
     //--------------------------
     // Fill in Residual Plot
