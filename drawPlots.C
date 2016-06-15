@@ -308,7 +308,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     TLatex *tex3;
     tex3 = new TLatex(0.2,0.7, s2);
     tex3->SetNDC();    
-    tex3->SetTextSize(0.04);    
+    tex3->SetTextSize(0.02);    
     tex3->SetLineWidth(2);
     tex3->SetTextFont(42);    
     tex3->Draw();
