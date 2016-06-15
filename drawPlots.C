@@ -297,21 +297,21 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     tex1->SetTextFont(42);    
     tex1->Draw();
 
-    TLatex tex1 = NULL;
-    tex1 = new TLatex(0.7,0.45, s1 );
-    tex1->SetNDC();    
-    tex1->SetTextSize(0.04);    
-    tex1->SetLineWidth(2);
-    tex1->SetTextFont(42);    
-    tex1->Draw();
+    TLatex tex2 = NULL;
+    tex2 = new TLatex(0.7,0.45, s1 );
+    tex2->SetNDC();    
+    tex2->SetTextSize(0.04);    
+    tex2->SetLineWidth(2);
+    tex2->SetTextFont(42);    
+    tex2->Draw();
 
-    TLatex tex1 = NULL;
-    tex1 = new TLatex(0.7,0.4, s2);
-    tex1->SetNDC();    
-    tex1->SetTextSize(0.04);    
-    tex1->SetLineWidth(2);
-    tex1->SetTextFont(42);    
-    tex1->Draw();
+    TLatex tex3 = NULL;
+    tex3 = new TLatex(0.7,0.4, s2);
+    tex3->SetNDC();    
+    tex3->SetTextSize(0.04);    
+    tex3->SetLineWidth(2);
+    tex3->SetTextFont(42);    
+    tex3->Draw();
 
     //--------------------------
     // Fill in Residual Plot
