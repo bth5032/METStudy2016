@@ -150,284 +150,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   rawmet_2jets_mu->Sumw2();
   
 
-  //=================================
-  // PFClass-MET
-  //=================================
-
-  // Photonic Pts
-  TH1F *ph_0013_pt = new TH1F(sampleName+"_photonPT0013", "Photonic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  ph_0013_pt->SetDirectory(rootdir);
-  ph_0013_pt->Sumw2();
-
-  TH1F *ph_1624_pt = new TH1F(sampleName+"_photonPT1624", "Photonic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  ph_1624_pt->SetDirectory(rootdir);
-  ph_1624_pt->Sumw2();
-
-  TH1F *ph_2430_pt = new TH1F(sampleName+"_photonPT2430", "Photonic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
-  ph_2430_pt->SetDirectory(rootdir);
-  ph_2430_pt->Sumw2();
-
-  TH1F *ph_30in_pt = new TH1F(sampleName+"_photonPT30in", "Photonic vector sum of pt for "+sampleName+" with |#eta| > 3", 500,0,500);
-  ph_30in_pt->SetDirectory(rootdir);
-  ph_30in_pt->Sumw2();
-
-  // Photonic Pts with 5gcut
-  TH1F *ph_0013_pt_5gcut = new TH1F(sampleName+"_photonPT0013_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  ph_0013_pt_5gcut->SetDirectory(rootdir);
-  ph_0013_pt_5gcut->Sumw2();
-
-  TH1F *ph_1624_pt_5gcut = new TH1F(sampleName+"_photonPT1624_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  ph_1624_pt_5gcut->SetDirectory(rootdir);
-  ph_1624_pt_5gcut->Sumw2();
-
-  TH1F *ph_2430_pt_5gcut = new TH1F(sampleName+"_photonPT2430_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
-  ph_2430_pt_5gcut->SetDirectory(rootdir);
-  ph_2430_pt_5gcut->Sumw2();
-
-  TH1F *ph_30in_pt_5gcut = new TH1F(sampleName+"_photonPT30in_5gcut", "Photonic vector sum of pt for photons >5GeV in "+sampleName+" with |#eta| > 3", 500,0,500);
-  ph_30in_pt_5gcut->SetDirectory(rootdir);
-  ph_30in_pt_5gcut->Sumw2();
-
-  // Charged Hadronic Pts
-  TH1F *ch_0013_pt = new TH1F(sampleName+"_chargedPT0013", "Charged hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  ch_0013_pt->SetDirectory(rootdir);
-  ch_0013_pt->Sumw2();
-
-  TH1F *ch_1624_pt = new TH1F(sampleName+"_chargedPT1624", "Charged hadronic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  ch_1624_pt->SetDirectory(rootdir);
-  ch_1624_pt->Sumw2();
-
-  TH1F *ch_2430_pt = new TH1F(sampleName+"_chargedPT2430", "Charged hadronic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
-  ch_2430_pt->SetDirectory(rootdir);
-  ch_2430_pt->Sumw2();
-  
-  // Neutral Hadronic Pts
-  TH1F *nu_0013_pt = new TH1F(sampleName+"_neutralPT0013", "Neutral hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  nu_0013_pt->SetDirectory(rootdir);
-  nu_0013_pt->Sumw2();
-
-  TH1F *nu_1624_pt = new TH1F(sampleName+"_neutralPT1624", "Neutral hadronic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  nu_1624_pt->SetDirectory(rootdir);
-  nu_1624_pt->Sumw2();
-
-  TH1F *nu_2430_pt = new TH1F(sampleName+"_neutralPT2430", "Neutral hadronic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
-  nu_2430_pt->SetDirectory(rootdir);
-  nu_2430_pt->Sumw2();
-
-  TH1F *nu_30in_pt = new TH1F(sampleName+"_neutralPT30in", "Neutral hadronic vector sum of pt for "+sampleName+" with |#eta| > 3.0", 500,0,500);
-  nu_30in_pt->SetDirectory(rootdir);
-  nu_30in_pt->Sumw2();
-
-
-  //=================================
-  // MET-PHI
-  //=================================
-
-  // Overall MET-Phi
-  TH1F *net_phi = new TH1F(sampleName+"_netPHI", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
-  net_phi->SetDirectory(rootdir);
-  net_phi->Sumw2();
-
-  TH1F *net_phi_2jets = new TH1F(sampleName+"_netPHI_2jets", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
-  net_phi_2jets->SetDirectory(rootdir);
-  net_phi_2jets->Sumw2();
-
-  TH1F *net_phi_el = new TH1F(sampleName+"_netPHI_el", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
-  net_phi_el->SetDirectory(rootdir);
-  net_phi_el->Sumw2();
-
-  TH1F *net_phi_2jets_el = new TH1F(sampleName+"_netPHI_2jets_el", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
-  net_phi_2jets_el->SetDirectory(rootdir);
-  net_phi_2jets_el->Sumw2();
-
-  TH1F *net_phi_mu = new TH1F(sampleName+"_netPHI_mu", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
-  net_phi_mu->SetDirectory(rootdir);
-  net_phi_mu->Sumw2();
-
-  TH1F *net_phi_2jets_mu = new TH1F(sampleName+"_netPHI_2jets_mu", "Net angle of vector sum of pt for "+sampleName, 200,-3.15,3.15);
-  net_phi_2jets_mu->SetDirectory(rootdir);
-  net_phi_2jets_mu->Sumw2();
-
-  // Photonic MET-Phi
-  TH1F *ph_0013_phi = new TH1F(sampleName+"_photonPHI0013", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 200,-3.15,3.15);
-  ph_0013_phi->SetDirectory(rootdir);
-  ph_0013_phi->Sumw2();
-
-  TH1F *ph_1624_phi = new TH1F(sampleName+"_photonPHI1624", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 200,-3.15,3.15);
-  ph_1624_phi->SetDirectory(rootdir);
-  ph_1624_phi->Sumw2();
-
-  TH1F *ph_2430_phi = new TH1F(sampleName+"_photonPHI2430", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 200,-3.15,3.15);
-  ph_2430_phi->SetDirectory(rootdir);
-  ph_2430_phi->Sumw2();
-
-  TH1F *ph_30in_phi = new TH1F(sampleName+"_photonPHI30in", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| > 3.0", 200,-3.15,3.15);
-  ph_30in_phi->SetDirectory(rootdir);
-  ph_30in_phi->Sumw2();
-
-  // Charged Hadronic MET-Phi
-  TH1F *ch_0013_phi = new TH1F(sampleName+"_chargedPHI0013", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 200,-3.15,3.15);
-  ch_0013_phi->SetDirectory(rootdir);
-  ch_0013_phi->Sumw2();
-
-  TH1F *ch_1624_phi = new TH1F(sampleName+"_chargedPHI1624", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 200,-3.15,3.15);
-  ch_1624_phi->SetDirectory(rootdir);
-  ch_1624_phi->Sumw2();
-
-  TH1F *ch_2430_phi = new TH1F(sampleName+"_chargedPHI2430", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 200,-3.15,3.15);
-  ch_2430_phi->SetDirectory(rootdir);
-  ch_2430_phi->Sumw2();
-
-  // Neutral Hadronic MET-Phi
-  TH1F *nu_0013_phi = new TH1F(sampleName+"_neutralPHI0013", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3", 200,-3.15,3.15);
-  nu_0013_phi->SetDirectory(rootdir);
-  nu_0013_phi->Sumw2();
-
-  TH1F *nu_1624_phi = new TH1F(sampleName+"_neutralPHI1624", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 200,-3.15,3.15);
-  nu_1624_phi->SetDirectory(rootdir);
-  nu_1624_phi->Sumw2();
-
-  TH1F *nu_2430_phi = new TH1F(sampleName+"_neutralPHI2430", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 200,-3.15,3.15);
-  nu_2430_phi->SetDirectory(rootdir);
-  nu_2430_phi->Sumw2();
-
-  TH1F *nu_30in_phi = new TH1F(sampleName+"_neutralPHI30in", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| > 3.0", 200,-3.15,3.15);
-  nu_30in_phi->SetDirectory(rootdir);
-  nu_30in_phi->Sumw2();
-
-  //=================================
-  // MET-PHI PT(20)
-  //=================================
-
-  // Photonic MET-Phi
-  TH1F *ph_0013_phi_pcut20 = new TH1F(sampleName+"_photonPHI0013_PCUT20", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| < 1.3 where |#Sum_{ph} #vec{p}_t| > 20", 200,-3.15,3.15);
-  ph_0013_phi_pcut20->SetDirectory(rootdir);
-  ph_0013_phi_pcut20->Sumw2();
-
-  TH1F *ph_1624_phi_pcut20 = new TH1F(sampleName+"_photonPHI1624_PCUT20", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4) where |#Sum_{ph} #vec{p}_t| > 20", 200,-3.15,3.15);
-  ph_1624_phi_pcut20->SetDirectory(rootdir);
-  ph_1624_phi_pcut20->Sumw2();
-
-  TH1F *ph_2430_phi_pcut20 = new TH1F(sampleName+"_photonPHI2430_PCUT20", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0) where |#Sum_{ph} #vec{p}_t| > 20", 200,-3.15,3.15);
-  ph_2430_phi_pcut20->SetDirectory(rootdir);
-  ph_2430_phi_pcut20->Sumw2();
-
-  TH1F *ph_30in_phi_pcut20 = new TH1F(sampleName+"_photonPHI30in_PCUT20", "Net angle of photonic vector sum of pt for "+sampleName+" with |#eta| > 3.0 where |#Sum_{ph} #vec{p}_t| > 20", 200,-3.15,3.15);
-  ph_30in_phi_pcut20->SetDirectory(rootdir);
-  ph_30in_phi_pcut20->Sumw2();
-
-  // Charged Hadronic MET-Phi
-  TH1F *ch_0013_phi_pcut20 = new TH1F(sampleName+"_chargedPHI0013_PCUT20", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3 where |#Sum_{ch} #vec{p}_t| > 20", 200,-3.15,3.15);
-  ch_0013_phi_pcut20->SetDirectory(rootdir);
-  ch_0013_phi_pcut20->Sumw2();
-
-  TH1F *ch_1624_phi_pcut20 = new TH1F(sampleName+"_chargedPHI1624_PCUT20", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4) where |#Sum_{ch} #vec{p}_t| > 20", 200,-3.15,3.15);
-  ch_1624_phi_pcut20->SetDirectory(rootdir);
-  ch_1624_phi_pcut20->Sumw2();
-
-  TH1F *ch_2430_phi_pcut20 = new TH1F(sampleName+"_chargedPHI2430_PCUT20", "Net angle of charged hadronic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0) where |#Sum_{ch} #vec{p}_t| > 20", 200,-3.15,3.15);
-  ch_2430_phi_pcut20->SetDirectory(rootdir);
-  ch_2430_phi_pcut20->Sumw2();
-
-  // Neutral Hadronic MET-Phi
-  TH1F *nu_0013_phi_pcut20 = new TH1F(sampleName+"_neutralPHI0013_PCUT20", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| < 1.3 where |#Sum_{nu} #vec{p}_t| > 20", 200,-3.15,3.15);
-  nu_0013_phi_pcut20->SetDirectory(rootdir);
-  nu_0013_phi_pcut20->Sumw2();
-
-  TH1F *nu_1624_phi_pcut20 = new TH1F(sampleName+"_neutralPHI1624_PCUT20", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4) where |#Sum_{nu} #vec{p}_t| > 20", 200,-3.15,3.15);
-  nu_1624_phi_pcut20->SetDirectory(rootdir);
-  nu_1624_phi_pcut20->Sumw2();
-
-  TH1F *nu_2430_phi_pcut20 = new TH1F(sampleName+"_neutralPHI2430_PCUT20", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0) where |#Sum_{nu} #vec{p}_t| > 20", 200,-3.15,3.15);
-  nu_2430_phi_pcut20->SetDirectory(rootdir);
-  nu_2430_phi_pcut20->Sumw2();
-
-  TH1F *nu_30in_phi_pcut20 = new TH1F(sampleName+"_neutralPHI30in_PCUT20", "Net angle of neutral hadronic vector sum of pt for "+sampleName+" with |#eta| > 3.0 where |#Sum_{nu} #vec{p}_t| > 20", 200,-3.15,3.15);
-  nu_30in_phi_pcut20->SetDirectory(rootdir);
-  nu_30in_phi_pcut20->Sumw2();
-
-  //=================================
-  // SUM ET
-  //=================================
-
-  // Overall SumEt
-  TH1F *net_set = new TH1F(sampleName+"_netSET", "Overall sumET for "+sampleName, 500,0,6000);
-  net_set->SetDirectory(rootdir);
-  net_set->Sumw2();
-
-  // Photonic SET
-  TH1F *ph_0013_set = new TH1F(sampleName+"_photonSET0013", "Photonic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  ph_0013_set->SetDirectory(rootdir);
-  ph_0013_set->Sumw2();
-
-  TH1F *ph_1624_set = new TH1F(sampleName+"_photonSET1624", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  ph_1624_set->SetDirectory(rootdir);
-  ph_1624_set->Sumw2();
-
-  TH1F *ph_2430_set = new TH1F(sampleName+"_photonSET2430", "Photonic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
-  ph_2430_set->SetDirectory(rootdir);
-  ph_2430_set->Sumw2();
-
-  TH1F *ph_30in_set = new TH1F(sampleName+"_photonSET30in", "Photonic scalar sum of pt for "+sampleName+" with |#eta| > 3.0", 500,0,500);
-  ph_30in_set->SetDirectory(rootdir);
-  ph_30in_set->Sumw2();
-
-
-  // Photonic SET With 5GeV Cuts
-  TH1F *ph_0013_set_5gcut = new TH1F(sampleName+"_photonSET0013_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  ph_0013_set_5gcut->SetDirectory(rootdir);
-  ph_0013_set_5gcut->Sumw2();
-
-  TH1F *ph_1624_set_5gcut = new TH1F(sampleName+"_photonSET1624_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  ph_1624_set_5gcut->SetDirectory(rootdir);
-  ph_1624_set_5gcut->Sumw2();
-
-  TH1F *ph_2430_set_5gcut = new TH1F(sampleName+"_photonSET2430_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
-  ph_2430_set_5gcut->SetDirectory(rootdir);
-  ph_2430_set_5gcut->Sumw2();
-
-  TH1F *ph_30in_set_5gcut = new TH1F(sampleName+"_photonSET30in_5gcut", "Photonic scalar sum of pt for >5 GeV photons in "+sampleName+" with |#eta| > 3.0", 500,0,500);
-  ph_30in_set_5gcut->SetDirectory(rootdir);
-  ph_30in_set_5gcut->Sumw2();
-
-  // Charged Hadronic SET
-  TH1F *ch_0013_set = new TH1F(sampleName+"_chargedSET0013", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  ch_0013_set->SetDirectory(rootdir);
-  ch_0013_set->Sumw2();
-
-  TH1F *ch_1624_set = new TH1F(sampleName+"_chargedSET1624", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  ch_1624_set->SetDirectory(rootdir);
-  ch_1624_set->Sumw2();
-
-  TH1F *ch_2430_set = new TH1F(sampleName+"_chargedSET2430", "Charged hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
-  ch_2430_set->SetDirectory(rootdir);
-  ch_2430_set->Sumw2();
-
-  // Neutral Hadronic SET
-  TH1F *nu_0013_set = new TH1F(sampleName+"_neutralSET0013", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| < 1.3", 500,0,500);
-  nu_0013_set->SetDirectory(rootdir);
-  nu_0013_set->Sumw2();
-
-  TH1F *nu_1624_set = new TH1F(sampleName+"_neutralSET1624", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (1.6,2.4)", 500,0,500);
-  nu_1624_set->SetDirectory(rootdir);
-  nu_1624_set->Sumw2();
-
-  TH1F *nu_2430_set = new TH1F(sampleName+"_neutralSET2430", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| #in (2.4,3.0)", 500,0,500);
-  nu_2430_set->SetDirectory(rootdir);
-  nu_2430_set->Sumw2();
-
-  TH1F *nu_30in_set = new TH1F(sampleName+"_neutralSET30in", "Neutral hadronic scalar sum of pt for "+sampleName+" with |#eta| > 3.0", 500,0,500);
-  nu_30in_set->SetDirectory(rootdir);
-  nu_30in_set->Sumw2();
-
   //Extra Histos
   TH1F *nVert = new TH1F(sampleName+"_nVert", "Number of verticies for "+sampleName, 50,0,50);
   nVert->SetDirectory(rootdir);
   nVert->Sumw2();
-
-  TH1F *bumpPhi = new TH1F(sampleName+"_PHIinBump", "Net angle VSPT of events in 50-120GeV bump for "+sampleName, 200,-3.15,3.15);
-  bumpPhi->SetDirectory(rootdir);
-  bumpPhi->Sumw2();
 
   TH1F *dilmass = new TH1F(sampleName+"_dilmass", "Dilepton Mass for "+sampleName, 300,0,150);
   dilmass->SetDirectory(rootdir);
@@ -441,37 +167,17 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   dilmass_mm->SetDirectory(rootdir);
   dilmass_mm->Sumw2();
 
-  TH2F *metSumET2D = new TH2F(sampleName+"_METSumET", "MET vs SumET for "+sampleName, 1000, 0, 1000, 10000, 0, 10000);
-  metSumET2D->SetDirectory(rootdir);
-  metSumET2D->Sumw2();
+  TH1F *dilmass_2jets = new TH1F(sampleName+"_dilmass", "Dilepton Mass with >=2 jets for "+sampleName, 300,0,150);
+  dilmass_2jets->SetDirectory(rootdir);
+  dilmass_2jets->Sumw2();
 
-  TH1F *numMETFilters = new TH1F(sampleName+"_numMETFilters", "Number of MET Filters passed for events in "+sampleName, 50,0,50);
-  numMETFilters->SetDirectory(rootdir);
-  numMETFilters->Sumw2();
-
-  TH1F *deltaR = new TH1F(sampleName+"_deltaR", "Separation Between 2 Leading Leptons "+sampleName, 58,0,5.8);
-  deltaR->SetDirectory(rootdir);
-  deltaR->Sumw2();
-
-  TH1F *deltaR_2jets = new TH1F(sampleName+"_deltaR_2jets", "Separation Between 2 Leading Leptons With a 2 Jet Cut "+sampleName, 58,0,5.8);
-  deltaR_2jets->SetDirectory(rootdir);
-  deltaR_2jets->Sumw2();
-
-  TH1F *deltaR_2jets_mt2cut = new TH1F(sampleName+"_deltaR_2jets_mt2cut", "Separation Between 2 Leading Leptons With a 2 Jet Cut and MT2>80 "+sampleName, 58,0,5.8);
-  deltaR_2jets_mt2cut->SetDirectory(rootdir);
-  deltaR_2jets_mt2cut->Sumw2();
-
-  TH2F *mt2PT2D = new TH2F(sampleName+"_mt2PT2D", "MT2_{ll} vs P_{T,ll} for "+sampleName, 1000, 0, 1000, 1000, 0, 1000);
-  mt2PT2D->SetDirectory(rootdir);
-  mt2PT2D->Sumw2();
-
-  TH1F *ptll_mt2cut = new TH1F(sampleName+"_ptll_mt2cut", "P_{T} of Dilepton Combination With MT2>80 for"+sampleName, 1000,0,1000);
-  ptll_mt2cut->SetDirectory(rootdir);
-  ptll_mt2cut->Sumw2();
-
-  TH1F *mt2_ll = new TH1F(sampleName+"_mt2_ll", "MT2 of Dilepton System for"+sampleName, 1000,0,1000);
-  mt2_ll->SetDirectory(rootdir);
-  mt2_ll->Sumw2();
+  TH1F *dilmass_ee = new TH1F(sampleName+"_dilmass_ee", "Dilepton Mass (just dielectron events) with >=2 jets for "+sampleName, 300,0,150);
+  dilmass_2jets_ee->SetDirectory(rootdir);
+  dilmass_2jets_ee->Sumw2();
+  
+  TH1F *dilmass_2jets_mm = new TH1F(sampleName+"_dilmass_mm", "Dilepton Mass (just dimuon events) with >=2 jets for "+sampleName, 300,0,150);
+  dilmass_2jets_mm->SetDirectory(rootdir);
+  dilmass_2jets_mm->Sumw2();
 
 
 
@@ -540,7 +246,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       else{
         //weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
-        weight = phys.evt_scale1fb() * 2.3; 
+        weight = phys.evt_scale1fb(); 
       }
 
       if( (! phys.isData()) && dovtxreweighting ){
@@ -566,15 +272,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       numMETFilters->Fill(sumMETFilters);
 
-      if ( vinceRegion() ){
-        mt2_ll->Fill(phys.mt2(),weight);
-        
-        if (phys.mt2() > 80 ){
-          ptll_mt2cut->Fill(phys.dilpt(),weight);
-        }
-
-        mt2PT2D->Fill(phys.mt2(),phys.dilpt(),weight);
-      }
 
 /*      if (phys.met_T1CHS_miniAOD_CORE_pt() > 5800){
         cout<<"6000+ MET event:"<<endl;
@@ -589,13 +286,10 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         cout<<"event: "<<phys.evt()<<endl;
       }*/
 
-      deltaR->Fill(phys.dRll(), weight);
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
-        deltaR_2jets->Fill(phys.dRll(), weight);
 
         if (phys.mt2() > 80 ){
-          deltaR_2jets_mt2cut->Fill(phys.dRll(), weight);
         }
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
         {
@@ -652,166 +346,38 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       //Type 1 MET
       if(phys.met_T1CHS_miniAOD_CORE_pt() > 0){
         t1met->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
-        if (phys.met_T1CHS_miniAOD_CORE_pt() > 20){
-          net_phi->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
-        }
         if (phys.hyp_type() == 0){
           t1met_el->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
-          if (phys.met_T1CHS_miniAOD_CORE_pt() > 20){
-            net_phi_el->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
-          }
         }
         else
         {
           t1met_mu->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight); 
-          if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
-          {
-            net_phi_mu->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
-          }
         }
-      }
-
-      // Draw photon histos
-      
-      //5GeV cut
-      /*if (phys.phpfcands_0013_pt_5gcut() > 0){
-        ph_0013_set_5gcut->Fill(phys.phpfcands_0013_sumet_5gcut(), weight);
-        ph_0013_pt_5gcut->Fill(phys.phpfcands_0013_pt_5gcut(), weight);
-      }*/
-      
-      if (phys.phpfcands_0013_pt()>0){
-        //regular
-        ph_0013_pt->Fill(phys.phpfcands_0013_pt(), weight);
-        ph_0013_phi->Fill(phys.phpfcands_0013_phi(), weight);
-        ph_0013_set->Fill(phys.phpfcands_0013_sumet(), weight);
-        if (phys.phpfcands_0013_pt()>20) {
-          ph_0013_phi_pcut20->Fill(phys.phpfcands_0013_phi(), weight);
-        }
-      }
-      
-      //5Gev Cut
-      /*if (phys.phpfcands_1624_pt_5gcut()>0){
-          ph_1624_pt_5gcut->Fill(phys.phpfcands_1624_pt_5gcut(), weight);
-          ph_1624_set_5gcut->Fill(phys.phpfcands_1624_sumet_5gcut(), weight);
-      }*/
-
-      //regular
-      if (phys.phpfcands_1624_pt()>0){
-        ph_1624_pt->Fill(phys.phpfcands_1624_pt(), weight);
-        ph_1624_phi->Fill(phys.phpfcands_1624_phi(), weight);
-        ph_1624_set->Fill(phys.phpfcands_1624_sumet(), weight);
-        if (phys.phpfcands_1624_pt()>20) {
-          ph_1624_phi_pcut20->Fill(phys.phpfcands_1624_phi(), weight);
-        }
-      }
-      
-      //5GeV Cut
-      /*if (phys.phpfcands_2430_pt_5gcut() > 0){
-        ph_2430_pt_5gcut->Fill(phys.phpfcands_2430_pt_5gcut(), weight);
-        ph_2430_set_5gcut->Fill(phys.phpfcands_2430_sumet_5gcut(), weight);
-      }*/
-
-      //regular
-      if (phys.phpfcands_2430_pt()>0){
-        ph_2430_pt->Fill(phys.phpfcands_2430_pt(), weight);
-        ph_2430_phi->Fill(phys.phpfcands_2430_phi(), weight);
-        ph_2430_set->Fill(phys.phpfcands_2430_sumet(), weight);
-        if (phys.phpfcands_2430_pt()>20) {
-          ph_2430_phi_pcut20->Fill(phys.phpfcands_2430_phi(), weight);
-        }
-      }
-      
-      //5GeV cut
-      /*if (phys.phpfcands_30in_pt_5gcut() > 0 ){
-        ph_30in_pt_5gcut->Fill(phys.phpfcands_30in_pt_5gcut(), weight);
-        ph_30in_set_5gcut->Fill(phys.phpfcands_30in_sumet_5gcut(), weight);
-      }*/
-      if (phys.phpfcands_30in_pt()>0){  
-        //regular
-        ph_30in_pt->Fill(phys.phpfcands_30in_pt(), weight);
-        ph_30in_phi->Fill(phys.phpfcands_30in_phi(), weight);
-        ph_30in_set->Fill(phys.phpfcands_30in_sumet(), weight);
-        if (phys.phpfcands_30in_pt()>20) {
-          ph_30in_phi_pcut20->Fill(phys.phpfcands_30in_phi(), weight);
-        }
-      }
-
-      // Draw charged hadron histos
-      if (phys.chpfcands_0013_pt()>0){
-        ch_0013_pt->Fill(phys.chpfcands_0013_pt(), weight);
-        ch_0013_phi->Fill(phys.chpfcands_0013_phi(), weight);
-        ch_0013_set->Fill(phys.chpfcands_0013_sumet(), weight);
-        if (phys.chpfcands_0013_pt()>20) {
-          ch_0013_phi_pcut20->Fill(phys.chpfcands_0013_phi(), weight);
-        }
-      }
-      if (phys.chpfcands_1624_pt()>0){
-        ch_1624_pt->Fill(phys.chpfcands_1624_pt(), weight);
-        ch_1624_phi->Fill(phys.chpfcands_1624_phi(), weight);
-        ch_1624_set->Fill(phys.chpfcands_1624_sumet(), weight);
-        if (phys.chpfcands_1624_pt()>20) {
-          ch_1624_phi_pcut20->Fill(phys.chpfcands_1624_phi(), weight);
-        }
-      }
-      if (phys.chpfcands_2430_pt()>0){
-        ch_2430_pt->Fill(phys.chpfcands_2430_pt(), weight);
-        ch_2430_phi->Fill(phys.chpfcands_2430_phi(), weight);
-        ch_2430_set->Fill(phys.chpfcands_2430_sumet(), weight);
-        if (phys.chpfcands_2430_pt()>20) {
-          ch_2430_phi_pcut20->Fill(phys.chpfcands_2430_phi(), weight);
-        }
-      }
-
-      // Draw neutral hadron histos
-      if (phys.nupfcands_0013_pt()>0){
-        nu_0013_pt->Fill(phys.nupfcands_0013_pt(), weight);
-        nu_0013_phi->Fill(phys.nupfcands_0013_phi(), weight);
-        nu_0013_set->Fill(phys.nupfcands_0013_sumet(), weight);
-        if (phys.nupfcands_0013_pt()>20) {
-          nu_0013_phi_pcut20->Fill(phys.nupfcands_0013_phi(), weight);
-        }
-      }
-      if (phys.nupfcands_1624_pt()>0){
-        nu_1624_pt->Fill(phys.nupfcands_1624_pt(), weight);
-        nu_1624_phi->Fill(phys.nupfcands_1624_phi(), weight);
-        nu_1624_set->Fill(phys.nupfcands_1624_sumet(), weight);
-        if (phys.nupfcands_1624_pt()>20) {
-          nu_1624_phi_pcut20->Fill(phys.nupfcands_1624_phi(), weight);
-        }
-      }
-      if (phys.nupfcands_2430_pt()>0){
-        nu_2430_pt->Fill(phys.nupfcands_2430_pt(), weight);
-        nu_2430_phi->Fill(phys.nupfcands_2430_phi(), weight);
-        nu_2430_set->Fill(phys.nupfcands_2430_sumet(), weight);if (phys.nupfcands_2430_pt()>20) {
-          nu_2430_phi_pcut20->Fill(phys.nupfcands_2430_phi(), weight);
-        }
-      }
-      if (phys.nupfcands_30in_pt()>0){
-        nu_30in_pt->Fill(phys.nupfcands_30in_pt(), weight);
-        nu_30in_phi->Fill(phys.nupfcands_30in_phi(), weight);
-        nu_30in_set->Fill(phys.nupfcands_30in_sumet(), weight);
-        if (phys.nupfcands_30in_pt()>20) {
-          nu_30in_phi_pcut20->Fill(phys.nupfcands_30in_phi(), weight);
-        }
-      }
-
-      // Draw bump-phi histo
-      if (phys.met_T1CHS_miniAOD_CORE_pt() > 50 && phys.met_T1CHS_miniAOD_CORE_pt() < 120){
-
-        bumpPhi->Fill(met_T1CHS_miniAOD_CORE_phi(), weight);
       }
 
       // Fill num verticies
       nVert->Fill(phys.nVert(), weight);
 
       // Fill Dilepton Mass
-      dilmass->Fill(phys.dilmass(), weight);
+      dilmass->Fill(phys.dilmass(), weight*2.058);
 
       if (phys.hyp_type() == 1){
-        dilmass_mm->Fill(phys.dilmass(), weight);        
+        dilmass_mm->Fill(phys.dilmass(), weight*2.058);        
       }
       else if (phys.hyp_type() == 0){
-        dilmass_ee->Fill(phys.dilmass(), weight);        
+        dilmass_ee->Fill(phys.dilmass(), weight*2.058);        
+      }
+
+      // Fill Dilepton Mass
+      if (phys.njets() >= 2){
+        dilmass_2jets->Fill(phys.dilmass(), weight*2.058);
+
+        if (phys.hyp_type() == 1){
+          dilmass_2jets_mm->Fill(phys.dilmass(), weight*2.058);        
+        }
+        else if (phys.hyp_type() == 0){
+          dilmass_2jets_ee->Fill(phys.dilmass(), weight*2.058);        
+        }
       }
 
       //met vs. sumet plot
@@ -842,7 +408,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   t1met_2jets_el->Write();
   t1met_mu->Write();
   t1met_2jets_mu->Write();
-  net_set->Write();
   
   //RAW MET
   rawmet->Write();
@@ -851,81 +416,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   rawmet_2jets_el->Write();
   rawmet_mu->Write();
   rawmet_2jets_mu->Write();
-
-  //NET MET-PHI
-  net_phi->Write();
-  net_phi_2jets->Write();
-  net_phi_el->Write();
-  net_phi_2jets_el->Write();
-  net_phi_mu->Write();
-  net_phi_2jets_mu->Write();
-  
-  //Photon
-  ph_0013_pt->Write();
-  ph_1624_pt->Write();
-  ph_2430_pt->Write();
-  ph_30in_pt->Write();
-
-  ph_0013_pt_5gcut->Write();
-  ph_1624_pt_5gcut->Write();
-  ph_2430_pt_5gcut->Write();
-  ph_30in_pt_5gcut->Write();
-
-  ph_0013_phi->Write();
-  ph_1624_phi->Write();
-  ph_2430_phi->Write();
-  ph_30in_phi->Write();
-
-  ph_0013_phi_pcut20->Write();
-  ph_1624_phi_pcut20->Write();
-  ph_2430_phi_pcut20->Write();
-  ph_30in_phi_pcut20->Write();
-  
-  ph_0013_set->Write();
-  ph_1624_set->Write();
-  ph_2430_set->Write();
-  ph_30in_set->Write();
-
-  ph_0013_set_5gcut->Write();
-  ph_1624_set_5gcut->Write();
-  ph_2430_set_5gcut->Write();
-  ph_30in_set_5gcut->Write();
-  
-  //Charged
-  ch_0013_pt->Write();
-  ch_1624_pt->Write();
-  ch_2430_pt->Write();
-  ch_0013_phi->Write();
-  ch_1624_phi->Write();
-  ch_2430_phi->Write();
-
-  ch_0013_phi_pcut20->Write();
-  ch_1624_phi_pcut20->Write();
-  ch_2430_phi_pcut20->Write();
-  
-  ch_0013_set->Write();
-  ch_1624_set->Write();
-  ch_2430_set->Write();
-  
-  //Neutral
-  nu_0013_pt->Write();
-  nu_1624_pt->Write();
-  nu_2430_pt->Write();
-  nu_30in_pt->Write();
-  nu_0013_phi->Write();
-  nu_1624_phi->Write();
-  nu_2430_phi->Write();
-  nu_30in_phi->Write();
-
-  nu_0013_phi_pcut20->Write();
-  nu_1624_phi_pcut20->Write();
-  nu_2430_phi_pcut20->Write();
-  nu_30in_phi_pcut20->Write();
-
-  nu_0013_set->Write();
-  nu_1624_set->Write();
-  nu_2430_set->Write();
-  nu_30in_set->Write();
   
   //Extra
   nVert->Write();
@@ -933,17 +423,11 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   dilmass->Write();
   dilmass_ee->Write();
   dilmass_mm->Write();
+  dilmass_2jets->Write();
+  dilmass_2jets_ee->Write();
+  dilmass_2jets_mm->Write();
   numEvents->Write();
   numMETFilters->Write();
-  metSumET2D->Write();
-
-  deltaR->Write();
-  deltaR_2jets->Write();
-  deltaR_2jets_mt2cut->Write();
-
-  mt2_ll->Write();
-  ptll_mt2cut->Write();
-  mt2PT2D->Write();
 
   //close output file
   output->Write();

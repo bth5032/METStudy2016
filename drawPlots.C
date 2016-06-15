@@ -141,12 +141,23 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     //===========================
     double numEventsData = data->Integral(0,-1);
     double numEventsMC = mc_sum->Integral(0,-1);
-    double scaleFactor = ((double) numEventsData/numEventsMC);
+
+    TString s1 = "Number of events in Data: ";
+    s1+=TString(to_string(numEventsData));
+    TString s2 = "Number of events in MC: ";
+    s2+=TString(to_string(numEventsMC));
+
+    TLatex tex;
+    tex.SetTextAlign(23);
+    tex.SetTextSize(0.08);
+    tex.DrawLatex(0.8, 0.95, s1);
+    tex.DrawLatex(0.8, 0.85, s2);
+    /*double scaleFactor = ((double) numEventsData/numEventsMC);
 
     zjets->Scale(scaleFactor);
     fsbkg->Scale(scaleFactor);
     if (do_extra) extra->Scale(scaleFactor);
-    mc_sum->Scale(scaleFactor);
+    mc_sum->Scale(scaleFactor);*/
 
 
     //===========================
@@ -265,6 +276,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     plotpad->RedrawAxis();
 
     TLegend *l1;
+    l1->SetHeader("Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb")
     if (plot_info->type()=="phi"){
      l1 = new TLegend(0.73, 0.23, 0.88, 0.38);
     }
