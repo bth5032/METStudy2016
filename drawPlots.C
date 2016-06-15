@@ -146,12 +146,6 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     s1+=TString(to_string(numEventsData));
     TString s2 = "Number of events in MC: ";
     s2+=TString(to_string(numEventsMC));
-
-    TLatex tex;
-    tex.SetTextAlign(23);
-    tex.SetTextSize(0.08);
-    tex.DrawLatex(0.8, 0.95, s1);
-    tex.DrawLatex(0.8, 0.85, s2);
     /*double scaleFactor = ((double) numEventsData/numEventsMC);
 
     zjets->Scale(scaleFactor);
@@ -287,13 +281,20 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     l1->SetShadowColor(kWhite);
     l1->SetFillColor(kWhite);
     
-    l1->SetHeader("Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb");
+
     l1->AddEntry(data, "data", "p");
     l1->AddEntry(zjets, "Z+jets", "f");
     l1->AddEntry(fsbkg, "t#bar{t}", "f");
     if (do_extra) {l1->AddEntry(extra, "Low #sigma", "f");}
 
     l1->Draw("same");
+
+    TLatex tex;
+    tex.SetTextAlign(23);
+    tex.SetTextSize(0.08);
+    tex.DrawLatex(0.8, 0.85, s1);
+    tex.DrawLatex(0.8, 0.75, s2);
+    tex.DrawLatex(0.8, 0.95, "Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb");
 
     //--------------------------
     // Fill in Residual Plot
