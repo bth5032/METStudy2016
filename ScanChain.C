@@ -167,15 +167,15 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   dilmass_mm->SetDirectory(rootdir);
   dilmass_mm->Sumw2();
 
-  TH1F *dilmass_2jets = new TH1F(sampleName+"_dilmass", "Dilepton Mass with >=2 jets for "+sampleName, 300,0,150);
+  TH1F *dilmass_2jets = new TH1F(sampleName+"_dilmass_2jets", "Dilepton Mass with >=2 jets for "+sampleName, 300,0,150);
   dilmass_2jets->SetDirectory(rootdir);
   dilmass_2jets->Sumw2();
 
-  TH1F *dilmass_ee = new TH1F(sampleName+"_dilmass_ee", "Dilepton Mass (just dielectron events) with >=2 jets for "+sampleName, 300,0,150);
+  TH1F *dilmass_2jets_ee = new TH1F(sampleName+"_dilmass_2jets_ee", "Dilepton Mass (just dielectron events) with >=2 jets for "+sampleName, 300,0,150);
   dilmass_2jets_ee->SetDirectory(rootdir);
   dilmass_2jets_ee->Sumw2();
   
-  TH1F *dilmass_2jets_mm = new TH1F(sampleName+"_dilmass_mm", "Dilepton Mass (just dimuon events) with >=2 jets for "+sampleName, 300,0,150);
+  TH1F *dilmass_2jets_mm = new TH1F(sampleName+"_dilmass_2jets_mm", "Dilepton Mass (just dimuon events) with >=2 jets for "+sampleName, 300,0,150);
   dilmass_2jets_mm->SetDirectory(rootdir);
   dilmass_2jets_mm->Sumw2();
 
@@ -267,11 +267,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (do_MET_filters){
         if (! passMETFilters()) continue;
       }
-
-      double sumMETFilters = phys.Flag_HBHENoiseFilter()+phys.Flag_HBHEIsoNoiseFilter()+phys.Flag_CSCTightHaloFilter()+phys.Flag_EcalDeadCellTriggerPrimitiveFilter()+phys.Flag_goodVertices()+phys.Flag_eeBadScFilter();
-
-      numMETFilters->Fill(sumMETFilters);
-
 
 /*      if (phys.met_T1CHS_miniAOD_CORE_pt() > 5800){
         cout<<"6000+ MET event:"<<endl;
@@ -427,7 +422,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   dilmass_2jets_ee->Write();
   dilmass_2jets_mm->Write();
   numEvents->Write();
-  numMETFilters->Write();
 
   //close output file
   output->Write();
