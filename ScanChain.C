@@ -246,7 +246,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
 
       else{
         //weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
-        weight = phys.evt_scale1fb(); 
+        weight = phys.evt_scale1fb()*2.058; 
       }
 
       if( (! phys.isData()) && dovtxreweighting ){
@@ -339,24 +339,24 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       nVert->Fill(phys.nVert(), weight);
 
       // Fill Dilepton Mass
-      dilmass->Fill(phys.dilmass(), weight*2.058);
+      dilmass->Fill(phys.dilmass(), weight);
 
       if (phys.hyp_type() == 1){
-        dilmass_mm->Fill(phys.dilmass(), weight*2.058);        
+        dilmass_mm->Fill(phys.dilmass(), weight);        
       }
       else if (phys.hyp_type() == 0){
-        dilmass_ee->Fill(phys.dilmass(), weight*2.058);        
+        dilmass_ee->Fill(phys.dilmass(), weight);        
       }
 
       // Fill Dilepton Mass
       if (phys.njets() >= 2){
-        dilmass_2jets->Fill(phys.dilmass(), weight*2.058);
+        dilmass_2jets->Fill(phys.dilmass(), weight);
 
         if (phys.hyp_type() == 1){
-          dilmass_2jets_mm->Fill(phys.dilmass(), weight*2.058);        
+          dilmass_2jets_mm->Fill(phys.dilmass(), weight);        
         }
         else if (phys.hyp_type() == 0){
-          dilmass_2jets_ee->Fill(phys.dilmass(), weight*2.058);        
+          dilmass_2jets_ee->Fill(phys.dilmass(), weight);        
         }
       }
 
