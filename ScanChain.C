@@ -289,25 +289,14 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         if (phys.met_T1CHS_miniAOD_CORE_pt() > 0)
         {
           t1met_2jets->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
-          if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
-          {
-            net_phi_2jets->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
-          }
           if (phys.hyp_type() == 0)
           {
             t1met_2jets_el->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
-            if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
-            {
-              net_phi_2jets_el->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
-            }
           }
           else
           {
             t1met_2jets_mu->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), weight);
             if (phys.met_T1CHS_miniAOD_CORE_pt() > 20)
-            {
-              net_phi_2jets_mu->Fill(phys.met_T1CHS_miniAOD_CORE_phi(), weight);
-            } 
           }
         }
         if (phys.met_rawPt() > 0)
@@ -375,12 +364,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         }
       }
 
-      //met vs. sumet plot
-      metSumET2D->Fill(phys.met_T1CHS_miniAOD_CORE_pt(), phys.sumet_raw(), weight);
-
-      //net sumet
-      net_set->Fill(phys.sumet_raw(), weight);
-
     }
     // Clean Up
     delete tree;
@@ -414,7 +397,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   
   //Extra
   nVert->Write();
-  bumpPhi->Write();
   dilmass->Write();
   dilmass_ee->Write();
   dilmass_mm->Write();
