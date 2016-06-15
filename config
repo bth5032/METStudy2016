@@ -5,3 +5,11 @@ plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/Frank/
 vertex_reweighting=No
 met_filters=Yes
 low_xsec=Yes
+
+Name=80_Frank_nodz
+Dataset=80x
+histogram_output=/nfs-7/userdata/bobak/METStudy2016/80Histos/FrankNoDZ/
+plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/FrankNoDZ/
+vertex_reweighting=No
+met_filters=Yes
+low_xsec=Yes

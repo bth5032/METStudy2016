@@ -62,7 +62,7 @@ bool passBaseCut(){
 
   if (!(phys.evt_type() == 0)) return false;
   
-  if (! ((phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
+  if (! ((phys.HLT_DoubleMu_nonDZ() || phys.HLT_DoubleMu_tk_nonDZ() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
     if (! ((phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) )
     {
       return false; 
@@ -180,20 +180,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
   dilmass_2jets_mm->Sumw2();
 
 
-
-  //Set up manual vertex reweighting.
-  
-  TH1F *h_vtxweight;
-  TFile *f_vtx;
-  
-  if( dovtxreweighting ){
-    f_vtx = TFile::Open(savePath+"nvtx_ratio.root","READ");
-    h_vtxweight = (TH1F*)f_vtx->Get("h_vtx_ratio")->Clone("h_vtxweight");
-    h_vtxweight->SetDirectory(rootdir);
-    f_vtx->Close();
-  }
-
-
   // Loop over events to Analyze
   unsigned int nEventsTotal = 0;
   unsigned int nEventsChain = chain->GetEntries();
@@ -245,20 +231,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       }
 
       else{
-        //weight = phys.evt_scale1fb() * 2.3 * phys.puWeight(); 
         weight = phys.evt_scale1fb()*2.058; 
-      }
-
-      if( (! phys.isData()) && dovtxreweighting ){
-        weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(phys.nVert()));   
-      }
-
-      if( (! phys.isData()) && do_stdvtx_reweighting){
-        weight *= phys.puWeight();   
-      }
-
-      if ( force_vtx_reweight ){
-        weight *= h_vtxweight->GetBinContent(h_vtxweight->FindBin(phys.nVert())); 
       }
 
       // Base Cut
@@ -267,19 +240,6 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
       if (do_MET_filters){
         if (! passMETFilters()) continue;
       }
-
-/*      if (phys.met_T1CHS_miniAOD_CORE_pt() > 5800){
-        cout<<"6000+ MET event:"<<endl;
-        cout<<"run: "<<phys.run()<<endl;
-        cout<<"lumi: "<<phys.lumi()<<endl;
-        cout<<"event: "<<phys.evt()<<endl;
-      }
-      else if (phys.met_T1CHS_miniAOD_CORE_pt() > 3500){
-        cout<<"3500+ MET event:"<<endl;
-        cout<<"run: "<<phys.run()<<endl;
-        cout<<"lumi: "<<phys.lumi()<<endl;
-        cout<<"event: "<<phys.evt()<<endl;
-      }*/
 
       // Draw samples with 2 jet cut
       if (phys.njets() >= 2){
@@ -309,7 +269,7 @@ int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxre
         }
       }
 
-      // Draw other MET hists
+      // Draw Raw MET hists
       if(phys.met_rawPt() > 0){
         //Raw MET
         rawmet->Fill(phys.met_rawPt(), weight);
