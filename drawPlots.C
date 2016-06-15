@@ -276,7 +276,7 @@ ERROR: Could not find plot info for "+plot_name+"\n\
     plotpad->RedrawAxis();
 
     TLegend *l1;
-    l1->SetHeader("Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb")
+    l1->SetHeader("Double #mu JSON: 2058.01/pb Double EG JSON: 2058.36/pb");
     if (plot_info->type()=="phi"){
      l1 = new TLegend(0.73, 0.23, 0.88, 0.38);
     }

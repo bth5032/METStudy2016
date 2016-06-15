@@ -284,7 +284,7 @@ PlotList* getPlotList(){
   PlotList* all_plots = new PlotList("type1MET", "type1MET", "Type 1 MET for All Events in Study", "E^{miss}_{T} (GeV)", "Count / [5 GeV]", 0, 150, 5);
 
   addMETPlots(all_plots);
-  addMllPlots(all_plots);
+  addExtraPlots(all_plots);
 
 return all_plots;
 
