@@ -60,6 +60,7 @@ bool passMuonTriggers(){
       return (phys.HLT_DoubleMu_nonDZ() || phys.HLT_DoubleMu_tk_nonDZ() || phys.HLT_DoubleMu_noiso());
     } 
   }
+  
   else{
     return true; //MC always passes
   }
