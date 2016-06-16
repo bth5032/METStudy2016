@@ -110,7 +110,7 @@ bool vinceRegion(){
 }
 
 
-int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool force_vtx_reweight=false, bool muDZTriggers=false; bool fast = true, int nEvents = -1) {
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool force_vtx_reweight=false, bool muDZTriggers=false, bool fast = true, int nEvents = -1) {
 
   useMuonDZTriggers=muDZTriggers;
 
