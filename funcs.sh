@@ -13,6 +13,7 @@ function setConfig {
 	MET_STUDY_DO_MET_FILTERS="false"
 	MET_STUDY_INCLUDED_LOW_XSEC_SAMPLES="false"
 	MET_STUDY_FORCE_VTX_REWEIGHT_ON_DATA="false"
+	MET_STUDY_USE_MUON_DZ_TRIGGGERS="false"
 
 	MET_STUDY_SETVARS_OPTS=`grep -A6 "Name=$1$" < config | xargs`
 	
@@ -66,7 +67,18 @@ function setConfig {
 			elif [[ ${i#*=} == "No" ]]
 			then
 				MET_STUDY_FORCE_VTX_REWEIGHT_ON_DATA="false"
-				echo "echo "Forcing vertex reweighting on data""
+				echo "Forcing vertex reweighting on data"
+			fi
+		elif [[ ${i%=*} == "use_muon_dz_triggers" ]]
+		then
+			if [[ ${i#*=} == "Yes" ]]
+			then
+				MET_STUDY_USE_MUON_DZ_TRIGGGERS="true"
+				echo "Using Muon DZ triggers..."
+			elif [[ ${i#*=} == "No" ]]
+			then
+				MET_STUDY_USE_MUON_DZ_TRIGGGERS="false"
+				echo "Using NonDZ triggers for Muons..."
 			fi
 		elif [[ ${i%=*} == "vertex_reweighting" ]]
 		then
@@ -211,7 +223,7 @@ function makeHistos {
 				echo "Using existsing vertex ratio file."
 			fi
 		fi
-		root -l -b -q "doAll.C(\"$MET_STUDY_DATASET\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX, $MET_STUDY_DO_STD_VTX, $MET_STUDY_DO_MET_FILTERS, $MET_STUDY_FORCE_VTX_REWEIGHT_ON_DATA)"
+		root -l -b -q "doAll.C(\"$MET_STUDY_DATASET\", \"$MET_STUDY_HISTO_DIR\", $MET_STUDY_HISTOS_FLAG_DATA, $MET_STUDY_HISTOS_FLAG_DY, $MET_STUDY_HISTOS_FLAG_TTBAR, $MET_STUDY_HISTOS_FLAG_ST, $MET_STUDY_HISTOS_FLAG_ZZ, $MET_STUDY_HISTOS_FLAG_WW, $MET_STUDY_HISTOS_FLAG_WZ, $MET_STUDY_HISTOS_FLAG_VVV, $MET_STUDY_DO_VTX, $MET_STUDY_DO_STD_VTX, $MET_STUDY_DO_MET_FILTERS, $MET_STUDY_FORCE_VTX_REWEIGHT_ON_DATA, $MET_STUDY_USE_MUON_DZ_TRIGGGERS)"
 	fi
 }	
 

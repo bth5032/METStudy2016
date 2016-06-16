@@ -5,6 +5,7 @@ plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/Frank/
 vertex_reweighting=No
 met_filters=Yes
 low_xsec=Yes
+use_muon_dz_triggers=Yes
 
 Name=80_Frank_nodz
 Dataset=80x_Bobak
@@ -13,3 +14,4 @@ plot_output=/home/users/bhashemi/public_html/ZMET2016/looper/80/FrankNoDZ/
 vertex_reweighting=No
 met_filters=Yes
 low_xsec=Yes
+use_muon_dz_triggers=No

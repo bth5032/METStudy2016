@@ -28,6 +28,8 @@ using namespace std;
 using namespace zmet;
 using namespace duplicate_removal;
 
+bool useMuonDZTriggers=false;
+
 bool passMETFilters(){
 
   if( phys.isData()                   ){
@@ -51,7 +53,7 @@ bool passMETFilters(){
 
 bool passMuonTriggers(){
   if ( phys.isData() ){
-    if ( conf->get("use_muon_DZ_triggers") == "true" ){
+    if ( useMuonDZTriggers ){
       cout<<"Using DZ triggers"<<endl;
       return (phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso());
     }
@@ -60,7 +62,7 @@ bool passMuonTriggers(){
       return (phys.HLT_DoubleMu_nonDZ() || phys.HLT_DoubleMu_tk_nonDZ() || phys.HLT_DoubleMu_noiso());
     } 
   }
-  
+
   else{
     return true; //MC always passes
   }
@@ -108,7 +110,9 @@ bool vinceRegion(){
 }
 
 
-int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool force_vtx_reweight=false, bool fast = true, int nEvents = -1) {
+int ScanChain( TChain* chain, TString sampleName, TString savePath, bool dovtxreweighting = false, bool do_stdvtx_reweighting = false, bool do_MET_filters = false, bool force_vtx_reweight=false, bool muDZTriggers=false; bool fast = true, int nEvents = -1) {
+
+  useMuonDZTriggers=muDZTriggers;
 
   // Benchmark
   TBenchmark *bmark = new TBenchmark();
