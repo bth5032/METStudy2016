@@ -15,7 +15,7 @@ function setConfig {
 	MET_STUDY_FORCE_VTX_REWEIGHT_ON_DATA="false"
 	MET_STUDY_USE_MUON_DZ_TRIGGGERS="false"
 
-	MET_STUDY_SETVARS_OPTS=`grep -A6 "Name=$1$" < config | xargs`
+	MET_STUDY_SETVARS_OPTS=`grep -A7 "Name=$1$" < config | xargs`
 	
 	
 	while [[ -z $MET_STUDY_SETVARS_OPTS ]]
@@ -24,7 +24,7 @@ function setConfig {
 		grep "Name=" < config | cut -f2 -d '='
 		echo -n "Type name of sample: "
 		read NEXTOPT
-		MET_STUDY_SETVARS_OPTS=`grep -A6 "Name=$NEXTOPT$" < config | xargs`
+		MET_STUDY_SETVARS_OPTS=`grep -A7 "Name=$NEXTOPT$" < config | xargs`
 	done
 
 	echo "Running On Set: $1"
