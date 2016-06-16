@@ -49,6 +49,31 @@ bool passMETFilters(){
   return true;
 }
 
+bool passMuonTriggers(){
+  if ( phys.isData() ){
+    if ( conf->get("use_muon_DZ_triggers") == "true" ){
+      cout<<"Using DZ triggers"<<endl;
+      return (phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso());
+    }
+    else{
+      cout<<"Using Non DZ triggers"<<endl;
+      return (phys.HLT_DoubleMu_nonDZ() || phys.HLT_DoubleMu_tk_nonDZ() || phys.HLT_DoubleMu_noiso());
+    } 
+  }
+  else{
+    return true; //MC always passes
+  }
+}
+
+bool passElectronTriggers(){
+  if (phys.isData()){
+    return (phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() );
+  }
+  else{
+    return true; //MC always passes
+  }
+}
+
 bool passBaseCut(){
   if (!(phys.dilmass() < 101 && phys.dilmass() > 81)) return false;
 
@@ -62,8 +87,8 @@ bool passBaseCut(){
 
   if (!(phys.evt_type() == 0)) return false;
   
-  if (! ((phys.HLT_DoubleMu() || phys.HLT_DoubleMu_tk() || phys.HLT_DoubleMu_noiso()) && phys.hyp_type() == 1 )){
-    if (! ((phys.HLT_DoubleEl_DZ() || phys.HLT_DoubleEl_noiso() ) && phys.hyp_type() == 0) )
+  if (! ( passMuonTriggers() && phys.hyp_type() == 1 )){
+    if (! ( passElectronTriggers() && phys.hyp_type() == 0) )
     {
       return false; 
     }
